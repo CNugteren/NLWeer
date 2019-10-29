@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NLWeer</string>
+    <string name="nav_header_title">NLWeer</string>
+    <string name="nav_header_subtitle">Free, open-source, and privacy-friendly Dutch weather prediction app</string>
+    <string name="nav_header_desc">Navigation header icon</string>
+    <string name="action_settings">Settings [TODO]</string>
+
+    <string name="menu_knmi_header">KNMI</string>
+    <string name="menu_knmi_rain_m1">Rain last hour</string>
+
+    <string name="menu_buienradar_header">Buienradar [TODO]</string>
+</resources>
