@@ -8,11 +8,6 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="nav_gallery">
-                    <value>
-                      <LayoutPositions />
-                    </value>
-                  </entry>
                   <entry key="nav_knmi_rain_m1">
                     <value>
                       <LayoutPositions>
@@ -23,26 +18,6 @@
                           </Point>
                         </option>
                       </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="nav_send">
-                    <value>
-                      <LayoutPositions />
-                    </value>
-                  </entry>
-                  <entry key="nav_share">
-                    <value>
-                      <LayoutPositions />
-                    </value>
-                  </entry>
-                  <entry key="nav_slideshow">
-                    <value>
-                      <LayoutPositions />
-                    </value>
-                  </entry>
-                  <entry key="nav_tools">
-                    <value>
-                      <LayoutPositions />
                     </value>
                   </entry>
                 </map>
