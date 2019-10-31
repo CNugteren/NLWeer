@@ -1,4 +1,4 @@
-package foss.cnugteren.nlweer.ui.knmi_rain_m1
+package foss.cnugteren.nlweer.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import foss.cnugteren.nlweer.R
 
-class KnmiRainM1Fragment : Fragment() {
+open class BaseFragment : Fragment() {
 
-    private lateinit var homeViewModel: KnmiRainM1ViewModel
+    private lateinit var homeViewModel: BaseViewModel
     private lateinit var gifView: WebView
 
     override fun onCreateView(
@@ -20,12 +20,19 @@ class KnmiRainM1Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         homeViewModel =
-            ViewModelProviders.of(this).get(KnmiRainM1ViewModel::class.java)
+            ViewModelProviders.of(this).get(BaseViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_knmi_rain_m1, container, false)
 
         gifView = root.findViewById(R.id.gif_view) as WebView
-        gifView.loadUrl("https://cdn.knmi.nl/knmi/map/general/weather-map.gif")
-
+        gifView.loadUrl(getURL())
         return root
+    }
+
+    open fun getURL(): String {
+        return "" // Implemented in derived classes
+    }
+
+    fun onRefreshListener() {
+        gifView.loadUrl(getURL())
     }
 }
