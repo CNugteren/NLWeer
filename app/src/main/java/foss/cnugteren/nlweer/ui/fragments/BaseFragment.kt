@@ -32,7 +32,7 @@ open class BaseFragment : Fragment() {
         return "" // Implemented in derived classes
     }
 
-    fun onRefreshListener() {
+    fun refresh() {
         gifView.loadUrl(getURL())
     }
 }
