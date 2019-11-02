@@ -5,18 +5,21 @@
     <string name="nav_header_desc">Navigation header icon</string>
 
     <string name="action_refresh">Refresh</string>
-    <string name="action_settings">Settings [TODO]</string>
+    <string name="action_settings">Settings</string>
     <string name="action_about">About</string>
 
     <string name="menu_about">NLWeer</string>
+    <string name="menu_settings">Settings</string>
 
     <string name="menu_knmi_header">KNMI</string>
-    <string name="menu_knmi_rain_m1">Rain and temperature last hour</string>
+    <string name="menu_knmi_rain_m1">Rain last hour</string>
 
     <string name="menu_buienradar_header">Buienradar [TODO]</string>
 
+    <string name="settings_text_header_1">Nothing here yet...</string>
+
     <string name="about_text_header_1">About NLWeer</string>
-    <string name="about_text_content_1">NLWeer is a free as in freedom, open-source, and privacy-friendly Dutch weather prediction app. It uses the MIT license. Weather information is provided by KNMI and Buienradar, see below. For the code and more information see:\n\nhttps://github.com/CNugteren/NLWeer</string>
+    <string name="about_text_content_1">NLWeer is an open-source and privacy-friendly Dutch weather prediction app. It is free as in free lunch and as n freedom. The code is MIT licensed. Weather information is provided by KNMI and Buienradar, see below. For code, reporting issues, new versions, and more information see:\n\nhttps://github.com/CNugteren/NLWeer</string>
     <string name="about_text_header_2">KNMI data</string>
     <string name="about_text_content_2">To be filled in.</string>
     <string name="about_text_header_3">Buienradar data</string>

@@ -62,8 +62,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Menu button: fragment_about
+    // Menu button: settings
+    fun onClickSettings(v: MenuItem) {
+        // TODO: Only navigate if not there yet
+        val navController = findNavController(R.id.nav_host_fragment)
+        navController.navigate(R.id.nav_settings)
+    }
+
+    // Menu button: about
     fun onClickAbout(v: MenuItem) {
+        // TODO: Only navigate if not there yet
         val navController = findNavController(R.id.nav_host_fragment)
         navController.navigate(R.id.nav_about)
     }

@@ -10,6 +10,7 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="200"
+        android:onClick="onClickSettings"
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
