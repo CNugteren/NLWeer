@@ -9,7 +9,22 @@
         android:id="@+id/nav_knmi_rain_m1"
         android:name="foss.cnugteren.nlweer.ui.fragments.KnmiRainM1Fragment"
         android:label="@string/menu_knmi_rain_m1"
-        tools:layout="@layout/fragment_knmi_rain_m1" />
+        tools:layout="@layout/fragment_knmi" />
+    <fragment
+        android:id="@+id/nav_knmi_today"
+        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiTodayFragment"
+        android:label="@string/menu_knmi_today"
+        tools:layout="@layout/fragment_knmi" />
+    <fragment
+        android:id="@+id/nav_knmi_tonight"
+        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiTonightFragment"
+        android:label="@string/menu_knmi_tonight"
+        tools:layout="@layout/fragment_knmi" />
+    <fragment
+        android:id="@+id/nav_knmi_tomorrow"
+        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiTomorrowFragment"
+        android:label="@string/menu_knmi_tomorrow"
+        tools:layout="@layout/fragment_knmi" />
 
     <fragment
         android:id="@+id/nav_about"

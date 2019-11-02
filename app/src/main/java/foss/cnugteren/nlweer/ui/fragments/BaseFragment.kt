@@ -18,7 +18,7 @@ open class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_knmi_rain_m1, container, false)
+        val root = inflater.inflate(R.layout.fragment_knmi, container, false)
 
         // Pull down to refresh the page
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
