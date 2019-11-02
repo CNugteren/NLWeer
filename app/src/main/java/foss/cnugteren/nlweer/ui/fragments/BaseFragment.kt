@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import foss.cnugteren.nlweer.R
 
 open class BaseFragment : Fragment() {
 
-    private lateinit var homeViewModel: BaseViewModel
     private lateinit var gifView: WebView
 
     override fun onCreateView(
@@ -19,12 +17,12 @@ open class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProviders.of(this).get(BaseViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_knmi_rain_m1, container, false)
 
         gifView = root.findViewById(R.id.gif_view) as WebView
         gifView.loadUrl(getURL())
+        gifView.settings.loadWithOverviewMode = true
+        gifView.settings.useWideViewPort = true
         return root
     }
 
