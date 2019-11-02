@@ -11,4 +11,10 @@
         android:label="@string/menu_knmi_rain_m1"
         tools:layout="@layout/fragment_knmi_rain_m1" />
 
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="foss.cnugteren.nlweer.ui.fragments.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about" />
+
 </navigation>

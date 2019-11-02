@@ -61,4 +61,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    // Menu button: fragment_about
+    fun onClickAbout(v: MenuItem) {
+        val navController = findNavController(R.id.nav_host_fragment)
+        navController.navigate(R.id.nav_about)
+    }
 }
