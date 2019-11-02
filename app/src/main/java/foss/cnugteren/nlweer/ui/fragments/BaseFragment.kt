@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import androidx.fragment.app.Fragment
 import foss.cnugteren.nlweer.R
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 open class BaseFragment : Fragment() {
 
@@ -19,6 +20,14 @@ open class BaseFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_knmi_rain_m1, container, false)
 
+        // Pull down to refresh the page
+        val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
+        pullToRefresh.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+            refresh() // your code
+            pullToRefresh.setRefreshing(false)
+        })
+
+        // The web-viewer for the content
         gifView = root.findViewById(R.id.gif_view) as WebView
         gifView.loadUrl(getURL())
         gifView.settings.loadWithOverviewMode = true
