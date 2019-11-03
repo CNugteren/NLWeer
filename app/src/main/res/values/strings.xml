@@ -13,9 +13,9 @@
 
     <string name="menu_knmi_header">Source: KNMI</string>
     <string name="menu_knmi_rain_m1">Rain last hour</string>
-    <string name="menu_knmi_today">Prediction today</string>
-    <string name="menu_knmi_tonight">Prediction tonight</string>
-    <string name="menu_knmi_tomorrow">Prediction tomorrow</string>
+    <string name="menu_knmi_today">Forecast today</string>
+    <string name="menu_knmi_tonight">Forecast tonight</string>
+    <string name="menu_knmi_tomorrow">Forecast tomorrow</string>
     <string name="menu_knmi_temperature">Temperature</string>
     <string name="menu_knmi_wind">Wind</string>
 
@@ -30,9 +30,10 @@
     <string name="about_text_header_3">Buienradar data</string>
     <string name="about_text_content_3">To be filled in.</string>
     <string name="about_text_header_4">App and menu icons</string>
-    <string name="about_text_content_4">Fxemoji_u26C5: Copyright by Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
-\nOOjs UI icon moon: Copyright OOjs UI Team, MIT License, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
-\nSun shape and wind icon: Copyright by Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon</string>
+    <string name="about_text_content_4">Main app icon: Copyright by Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
+\nMoon icon: Copyright OOjs UI Team, MIT License, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
+\nSun and wind icon: Copyright by Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon
+\nTemperature sunrise icon: Icons made by Hirschwolf and Freepik from www.flaticon.com</string>
     <string name="about_text_header_5">NLWeer version info</string>
 
 </resources>
