@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Menu button: refresh
-    fun onClickRefresh(v: MenuItem) {
+    fun onClickRefresh(@Suppress("UNUSED_PARAMETER") v: MenuItem) {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         if (navHostFragment != null) {
             val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
@@ -68,16 +68,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Menu button: settings
-    fun onClickSettings(v: MenuItem) {
-        // TODO: Only navigate if not there yet
+    fun onClickSettings(@Suppress("UNUSED_PARAMETER") v: MenuItem) {
         val navController = findNavController(R.id.nav_host_fragment)
-        navController.navigate(R.id.nav_settings)
+        if (navController.currentDestination?.id != R.id.nav_settings) {
+            navController.navigate(R.id.nav_settings)
+        }
     }
 
     // Menu button: about
-    fun onClickAbout(v: MenuItem) {
-        // TODO: Only navigate if not there yet
+    fun onClickAbout(@Suppress("UNUSED_PARAMETER") v: MenuItem) {
         val navController = findNavController(R.id.nav_host_fragment)
-        navController.navigate(R.id.nav_about)
+        if (navController.currentDestination?.id != R.id.nav_about) {
+            navController.navigate(R.id.nav_about)
+        }
     }
 }
