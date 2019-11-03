@@ -36,7 +36,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_knmi_rain_m1,
                 R.id.nav_knmi_today,
                 R.id.nav_knmi_tomorrow,
-                R.id.nav_knmi_tonight
+                R.id.nav_knmi_tonight,
+                R.id.nav_knmi_temperature,
+                R.id.nav_knmi_wind
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

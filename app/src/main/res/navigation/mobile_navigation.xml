@@ -25,6 +25,16 @@
         android:name="foss.cnugteren.nlweer.ui.fragments.KnmiTomorrowFragment"
         android:label="@string/menu_knmi_tomorrow"
         tools:layout="@layout/fragment_knmi" />
+    <fragment
+        android:id="@+id/nav_knmi_temperature"
+        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiTemperatureFragment"
+        android:label="@string/menu_knmi_temperature"
+        tools:layout="@layout/fragment_knmi" />
+    <fragment
+        android:id="@+id/nav_knmi_wind"
+        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiWindFragment"
+        android:label="@string/menu_knmi_wind"
+        tools:layout="@layout/fragment_knmi" />
 
     <fragment
         android:id="@+id/nav_about"

@@ -21,10 +21,20 @@
                 android:id="@+id/nav_knmi_tomorrow"
                 android:icon="@drawable/menu_tomorrow"
                 android:title="@string/menu_knmi_tomorrow" />
+            <item
+                android:id="@+id/nav_knmi_temperature"
+                android:icon="@drawable/menu_temperature"
+                android:title="@string/menu_knmi_temperature" />
+            <item
+                android:id="@+id/nav_knmi_wind"
+                android:icon="@drawable/menu_wind"
+                android:title="@string/menu_knmi_wind" />
         </menu>
     </item>
 
     <item android:title="@string/menu_buienradar_header">
+        <menu>
+        </menu>
 
     </item>
 
