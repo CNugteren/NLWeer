@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">NLWeer</string>
     <string name="nav_header_title">NLWeer</string>
-    <string name="nav_header_subtitle">Free, open-source, and privacy-friendly Dutch weather prediction app</string>
+    <string name="nav_header_subtitle">Free, open-source, and privacy-friendly Dutch weather app</string>
     <string name="nav_header_desc">Navigation header icon</string>
 
     <string name="action_refresh">Refresh</string>
@@ -22,11 +22,16 @@
     <string name="settings_text_header_1">Nothing here yet...</string>
 
     <string name="about_text_header_1">About NLWeer</string>
-    <string name="about_text_content_1">NLWeer is an open-source and privacy-friendly Dutch weather prediction app. It is free both as in free lunch and as in freedom. The code is MIT licensed. Weather information is provided by KNMI and Buienradar, see below. For code, reporting issues, new versions, and more information see:\n\nhttps://github.com/CNugteren/NLWeer</string>
+    <string name="about_text_content_1">NLWeer is an open-source and privacy-friendly Dutch weather app. It is free both as in free lunch and as in freedom. The code is MIT licensed. Weather information is provided by KNMI and Buienradar, see below. For code, reporting issues, new versions, and more information see:\n\nhttps://github.com/CNugteren/NLWeer</string>
     <string name="about_text_header_2">KNMI data</string>
     <string name="about_text_content_2">All KNMI data is copyright under the Creative Commons zero (CC0) license, with the note that KNMI itself is not involved with the NLWeer app and does not actively support the usage of this data in NLWeer. For more information see https://www.knmi.nl/copyright</string>
     <string name="about_text_header_3">Buienradar data</string>
     <string name="about_text_content_3">To be filled in.</string>
-    <string name="about_text_header_4">App icon</string>
-    <string name="about_text_content_4"> \'Fxemoji_u26C5\': Copyright by Mozilla, CC BY 4.0, \nhttps://commons.wikimedia.org/w/index.php?curid=59726384</string>
+    <string name="about_text_header_4">App icons</string>
+    <string name="about_text_content_4">
+\'Fxemoji_u26C5\': Copyright by Mozilla, CC BY 4.0, \nhttps://commons.wikimedia.org/w/index.php?curid=59726384\n\n
+\'OOjs UI icon moon\': Copyright OOjs UI Team, MIT License, \nhttps://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n\n
+\`Sun shape icon\`: Copyright by Icon Fonts, CC BY 3.0, \nhttp://www.onlinewebfonts.com/icon
+</string>
+
 </resources>

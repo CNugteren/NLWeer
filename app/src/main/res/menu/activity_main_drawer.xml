@@ -7,19 +7,19 @@
         <menu>
             <item
                 android:id="@+id/nav_knmi_rain_m1"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/menu_radar"
                 android:title="@string/menu_knmi_rain_m1" />
             <item
                 android:id="@+id/nav_knmi_today"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/menu_today"
                 android:title="@string/menu_knmi_today" />
             <item
                 android:id="@+id/nav_knmi_tonight"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/menu_moon"
                 android:title="@string/menu_knmi_tonight" />
             <item
                 android:id="@+id/nav_knmi_tomorrow"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/menu_tomorrow"
                 android:title="@string/menu_knmi_tomorrow" />
         </menu>
     </item>
