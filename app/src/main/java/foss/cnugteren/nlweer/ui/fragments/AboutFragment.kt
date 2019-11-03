@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import foss.cnugteren.nlweer.BuildConfig
 import foss.cnugteren.nlweer.R
 
 class AboutFragment: Fragment() {
@@ -15,6 +17,12 @@ class AboutFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_about, container, false)
+
+        val versionCode = BuildConfig.VERSION_CODE
+        val versionName = BuildConfig.VERSION_NAME
+        val versionField = root.findViewById<TextView>(R.id.textViewVersion)
+        versionField.text = versionName + " (build " + versionCode + ")"
+
         return root
     }
 }
