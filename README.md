@@ -1,7 +1,11 @@
 NLWeer
 ================
 
-NLWeer is an open-source and privacy-friendly Dutch weather app for Android (5.0 or newer). It is free both as in free lunch and as in freedom. The code is MIT licensed. Weather information is provided by KNMI, see the about screen in the app for more information.
+NLWeer is a simple open-source and privacy-friendly Dutch weather app for Android (5.0 or newer). It is free both as in free lunch and as in freedom. The code is MIT licensed. Weather information is provided by KNMI, see the about screen in the app for more information.
+
+This is what it looks like:
+
+![NLWeer rain radar](docs/rain_radar.png) ![NLWeer navigation menu](docs/navigation_menu.png) ![NLWeer forecast](docs/forecast.png)
 
 
 Reasons to use NLWeer
@@ -14,6 +18,13 @@ Compared to other weather apps for the Netherlands (e.g. Buienradar), here are s
 * It does not require any permissions
 * It is very lightweight and battery friendly
 * It does not require the Google Play Services (e.g. it will run on LineageOS without Google Play or microG)
+
+But there are reasons as well not to use NLWeer (for now at least):
+
+* It doesn't use location information on the map, it just displays everything
+* It doesn't produce a rain-forecast graph for your location
+* It doesn't include a written weather forecast
+* It doesn't include data from Buienradar (yet)
 
 
 How to use NLWeer
