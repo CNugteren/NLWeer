@@ -5,7 +5,7 @@ NLWeer is a simple open-source and privacy-friendly Dutch weather app for Androi
 
 This is what it looks like:
 
-![NLWeer rain radar](docs/rain_radar.png) ![NLWeer navigation menu](docs/navigation_menu.png) ![NLWeer forecast](docs/forecast.png)
+![NLWeer rain radar](metadata/en-US/images/phoneScreenshots/rain_radar.png) ![NLWeer navigation menu](metadata/en-US/images/phoneScreenshots/navigation_menu.png) ![NLWeer forecast](metadata/en-US/images/phoneScreenshots/forecast.png)
 
 
 Reasons to use NLWeer
