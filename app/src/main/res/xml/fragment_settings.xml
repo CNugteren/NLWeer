@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:defaultValue="false">
+
+    <SwitchPreferenceCompat
+        android:key="location_enable"
+        android:title="@string/settings_location_enable" />
+
+    <EditTextPreference
+        android:defaultValue="52.64"
+        android:dependency="location_enable"
+        android:inputType="number"
+        android:key="location_latitude"
+        android:maxLength="4"
+        android:title="@string/settings_latitude" />
+
+    <EditTextPreference
+        android:defaultValue="5.10"
+        android:dependency="location_enable"
+        android:inputType="number"
+        android:key="location_longitude"
+        android:maxLength="4"
+        android:title="@string/settings_longitude" />
+
+</PreferenceScreen>

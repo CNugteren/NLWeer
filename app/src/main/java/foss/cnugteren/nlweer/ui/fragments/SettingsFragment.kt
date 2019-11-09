@@ -1,20 +1,24 @@
 package foss.cnugteren.nlweer.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceFragmentCompat
 import foss.cnugteren.nlweer.R
+import android.content.SharedPreferences
+import androidx.preference.EditTextPreference
+import androidx.preference.Preference
 
-class SettingsFragment: Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_settings, container, false)
-        return root
+class SettingsFragment : PreferenceFragmentCompat(),
+    SharedPreferences.OnSharedPreferenceChangeListener {
+
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.fragment_settings, rootKey)
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+        val pref = findPreference<Preference>(key)
+        if (pref is EditTextPreference) {
+            pref.summary = sharedPreferences.getString(key, "")
+        }
     }
 }
