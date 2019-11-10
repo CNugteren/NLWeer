@@ -7,22 +7,23 @@
 
     <SwitchPreferenceCompat
         android:key="location_enable"
-        android:title="@string/settings_location_enable" />
+        android:title="@string/settings_location_enable"
+        android:summary="@string/settings_location_enable_sub"/>
 
     <EditTextPreference
-        android:defaultValue="52.64"
+        android:defaultValue="52.37"
         android:dependency="location_enable"
         android:inputType="number"
         android:key="location_latitude"
-        android:maxLength="4"
+        android:maxLength="5"
         android:title="@string/settings_latitude" />
 
     <EditTextPreference
-        android:defaultValue="5.10"
+        android:defaultValue="4.90"
         android:dependency="location_enable"
         android:inputType="number"
         android:key="location_longitude"
-        android:maxLength="4"
+        android:maxLength="5"
         android:title="@string/settings_longitude" />
 
 </PreferenceScreen>

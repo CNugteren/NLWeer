@@ -8,4 +8,5 @@ class KnmiTodayFragment : BaseFragment() {
 
     override fun imageWidth(): Int { return 425 }
     override fun imageHeight(): Int { return 467 }
+    override fun coordinates(): Array<Float> { return arrayOf(50.70f, 3.00f, 53.67f, 7.57f) }
 }

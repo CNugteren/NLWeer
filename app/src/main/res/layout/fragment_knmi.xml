@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <WebView
+    <foss.cnugteren.nlweer.DrawWebView
         android:id="@+id/gif_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>

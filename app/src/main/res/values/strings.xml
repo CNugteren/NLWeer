@@ -22,6 +22,7 @@
     <string name="menu_buienradar_header">Buienradar</string>
 
     <string name="settings_location_enable">Show my location</string>
+    <string name="settings_location_enable_sub">Shows a circle at roughly your location</string>
     <string name="settings_latitude">My location: Latitude</string>
     <string name="settings_longitude">My location: Longitude</string>
 

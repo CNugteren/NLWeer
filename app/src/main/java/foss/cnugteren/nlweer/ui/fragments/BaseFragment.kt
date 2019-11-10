@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
+import foss.cnugteren.nlweer.DrawWebView
 import androidx.fragment.app.Fragment
 import foss.cnugteren.nlweer.R
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import kotlin.math.min
 import android.view.ViewTreeObserver
+import androidx.preference.PreferenceManager
 
 abstract class BaseFragment : Fragment() {
 
-    private lateinit var gifView: WebView
+    private lateinit var gifView: DrawWebView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,24 +30,40 @@ abstract class BaseFragment : Fragment() {
         })
 
         // The web-viewer for the content
-        gifView = root.findViewById(R.id.gif_view) as WebView
+        gifView = root.findViewById(R.id.gif_view) as DrawWebView
         gifView.loadUrl(getURL())
 
         // Sets the scale of the image
         root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 root.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                val scaleWidth = (100f * root.width / imageWidth())
-                val scaleHeight = (100f * root.height / imageHeight())
-                gifView.setInitialScale(min(scaleWidth, scaleHeight).toInt())
+                gifView.fullWidth = root.width
+                gifView.fullHeight = root.height
+                gifView.imageWidth = imageWidth()
+                gifView.imageHeight = imageHeight()
+                gifView.imageCoordinates = coordinates()
+                gifView.setWidthFittingScale()
             }
         })
+
+        // Set the location (latitude and longitude)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        gifView.drawCircles = sharedPreferences.getBoolean("location_enable", false)
+        if (gifView.drawCircles) {
+            val latString = sharedPreferences.getString("location_latitude", null)?.toFloatOrNull()
+            val lonString = sharedPreferences.getString("location_longitude", null)?.toFloatOrNull()
+            if (latString != null && lonString != null) {
+                gifView.lat = latString
+                gifView.lon = lonString
+            }
+        }
 
         return root
     }
 
     abstract fun imageWidth(): Int // Implemented in derived classes
     abstract fun imageHeight(): Int // Implemented in derived classes
+    abstract fun coordinates(): Array<Float> // Implemented in derived classes
 
     abstract fun getURL(): String // Implemented in derived classes
 

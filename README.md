@@ -21,7 +21,7 @@ Compared to other weather apps for the Netherlands (e.g. Buienradar), here are s
 
 But there are reasons as well not to use NLWeer (for now at least):
 
-* It doesn't use location information on the map, it just displays everything
+* It doesn't use automatic location information on the map
 * It doesn't produce a rain-forecast graph for your location
 * It doesn't include a written weather forecast
 * It doesn't include data from Buienradar (yet)
