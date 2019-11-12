@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         if (navHostFragment != null) {
             val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
             if (fragment is BaseFragment) {
-                fragment.refresh()
+                fragment.refreshPage()
             }
         }
     }

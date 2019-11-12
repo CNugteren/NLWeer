@@ -25,13 +25,12 @@ abstract class BaseFragment : Fragment() {
         // Pull down to refresh the page
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
         pullToRefresh.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
-            refresh()
-            pullToRefresh.setRefreshing(false)
+            refreshPage()
+            pullToRefresh.isRefreshing = false
         })
 
         // The web-viewer for the content
         gifView = root.findViewById(R.id.gif_view) as DrawWebView
-        gifView.loadUrl(getURL())
 
         // Sets the scale of the image
         root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -43,6 +42,7 @@ abstract class BaseFragment : Fragment() {
                 gifView.imageHeight = imageHeight()
                 gifView.imageCoordinates = coordinates()
                 gifView.setWidthFittingScale()
+                loadPage()
             }
         })
 
@@ -67,7 +67,27 @@ abstract class BaseFragment : Fragment() {
 
     abstract fun getURL(): String // Implemented in derived classes
 
-    fun refresh() {
-        gifView.loadUrl(getURL())
+    fun refreshPage() {
+        gifView.clearCache(false)
+        loadPage()
+    }
+
+    fun loadPage() {
+        // Centers the image both horizontally and vertically using CSS
+        gifView.loadDataWithBaseURL(null,"""
+            <html>
+                <head>
+                    <style type='text/css'>
+                        html {
+                           width: 100%;
+                           height: 100%;
+                           background: black url(""".trimIndent() + getURL() + """) center center no-repeat;
+                        }
+                    </style>
+                </head>
+                <body></body>
+            </html>
+        """.trimIndent(),
+            "text/html",  "UTF-8", null)
     }
 }

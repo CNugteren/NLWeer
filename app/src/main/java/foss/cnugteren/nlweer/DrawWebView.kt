@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.webkit.WebView
 import androidx.core.content.ContextCompat
+import kotlin.math.ceil
 import kotlin.math.min
 
 
@@ -44,7 +45,7 @@ class DrawWebView : WebView {
         scaleWidth = fullWidth / imageWidth.toFloat()
         scaleHeight = fullHeight / imageHeight.toFloat()
         minScale = min(scaleWidth, scaleHeight)
-        super.setInitialScale((100f * minScale).toInt())
+        super.setInitialScale(ceil(100f * minScale).toInt())
     }
 
     override fun onDraw(canvas: Canvas) {
