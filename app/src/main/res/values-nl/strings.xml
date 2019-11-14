@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NLWeer</string>
+    <string name="nav_header_title">NLWeer</string>
+    <string name="nav_header_subtitle">Een gratis, open-source en privacy vriendelijke Nederlandse weer app</string>
+    <string name="nav_header_desc">Navigatie icoon</string>
+
+    <string name="action_refresh">Herladen</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="action_about">Info</string>
+
+    <string name="menu_about">NLWeer</string>
+    <string name="menu_settings">Instellingen</string>
+
+    <string name="menu_knmi_header">Bron: KNMI</string>
+    <string name="menu_knmi_rain_m1">Regen afgelopen uur</string>
+    <string name="menu_knmi_today">Voorspelling vandaag</string>
+    <string name="menu_knmi_tonight">Voorspelling vannacht</string>
+    <string name="menu_knmi_tomorrow">Voorspelling morgen</string>
+    <string name="menu_knmi_temperature">Temperatuur</string>
+    <string name="menu_knmi_wind">Wind</string>
+
+    <string name="menu_buienradar_header">Buienradar</string>
+
+    <string name="settings_location_enable">Laat mijn locatie zien</string>
+    <string name="settings_location_enable_sub">Teken een cirkel ongeveer op mijn locatie</string>
+    <string name="settings_latitude">Mijn locatie: latitude</string>
+    <string name="settings_longitude">Mijn locatie: longitude</string>
+
+    <string name="about_text_header_1">Over NLWeer</string>
+    <string name="about_text_content_1">NLWeer is een open-source en privacy vriendelijke Nederlandse weer app. Het is gratis en vrij om te gebruiken. De code valt onder de MIT licentie. De weergegevens worden door het KNMI en de Buienradar verstrekt, zie hieronder voor meer informatie. Om de code in te zien, om problemen te rapporteren, voor nieuwe versies of voor meer informatie zie:\n\nhttps://github.com/CNugteren/NLWeer</string>
+    <string name="about_text_header_2">KNMI gegevens</string>
+    <string name="about_text_content_2">Alle KNMI gegevens zijn copyright onder de Creative Commons zero (CC0) licentie, met daarbij de notitie dat het KNMI niet betrokken is bij NLWeer en de strekking daarvan niet noodzakelijkerwijs onderschrijft. Voor meer informatie zie https://www.knmi.nl/copyright</string>
+    <string name="about_text_header_3">Buienradar gegevens</string>
+    <string name="about_text_content_3">Buienradar gegevens worden op dit moment niet gebruikt door NLWeer.</string>
+    <string name="about_text_header_4">App en menu iconen</string>
+    <string name="about_text_content_4">App icoon: Copyright Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
+\nMaan icoon: Copyright OOjs UI Team, MIT licentie, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
+\nZon en wind iconen: Copyright Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
+\nTemperatuur en zonsopgang iconen: Gemaakt door Hirschwolf en Freepik van www.flaticon.com</string>
+    <string name="about_text_header_5">NLWeer versie informatie</string>
+
+</resources>

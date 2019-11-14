@@ -1,0 +1,16 @@
+NLWeer is een simpele open-source en privacy vriendelijke Nederlandse weer app voor Android (5.0 of nieuwer). Het is gratis en vrij om te gebruiken. De weergegevens worden door het KNMI en de Buienradar verstrekt, zie het info scherm in de app voor meer informatie.
+
+In vergelijking met andere weer-apps voor Nederland (bijvoorbeeld Buienradar) zouden dit redenen kunnen zijn om NLWeer te overwegen:
+
+* Het is open-source en kan worden aangepast en verbeterd door iedereen
+* Het laat geen reclame zien en zal dat ook nooit doen
+* Het vereist geen speciale permissies van Android
+* Het is een eenvoudige app en dus batterij vriendelijk
+* Het gebruikt geen Google Play Services
+
+Maar er zijn ook redenen om NLWeer niet te gebruiken (op dit moment ten minste):
+
+* Het gebruikt geen locatie informatie
+* Het laat geen voorspellingsgrafiek zien van bijvoorbeeld regen op jouw locatie
+* Het heeft geen geschreven weersvoorspelling
+* Het laat (op dit moment) nog geen Buienradar data zien
