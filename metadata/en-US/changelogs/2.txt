@@ -1,0 +1,3 @@
+- Now displays your current location on the map if specified
+- The app is now also available in Dutch
+

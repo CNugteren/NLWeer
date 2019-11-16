@@ -1,0 +1,3 @@
+- Laat optioneel je huidige locatie zien op de kaart
+- De app is nu ook beschikbaar in het Nederlands
+
