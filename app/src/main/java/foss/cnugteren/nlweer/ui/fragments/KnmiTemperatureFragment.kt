@@ -8,5 +8,5 @@ class KnmiTemperatureFragment : BaseFragment() {
 
     override fun imageWidth(): Int { return 569 }
     override fun imageHeight(): Int { return 622 }
-    override fun coordinates(): Array<Float> { return arrayOf(50.70f, 2.70f, 53.67f, 7.57f) }
+    override fun coordinates(): Array<Float> { return arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f) }
 }

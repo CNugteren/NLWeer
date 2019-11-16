@@ -23,7 +23,7 @@
     <string name="menu_buienradar_header">Buienradar</string>
 
     <string name="settings_location_enable">Laat mijn locatie zien</string>
-    <string name="settings_location_enable_sub">Teken een cirkel ongeveer op mijn locatie</string>
+    <string name="settings_location_enable_sub">Teken een cirkel op mijn locatie</string>
     <string name="settings_latitude">Mijn locatie: latitude</string>
     <string name="settings_longitude">Mijn locatie: longitude</string>
 

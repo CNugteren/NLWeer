@@ -19,7 +19,7 @@ class DrawWebView : WebView {
     var lat = 0f
     var lon = 0f
     var drawCircles = false
-    lateinit var imageCoordinates: Array<Float> // minLat, minLon, maxLat, maxLon
+    lateinit var imageCoordinates: Array<Float> // minLat, minLon, maxLat, maxLon, width-offset-based-on-height, height-offset-based-on-width
     private var scaleWidth = 1f
     private var scaleHeight = 1f
     private var minScale = 1f
@@ -57,26 +57,37 @@ class DrawWebView : WebView {
 
     // Some test values to test the map imageCoordinates
     private fun drawTestCircles(canvas: Canvas) {
-        drawCircle(canvas, 52.11f, 5.18f) // de Bilt
-        drawCircle(canvas, 50.868f, 5.702f) // Maastricht
-        drawCircle(canvas, 53.167f, 4.839f) // top of Texel
-        drawCircle(canvas, 51.529f, 3.428f) // Bottom left: Westkapelle
-        drawCircle(canvas, 53.229f, 7.191f) // Top right at the bottom of Dollart and border with DE
+        drawCircle(canvas, 51.3694f,3.3659f) // SW border with Belgium at Cadzand
+        drawCircle(canvas, 50.7543f,6.0209f) // SE border with Belgium & Germany at Vaalserberg
+        drawCircle(canvas, 51.8236f,5.9449f) // E border with Germany at Nijmegen
+        drawCircle(canvas, 53.2360f,7.2098f) // NE border with Germany at the bottom of the Dollart
+        drawCircle(canvas, 53.4390f,5.5466f) // N border with the sea at the eastern most point of Terschelling
+        drawCircle(canvas, 53.1851f,4.8522f) // NW border with the sea at the northern most point of Texel
+        drawCircle(canvas, 51.9841f,4.0964f) // S border with the sea at the extreme point at Hoek van Holland
     }
 
     private fun drawCircle(canvas: Canvas, lat: Float, lon: Float) {
+        if (imageCoordinates.size < 6) { return } // invalid data provided
+
         val minLat = imageCoordinates[0]; val minLon = imageCoordinates[1]
         val maxLat = imageCoordinates[2]; val maxLon = imageCoordinates[3]
-        if (lat < minLat || lon < minLon || lat > maxLat || lon > maxLon) {
+
+        // Percentage of the image computation
+        var percentWidth = (lon - minLon) / (maxLon - minLon)
+        var percentHeight = (lat - minLat) / (maxLat - minLat)
+        percentWidth += percentHeight * imageCoordinates[4]
+        percentHeight += percentWidth * imageCoordinates[5]
+        if (percentHeight < 0 || percentWidth < 0 || percentHeight > 1 || percentWidth > 1) {
             return // skip drawing - out of bounds
         }
-        val offsetWidth = (fullWidth - imageWidth * minScale) / 2f
-        val offsetHeight = (fullHeight - imageHeight * minScale) / 2f
-        val percentWidth = (lon - minLon) / (maxLon - minLon)
-        val percentHeight = (lat - minLat) / (maxLat - minLat)
+
+        // Pixel space
         val xPos = imageWidth * minScale * percentWidth
         val yPos = imageHeight * minScale * (1f - percentHeight)
-        canvas.drawCircle(xPos + offsetWidth, yPos + offsetHeight,40f, painter)
+        val offsetWidth = (fullWidth - imageWidth * minScale) / 2f
+        val offsetHeight = (fullHeight - imageHeight * minScale) / 2f
+        canvas.drawCircle(xPos + offsetWidth, yPos + offsetHeight,25f, painter)
+        canvas.drawCircle(xPos + offsetWidth, yPos + offsetHeight,3f, painter)
     }
 
 }
