@@ -10,6 +10,7 @@ import foss.cnugteren.nlweer.R
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import android.view.ViewTreeObserver
 import androidx.preference.PreferenceManager
+import foss.cnugteren.nlweer.MainActivity
 
 abstract class BaseFragment : Fragment() {
 
@@ -50,11 +51,15 @@ abstract class BaseFragment : Fragment() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         gifView.drawCircles = sharedPreferences.getBoolean("location_enable", false)
         if (gifView.drawCircles) {
-            val latString = sharedPreferences.getString("location_latitude", null)?.toFloatOrNull()
-            val lonString = sharedPreferences.getString("location_longitude", null)?.toFloatOrNull()
-            if (latString != null && lonString != null) {
-                gifView.lat = latString
-                gifView.lon = lonString
+            val gpsEnable = sharedPreferences.getBoolean("gps_enable", false)
+            if (!gpsEnable) { // Sets the lat/lon from manual source
+                val lat = sharedPreferences.getString("location_latitude", null)?.toFloatOrNull()
+                val lon = sharedPreferences.getString("location_longitude", null)?.toFloatOrNull()
+                setLocation(lat, lon)
+            }
+            else { // Sets from the latest known values from the main activity
+                val activity = this.activity as MainActivity
+                setLocation(activity.gpsLat, activity.gpsLon)
             }
         }
 
@@ -66,6 +71,13 @@ abstract class BaseFragment : Fragment() {
     abstract fun coordinates(): Array<Float> // Implemented in derived classes
 
     abstract fun getURL(): String // Implemented in derived classes
+
+    fun setLocation(lat: Float?, lon: Float?) {
+        if (lat != null && lon != null) { // Only sets if valid
+            gifView.lat = lat
+            gifView.lon = lon
+        }
+    }
 
     fun refreshPage() {
         gifView.clearCache(false)

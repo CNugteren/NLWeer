@@ -8,11 +8,20 @@
     <SwitchPreferenceCompat
         android:key="location_enable"
         android:title="@string/settings_location_enable"
-        android:summary="@string/settings_location_enable_sub"/>
+        android:summary="@string/settings_location_enable_sub"
+        android:defaultValue="false"/>
+
+    <SwitchPreferenceCompat
+        android:key="gps_enable"
+        android:title="@string/settings_gps_enable"
+        android:summary="@string/settings_gps_enable_sub"
+        android:defaultValue="false"
+        android:disableDependentsState="true"
+        android:dependency="location_enable"/>
 
     <EditTextPreference
         android:defaultValue="52.37"
-        android:dependency="location_enable"
+        android:dependency="gps_enable"
         android:inputType="number"
         android:key="location_latitude"
         android:maxLength="5"
@@ -20,7 +29,7 @@
 
     <EditTextPreference
         android:defaultValue="4.90"
-        android:dependency="location_enable"
+        android:dependency="gps_enable"
         android:inputType="number"
         android:key="location_longitude"
         android:maxLength="5"

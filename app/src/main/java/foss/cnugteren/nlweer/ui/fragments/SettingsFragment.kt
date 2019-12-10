@@ -1,12 +1,12 @@
 package foss.cnugteren.nlweer.ui.fragments
 
+import android.Manifest
 import android.os.Bundle
-import androidx.preference.PreferenceFragmentCompat
 import foss.cnugteren.nlweer.R
 import android.content.SharedPreferences
-import androidx.preference.EditTextPreference
-import androidx.preference.Preference
-import androidx.preference.PreferenceManager
+import androidx.core.app.ActivityCompat
+import androidx.preference.*
+import foss.cnugteren.nlweer.MainActivity
 
 
 class SettingsFragment : PreferenceFragmentCompat(),
@@ -35,11 +35,21 @@ class SettingsFragment : PreferenceFragmentCompat(),
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
     }
 
-    // If the value of the settings change, sets the new values as summaries
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         val pref = findPreference<Preference>(key)
+
+        // If the value of the settings change, sets the new values as summaries
         if (pref is EditTextPreference) {
             pref.summary = sharedPreferences.getString(key, "")
+        }
+
+        // Set/unset GPS location
+        if (pref is SwitchPreferenceCompat && key == "gps_enable") {
+            val activity = this.activity as MainActivity
+            if (pref.isChecked) {
+                ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+            }
+            activity.setLocationManager()
         }
     }
 }

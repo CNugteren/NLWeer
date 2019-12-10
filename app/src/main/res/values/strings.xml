@@ -23,6 +23,8 @@
 
     <string name="settings_location_enable">Show my location</string>
     <string name="settings_location_enable_sub">Shows a circle at your location</string>
+    <string name="settings_gps_enable">Use GPS location</string>
+    <string name="settings_gps_enable_sub">Automatically determine location</string>
     <string name="settings_latitude">My location: latitude</string>
     <string name="settings_longitude">My location: longitude</string>
 

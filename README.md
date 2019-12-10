@@ -15,13 +15,12 @@ Compared to other weather apps for the Netherlands (e.g. Buienradar), here are s
 
 * It is open-source and can be customized/improved by anyone if needed
 * It does not nor never will display commercial advertisements
-* It does not require any permissions
+* It does not require any permissions (except for GPS if explicitly requested)
 * It is very lightweight and battery friendly
 * It does not require the Google Play Services (e.g. it will run on LineageOS without Google Play or microG)
 
 But there are reasons as well not to use NLWeer (for now at least):
 
-* It doesn't use automatic location information on the map
 * It doesn't produce a rain-forecast graph for your location
 * It doesn't include a written weather forecast
 * It doesn't include data from Buienradar (yet)
