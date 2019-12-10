@@ -4,13 +4,12 @@ In vergelijking met andere weer-apps voor Nederland (bijvoorbeeld Buienradar) zo
 
 * Het is open-source en kan worden aangepast en verbeterd door iedereen
 * Het laat geen reclame zien en zal dat ook nooit doen
-* Het vereist geen speciale permissies van Android
+* Het vereist geen speciale permissies van Android (behalve GPS wanneer gewenst)
 * Het is een eenvoudige app en dus batterij vriendelijk
 * Het gebruikt geen Google Play Services
 
 Maar er zijn ook redenen om NLWeer niet te gebruiken (op dit moment ten minste):
 
-* Het gebruikt geen locatie informatie
 * Het laat geen voorspellingsgrafiek zien van bijvoorbeeld regen op jouw locatie
 * Het heeft geen geschreven weersvoorspelling
 * Het laat (op dit moment) nog geen Buienradar data zien
