@@ -37,6 +37,12 @@
         tools:layout="@layout/fragment_knmi" />
 
     <fragment
+        android:id="@+id/nav_buienradar_rain_m1"
+        android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarRainM1Fragment"
+        android:label="@string/menu_buienradar_rain_m1"
+        tools:layout="@layout/fragment_buienradar" />
+
+    <fragment
         android:id="@+id/nav_about"
         android:name="foss.cnugteren.nlweer.ui.fragments.AboutFragment"
         android:label="@string/menu_about"

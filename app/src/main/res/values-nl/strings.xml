@@ -20,7 +20,8 @@
     <string name="menu_knmi_temperature">Temperatuur</string>
     <string name="menu_knmi_wind">Wind</string>
 
-    <string name="menu_buienradar_header">Buienradar</string>
+    <string name="menu_buienradar_header">Bron: Buienradar</string>
+    <string name="menu_buienradar_rain_m1">Regen afgelopen uur</string>
 
     <string name="settings_location_enable">Laat mijn locatie zien</string>
     <string name="settings_location_enable_sub">Teken een cirkel op mijn locatie</string>

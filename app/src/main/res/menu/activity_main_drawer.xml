@@ -34,6 +34,10 @@
 
     <item android:title="@string/menu_buienradar_header">
         <menu>
+            <item
+                android:id="@+id/nav_buienradar_rain_m1"
+                android:icon="@drawable/menu_radar"
+                android:title="@string/menu_buienradar_rain_m1" />
         </menu>
 
     </item>

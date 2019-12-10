@@ -19,7 +19,8 @@
     <string name="menu_knmi_temperature">Temperature</string>
     <string name="menu_knmi_wind">Wind</string>
 
-    <string name="menu_buienradar_header">Buienradar</string>
+    <string name="menu_buienradar_header">Source: Buienradar</string>
+    <string name="menu_buienradar_rain_m1">Rain last hour</string>
 
     <string name="settings_location_enable">Show my location</string>
     <string name="settings_location_enable_sub">Shows a circle at your location</string>
