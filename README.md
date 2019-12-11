@@ -1,6 +1,12 @@
 NLWeer
 ================
 
+[![Get it on F-Droid](https://img.shields.io/f-droid/v/foss.cnugteren.nlweer.svg)](https://f-droid.org/en/packages/foss.cnugteren.nlweer) [![Get it from GitHub](https://img.shields.io/github/release/cnugteren/NLWeer.svg?logo=github)](https://github.com/CNugteren/NLWeer/releases)
+
+<a href="https://f-droid.org/packages/foss.cnugteren.nlweer">
+  <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="75">
+</a>
+
 NLWeer is a simple open-source and privacy-friendly Dutch weather app for Android (5.0 or newer). It is free both as in free lunch and as in freedom. The code is MIT licensed. Weather information is provided by KNMI, see the about screen in the app for more information.
 
 This is what it looks like:
@@ -29,7 +35,7 @@ But there are reasons as well not to use NLWeer (for now at least):
 How to use NLWeer
 -------------
 
-Requirement is an Android device with version 5.0 (Lollipop, API 21) or newer. Afterwards, either:
+Requirement is an Android device with version 5.0 (Lollipop, API 21) or newer. You can install it in one of the following ways:
 
 * Download the apk from this repository's release page onto your device and install it
-* Install it from the the F-Droid repository (see [F-Droid.org](https://f-droid.org) if you don't have it yet)
+* Install it from the the [F-Droid app store](https://f-droid.org/en/packages/foss.cnugteren.nlweer/)
