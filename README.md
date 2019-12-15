@@ -1,5 +1,4 @@
-NLWeer
-================
+# NLWeer
 
 [![Get it on F-Droid](https://img.shields.io/f-droid/v/foss.cnugteren.nlweer.svg)](https://f-droid.org/en/packages/foss.cnugteren.nlweer) [![Get it from GitHub](https://img.shields.io/github/release/cnugteren/NLWeer.svg?logo=github)](https://github.com/CNugteren/NLWeer/releases)
 
@@ -14,8 +13,7 @@ This is what it looks like:
 ![NLWeer rain radar](metadata/en-US/images/phoneScreenshots/rain_radar.png) ![NLWeer navigation menu](metadata/en-US/images/phoneScreenshots/navigation_menu.png) ![NLWeer forecast](metadata/en-US/images/phoneScreenshots/forecast.png)
 
 
-Reasons to use NLWeer
--------------
+## Reasons to use NLWeer
 
 Compared to other weather apps for the Netherlands (e.g. Buienradar), here are some reasons to use NLWeer instead:
 
@@ -32,8 +30,7 @@ But there are reasons as well not to use NLWeer (for now at least):
 * It doesn't include data from Buienradar (yet)
 
 
-How to use NLWeer
--------------
+## How to use NLWeer
 
 Requirement is an Android device with version 5.0 (Lollipop, API 21) or newer. You can install it in one of the following ways:
 
