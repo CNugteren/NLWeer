@@ -22,7 +22,7 @@
     <string name="menu_buienradar_header">Buienradar</string>
 
     <string name="settings_location_enable">Show my location</string>
-    <string name="settings_location_enable_sub">Shows a circle at your location</string>
+    <string name="settings_location_enable_sub">Shows a circle at my location</string>
     <string name="settings_gps_enable">Use GPS location</string>
     <string name="settings_gps_enable_sub">Automatically determine location</string>
     <string name="settings_latitude">My location: latitude</string>
@@ -31,7 +31,7 @@
     <string name="about_text_header_1">About NLWeer</string>
     <string name="about_text_content_1">NLWeer is an open-source and privacy-friendly Dutch weather app. It is free both as in free lunch and as in freedom. The code is MIT licensed. Weather information is provided by KNMI and Buienradar, see below. For code, reporting issues, new versions, and more information see:\n\nhttps://github.com/CNugteren/NLWeer</string>
     <string name="about_text_header_2">KNMI data</string>
-    <string name="about_text_content_2">All KNMI data is copyright under the Creative Commons zero (CC0) license, with the note that KNMI itself is not involved with the NLWeer app and does not actively support the usage of this data in NLWeer. For more information see https://www.knmi.nl/copyright</string>
+    <string name="about_text_content_2">All KNMI data has the Creative Commons Zero (CC0) license, with the note that KNMI itself is not involved with the NLWeer app and does not actively support the usage of this data in NLWeer. For more information see https://www.knmi.nl/copyright</string>
     <string name="about_text_header_3">Buienradar data</string>
     <string name="about_text_content_3">Buienradar data is currently not used for NLWeer.</string>
     <string name="about_text_header_4">App and menu icons</string>
