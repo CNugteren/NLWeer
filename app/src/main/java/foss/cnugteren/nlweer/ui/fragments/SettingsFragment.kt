@@ -19,8 +19,8 @@ class SettingsFragment : PreferenceFragmentCompat(),
         // Sets the initial values as summaries
         val latString = sharedPreferences.getString("location_latitude", null)
         val lonString = sharedPreferences.getString("location_longitude", null)
-        findPreference<Preference>("location_latitude")?.summary = latString
-        findPreference<Preference>("location_longitude")?.summary = lonString
+        findPreference("location_latitude")?.summary = latString
+        findPreference("location_longitude")?.summary = lonString
     }
 
     override fun onResume() {
@@ -36,7 +36,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        val pref = findPreference<Preference>(key)
+        val pref = findPreference(key)
 
         // If the value of the settings change, sets the new values as summaries
         if (pref is EditTextPreference) {
