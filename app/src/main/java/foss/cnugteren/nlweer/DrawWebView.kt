@@ -5,10 +5,15 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.webkit.WebView
 import androidx.core.content.ContextCompat
+import androidx.core.view.GestureDetectorCompat
+import androidx.navigation.findNavController
 import kotlin.math.ceil
 import kotlin.math.min
+import kotlin.math.abs
 
 
 class DrawWebView : WebView {
@@ -29,13 +34,17 @@ class DrawWebView : WebView {
 
     private val painter = Paint()
 
-    constructor(context: Context) : super(context) { init() }
+    private lateinit var mDetector: GestureDetectorCompat
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) { init() }
+    constructor(context: Context) : super(context) { init(context) }
 
-    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) { init() }
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) { init(context) }
 
-    private fun init() {
+    constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) { init(context) }
+
+    private fun init(context: Context) {
+        mDetector = GestureDetectorCompat(context, MyGestureListener())
+
         painter.color = Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(context, R.color.colorHighlight)))
         painter.strokeWidth = 3f
         painter.style = Paint.Style.STROKE
@@ -91,6 +100,52 @@ class DrawWebView : WebView {
         val offsetHeight = (fullHeight - imageHeight * minScale) / 2f
         canvas.drawCircle(xPos + offsetWidth, yPos + offsetHeight,25f, painter)
         canvas.drawCircle(xPos + offsetWidth, yPos + offsetHeight,3f, painter)
+    }
+
+    fun goToPrevView() {
+        val navController = findNavController()
+        navController.navigate(prevView)
+    }
+
+    fun goToNextView() {
+        val navController = findNavController()
+        navController.navigate(nextView)
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        mDetector.onTouchEvent(event)
+        return super.onTouchEvent(event)
+    }
+
+    private inner class MyGestureListener : GestureDetector.SimpleOnGestureListener() {
+
+        private val SWIPE_THRESHOLD = 50
+        private val SWIPE_VELOCITY_THRESHOLD = 50
+
+        override fun onDown(event: MotionEvent): Boolean {
+            return true
+        }
+
+        override fun onFling(
+            event1: MotionEvent,
+            event2: MotionEvent,
+            velocityX: Float,
+            velocityY: Float
+        ): Boolean {
+            val diffY = event2.y - event1.y
+            val diffX = event2.x - event1.x
+            if (abs(diffX) > abs(diffY)) {
+                if (abs(diffX) > SWIPE_THRESHOLD &&
+                    abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                    if (diffX > 0) {
+                        goToPrevView()
+                    } else {
+                        goToNextView()
+                    }
+                }
+            }
+            return true
+        }
     }
 
 }
