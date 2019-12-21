@@ -1,6 +1,7 @@
 package foss.cnugteren.nlweer.ui.fragments
 
 class KnmiTemperatureFragment : BaseFragment() {
+    override val currentViewIndex = 4
 
     override fun getURL(): String {
         return "https://cdn.knmi.nl/knmi/map/page/weer/actueel-weer/temperatuur.png"

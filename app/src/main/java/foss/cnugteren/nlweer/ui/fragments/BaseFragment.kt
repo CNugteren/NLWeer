@@ -11,10 +11,22 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import android.view.ViewTreeObserver
 import androidx.preference.PreferenceManager
 import foss.cnugteren.nlweer.MainActivity
+import kotlin.math.max
+import kotlin.math.min
 
 abstract class BaseFragment : Fragment() {
 
     private lateinit var gifView: DrawWebView
+    abstract val currentViewIndex: Int  // overriden in child classes
+
+    private var allViews = arrayOf(
+        R.id.nav_knmi_rain_m1,
+        R.id.nav_knmi_today,
+        R.id.nav_knmi_tomorrow,
+        R.id.nav_knmi_tonight,
+        R.id.nav_knmi_temperature,
+        R.id.nav_knmi_wind
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +44,10 @@ abstract class BaseFragment : Fragment() {
 
         // The web-viewer for the content
         gifView = root.findViewById(R.id.gif_view) as DrawWebView
+
+        // Adds navigation (prev/next) to the views
+        gifView.prevView = allViews[max(currentViewIndex - 1, 0)]
+        gifView.nextView = allViews[min(currentViewIndex + 1, allViews.size - 1)]
 
         // Sets the scale of the image
         root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {

@@ -19,6 +19,9 @@ class DrawWebView : WebView {
     var lat = 0f
     var lon = 0f
     var drawCircles = false
+    var prevView = 0
+    var nextView = 0
+
     lateinit var imageCoordinates: Array<Float> // minLat, minLon, maxLat, maxLon, width-offset-based-on-height, height-offset-based-on-width
     private var scaleWidth = 1f
     private var scaleHeight = 1f
