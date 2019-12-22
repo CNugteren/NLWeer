@@ -103,14 +103,26 @@ class MainActivity : AppCompatActivity() {
             try {
                 try {
                     locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager?
-                    locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1f, locationListener)
+                    val networkProvidedAvailable = locationManager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+                    if (networkProvidedAvailable != null && networkProvidedAvailable) {
+                        locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1f, locationListener)
+                    }
+                    else { // Only use GPS if network location provided not available on this device
+                        locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1f, locationListener)
+                    }
                 } catch (ex: SecurityException) { }
             }
             catch (ex: Exception) { }
         }
         else {
+            locationManager?.removeUpdates(locationListener)
             locationManager = null
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        locationManager?.removeUpdates(locationListener)
     }
 
     // Try again the above function when the request was accepted
