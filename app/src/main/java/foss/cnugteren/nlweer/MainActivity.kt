@@ -20,6 +20,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
 import foss.cnugteren.nlweer.ui.fragments.BaseFragment
+import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
 import java.lang.Exception
 
 
@@ -75,6 +76,9 @@ class MainActivity : AppCompatActivity() {
         if (navHostFragment != null) {
             val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
             if (fragment is BaseFragment) {
+                fragment.refreshPage()
+            }
+            if (fragment is KnmiTextFragment) {
                 fragment.refreshPage()
             }
         }
