@@ -16,6 +16,8 @@ import org.jsoup.nodes.Document
 class KnmiTextFragment : Fragment() {
 
     private lateinit var root: View
+    private lateinit var headers: Array<String>
+    private lateinit var contents: Array<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,23 +47,37 @@ class KnmiTextFragment : Fragment() {
     }
 
     fun loadPage() {
-        var header = "Waiting for data..,"
-        var content = ""
+        headers = arrayOf("Vandaag & Morgen", "Vooruitzichten", "Vooruitzichten lange termijn")
+        contents = arrayOf("", "", "")
 
         // Retrieves the data from the URL using JSoup
         val htmlDocument = RetrieveWebPage().execute(getURL()).get()
-        if (htmlDocument == null) {
-            header = "No data found"
-            content = ""
-        }
-        else {
-            htmlDocument.run {
-                select("div.weather__text.media__body").forEach { element ->
-                    element.select("p").forEachIndexed { index, paragraph ->
-                        if (index == 0) {
-                            header = paragraph.text()
-                        } else {
-                            content += paragraph.text() + "\n\n"
+        htmlDocument?.run {
+            select("div.columns.filled-main-content").forEachIndexed { index, group ->
+
+                // Parse the data (0): the main weather report
+                if (index == 0) {
+                    select("div.weather__text.media__body").forEach { element ->
+                        element.select("p").forEach { paragraph ->
+                            contents[0] += paragraph.text() + "\n\n"
+                        }
+                    }
+                }
+
+                // Parse the data (1): the mid term report
+                if (index == 1) {
+                    group.select("div.col-sm-12.col-md-7").forEach { element ->
+                        element.select("p").forEach { paragraph ->
+                            contents[1] += paragraph.text() + "\n\n"
+                        }
+                    }
+                }
+
+                // Parse the data (2): the long term report
+                if (index == 3) {
+                    group.select("div.col-sm-12.col-md-7").forEach { element ->
+                        element.select("p").forEach { paragraph ->
+                            contents[2] += paragraph.text() + "\n\n"
                         }
                     }
                 }
@@ -69,10 +85,12 @@ class KnmiTextFragment : Fragment() {
         }
 
         // Displays the found data
-        val headerField = root.findViewById<TextView>(R.id.textViewHeader)
-        headerField.text = header
-        val contentField = root.findViewById<TextView>(R.id.textViewContent)
-        contentField.text = content
+        root.findViewById<TextView>(R.id.textViewHeader0).text = headers[0]
+        root.findViewById<TextView>(R.id.textViewContent0).text = contents[0].trimEnd()
+        root.findViewById<TextView>(R.id.textViewHeader1).text = headers[1]
+        root.findViewById<TextView>(R.id.textViewContent1).text = contents[1].trimEnd()
+        root.findViewById<TextView>(R.id.textViewHeader2).text = headers[2]
+        root.findViewById<TextView>(R.id.textViewContent2).text = contents[2].trimEnd()
     }
 
     internal inner class RetrieveWebPage : AsyncTask<String, Void, Document>() {
