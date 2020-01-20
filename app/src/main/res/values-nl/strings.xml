@@ -19,6 +19,8 @@
     <string name="menu_knmi_tomorrow">Voorspelling morgen</string>
     <string name="menu_knmi_temperature">Temperatuur</string>
     <string name="menu_knmi_wind">Wind</string>
+    <string name="menu_knmi_text">Weerbericht</string>
+    <string name="menu_knmi_text_source">Bron: https://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
 
     <string name="menu_buienradar_header">Buienradar</string>
 
@@ -38,7 +40,7 @@
     <string name="about_text_header_4">App- en menu-iconen</string>
     <string name="about_text_content_4">Appicoon: Copyright Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
 \nMaanicoon: Copyright OOjs UI Team, MIT licentie, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
-\nZon- en windiconen: Copyright Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
+\nZon-, wind- en weerberichticonen: Copyright Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
 \nTemperatuur en zonsopgang iconen: Gemaakt door Hirschwolf en Freepik van www.flaticon.com</string>
     <string name="about_text_header_5">NLWeer versie-informatie</string>
 

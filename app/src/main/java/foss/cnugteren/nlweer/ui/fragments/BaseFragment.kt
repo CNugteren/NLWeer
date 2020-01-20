@@ -84,7 +84,7 @@ abstract class BaseFragment : Fragment() {
         loadPage()
     }
 
-    fun loadPage() {
+    open fun loadPage() {
         // Centers the image both horizontally and vertically using CSS
         gifView.loadDataWithBaseURL(null,"""
             <html>
