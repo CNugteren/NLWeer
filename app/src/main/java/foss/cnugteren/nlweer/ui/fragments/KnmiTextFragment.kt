@@ -47,15 +47,15 @@ class KnmiTextFragment : Fragment() {
     }
 
     fun loadPage() {
-        headers = arrayOf("Vandaag & Morgen", "Vooruitzichten", "Vooruitzichten lange termijn")
-        contents = arrayOf("", "", "")
+        headers = arrayOf("Vandaag & Morgen", "Vooruitzichten", "", "Vooruitzichten lange termijn")
+        contents = arrayOf("", "", "", "")
 
         // Retrieves the data from the URL using JSoup
         val htmlDocument = RetrieveWebPage().execute(getURL()).get()
         htmlDocument?.run {
             select("div.columns.filled-main-content").forEachIndexed { index, group ->
 
-                // Parse the data (0): the main weather report
+                // The main weather report
                 if (index == 0) {
                     select("div.weather__text.media__body").forEach { element ->
                         element.select("p").forEach { paragraph ->
@@ -64,7 +64,7 @@ class KnmiTextFragment : Fragment() {
                     }
                 }
 
-                // Parse the data (1): the mid term report
+                // The mid term report
                 if (index == 1) {
                     group.select("div.col-sm-12.col-md-7").forEach { element ->
                         element.select("p").forEach { paragraph ->
@@ -73,11 +73,29 @@ class KnmiTextFragment : Fragment() {
                     }
                 }
 
-                // Parse the data (2): the long term report
+                // The icons/numbers week overview
+                if (index == 2) {
+                    group.select("div.weather-map__table-wrp").forEach { element ->
+                        element.select("li").forEach { column ->
+                            var tableData = ""
+                            column.select("span.weather-map__table-cell").forEachIndexed { index, item ->
+                                if (index == 0) {
+                                    tableData += "[" + item.text() + "] "
+                                }
+                                else {
+                                    tableData += item.text() + " "
+                                }
+                            }
+                            contents[2] += tableData + "\n\n"
+                        }
+                    }
+                }
+
+                // The long term report
                 if (index == 3) {
                     group.select("div.col-sm-12.col-md-7").forEach { element ->
                         element.select("p").forEach { paragraph ->
-                            contents[2] += paragraph.text() + "\n\n"
+                            contents[3] += paragraph.text() + "\n\n"
                         }
                     }
                 }
@@ -89,8 +107,9 @@ class KnmiTextFragment : Fragment() {
         root.findViewById<TextView>(R.id.textViewContent0).text = contents[0].trimEnd()
         root.findViewById<TextView>(R.id.textViewHeader1).text = headers[1]
         root.findViewById<TextView>(R.id.textViewContent1).text = contents[1].trimEnd()
-        root.findViewById<TextView>(R.id.textViewHeader2).text = headers[2]
         root.findViewById<TextView>(R.id.textViewContent2).text = contents[2].trimEnd()
+        root.findViewById<TextView>(R.id.textViewHeader3).text = headers[3]
+        root.findViewById<TextView>(R.id.textViewContent3).text = contents[3].trimEnd()
     }
 
     internal inner class RetrieveWebPage : AsyncTask<String, Void, Document>() {
