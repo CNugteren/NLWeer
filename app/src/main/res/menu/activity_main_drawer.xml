@@ -31,7 +31,7 @@
                 android:title="@string/menu_knmi_wind" />
             <item
                 android:id="@+id/nav_knmi_text"
-                android:icon="@drawable/menu_today"
+                android:icon="@drawable/menu_weather_report"
                 android:title="@string/menu_knmi_text" />
         </menu>
     </item>
