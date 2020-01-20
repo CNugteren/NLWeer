@@ -20,6 +20,7 @@
     <string name="menu_knmi_temperature">Temperatuur</string>
     <string name="menu_knmi_wind">Wind</string>
     <string name="menu_knmi_text">Weerbericht</string>
+    <string name="menu_knmi_text_source">Bron: https://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
 
     <string name="menu_buienradar_header">Buienradar</string>
 
