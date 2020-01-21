@@ -16,8 +16,6 @@ import org.jsoup.nodes.Document
 class KnmiTextFragment : Fragment() {
 
     private lateinit var root: View
-    private lateinit var headers: Array<String>
-    private lateinit var contents: Array<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,72 +45,12 @@ class KnmiTextFragment : Fragment() {
     }
 
     fun loadPage() {
-        headers = arrayOf("Vandaag & Morgen", "Vooruitzichten", "", "Vooruitzichten lange termijn")
-        contents = arrayOf("", "", "", "")
-
-        // Retrieves the data from the URL using JSoup
-        val htmlDocument = RetrieveWebPage().execute(getURL()).get()
-        htmlDocument?.run {
-            select("div.columns.filled-main-content").forEachIndexed { index, group ->
-
-                // The main weather report
-                if (index == 0) {
-                    select("div.weather__text.media__body").forEach { element ->
-                        element.select("p").forEach { paragraph ->
-                            contents[0] += paragraph.text() + "\n\n"
-                        }
-                    }
-                }
-
-                // The mid term report
-                if (index == 1) {
-                    group.select("div.col-sm-12.col-md-7").forEach { element ->
-                        element.select("p").forEach { paragraph ->
-                            contents[1] += paragraph.text() + "\n\n"
-                        }
-                    }
-                }
-
-                // The icons/numbers week overview
-                if (index == 2) {
-                    group.select("div.weather-map__table-wrp").forEach { element ->
-                        element.select("li").forEach { column ->
-                            var tableData = ""
-                            column.select("span.weather-map__table-cell").forEachIndexed { index, item ->
-                                if (index == 0) {
-                                    tableData += "[" + item.text() + "] "
-                                }
-                                else {
-                                    tableData += item.text() + " "
-                                }
-                            }
-                            contents[2] += tableData + "\n\n"
-                        }
-                    }
-                }
-
-                // The long term report
-                if (index == 3) {
-                    group.select("div.col-sm-12.col-md-7").forEach { element ->
-                        element.select("p").forEach { paragraph ->
-                            contents[3] += paragraph.text() + "\n\n"
-                        }
-                    }
-                }
-            }
-        }
-
-        // Displays the found data
-        root.findViewById<TextView>(R.id.textViewHeader0).text = headers[0]
-        root.findViewById<TextView>(R.id.textViewContent0).text = contents[0].trimEnd()
-        root.findViewById<TextView>(R.id.textViewHeader1).text = headers[1]
-        root.findViewById<TextView>(R.id.textViewContent1).text = contents[1].trimEnd()
-        root.findViewById<TextView>(R.id.textViewContent2).text = contents[2].trimEnd()
-        root.findViewById<TextView>(R.id.textViewHeader3).text = headers[3]
-        root.findViewById<TextView>(R.id.textViewContent3).text = contents[3].trimEnd()
+        RetrieveWebPage().execute(getURL())
     }
 
     internal inner class RetrieveWebPage : AsyncTask<String, Void, Document>() {
+
+        // Retrieves the data from the URL using JSoup (async)
         override fun doInBackground(vararg urls: String): Document? {
             try {
                 return Jsoup.connect(urls[0]).get()
@@ -120,7 +58,73 @@ class KnmiTextFragment : Fragment() {
                 return null
             }
         }
-        override fun onPostExecute(htmlDocument: Document) { }
-    }
 
+        // When complete: parses the result
+        override fun onPostExecute(htmlDocument: Document?) {
+            if (htmlDocument == null) {
+                root.findViewById<TextView>(R.id.textViewHeader0).text = "?"
+            }
+            var headers = arrayOf("Vandaag & Morgen", "Vooruitzichten", "", "Vooruitzichten lange termijn")
+            var contents = arrayOf("", "", "", "")
+
+            htmlDocument?.run {
+                select("div.columns.filled-main-content").forEachIndexed { index, group ->
+
+                    // The main weather report
+                    if (index == 0) {
+                        select("div.weather__text.media__body").forEach { element ->
+                            element.select("p").forEach { paragraph ->
+                                contents[0] += paragraph.text() + "\n\n"
+                            }
+                        }
+                    }
+
+                    // The mid term report
+                    if (index == 1) {
+                        group.select("div.col-sm-12.col-md-7").forEach { element ->
+                            element.select("p").forEach { paragraph ->
+                                contents[1] += paragraph.text() + "\n\n"
+                            }
+                        }
+                    }
+
+                    // The icons/numbers week overview
+                    if (index == 2) {
+                        group.select("div.weather-map__table-wrp").forEach { element ->
+                            element.select("li").forEach { column ->
+                                var tableData = ""
+                                column.select("span.weather-map__table-cell").forEachIndexed { index, item ->
+                                    if (index == 0) {
+                                        tableData += "[" + item.text() + "] "
+                                    }
+                                    else {
+                                        tableData += item.text() + " "
+                                    }
+                                }
+                                contents[2] += tableData + "\n\n"
+                            }
+                        }
+                    }
+
+                    // The long term report
+                    if (index == 3) {
+                        group.select("div.col-sm-12.col-md-7").forEach { element ->
+                            element.select("p").forEach { paragraph ->
+                                contents[3] += paragraph.text() + "\n\n"
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Displays the found data
+            root.findViewById<TextView>(R.id.textViewHeader0).text = headers[0]
+            root.findViewById<TextView>(R.id.textViewContent0).text = contents[0].trimEnd()
+            root.findViewById<TextView>(R.id.textViewHeader1).text = headers[1]
+            root.findViewById<TextView>(R.id.textViewContent1).text = contents[1].trimEnd()
+            root.findViewById<TextView>(R.id.textViewContent2).text = contents[2].trimEnd()
+            root.findViewById<TextView>(R.id.textViewHeader3).text = headers[3]
+            root.findViewById<TextView>(R.id.textViewContent3).text = contents[3].trimEnd()
+        }
+    }
 }
