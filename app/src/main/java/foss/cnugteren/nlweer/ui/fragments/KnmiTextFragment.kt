@@ -69,7 +69,10 @@ class KnmiTextFragment : Fragment() {
         // When complete: parses the result
         override fun onPostExecute(htmlDocument: Document?) {
             if (htmlDocument == null) {
-                root.findViewById<TextView>(R.id.textViewHeader0).text = "?"
+                root.findViewById<TextView>(R.id.textViewContent0).text = getString(R.string.menu_knmi_text_failed)
+                root.findViewById<TextView>(R.id.textViewContent1).text = getString(R.string.menu_knmi_text_failed)
+                root.findViewById<TextView>(R.id.textViewContent3).text = getString(R.string.menu_knmi_text_failed)
+                return
             }
             var contents = arrayOf("", "", "", "")
 
@@ -127,7 +130,7 @@ class KnmiTextFragment : Fragment() {
             root.findViewById<TextView>(R.id.textViewContent0).text = contents[0].trimEnd()
             root.findViewById<TextView>(R.id.textViewContent1).text = contents[1].trimEnd()
             root.findViewById<TextView>(R.id.textViewContent2).text = contents[2].trimEnd()
-            root.findViewById<TextView>(R.id.textViewContent3).text = contents[3].trimEnd()
+            root.findViewById<TextView>(R.id.textViewContent3).text = contents[3].trimEnd() + "\n\n"
         }
     }
 }

@@ -21,6 +21,8 @@
     <string name="menu_knmi_text">Weather report</string>
     <string name="menu_knmi_text_source">Source:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
     <string name="menu_knmi_text_loading">Data is being loaded...</string>
+    <string name="menu_knmi_text_failed">Data could not be loaded</string>
+
 
     <string name="menu_buienradar_header">Buienradar</string>
 
