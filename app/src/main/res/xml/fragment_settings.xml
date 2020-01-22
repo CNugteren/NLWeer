@@ -13,11 +13,19 @@
 
     <SwitchPreferenceCompat
         android:key="gps_enable"
-        android:title="@string/settings_gps_enable"
-        android:summary="@string/settings_gps_enable_sub"
+        android:title="@string/settings_location_auto_enable"
+        android:summary="@string/settings_location_auto_enable_sub"
         android:defaultValue="false"
         android:disableDependentsState="true"
         android:dependency="location_enable"/>
+
+    <ListPreference
+        android:defaultValue="Network"
+        android:entries="@array/location_provider_items"
+        android:entryValues="@array/location_provider_values"
+        android:enabled="false"
+        android:key="location_provider"
+        android:title="@string/settings_location_provider"/>
 
     <EditTextPreference
         android:defaultValue="52.37"

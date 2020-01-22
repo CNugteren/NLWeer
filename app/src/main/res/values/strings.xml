@@ -25,10 +25,13 @@
 
     <string name="settings_location_enable">Show my location</string>
     <string name="settings_location_enable_sub">Shows a circle at my location</string>
-    <string name="settings_gps_enable">Use GPS location</string>
-    <string name="settings_gps_enable_sub">Automatically determine location</string>
+    <string name="settings_location_auto_enable">Use GPS/network location</string>
+    <string name="settings_location_auto_enable_sub">Automatically determine location</string>
+    <string name="settings_location_provider">Choose location provider</string>
     <string name="settings_latitude">My location: latitude</string>
     <string name="settings_longitude">My location: longitude</string>
+    <string-array name="location_provider_items"><item>Network</item><item>GPS</item></string-array>
+    <string-array name="location_provider_values"><item>Network</item><item>GPS</item></string-array>
 
     <string name="about_text_header_1">About NLWeer</string>
     <string name="about_text_content_1">NLWeer is an open-source and privacy-friendly Dutch weather app. It is free both as in free lunch and as in freedom. The code is MIT licensed. Weather information is provided by KNMI and Buienradar, see below. For code, reporting issues, new versions, and more information see:\n\nhttps://github.com/CNugteren/NLWeer</string>
