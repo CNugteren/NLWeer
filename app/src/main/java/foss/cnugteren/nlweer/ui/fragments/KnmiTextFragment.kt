@@ -45,6 +45,13 @@ class KnmiTextFragment : Fragment() {
     }
 
     fun loadPage() {
+        val headers = arrayOf("Vandaag & Morgen", "Vooruitzichten", "", "Vooruitzichten lange termijn")
+        root.findViewById<TextView>(R.id.textViewHeader0).text = headers[0]
+        root.findViewById<TextView>(R.id.textViewHeader1).text = headers[1]
+        root.findViewById<TextView>(R.id.textViewHeader3).text = headers[3]
+        root.findViewById<TextView>(R.id.textViewContent0).text = getString(R.string.menu_knmi_text_loading)
+        root.findViewById<TextView>(R.id.textViewContent1).text = getString(R.string.menu_knmi_text_loading)
+        root.findViewById<TextView>(R.id.textViewContent3).text = getString(R.string.menu_knmi_text_loading)
         RetrieveWebPage().execute(getURL())
     }
 
@@ -64,7 +71,6 @@ class KnmiTextFragment : Fragment() {
             if (htmlDocument == null) {
                 root.findViewById<TextView>(R.id.textViewHeader0).text = "?"
             }
-            var headers = arrayOf("Vandaag & Morgen", "Vooruitzichten", "", "Vooruitzichten lange termijn")
             var contents = arrayOf("", "", "", "")
 
             htmlDocument?.run {
@@ -118,12 +124,9 @@ class KnmiTextFragment : Fragment() {
             }
 
             // Displays the found data
-            root.findViewById<TextView>(R.id.textViewHeader0).text = headers[0]
             root.findViewById<TextView>(R.id.textViewContent0).text = contents[0].trimEnd()
-            root.findViewById<TextView>(R.id.textViewHeader1).text = headers[1]
             root.findViewById<TextView>(R.id.textViewContent1).text = contents[1].trimEnd()
             root.findViewById<TextView>(R.id.textViewContent2).text = contents[2].trimEnd()
-            root.findViewById<TextView>(R.id.textViewHeader3).text = headers[3]
             root.findViewById<TextView>(R.id.textViewContent3).text = contents[3].trimEnd()
         }
     }
