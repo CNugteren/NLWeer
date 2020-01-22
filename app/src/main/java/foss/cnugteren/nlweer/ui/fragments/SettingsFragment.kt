@@ -15,12 +15,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.fragment_settings, rootKey)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-
-        // The 'choose location provider' button
-        val locationProviderSetting = findPreference("location_provider") as ListPreference
-        val showMyLocation = findPreference("location_enable") as SwitchPreferenceCompat
-        val useAutoLocation = findPreference("gps_enable") as SwitchPreferenceCompat
-        locationProviderSetting.isEnabled = (showMyLocation.isChecked && useAutoLocation.isChecked)
+        enableDisableLocationProviderButton()
 
         // Sets the initial values as summaries
         val latString = sharedPreferences.getString("location_latitude", null)
@@ -43,20 +38,20 @@ class SettingsFragment : PreferenceFragmentCompat(),
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
     }
 
+    fun enableDisableLocationProviderButton() {
+        // The 'choose location provider' button needs to be disabled/enabled appropriapatly
+        val locationProviderSetting = findPreference("location_provider") as ListPreference
+        val showMyLocation = findPreference("location_enable") as SwitchPreferenceCompat
+        val useAutoLocation = findPreference("gps_enable") as SwitchPreferenceCompat
+        locationProviderSetting.isEnabled = (showMyLocation.isChecked && useAutoLocation.isChecked)
+    }
+
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         val pref = findPreference(key)
-        val locationProviderSetting = findPreference("location_provider") as ListPreference
 
         // If the value of the settings change, sets the new values as summaries
         if (pref is EditTextPreference) {
             pref.summary = sharedPreferences.getString(key, "")
-        }
-
-        // Set/unset 'show my location'
-        if (pref is SwitchPreferenceCompat && key == "location_enable") {
-            if (!pref.isChecked) {
-                locationProviderSetting.isEnabled = false
-            }
         }
 
         // Set/unset automatic location
@@ -67,10 +62,6 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 if (locationProvider == "GPS") {
                     ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
                 }
-                locationProviderSetting.isEnabled = true
-            }
-            else {
-                locationProviderSetting.isEnabled = false
             }
             activity.setLocationManager()
         }
@@ -85,5 +76,8 @@ class SettingsFragment : PreferenceFragmentCompat(),
             }
             activity.setLocationManager()
         }
+
+        // Toggle the location provider button
+        enableDisableLocationProviderButton()
     }
 }
