@@ -62,6 +62,9 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 if (locationProvider == "GPS") {
                     ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
                 }
+                else { // Network
+                    ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),1)
+                }
             }
             activity.setLocationManager()
         }
@@ -73,6 +76,9 @@ class SettingsFragment : PreferenceFragmentCompat(),
             val locationProvider = pref.value
             if (locationProvider == "GPS") {
                 ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+            }
+            else { // Network
+                ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),1)
             }
             activity.setLocationManager()
         }
