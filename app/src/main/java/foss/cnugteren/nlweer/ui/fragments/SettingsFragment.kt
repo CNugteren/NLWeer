@@ -15,12 +15,15 @@ class SettingsFragment : PreferenceFragmentCompat(),
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.fragment_settings, rootKey)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        enableDisableLocationProviderButton()
 
         // Sets the initial values as summaries
         val latString = sharedPreferences.getString("location_latitude", null)
         val lonString = sharedPreferences.getString("location_longitude", null)
-        findPreference<Preference>("location_latitude")?.summary = latString
-        findPreference<Preference>("location_longitude")?.summary = lonString
+        val locationProvider = sharedPreferences.getString("location_provider", null)
+        findPreference("location_latitude")?.summary = latString
+        findPreference("location_longitude")?.summary = lonString
+        findPreference("location_provider")?.summary = locationProvider
     }
 
     override fun onResume() {
@@ -35,21 +38,52 @@ class SettingsFragment : PreferenceFragmentCompat(),
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
     }
 
+    fun enableDisableLocationProviderButton() {
+        // The 'choose location provider' button needs to be disabled/enabled appropriapatly
+        val locationProviderSetting = findPreference("location_provider") as ListPreference
+        val showMyLocation = findPreference("location_enable") as SwitchPreferenceCompat
+        val useAutoLocation = findPreference("gps_enable") as SwitchPreferenceCompat
+        locationProviderSetting.isEnabled = (showMyLocation.isChecked && useAutoLocation.isChecked)
+    }
+
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        val pref = findPreference<Preference>(key)
+        val pref = findPreference(key)
 
         // If the value of the settings change, sets the new values as summaries
         if (pref is EditTextPreference) {
             pref.summary = sharedPreferences.getString(key, "")
         }
 
-        // Set/unset GPS location
+        // Set/unset automatic location
         if (pref is SwitchPreferenceCompat && key == "gps_enable") {
             val activity = this.activity as MainActivity
             if (pref.isChecked) {
-                ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+                val locationProvider = sharedPreferences.getString("location_provider", "Network")
+                if (locationProvider == "GPS") {
+                    ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+                }
+                else { // Network
+                    ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),1)
+                }
             }
             activity.setLocationManager()
         }
+
+        // Set/unset the kind of location provider
+        if (pref is ListPreference && key == "location_provider") {
+            val activity = this.activity as MainActivity
+            pref.summary = sharedPreferences.getString(key, "")
+            val locationProvider = pref.value
+            if (locationProvider == "GPS") {
+                ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
+            }
+            else { // Network
+                ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),1)
+            }
+            activity.setLocationManager()
+        }
+
+        // Toggle the location provider button
+        enableDisableLocationProviderButton()
     }
 }

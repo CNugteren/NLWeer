@@ -35,6 +35,11 @@
         android:name="foss.cnugteren.nlweer.ui.fragments.KnmiWindFragment"
         android:label="@string/menu_knmi_wind"
         tools:layout="@layout/fragment_knmi" />
+    <fragment
+        android:id="@+id/nav_knmi_text"
+        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment"
+        android:label="@string/menu_knmi_text"
+        tools:layout="@layout/fragment_knmi" />
 
     <fragment
         android:id="@+id/nav_buienradar_rain_m1"

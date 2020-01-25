@@ -18,27 +18,35 @@
     <string name="menu_knmi_tomorrow">Forecast tomorrow</string>
     <string name="menu_knmi_temperature">Temperature</string>
     <string name="menu_knmi_wind">Wind</string>
+    <string name="menu_knmi_text">Weather report</string>
+    <string name="menu_knmi_text_source">Source:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
+    <string name="menu_knmi_text_loading">Data is being loaded...</string>
+    <string name="menu_knmi_text_failed">Data could not be loaded</string>
+
 
     <string name="menu_buienradar_header">Source: Buienradar</string>
     <string name="menu_buienradar_rain_m1">Rain last hour</string>
 
     <string name="settings_location_enable">Show my location</string>
-    <string name="settings_location_enable_sub">Shows a circle at your location</string>
-    <string name="settings_gps_enable">Use GPS location</string>
-    <string name="settings_gps_enable_sub">Automatically determine location</string>
+    <string name="settings_location_enable_sub">Shows a circle at my location</string>
+    <string name="settings_location_auto_enable">Use GPS/network location</string>
+    <string name="settings_location_auto_enable_sub">Automatically determine location</string>
+    <string name="settings_location_provider">Choose location provider</string>
     <string name="settings_latitude">My location: latitude</string>
     <string name="settings_longitude">My location: longitude</string>
+    <string-array name="location_provider_items"><item>Network</item><item>GPS</item></string-array>
+    <string-array name="location_provider_values"><item>Network</item><item>GPS</item></string-array>
 
     <string name="about_text_header_1">About NLWeer</string>
     <string name="about_text_content_1">NLWeer is an open-source and privacy-friendly Dutch weather app. It is free both as in free lunch and as in freedom. The code is MIT licensed. Weather information is provided by KNMI and Buienradar, see below. For code, reporting issues, new versions, and more information see:\n\nhttps://github.com/CNugteren/NLWeer</string>
     <string name="about_text_header_2">KNMI data</string>
-    <string name="about_text_content_2">All KNMI data is copyright under the Creative Commons zero (CC0) license, with the note that KNMI itself is not involved with the NLWeer app and does not actively support the usage of this data in NLWeer. For more information see https://www.knmi.nl/copyright</string>
+    <string name="about_text_content_2">All KNMI data has the Creative Commons Zero (CC0) license, with the note that KNMI itself is not involved with the NLWeer app and does not actively support the usage of this data in NLWeer. For more information see https://www.knmi.nl/copyright</string>
     <string name="about_text_header_3">Buienradar data</string>
     <string name="about_text_content_3">Buienradar data is currently not used for NLWeer.</string>
     <string name="about_text_header_4">App and menu icons</string>
     <string name="about_text_content_4">Main app icon: Copyright by Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
 \nMoon icon: Copyright OOjs UI Team, MIT License, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
-\nSun and wind icons: Copyright by Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
+\nSun, wind, and report icons: Copyright by Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
 \nTemperature and sunrise icons: Icons made by Hirschwolf and Freepik from www.flaticon.com</string>
     <string name="about_text_header_5">NLWeer version info</string>
 

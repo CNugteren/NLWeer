@@ -20,6 +20,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
 import foss.cnugteren.nlweer.ui.fragments.BaseFragment
+import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
 import java.lang.Exception
 
 
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_knmi_tonight,
                 R.id.nav_knmi_temperature,
                 R.id.nav_knmi_wind,
+                R.id.nav_knmi_text,
                 R.id.nav_buienradar_rain_m1
             ), drawerLayout
         )
@@ -77,6 +79,9 @@ class MainActivity : AppCompatActivity() {
             if (fragment is BaseFragment) {
                 fragment.refreshPage()
             }
+            if (fragment is KnmiTextFragment) {
+                fragment.refreshPage()
+            }
         }
     }
 
@@ -100,18 +105,33 @@ class MainActivity : AppCompatActivity() {
     fun setLocationManager() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         val gpsEnable = sharedPreferences.getBoolean("gps_enable", false)
+        val locationProvider = sharedPreferences.getString("location_provider", "Network")
         if (gpsEnable) {
             try {
                 try {
                     locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager?
-                    locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1f, locationListener)
+                    if (locationProvider == "Network") {
+                        val networkProvidedAvailable = locationManager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+                        if (networkProvidedAvailable != null && networkProvidedAvailable) {
+                            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1f, locationListener)
+                        }
+                    }
+                    else if (locationProvider == "GPS") {
+                        locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1f, locationListener)
+                    }
                 } catch (ex: SecurityException) { }
             }
             catch (ex: Exception) { }
         }
         else {
+            locationManager?.removeUpdates(locationListener)
             locationManager = null
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        locationManager?.removeUpdates(locationListener)
     }
 
     // Try again the above function when the request was accepted

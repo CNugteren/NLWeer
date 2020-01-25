@@ -4,7 +4,7 @@ Compared to other weather apps for the Netherlands (e.g. Buienradar), here are s
 
 * It is open-source and can be customized/improved by anyone if needed
 * It does not nor never will display commercial advertisements
-* It does not require any permissions (except GPS if requested)
+* It does not require any permissions (except GPS if explicitly requested)
 * It is very lightweight and battery friendly
 * It does not require the Google Play Services
 
