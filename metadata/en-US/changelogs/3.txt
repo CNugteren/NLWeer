@@ -1,0 +1,4 @@
+- Added a view to show the written weather report from KNMI
+- Added an option to use network or GPS-based location detection
+- Fixed crashes on older (API <=22) devices
+- Various minor improvements

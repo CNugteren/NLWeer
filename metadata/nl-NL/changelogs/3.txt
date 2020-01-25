@@ -1,0 +1,4 @@
+- Nieuwe pagina toegevoegd om het geschreven KNMI weerbericht te tonen
+- Nieuwe optie om GSM-netwerk of GPS te gebruiken voor automatische locatiebepaling
+- Problemen opgelost voor oudere (API <= 22) apparaten
+- Enkele kleine verbeteringen

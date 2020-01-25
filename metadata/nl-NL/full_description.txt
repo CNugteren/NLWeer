@@ -11,5 +11,4 @@ In vergelijking met andere weerapps voor Nederland (bijvoorbeeld Buienradar) zou
 Maar er zijn ook redenen om NLWeer niet te gebruiken (op dit moment ten minste):
 
 * Het laat geen voorspellingsgrafiek zien van bijvoorbeeld regen op jouw locatie
-* Het heeft geen geschreven weersvoorspelling
 * Het laat (op dit moment) nog geen Buienradar data zien
