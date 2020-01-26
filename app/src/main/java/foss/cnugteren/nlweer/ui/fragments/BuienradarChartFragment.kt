@@ -1,5 +1,6 @@
 package foss.cnugteren.nlweer.ui.fragments
 
+import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Description
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -87,9 +89,16 @@ class BuienradarChartFragment : Fragment() {
         // Chart styling and formatting
         chart.axisRight.isEnabled = false
         var description = Description()
-        description.text = getString(R.string.menu_buienradar_chart_description) + latitude.toString() + ", " + longitude.toString()
+        description.text = ""
         chart.description = description
         chart.setNoDataText(getString(R.string.menu_buienradar_chart_loading))
+        chart.setNoDataTextColor(Color.BLACK)
+        chart.setDrawGridBackground(false)
+        chart.xAxis.setDrawGridLines(false)
+        chart.axisLeft.setDrawGridLines(false)
+        chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        chart.setBackgroundColor(Color.WHITE)
+        chart.invalidate()
 
         RetrieveWebPage().execute(getURL())
     }
@@ -143,6 +152,8 @@ class BuienradarChartFragment : Fragment() {
                 val dataSet = BarDataSet(precipitations, getString(R.string.menu_buienradar_chart_unit))
                 dataSet.axisDependency = YAxis.AxisDependency.LEFT
                 dataSet.setDrawValues(false)
+                val colors = IntArray(1); colors[0] = R.color.colorPrimary
+                dataSet.setColors(colors, context)
                 chart.data = BarData(dataSet)
             }
             chart.setNoDataText(getString(R.string.menu_buienradar_chart_empty))
@@ -159,7 +170,7 @@ class BuienradarChartFragment : Fragment() {
 
             // The y-axis scale
             chart.axisLeft.axisMinimum = 0f
-            chart.axisLeft.axisMaximum = max(1.0f, maxPrecipitation)
+            chart.axisLeft.axisMaximum = max(8.0f, maxPrecipitation)
 
             // Final update
             chart.invalidate()
