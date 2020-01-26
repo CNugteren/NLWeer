@@ -26,6 +26,12 @@
 
     <string name="menu_buienradar_header">Source: Buienradar</string>
     <string name="menu_buienradar_rain_m1">Rain last hour</string>
+    <string name="menu_buienradar_chart">Rain prediction chart</string>
+    <string name="menu_buienradar_chart_unit">mm/h</string>
+    <string name="menu_buienradar_chart_description">Two hours ahead at </string>
+    <string name="menu_buienradar_chart_loading">Data is being loaded...</string>
+    <string name="menu_buienradar_chart_empty">No precipitation expected</string>
+    <string name="menu_buienradar_chart_error">Data could not be loaded</string>
 
     <string name="settings_location_enable">Show my location</string>
     <string name="settings_location_enable_sub">Shows a circle at my location</string>

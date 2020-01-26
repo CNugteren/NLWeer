@@ -26,6 +26,12 @@
 
     <string name="menu_buienradar_header">Bron: Buienradar</string>
     <string name="menu_buienradar_rain_m1">Regen afgelopen uur</string>
+    <string name="menu_buienradar_chart">Regen verwachting grafiek</string>
+    <string name="menu_buienradar_chart_unit">mm/u</string>
+    <string name="menu_buienradar_chart_description">Twee uur vooruit op </string>
+    <string name="menu_buienradar_chart_loading">Data wordt geladen...</string>
+    <string name="menu_buienradar_chart_empty">Geen regen verwacht</string>
+    <string name="menu_buienradar_chart_error">Data kon niet geladen worden</string>
 
     <string name="settings_location_enable">Toon mijn locatie</string>
     <string name="settings_location_enable_sub">Toon een cirkel op mijn locatie</string>
