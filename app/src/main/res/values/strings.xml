@@ -33,6 +33,15 @@
     <string name="menu_buienradar_chart_empty">No precipitation expected</string>
     <string name="menu_buienradar_chart_error">Data could not be loaded</string>
 
+    <string name="settings_category_sources">Data sources</string>
+    <string name="settings_buienradar_enable">Buienradar</string>
+    <string name="settings_buienradar_enable_sub">Show data from Buienradar</string>
+    <string name="settings_buienradar_enable_title">Permissions required for mobile usage</string>
+    <string name="settings_buienradar_enable_message">Buienradar data may only be shown if this is a non-mobile device or if you have explicit permissions. For more information see: \nhttps://www.buienradar.nl/overbuienradar/gratis-weerdata</string>
+    <string name="settings_buienradar_enable_accept">Continue</string>
+    <string name="settings_buienradar_enable_decline">Cancel</string>
+
+    <string name="settings_category_location">Location settings</string>
     <string name="settings_location_enable">Show my location</string>
     <string name="settings_location_enable_sub">Shows a circle at my location</string>
     <string name="settings_location_auto_enable">Use GPS/network location</string>
