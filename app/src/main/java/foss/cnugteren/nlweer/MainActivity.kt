@@ -22,7 +22,6 @@ import com.google.android.material.navigation.NavigationView
 import foss.cnugteren.nlweer.ui.fragments.BaseFragment
 import foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment
 import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
-import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+        setMenuItemsVisibility()
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -71,6 +71,20 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun setMenuItemsVisibility() {
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        val menu = navView.menu
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+
+        val sourceEnableKNMI = true
+        val menuKnmi = menu.findItem(R.id.knmi_menu)
+        menuKnmi.isVisible = sourceEnableKNMI
+
+        val sourceEnableBuienradar = sharedPreferences.getBoolean("buienradar_enable", false)
+        val menuBuienradar = menu.findItem(R.id.buienradar_menu)
+        menuBuienradar.isVisible = sourceEnableBuienradar
     }
 
     // Menu button: refresh

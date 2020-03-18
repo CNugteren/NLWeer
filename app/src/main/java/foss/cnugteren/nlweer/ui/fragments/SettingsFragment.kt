@@ -56,6 +56,12 @@ class SettingsFragment : PreferenceFragmentCompat(),
             pref.summary = sharedPreferences.getString(key, "")
         }
 
+        // Change data sources for display in the menu
+        if (pref is SwitchPreferenceCompat && (key == "buienradar_enable" || key == "knmi_enable")) {
+            val activity = this.activity as MainActivity
+            activity.setMenuItemsVisibility()
+        }
+
         // Displays Buienradar permission confirmation dialog
         if (pref is SwitchPreferenceCompat && key == "buienradar_enable") {
             if (pref.isChecked) {
