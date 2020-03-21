@@ -5,42 +5,60 @@
     android:layout_height="wrap_content"
     app:defaultValue="false">
 
-    <SwitchPreferenceCompat
-        android:key="location_enable"
-        android:title="@string/settings_location_enable"
-        android:summary="@string/settings_location_enable_sub"
-        android:defaultValue="false"/>
+    <PreferenceCategory
+        app:key="settings_category_sources"
+        app:title="@string/settings_category_sources">
 
-    <SwitchPreferenceCompat
-        android:key="gps_enable"
-        android:title="@string/settings_location_auto_enable"
-        android:summary="@string/settings_location_auto_enable_sub"
-        android:defaultValue="false"
-        android:disableDependentsState="true"
-        android:dependency="location_enable"/>
+        <SwitchPreferenceCompat
+            android:key="buienradar_enable"
+            android:title="@string/settings_buienradar_enable"
+            android:summary="@string/settings_buienradar_enable_sub"
+            android:defaultValue="false"/>
 
-    <ListPreference
-        android:defaultValue="Network"
-        android:entries="@array/location_provider_items"
-        android:entryValues="@array/location_provider_values"
-        android:enabled="false"
-        android:key="location_provider"
-        android:title="@string/settings_location_provider"/>
+    </PreferenceCategory>
 
-    <EditTextPreference
-        android:defaultValue="52.37"
-        android:dependency="gps_enable"
-        android:inputType="number"
-        android:key="location_latitude"
-        android:maxLength="5"
-        android:title="@string/settings_latitude" />
+    <PreferenceCategory
+        app:key="settings_category_location"
+        app:title="@string/settings_category_location">
 
-    <EditTextPreference
-        android:defaultValue="4.90"
-        android:dependency="gps_enable"
-        android:inputType="number"
-        android:key="location_longitude"
-        android:maxLength="5"
-        android:title="@string/settings_longitude" />
+        <SwitchPreferenceCompat
+            android:key="location_enable"
+            android:title="@string/settings_location_enable"
+            android:summary="@string/settings_location_enable_sub"
+            android:defaultValue="false"/>
+
+        <SwitchPreferenceCompat
+            android:key="gps_enable"
+            android:title="@string/settings_location_auto_enable"
+            android:summary="@string/settings_location_auto_enable_sub"
+            android:defaultValue="false"
+            android:disableDependentsState="true"
+            android:dependency="location_enable"/>
+
+        <ListPreference
+            android:defaultValue="Network"
+            android:entries="@array/location_provider_items"
+            android:entryValues="@array/location_provider_values"
+            android:enabled="false"
+            android:key="location_provider"
+            android:title="@string/settings_location_provider"/>
+
+        <EditTextPreference
+            android:defaultValue="52.37"
+            android:dependency="gps_enable"
+            android:inputType="number"
+            android:key="location_latitude"
+            android:maxLength="5"
+            android:title="@string/settings_latitude" />
+
+        <EditTextPreference
+            android:defaultValue="4.90"
+            android:dependency="gps_enable"
+            android:inputType="number"
+            android:key="location_longitude"
+            android:maxLength="5"
+            android:title="@string/settings_longitude" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

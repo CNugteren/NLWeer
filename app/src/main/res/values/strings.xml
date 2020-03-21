@@ -24,8 +24,24 @@
     <string name="menu_knmi_text_failed">Data could not be loaded</string>
 
 
-    <string name="menu_buienradar_header">Buienradar</string>
+    <string name="menu_buienradar_header">Source: Buienradar</string>
+    <string name="menu_buienradar_rain_m1">Rain last hour</string>
+    <string name="menu_buienradar_chart">Rain prediction chart</string>
+    <string name="menu_buienradar_chart_unit">mm/h</string>
+    <string name="menu_buienradar_chart_description">Two hours ahead at</string>
+    <string name="menu_buienradar_chart_loading">Data is being loaded...</string>
+    <string name="menu_buienradar_chart_empty">No precipitation expected</string>
+    <string name="menu_buienradar_chart_error">Data could not be loaded (outside of the Netherlands?)</string>
 
+    <string name="settings_category_sources">Data sources</string>
+    <string name="settings_buienradar_enable">Buienradar</string>
+    <string name="settings_buienradar_enable_sub">Show data from Buienradar</string>
+    <string name="settings_buienradar_enable_title">Permissions required for mobile usage</string>
+    <string name="settings_buienradar_enable_message">Buienradar data may only be shown if this is a non-mobile device or if you have explicit permissions. For more information see: \nhttps://www.buienradar.nl/overbuienradar/gratis-weerdata</string>
+    <string name="settings_buienradar_enable_accept">Continue</string>
+    <string name="settings_buienradar_enable_decline">Cancel</string>
+
+    <string name="settings_category_location">Location settings</string>
     <string name="settings_location_enable">Show my location</string>
     <string name="settings_location_enable_sub">Shows a circle at my location</string>
     <string name="settings_location_auto_enable">Use GPS/network location</string>
@@ -41,11 +57,11 @@
     <string name="about_text_header_2">KNMI data</string>
     <string name="about_text_content_2">All KNMI data has the Creative Commons Zero (CC0) license, with the note that KNMI itself is not involved with the NLWeer app and does not actively support the usage of this data in NLWeer. For more information see https://www.knmi.nl/copyright</string>
     <string name="about_text_header_3">Buienradar data</string>
-    <string name="about_text_content_3">Buienradar data is currently not used for NLWeer.</string>
+    <string name="about_text_content_3">Buienradar data is freely available, however, usage is only allowed for non-commercial purposes. Using it for mobile applications or commercial purposes requires permission of Buienradar, a brand of RTL Nederland. For more information see: https://www.buienradar.nl/overbuienradar/gratis-weerdata</string>
     <string name="about_text_header_4">App and menu icons</string>
     <string name="about_text_content_4">Main app icon: Copyright by Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
 \nMoon icon: Copyright OOjs UI Team, MIT License, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
-\nSun, wind, and report icons: Copyright by Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
+\nSun, wind, graph, and report icons: Copyright by Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
 \nTemperature and sunrise icons: Icons made by Hirschwolf and Freepik from www.flaticon.com</string>
     <string name="about_text_header_5">NLWeer version info</string>
 

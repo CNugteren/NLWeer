@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">NLWeer</string>
     <string name="nav_header_title">NLWeer</string>
-    <string name="nav_header_subtitle">Een gratis, opensource en privacyvriendelijke Nederlandse weerapp</string>
+    <string name="nav_header_subtitle">Een opensource en privacyvriendelijke Nederlandse weerapp</string>
     <string name="nav_header_desc">Navigatieicoon</string>
 
     <string name="action_refresh">Herlaad</string>
@@ -24,8 +24,24 @@
     <string name="menu_knmi_text_loading">Data wordt geladen...</string>
     <string name="menu_knmi_text_failed">Data kon niet geladen worden</string>
 
-    <string name="menu_buienradar_header">Buienradar</string>
+    <string name="menu_buienradar_header">Bron: Buienradar</string>
+    <string name="menu_buienradar_rain_m1">Regen afgelopen uur</string>
+    <string name="menu_buienradar_chart">Neerslagverwachting</string>
+    <string name="menu_buienradar_chart_unit">mm/u</string>
+    <string name="menu_buienradar_chart_description">Twee uur vooruit op</string>
+    <string name="menu_buienradar_chart_loading">Data wordt geladen...</string>
+    <string name="menu_buienradar_chart_empty">Geen regen verwacht</string>
+    <string name="menu_buienradar_chart_error">Data kon niet geladen worden (locatie buiten Nederland?)</string>
 
+    <string name="settings_category_sources">Data bronnen</string>
+    <string name="settings_buienradar_enable">Buienradar</string>
+    <string name="settings_buienradar_enable_sub">Laat data van Buienradar zien</string>
+    <string name="settings_buienradar_enable_title">Toestemming nodig voor mobiele toepassingen</string>
+    <string name="settings_buienradar_enable_message">Buienradar data mag alleen getoond worden als dit geen mobiel apparaat is of als u expliciete toestemming heeft. Voor meer informatie zie: \nhttps://www.buienradar.nl/overbuienradar/gratis-weerdata</string>
+    <string name="settings_buienradar_enable_accept">Doorgaan</string>
+    <string name="settings_buienradar_enable_decline">Annuleren</string>
+
+    <string name="settings_category_location">Locatie instellingen</string>
     <string name="settings_location_enable">Toon mijn locatie</string>
     <string name="settings_location_enable_sub">Toon een cirkel op mijn locatie</string>
     <string name="settings_location_auto_enable">Gebruik GPS/netwerk-locatie</string>
@@ -41,11 +57,11 @@
     <string name="about_text_header_2">KNMI-gegevens</string>
     <string name="about_text_content_2">Alle KNMI-gegevens hebben de Creative Commons Zero (CC0) licentie, met daarbij de notitie dat het KNMI niet betrokken is bij NLWeer en de strekking daarvan niet noodzakelijkerwijs onderschrijft. Voor meer informatie zie https://www.knmi.nl/copyright</string>
     <string name="about_text_header_3">Buienradargegevens</string>
-    <string name="about_text_content_3">Buienradargegevens worden op dit moment niet gebruikt door NLWeer.</string>
+    <string name="about_text_content_3">Buienradar stelt gratis weerdata beschikbaar, maar gebruik ervan is alleen toegestaan voor niet-commerciele doeleinden. Het gebruik voor mobiele toepassingen of commerciele doeleinden vereist toestemming van Buienradar, een merk van RTL Nederland. Voor meer informatie zie: https://www.buienradar.nl/overbuienradar/gratis-weerdata</string>
     <string name="about_text_header_4">App- en menu-iconen</string>
     <string name="about_text_content_4">Appicoon: Copyright Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
 \nMaanicoon: Copyright OOjs UI Team, MIT licentie, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
-\nZon-, wind- en weerberichticonen: Copyright Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
+\nZon-, wind-, grafiek- en weerberichticonen: Copyright Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
 \nTemperatuur en zonsopgang iconen: Gemaakt door Hirschwolf en Freepik van www.flaticon.com</string>
     <string name="about_text_header_5">NLWeer versie-informatie</string>
 

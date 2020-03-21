@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="@string/menu_knmi_header">
+    <item android:id="@+id/knmi_menu" android:title="@string/menu_knmi_header">
         <menu>
             <item
                 android:id="@+id/nav_knmi_rain_m1"
@@ -36,8 +36,16 @@
         </menu>
     </item>
 
-    <item android:title="@string/menu_buienradar_header">
+    <item android:id="@+id/buienradar_menu" android:title="@string/menu_buienradar_header">
         <menu>
+            <item
+                android:id="@+id/nav_buienradar_rain_m1"
+                android:icon="@drawable/menu_radar"
+                android:title="@string/menu_buienradar_rain_m1" />
+            <item
+                android:id="@+id/nav_buienradar_chart"
+                android:icon="@drawable/menu_bargraph"
+                android:title="@string/menu_buienradar_chart" />
         </menu>
 
     </item>

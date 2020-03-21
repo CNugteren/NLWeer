@@ -113,11 +113,36 @@ def knmi_now():
     coord_fitter(ground_truths, limits)
 
 
+def buienradar_rain():
+    """Covers the rain-radar map from Buienradar"""
+    # Best fit: 49.50f, 0.15f, 54.80f, 10.25f, 0.02f, -0.01f
+    ground_truths = [  # (width, height) in percentages corresponding to the above points
+        (0.32, 0.35),
+        (0.59, 0.23),
+        (0.58, 0.43),
+        (0.71, 0.70),
+        (0.55, 0.74),
+        (0.48, 0.69),
+        (0.40, 0.46),
+    ]
+    limits = (
+        49.1, 49.8,
+        -0.1, 0.5,
+        54.3, 55.0,
+        9.9, 10.6,
+        -0.01, 0.05,
+        -0.05, 0.05,
+    )
+    print("Fitting coordinates for rain radar Buienradar map...")
+    coord_fitter(ground_truths, limits)
+
+
 def main():
     # Comment out one of the below if you are only interested in a particular fit
     knmi_radar()
     knmi_forecast()
     knmi_now()
+    buienradar_rain()
 
 
 main()

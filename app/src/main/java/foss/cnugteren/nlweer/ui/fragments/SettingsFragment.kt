@@ -1,6 +1,8 @@
 package foss.cnugteren.nlweer.ui.fragments
 
 import android.Manifest
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import foss.cnugteren.nlweer.R
 import android.content.SharedPreferences
@@ -52,6 +54,31 @@ class SettingsFragment : PreferenceFragmentCompat(),
         // If the value of the settings change, sets the new values as summaries
         if (pref is EditTextPreference) {
             pref.summary = sharedPreferences.getString(key, "")
+        }
+
+        // Change data sources for display in the menu
+        if (pref is SwitchPreferenceCompat && (key == "buienradar_enable" || key == "knmi_enable")) {
+            val activity = this.activity as MainActivity
+            activity.setMenuItemsVisibility()
+        }
+
+        // Displays Buienradar permission confirmation dialog
+        if (pref is SwitchPreferenceCompat && key == "buienradar_enable") {
+            if (pref.isChecked) {
+                val alertDialog: AlertDialog? = activity?.let {
+                    val builder = AlertDialog.Builder(it)
+                    builder.setMessage(R.string.settings_buienradar_enable_message)
+                    builder.setTitle(R.string.settings_buienradar_enable_title)
+                    builder.apply {
+                        setPositiveButton(R.string.settings_buienradar_enable_accept,
+                            DialogInterface.OnClickListener { _, _ -> })
+                        setNegativeButton(R.string.settings_buienradar_enable_decline,
+                            DialogInterface.OnClickListener { _, _ -> pref.isChecked = false })
+                    }
+                    builder.create()
+                }
+                alertDialog?.show()
+            }
         }
 
         // Set/unset automatic location

@@ -20,8 +20,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
 import foss.cnugteren.nlweer.ui.fragments.BaseFragment
+import foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment
 import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
-import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+        setMenuItemsVisibility()
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -51,7 +52,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_knmi_tonight,
                 R.id.nav_knmi_temperature,
                 R.id.nav_knmi_wind,
-                R.id.nav_knmi_text
+                R.id.nav_knmi_text,
+                R.id.nav_buienradar_rain_m1,
+                R.id.nav_buienradar_chart
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -68,6 +71,20 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun setMenuItemsVisibility() {
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        val menu = navView.menu
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+
+        val sourceEnableKNMI = true
+        val menuKnmi = menu.findItem(R.id.knmi_menu)
+        menuKnmi.isVisible = sourceEnableKNMI
+
+        val sourceEnableBuienradar = sharedPreferences.getBoolean("buienradar_enable", false)
+        val menuBuienradar = menu.findItem(R.id.buienradar_menu)
+        menuBuienradar.isVisible = sourceEnableBuienradar
     }
 
     // Menu button: refresh
@@ -159,6 +176,9 @@ class MainActivity : AppCompatActivity() {
             if (navHostFragment != null) {
                 val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
                 if (fragment is BaseFragment) {
+                    fragment.setLocation(gpsLatCurrent, gpsLonCurrent)
+                }
+                if (fragment is BuienradarChartFragment) {
                     fragment.setLocation(gpsLatCurrent, gpsLonCurrent)
                 }
             }
