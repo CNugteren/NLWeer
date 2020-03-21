@@ -6,11 +6,11 @@
   <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="75">
 </a>
 
-NLWeer is a simple open-source and privacy-friendly Dutch weather app for Android (5.0 or newer). It is free both as in free lunch and as in freedom. The code is MIT licensed. Weather information is provided by KNMI, see the about screen in the app for more information.
+NLWeer is a simple open-source and privacy-friendly Dutch weather app for Android (5.0 or newer). It is free both as in free lunch and as in freedom. The code is MIT licensed. Weather information is provided by KNMI or optionally by Buienradar, see the about screen in the app for more information.
 
 This is what it looks like:
 
-![NLWeer rain radar](metadata/en-US/images/phoneScreenshots/rain_radar.png) ![NLWeer navigation menu](metadata/en-US/images/phoneScreenshots/navigation_menu.png) ![NLWeer forecast](metadata/en-US/images/phoneScreenshots/forecast.png)
+![NLWeer KNMI rain radar](metadata/en-US/images/phoneScreenshots/rain_radar.png) ![NLWeer KNMI navigation menu](metadata/en-US/images/phoneScreenshots/navigation_menu.png) ![NLWeer KNMI forecast](metadata/en-US/images/phoneScreenshots/forecast.png)
 
 
 ## Reasons to use NLWeer
@@ -23,10 +23,12 @@ Compared to other weather apps for the Netherlands (e.g. Buienradar), here are s
 * It is very lightweight and battery friendly
 * It does not require the Google Play Services (e.g. it will run on LineageOS without Google Play or microG)
 
-But there are reasons as well not to use NLWeer (for now at least):
+Features of NLWeer:
 
-* It doesn't produce a rain-forecast graph for your location
-* It doesn't include data from Buienradar (yet)
+* Includes weather maps as well as a written weather report
+* Includes weather information from multiple sources
+* Three options for localisation (shown as a red circle): manual lon/lat coordinates, mobile service provider, or GPS
+* Includes a precipitation prediction graph on your current location
 
 
 ## How to use NLWeer
@@ -35,3 +37,5 @@ Requirement is an Android device with version 5.0 (Lollipop, API 21) or newer. Y
 
 * Download the apk from this repository's release page onto your device and install it
 * Install it from the the [F-Droid app store](https://f-droid.org/en/packages/foss.cnugteren.nlweer/)
+
+Note that Buienradar data may only be shown when running on a non-mobile device or if you have explicit permissions. For more information see [the Buienradar website](https://www.buienradar.nl/overbuienradar/gratis-weerdata).
