@@ -43,6 +43,22 @@
                 android:icon="@drawable/menu_radar"
                 android:title="@string/menu_buienradar_rain_m1" />
             <item
+                android:id="@+id/nav_buienradar_sun"
+                android:icon="@drawable/menu_today"
+                android:title="@string/menu_buienradar_sun" />
+            <item
+                android:id="@+id/nav_buienradar_cloud"
+                android:icon="@drawable/menu_cloud"
+                android:title="@string/menu_buienradar_cloud" />
+            <item
+                android:id="@+id/nav_buienradar_drizzle"
+                android:icon="@drawable/menu_drizzle"
+                android:title="@string/menu_buienradar_drizzle" />
+            <item
+                android:id="@+id/nav_buienradar_hail"
+                android:icon="@drawable/menu_hail"
+                android:title="@string/menu_buienradar_hail" />
+            <item
                 android:id="@+id/nav_buienradar_chart"
                 android:icon="@drawable/menu_bargraph"
                 android:title="@string/menu_buienradar_chart" />

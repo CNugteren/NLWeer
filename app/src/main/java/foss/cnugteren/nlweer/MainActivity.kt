@@ -54,6 +54,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_knmi_wind,
                 R.id.nav_knmi_text,
                 R.id.nav_buienradar_rain_m1,
+                R.id.nav_buienradar_sun,
+                R.id.nav_buienradar_cloud,
+                R.id.nav_buienradar_drizzle,
+                R.id.nav_buienradar_hail,
                 R.id.nav_buienradar_chart
             ), drawerLayout
         )

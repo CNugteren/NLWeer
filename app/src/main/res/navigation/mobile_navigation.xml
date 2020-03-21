@@ -48,6 +48,30 @@
         tools:layout="@layout/fragment_buienradar" />
 
     <fragment
+        android:id="@+id/nav_buienradar_sun"
+        android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarSunFragment"
+        android:label="@string/menu_buienradar_sun"
+        tools:layout="@layout/fragment_buienradar" />
+
+    <fragment
+        android:id="@+id/nav_buienradar_cloud"
+        android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarCloudFragment"
+        android:label="@string/menu_buienradar_cloud"
+        tools:layout="@layout/fragment_buienradar" />
+
+    <fragment
+        android:id="@+id/nav_buienradar_drizzle"
+        android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarDrizzleFragment"
+        android:label="@string/menu_buienradar_drizzle"
+        tools:layout="@layout/fragment_buienradar" />
+
+    <fragment
+        android:id="@+id/nav_buienradar_hail"
+        android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarHailFragment"
+        android:label="@string/menu_buienradar_hail"
+        tools:layout="@layout/fragment_buienradar" />
+
+    <fragment
         android:id="@+id/nav_buienradar_chart"
         android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment"
         android:label="@string/menu_buienradar_chart"
