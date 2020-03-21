@@ -23,7 +23,6 @@
     <string name="menu_knmi_text_loading">Data is being loaded...</string>
     <string name="menu_knmi_text_failed">Data could not be loaded</string>
 
-
     <string name="menu_buienradar_header">Source: Buienradar</string>
     <string name="menu_buienradar_rain_m1">Rain last hour</string>
     <string name="menu_buienradar_chart">Rain prediction chart</string>
@@ -34,6 +33,8 @@
     <string name="menu_buienradar_chart_error">Data could not be loaded (outside of the Netherlands?)</string>
 
     <string name="settings_category_sources">Data sources</string>
+    <string name="settings_knmi_enable">KNMI</string>
+    <string name="settings_knmi_enable_sub">Show data from KNMI</string>
     <string name="settings_buienradar_enable">Buienradar</string>
     <string name="settings_buienradar_enable_sub">Show data from Buienradar</string>
     <string name="settings_buienradar_enable_title">Permissions required for mobile usage</string>

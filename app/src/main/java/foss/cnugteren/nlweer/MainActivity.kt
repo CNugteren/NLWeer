@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         val menu = navView.menu
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
 
-        val sourceEnableKNMI = true
+        val sourceEnableKNMI = sharedPreferences.getBoolean("knmi_enable", true)
         val menuKnmi = menu.findItem(R.id.knmi_menu)
         menuKnmi.isVisible = sourceEnableKNMI
 

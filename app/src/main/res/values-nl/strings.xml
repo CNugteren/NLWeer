@@ -34,6 +34,8 @@
     <string name="menu_buienradar_chart_error">Data kon niet geladen worden (locatie buiten Nederland?)</string>
 
     <string name="settings_category_sources">Data bronnen</string>
+    <string name="settings_knmi_enable">KNMI</string>
+    <string name="settings_knmi_enable_sub">Laat data van KNMI zien</string>
     <string name="settings_buienradar_enable">Buienradar</string>
     <string name="settings_buienradar_enable_sub">Laat data van Buienradar zien</string>
     <string name="settings_buienradar_enable_title">Toestemming nodig voor mobiele toepassingen</string>

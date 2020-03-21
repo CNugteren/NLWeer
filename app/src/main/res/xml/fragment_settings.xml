@@ -10,6 +10,12 @@
         app:title="@string/settings_category_sources">
 
         <SwitchPreferenceCompat
+            android:key="knmi_enable"
+            android:title="@string/settings_knmi_enable"
+            android:summary="@string/settings_knmi_enable_sub"
+            android:defaultValue="true"/>
+
+        <SwitchPreferenceCompat
             android:key="buienradar_enable"
             android:title="@string/settings_buienradar_enable"
             android:summary="@string/settings_buienradar_enable_sub"
