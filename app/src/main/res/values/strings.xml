@@ -10,6 +10,7 @@
 
     <string name="menu_about">NLWeer</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_empty">Empty screen</string>
 
     <string name="menu_knmi_header">Source: KNMI</string>
     <string name="menu_knmi_rain_m1">Rain last hour</string>
@@ -45,6 +46,8 @@
     <string name="settings_buienradar_enable_message">Buienradar data may only be shown if this is a non-mobile device or if you have explicit permissions. For more information see: \nhttps://www.buienradar.nl/overbuienradar/gratis-weerdata</string>
     <string name="settings_buienradar_enable_accept">Continue</string>
     <string name="settings_buienradar_enable_decline">Cancel</string>
+    <string name="settings_default_view">First screen</string>
+    <string name="settings_default_view_sub">Select the screen shown at the start</string>
 
     <string name="settings_category_location">Location settings</string>
     <string name="settings_location_enable">Show my location</string>

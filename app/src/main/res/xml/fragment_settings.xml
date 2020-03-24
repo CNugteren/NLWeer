@@ -21,6 +21,13 @@
             android:summary="@string/settings_buienradar_enable_sub"
             android:defaultValue="false"/>
 
+        <ListPreference
+            android:title="@string/settings_default_view"
+            android:summary="@string/settings_default_view_sub"
+            android:key="settings_default_view_listpreference"
+            android:entries="@array/empty_options"
+            android:entryValues="@array/empty_values"
+            android:defaultValue="0"/>
     </PreferenceCategory>
 
     <PreferenceCategory

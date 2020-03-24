@@ -78,6 +78,12 @@
         tools:layout="@layout/fragment_buienradar" />
 
     <fragment
+        android:id="@+id/nav_empty"
+        android:name="foss.cnugteren.nlweer.ui.fragments.EmptyFragment"
+        android:label="@string/menu_empty"
+        tools:layout="@layout/fragment_knmi" />
+
+    <fragment
         android:id="@+id/nav_about"
         android:name="foss.cnugteren.nlweer.ui.fragments.AboutFragment"
         android:label="@string/menu_about"

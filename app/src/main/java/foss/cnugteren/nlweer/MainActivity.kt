@@ -58,12 +58,14 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_buienradar_cloud,
                 R.id.nav_buienradar_drizzle,
                 R.id.nav_buienradar_hail,
-                R.id.nav_buienradar_chart
+                R.id.nav_buienradar_chart,
+                R.id.nav_empty
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         setLocationManager()
+        setStartFragment()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -89,6 +91,17 @@ class MainActivity : AppCompatActivity() {
         val sourceEnableBuienradar = sharedPreferences.getBoolean("buienradar_enable", false)
         val menuBuienradar = menu.findItem(R.id.buienradar_menu)
         menuBuienradar.isVisible = sourceEnableBuienradar
+    }
+
+    fun setStartFragment() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val defaultViewId = sharedPreferences.getString("settings_default_view_listpreference", (R.id.nav_knmi_rain_m1).toString())?.toInt()
+        if (defaultViewId != null) {
+            val navController = findNavController(R.id.nav_host_fragment)
+            val navGraph = navController.graph
+            navGraph.startDestination = defaultViewId
+            navController.graph = navGraph
+        }
     }
 
     // Menu button: refresh

@@ -3,9 +3,9 @@ package foss.cnugteren.nlweer.ui.fragments
 import android.Manifest
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.os.Bundle
 import foss.cnugteren.nlweer.R
 import android.content.SharedPreferences
+import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.preference.*
 import foss.cnugteren.nlweer.MainActivity
@@ -26,6 +26,16 @@ class SettingsFragment : PreferenceFragmentCompat(),
         findPreference("location_latitude")?.summary = latString
         findPreference("location_longitude")?.summary = lonString
         findPreference("location_provider")?.summary = locationProvider
+
+        // Sets the default view list options
+        val defaultViewSelection = findPreference("settings_default_view_listpreference") as ListPreference
+        setListPreferenceData(defaultViewSelection)
+        defaultViewSelection.onPreferenceClickListener = (object : Preference.OnPreferenceClickListener {
+            override fun onPreferenceClick(preference: Preference?): Boolean {
+                setListPreferenceData(defaultViewSelection)
+                return false
+            }
+        })
     }
 
     override fun onResume() {
@@ -40,12 +50,55 @@ class SettingsFragment : PreferenceFragmentCompat(),
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
     }
 
-    fun enableDisableLocationProviderButton() {
-        // The 'choose location provider' button needs to be disabled/enabled appropriapatly
+    private fun enableDisableLocationProviderButton() {
+        // The 'choose location provider' button needs to be disabled/enabled appropriately
         val locationProviderSetting = findPreference("location_provider") as ListPreference
         val showMyLocation = findPreference("location_enable") as SwitchPreferenceCompat
         val useAutoLocation = findPreference("gps_enable") as SwitchPreferenceCompat
         locationProviderSetting.isEnabled = (showMyLocation.isChecked && useAutoLocation.isChecked)
+    }
+
+    private fun setListPreferenceData(defaultViewSelection: ListPreference) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val sourceEnableKNMI = sharedPreferences.getBoolean("knmi_enable", true)
+        val sourceEnableBuienradar = sharedPreferences.getBoolean("buienradar_enable", false)
+
+        val entries = mutableListOf(getString(R.string.menu_empty))
+        val values = mutableListOf(R.id.nav_empty.toString())
+        if (sourceEnableKNMI) {
+            entries.add("KNMI: " + getString(R.string.menu_knmi_rain_m1))
+            entries.add("KNMI: " + getString(R.string.menu_knmi_today))
+            entries.add("KNMI: " + getString(R.string.menu_knmi_tonight))
+            entries.add("KNMI: " + getString(R.string.menu_knmi_tomorrow))
+            entries.add("KNMI: " + getString(R.string.menu_knmi_temperature))
+            entries.add("KNMI: " + getString(R.string.menu_knmi_wind))
+            entries.add("KNMI: " + getString(R.string.menu_knmi_text))
+            values.add(R.id.nav_knmi_rain_m1.toString())
+            values.add(R.id.nav_knmi_today.toString())
+            values.add(R.id.nav_knmi_tomorrow.toString())
+            values.add(R.id.nav_knmi_tonight.toString())
+            values.add(R.id.nav_knmi_temperature.toString())
+            values.add(R.id.nav_knmi_wind.toString())
+            values.add(R.id.nav_knmi_text.toString())
+        }
+        if (sourceEnableBuienradar) {
+            entries.add("Buienradar: " + getString(R.string.menu_buienradar_rain_m1))
+            entries.add("Buienradar: " + getString(R.string.menu_buienradar_sun))
+            entries.add("Buienradar: " + getString(R.string.menu_buienradar_cloud))
+            entries.add("Buienradar: " + getString(R.string.menu_buienradar_drizzle))
+            entries.add("Buienradar: " + getString(R.string.menu_buienradar_hail))
+            entries.add("Buienradar: " + getString(R.string.menu_buienradar_chart))
+            values.add(R.id.nav_buienradar_rain_m1.toString())
+            values.add(R.id.nav_buienradar_sun.toString())
+            values.add(R.id.nav_buienradar_cloud.toString())
+            values.add(R.id.nav_buienradar_drizzle.toString())
+            values.add(R.id.nav_buienradar_hail.toString())
+            values.add(R.id.nav_buienradar_chart.toString())
+        }
+
+        defaultViewSelection.entries = entries.toTypedArray()
+        defaultViewSelection.entryValues = values.toTypedArray()
+        defaultViewSelection.setDefaultValue(R.id.nav_knmi_rain_m1.toString())
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
