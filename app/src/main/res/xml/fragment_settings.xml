@@ -26,8 +26,7 @@
             android:summary="@string/settings_default_view_sub"
             android:key="settings_default_view_listpreference"
             android:entries="@array/empty_options"
-            android:entryValues="@array/empty_values"
-            android:defaultValue="0"/>
+            android:entryValues="@array/empty_values"/>
     </PreferenceCategory>
 
     <PreferenceCategory

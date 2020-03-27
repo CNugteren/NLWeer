@@ -65,7 +65,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         setLocationManager()
-        setStartFragment()
+        if (savedInstanceState == null) { // Only when the app starts for the first time
+            setStartFragment()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
