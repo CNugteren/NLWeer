@@ -1,0 +1,2 @@
+- Added weather information from Buienradar as secondary source
+- Added an option to select the first screen

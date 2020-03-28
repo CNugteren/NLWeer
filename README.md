@@ -10,8 +10,9 @@ NLWeer is a simple open-source and privacy-friendly Dutch weather app for Androi
 
 This is what it looks like:
 
-![NLWeer KNMI rain radar](metadata/en-US/images/phoneScreenshots/rain_radar.png) ![NLWeer KNMI navigation menu](metadata/en-US/images/phoneScreenshots/navigation_menu.png) ![NLWeer KNMI forecast](metadata/en-US/images/phoneScreenshots/forecast.png)
+![NLWeer KNMI rain radar](metadata/en-US/images/phoneScreenshots/rain_radar.png) ![NLWeer navigation menu](metadata/en-US/images/phoneScreenshots/navigation_menu.png) ![NLWeer KNMI forecast](metadata/en-US/images/phoneScreenshots/forecast.png)
 
+![NLWeer settings](metadata/en-US/images/phoneScreenshots/settings.png) ![NLWeer navigation menu (bottom)](metadata/en-US/images/phoneScreenshots/navigation_menu_bottom.png) ![NLWeer Buienradar prediction](metadata/en-US/images/phoneScreenshots/rain_prediction.png)
 
 ## Reasons to use NLWeer
 
@@ -29,6 +30,7 @@ Features of NLWeer:
 * Includes weather information from multiple sources
 * Three options for localisation (shown as a red circle): manual lon/lat coordinates, mobile service provider, or GPS
 * Includes a precipitation prediction graph on your current location
+* Languages: English and Dutch
 
 
 ## How to use NLWeer
