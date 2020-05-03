@@ -19,6 +19,8 @@
     <string name="menu_knmi_tomorrow">Forecast tomorrow</string>
     <string name="menu_knmi_temperature">Temperature</string>
     <string name="menu_knmi_wind">Wind</string>
+    <string name="menu_knmi_sun_today">Sun strength today</string>
+    <string name="menu_knmi_sun_tomorrow">Sun strength tomorrow</string>
     <string name="menu_knmi_text">Weather report</string>
     <string name="menu_knmi_text_source">Source:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
     <string name="menu_knmi_text_loading">Data is being loaded...</string>

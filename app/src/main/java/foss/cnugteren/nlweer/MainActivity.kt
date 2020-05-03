@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_knmi_tonight,
                 R.id.nav_knmi_temperature,
                 R.id.nav_knmi_wind,
+                R.id.nav_knmi_sun_tod,
+                R.id.nav_knmi_sun_tom,
                 R.id.nav_knmi_text,
                 R.id.nav_buienradar_rain_m1,
                 R.id.nav_buienradar_sun,

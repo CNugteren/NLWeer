@@ -30,6 +30,14 @@
                 android:icon="@drawable/menu_wind"
                 android:title="@string/menu_knmi_wind" />
             <item
+                android:id="@+id/nav_knmi_sun_tod"
+                android:icon="@drawable/menu_today"
+                android:title="@string/menu_knmi_sun_today" />
+            <item
+                android:id="@+id/nav_knmi_sun_tom"
+                android:icon="@drawable/menu_tomorrow"
+                android:title="@string/menu_knmi_sun_tomorrow" />
+            <item
                 android:id="@+id/nav_knmi_text"
                 android:icon="@drawable/menu_weather_report"
                 android:title="@string/menu_knmi_text" />
