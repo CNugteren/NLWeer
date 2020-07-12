@@ -20,6 +20,8 @@
     <string name="menu_knmi_tomorrow">Voorspelling morgen</string>
     <string name="menu_knmi_temperature">Temperatuur</string>
     <string name="menu_knmi_wind">Wind</string>
+    <string name="menu_knmi_sun_today">Zonsterkte vandaag</string>
+    <string name="menu_knmi_sun_tomorrow">Zonsterkte morgen</string>
     <string name="menu_knmi_text">Weerbericht</string>
     <string name="menu_knmi_text_source">Bron:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
     <string name="menu_knmi_text_loading">Data wordt geladen...</string>

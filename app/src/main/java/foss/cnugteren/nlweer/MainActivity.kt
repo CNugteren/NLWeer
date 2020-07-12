@@ -29,6 +29,8 @@ val KNMI_ITEMS = arrayOf(
     arrayOf(R.string.menu_knmi_tonight, R.id.nav_knmi_tonight),
     arrayOf(R.string.menu_knmi_tomorrow, R.id.nav_knmi_tomorrow),
     arrayOf(R.string.menu_knmi_temperature, R.id.nav_knmi_temperature),
+    arrayOf(R.string.menu_knmi_sun_tod, R.id.nav_knmi_sun_tod),
+    arrayOf(R.string.menu_knmi_sun_tom, R.id.nav_knmi_sun_tom),
     arrayOf(R.string.menu_knmi_wind, R.id.nav_knmi_wind),
     arrayOf(R.string.menu_knmi_text, R.id.nav_knmi_text)
 )
@@ -66,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         for (item in KNMI_ITEMS) { destinations.add(item[1]) }
         for (item in BUIENRADAR_ITEMS) { destinations.add(item[1]) }
         appBarConfiguration = AppBarConfiguration(destinations, drawerLayout)
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         setLocationManager()
