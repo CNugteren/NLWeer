@@ -29,9 +29,9 @@ val KNMI_ITEMS = arrayOf(
     arrayOf(R.string.menu_knmi_tonight, R.id.nav_knmi_tonight),
     arrayOf(R.string.menu_knmi_tomorrow, R.id.nav_knmi_tomorrow),
     arrayOf(R.string.menu_knmi_temperature, R.id.nav_knmi_temperature),
-    arrayOf(R.string.menu_knmi_sun_tod, R.id.nav_knmi_sun_tod),
-    arrayOf(R.string.menu_knmi_sun_tom, R.id.nav_knmi_sun_tom),
     arrayOf(R.string.menu_knmi_wind, R.id.nav_knmi_wind),
+    arrayOf(R.string.menu_knmi_sun_today, R.id.nav_knmi_sun_tod),
+    arrayOf(R.string.menu_knmi_sun_tomorrow, R.id.nav_knmi_sun_tom),
     arrayOf(R.string.menu_knmi_text, R.id.nav_knmi_text)
 )
 

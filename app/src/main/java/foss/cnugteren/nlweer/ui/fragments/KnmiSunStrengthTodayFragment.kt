@@ -8,5 +8,5 @@ class KnmiSunStrengthTodayFragment : BaseFragment() {
 
     override fun imageWidth(): Int { return 425 }
     override fun imageHeight(): Int { return 457 }
-    override fun coordinates(): Array<Float> { return arrayOf(50.60f, 1.85f, 54.05f, 7.20f, -0.10f, 0.09f) }
+    override fun coordinates(): Array<Float> { return arrayOf(50.70f, 3.10f, 53.65f, 7.55f, -0.01f, 0.00f) }
 }
