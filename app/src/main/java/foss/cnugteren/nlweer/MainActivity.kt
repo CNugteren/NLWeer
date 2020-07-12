@@ -23,6 +23,24 @@ import foss.cnugteren.nlweer.ui.fragments.BaseFragment
 import foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment
 import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
 
+val KNMI_ITEMS = arrayOf(
+    arrayOf(R.string.menu_knmi_rain_m1, R.id.nav_knmi_rain_m1),
+    arrayOf(R.string.menu_knmi_today, R.id.nav_knmi_today),
+    arrayOf(R.string.menu_knmi_tonight, R.id.nav_knmi_tonight),
+    arrayOf(R.string.menu_knmi_tomorrow, R.id.nav_knmi_tomorrow),
+    arrayOf(R.string.menu_knmi_temperature, R.id.nav_knmi_temperature),
+    arrayOf(R.string.menu_knmi_wind, R.id.nav_knmi_wind),
+    arrayOf(R.string.menu_knmi_text, R.id.nav_knmi_text)
+)
+
+val BUIENRADAR_ITEMS = arrayOf(
+    arrayOf(R.string.menu_buienradar_rain_m1, R.id.nav_buienradar_rain_m1),
+    arrayOf(R.string.menu_buienradar_sun, R.id.nav_buienradar_sun),
+    arrayOf(R.string.menu_buienradar_cloud, R.id.nav_buienradar_cloud),
+    arrayOf(R.string.menu_buienradar_drizzle, R.id.nav_buienradar_drizzle),
+    arrayOf(R.string.menu_buienradar_hail, R.id.nav_buienradar_hail),
+    arrayOf(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart)
+)
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,24 +62,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_knmi_rain_m1,
-                R.id.nav_knmi_today,
-                R.id.nav_knmi_tomorrow,
-                R.id.nav_knmi_tonight,
-                R.id.nav_knmi_temperature,
-                R.id.nav_knmi_wind,
-                R.id.nav_knmi_text,
-                R.id.nav_buienradar_rain_m1,
-                R.id.nav_buienradar_sun,
-                R.id.nav_buienradar_cloud,
-                R.id.nav_buienradar_drizzle,
-                R.id.nav_buienradar_hail,
-                R.id.nav_buienradar_chart,
-                R.id.nav_empty
-            ), drawerLayout
-        )
+        val destinations = mutableSetOf(R.id.nav_empty)
+        for (item in KNMI_ITEMS) { destinations.add(item[1]) }
+        for (item in BUIENRADAR_ITEMS) { destinations.add(item[1]) }
+        appBarConfiguration = AppBarConfiguration(destinations, drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         setLocationManager()
