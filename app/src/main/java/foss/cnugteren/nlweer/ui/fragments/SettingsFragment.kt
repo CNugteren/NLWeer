@@ -30,6 +30,14 @@ class SettingsFragment : PreferenceFragmentCompat(),
         findPreference("location_longitude")?.summary = lonString
         findPreference("location_provider")?.summary = locationProvider
 
+        // Sets the views listed in the navigation menu
+        val navViewsVisibleKNMI = findPreference("settings_nav_view_knmi") as MultiSelectListPreference
+        val navItemsKNMI = sharedPreferences.getStringSet("settings_nav_view_knmi", setOf("not_yet_set"))
+        setNavViews(navViewsVisibleKNMI, KNMI_ITEMS, navItemsKNMI == setOf("not_yet_set"))
+        val navViewsVisibleBuienradar = findPreference("settings_nav_view_buienradar") as MultiSelectListPreference
+        val navItemsBuienradar = sharedPreferences.getStringSet("settings_nav_view_buienradar", setOf("not_yet_set"))
+        setNavViews(navViewsVisibleBuienradar, BUIENRADAR_ITEMS, navItemsBuienradar == setOf("not_yet_set"))
+
         // Sets the default view list options
         val defaultViewSelection = findPreference("settings_default_view_listpreference") as ListPreference
         setListPreferenceData(defaultViewSelection)
@@ -61,6 +69,26 @@ class SettingsFragment : PreferenceFragmentCompat(),
         locationProviderSetting.isEnabled = (showMyLocation.isChecked && useAutoLocation.isChecked)
     }
 
+    private fun setNavViews(multiSelect: MultiSelectListPreference,
+                            items: Array<Array<Int>>, do_set_defaults: Boolean) {
+        // Add all the items possible to show in the nav menu to the list of options
+        val entries = mutableListOf<String>()
+        val values = mutableListOf<String>()
+        val defaults = mutableListOf<String>()
+        for (item in items) {
+            entries.add(getString(item[0]))
+            values.add(item[1].toString())
+            if (item[2] == 1) {
+                defaults.add(item[1].toString())
+            }
+        }
+        multiSelect.entries = entries.toTypedArray()
+        multiSelect.entryValues = values.toTypedArray()
+        if (do_set_defaults) {
+            multiSelect.values = defaults.toSet()
+        }
+    }
+
     private fun setListPreferenceData(defaultViewSelection: ListPreference) {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val sourceEnableKNMI = sharedPreferences.getBoolean("knmi_enable", true)
@@ -84,8 +112,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
         }
         if (sourceEnableBuienradar) {
             for (item in BUIENRADAR_ITEMS) {
-                entries.add("Buienradar: " + getString(item[0]))
-                values.add(item[1].toString())
+                if (menu.findItem(item[1]).isVisible) {
+                    entries.add("Buienradar: " + getString(item[0]))
+                    values.add(item[1].toString())
+                }
             }
         }
 
@@ -104,6 +134,12 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
         // Change data sources for display in the menu
         if (pref is SwitchPreferenceCompat && (key == "buienradar_enable" || key == "knmi_enable")) {
+            val activity = this.activity as MainActivity
+            activity.setMenuItemsVisibility()
+        }
+
+        // Change data sources for display in the menu
+        if (pref is MultiSelectListPreference && (key == "settings_nav_view_knmi" || key == "settings_nav_view_buienradar")) {
             val activity = this.activity as MainActivity
             activity.setMenuItemsVisibility()
         }

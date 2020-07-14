@@ -15,11 +15,27 @@
             android:summary="@string/settings_knmi_enable_sub"
             android:defaultValue="true"/>
 
+        <MultiSelectListPreference
+            android:title="@string/settings_nav_view_knmi"
+            android:summary="@string/settings_nav_view_knmi_sub"
+            android:key="settings_nav_view_knmi"
+            android:entries="@array/empty_options"
+            android:entryValues="@array/empty_values"
+            android:dependency="knmi_enable"/>
+
         <SwitchPreferenceCompat
             android:key="buienradar_enable"
             android:title="@string/settings_buienradar_enable"
             android:summary="@string/settings_buienradar_enable_sub"
             android:defaultValue="false"/>
+
+        <MultiSelectListPreference
+            android:title="@string/settings_nav_view_buienradar"
+            android:summary="@string/settings_nav_view_buienradar_sub"
+            android:key="settings_nav_view_buienradar"
+            android:entries="@array/empty_options"
+            android:entryValues="@array/empty_values"
+            android:dependency="buienradar_enable"/>
 
         <ListPreference
             android:title="@string/settings_default_view"

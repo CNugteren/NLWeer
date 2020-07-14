@@ -23,25 +23,25 @@ import foss.cnugteren.nlweer.ui.fragments.BaseFragment
 import foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment
 import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
 
+// Each item consists of: string name, nav ID, default shown (1) or not (0)
 val KNMI_ITEMS = arrayOf(
-    arrayOf(R.string.menu_knmi_rain_m1, R.id.nav_knmi_rain_m1),
-    arrayOf(R.string.menu_knmi_today, R.id.nav_knmi_today),
-    arrayOf(R.string.menu_knmi_tonight, R.id.nav_knmi_tonight),
-    arrayOf(R.string.menu_knmi_tomorrow, R.id.nav_knmi_tomorrow),
-    arrayOf(R.string.menu_knmi_temperature, R.id.nav_knmi_temperature),
-    arrayOf(R.string.menu_knmi_wind, R.id.nav_knmi_wind),
-    arrayOf(R.string.menu_knmi_sun_today, R.id.nav_knmi_sun_tod),
-    arrayOf(R.string.menu_knmi_sun_tomorrow, R.id.nav_knmi_sun_tom),
-    arrayOf(R.string.menu_knmi_text, R.id.nav_knmi_text)
+    arrayOf(R.string.menu_knmi_rain_m1, R.id.nav_knmi_rain_m1, 1),
+    arrayOf(R.string.menu_knmi_today, R.id.nav_knmi_today, 1),
+    arrayOf(R.string.menu_knmi_tonight, R.id.nav_knmi_tonight, 1),
+    arrayOf(R.string.menu_knmi_tomorrow, R.id.nav_knmi_tomorrow, 1),
+    arrayOf(R.string.menu_knmi_temperature, R.id.nav_knmi_temperature, 1),
+    arrayOf(R.string.menu_knmi_wind, R.id.nav_knmi_wind, 1),
+    arrayOf(R.string.menu_knmi_sun_today, R.id.nav_knmi_sun_tod, 0),
+    arrayOf(R.string.menu_knmi_sun_tomorrow, R.id.nav_knmi_sun_tom, 0),
+    arrayOf(R.string.menu_knmi_text, R.id.nav_knmi_text, 1)
 )
-
 val BUIENRADAR_ITEMS = arrayOf(
-    arrayOf(R.string.menu_buienradar_rain_m1, R.id.nav_buienradar_rain_m1),
-    arrayOf(R.string.menu_buienradar_sun, R.id.nav_buienradar_sun),
-    arrayOf(R.string.menu_buienradar_cloud, R.id.nav_buienradar_cloud),
-    arrayOf(R.string.menu_buienradar_drizzle, R.id.nav_buienradar_drizzle),
-    arrayOf(R.string.menu_buienradar_hail, R.id.nav_buienradar_hail),
-    arrayOf(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart)
+    arrayOf(R.string.menu_buienradar_rain_m1, R.id.nav_buienradar_rain_m1, 1),
+    arrayOf(R.string.menu_buienradar_sun, R.id.nav_buienradar_sun, 1),
+    arrayOf(R.string.menu_buienradar_cloud, R.id.nav_buienradar_cloud, 1),
+    arrayOf(R.string.menu_buienradar_drizzle, R.id.nav_buienradar_drizzle, 0),
+    arrayOf(R.string.menu_buienradar_hail, R.id.nav_buienradar_hail, 0),
+    arrayOf(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart, 1)
 )
 
 class MainActivity : AppCompatActivity() {
@@ -100,6 +100,24 @@ class MainActivity : AppCompatActivity() {
         val sourceEnableBuienradar = sharedPreferences.getBoolean("buienradar_enable", false)
         val menuBuienradar = menu.findItem(R.id.buienradar_menu)
         menuBuienradar.isVisible = sourceEnableBuienradar
+
+        val navItemsKNMI = sharedPreferences.getStringSet("settings_nav_view_knmi", setOf("not_yet_set"))
+        if (navItemsKNMI != null) {
+            for (item in KNMI_ITEMS) {
+                val menuItem = menu.findItem(item[1])
+                if (navItemsKNMI == setOf("not_yet_set")) {  menuItem.isVisible = (item[2] == 1) }
+                else { menuItem.isVisible = (item[1].toString() in navItemsKNMI) }
+            }
+        }
+
+        val navItemsBuienradar = sharedPreferences.getStringSet("settings_nav_view_buienradar", setOf("not_yet_set"))
+        if (navItemsBuienradar != null) {
+            for (item in BUIENRADAR_ITEMS) {
+                val menuItem = menu.findItem(item[1])
+                if (navItemsBuienradar == setOf("not_yet_set")) {  menuItem.isVisible = (item[2] == 1) }
+                else { menuItem.isVisible = (item[1].toString() in navItemsBuienradar) }
+            }
+        }
     }
 
     fun setStartFragment() {

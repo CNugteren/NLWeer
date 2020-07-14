@@ -50,6 +50,10 @@
     <string name="settings_buienradar_enable_decline">Cancel</string>
     <string name="settings_default_view">First screen</string>
     <string name="settings_default_view_sub">Select the screen shown at the start</string>
+    <string name="settings_nav_view_knmi">KNMI views</string>
+    <string name="settings_nav_view_knmi_sub">Select the views to show in the app</string>
+    <string name="settings_nav_view_buienradar">Buienradar views</string>
+    <string name="settings_nav_view_buienradar_sub">Select the views to show in the app</string>
 
     <string name="settings_category_location">Location settings</string>
     <string name="settings_location_enable">Show my location</string>

@@ -51,6 +51,10 @@
     <string name="settings_buienradar_enable_decline">Annuleren</string>
     <string name="settings_default_view">Eerste scherm</string>
     <string name="settings_default_view_sub">Kies het scherm dat bij de start te zien is</string>
+    <string name="settings_nav_view_knmi">KNMI kaarten</string>
+    <string name="settings_nav_view_knmi_sub">Kies welke kaarten te zien zijn in de app</string>
+    <string name="settings_nav_view_buienradar">Buienradar kaarten</string>
+    <string name="settings_nav_view_buienradar_sub">Kies welke kaarten te zien zijn in de app</string>
 
     <string name="settings_category_location">Locatie instellingen</string>
     <string name="settings_location_enable">Toon mijn locatie</string>
