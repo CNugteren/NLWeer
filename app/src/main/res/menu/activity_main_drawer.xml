@@ -30,6 +30,18 @@
                 android:icon="@drawable/menu_wind"
                 android:title="@string/menu_knmi_wind" />
             <item
+                android:id="@+id/nav_knmi_visibility"
+                android:icon="@drawable/menu_fog"
+                android:title="@string/menu_knmi_visibility" />
+            <item
+                android:id="@+id/nav_knmi_humidity"
+                android:icon="@drawable/menu_humidity"
+                android:title="@string/menu_knmi_humidity" />
+            <item
+                android:id="@+id/nav_knmi_warnings"
+                android:icon="@drawable/menu_warning"
+                android:title="@string/menu_knmi_warnings" />
+            <item
                 android:id="@+id/nav_knmi_sun_tod"
                 android:icon="@drawable/menu_today"
                 android:title="@string/menu_knmi_sun_today" />

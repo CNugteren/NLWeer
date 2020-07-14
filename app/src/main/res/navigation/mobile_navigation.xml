@@ -36,6 +36,21 @@
         android:label="@string/menu_knmi_wind"
         tools:layout="@layout/fragment_knmi" />
     <fragment
+        android:id="@+id/nav_knmi_visibility"
+        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiVisibilityFragment"
+        android:label="@string/menu_knmi_visibility"
+        tools:layout="@layout/fragment_knmi" />
+    <fragment
+        android:id="@+id/nav_knmi_humidity"
+        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiHumidityFragment"
+        android:label="@string/menu_knmi_humidity"
+        tools:layout="@layout/fragment_knmi" />
+    <fragment
+        android:id="@+id/nav_knmi_warnings"
+        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiWarningsFragment"
+        android:label="@string/menu_knmi_warnings"
+        tools:layout="@layout/fragment_knmi" />
+    <fragment
         android:id="@+id/nav_knmi_sun_tod"
         android:name="foss.cnugteren.nlweer.ui.fragments.KnmiSunStrengthTodayFragment"
         android:label="@string/menu_knmi_sun_today"

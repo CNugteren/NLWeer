@@ -19,6 +19,9 @@
     <string name="menu_knmi_tomorrow">Forecast tomorrow</string>
     <string name="menu_knmi_temperature">Temperature</string>
     <string name="menu_knmi_wind">Wind</string>
+    <string name="menu_knmi_visibility">Visibility</string>
+    <string name="menu_knmi_humidity">Relative humidity</string>
+    <string name="menu_knmi_warnings">Weather warnings</string>
     <string name="menu_knmi_sun_today">Sun strength today</string>
     <string name="menu_knmi_sun_tomorrow">Sun strength tomorrow</string>
     <string name="menu_knmi_text">Weather report</string>
@@ -75,7 +78,7 @@
     <string name="about_text_header_4">App and menu icons</string>
     <string name="about_text_content_4">Main app icon: Copyright by Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
 \nMoon icon: Copyright OOjs UI Team, MIT License, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
-\nSun, wind, hail, cloud, drizzle, graph, and report icons: Copyright by Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
+\nSun, wind, hail, cloud, drizzle, graph, humidity, fog, warning, and report icons: Copyright by Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
 \nTemperature and sunrise icons: Icons made by Hirschwolf and Freepik from www.flaticon.com</string>
     <string name="about_text_header_5">NLWeer version info</string>
 
