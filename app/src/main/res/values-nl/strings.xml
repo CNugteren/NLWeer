@@ -6,6 +6,7 @@
     <string name="nav_header_desc">Navigatieicoon</string>
 
     <string name="action_refresh">Herlaad</string>
+    <string name="action_share">Deel kaart</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_about">Info</string>
 
@@ -69,6 +70,11 @@
     <string name="settings_longitude">Mijn locatie: lengtegraad</string>
     <string-array name="location_provider_items"><item>Netwerk</item><item>GPS</item></string-array>
     <string-array name="location_provider_values"><item>Network</item><item>GPS</item></string-array>
+
+    <string name="share_subject">NLWeer kaart</string>
+    <string name="share_choose">Deel deze kaart via</string>
+    <string name="share_disabled_alert_title">Niet geimplementeerd</string>
+    <string name="share_disabled_alert_message">Deze pagina kan niet gedeeld worden, alleen kaarten worden ondersteund</string>
 
     <string name="about_text_header_1">Over NLWeer</string>
     <string name="about_text_content_1">NLWeer is een opensource en privacyvriendelijke Nederlandse weerapp. Het is gratis en vrij om te gebruiken. De code valt onder de MIT-licentie. De weergegevens worden door het KNMI en de Buienradar verstrekt, zie hieronder voor meer informatie. Om de code in te zien, om problemen te rapporteren, voor nieuwe versies of voor meer informatie zie:\n\nhttps://github.com/CNugteren/NLWeer</string>

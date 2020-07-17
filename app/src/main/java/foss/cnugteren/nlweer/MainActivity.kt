@@ -1,6 +1,9 @@
 package foss.cnugteren.nlweer
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
@@ -145,6 +148,42 @@ class MainActivity : AppCompatActivity() {
             if (fragment is KnmiTextFragment) {
                 fragment.refreshPage()
             }
+        }
+    }
+
+    // Menu button: share
+    fun onClickShare(@Suppress("UNUSED_PARAMETER") v: MenuItem) {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        if (navHostFragment != null) {
+
+            // Retrieve the URL to share
+            val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
+            val url: String
+            if (fragment is BaseFragment) {
+                url = fragment.getURL()
+            } else {
+
+                // Unsupported
+                val alertDialog: AlertDialog? = let {
+                    val builder = AlertDialog.Builder(it)
+                    builder.setMessage(R.string.share_disabled_alert_message)
+                    builder.setTitle(R.string.share_disabled_alert_title)
+                    builder.apply {
+                        setPositiveButton(R.string.settings_buienradar_enable_accept,
+                            DialogInterface.OnClickListener { _, _ -> })
+                    }
+                    builder.create()
+                }
+                alertDialog?.show()
+                return
+            }
+
+            // Share it
+            val sharing = Intent(Intent.ACTION_SEND)
+            sharing.type = "text/plain"
+            sharing.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_subject))
+            sharing.putExtra(Intent.EXTRA_TEXT, url)
+            startActivity(Intent.createChooser(sharing, getString(R.string.share_choose)))
         }
     }
 
