@@ -121,6 +121,9 @@ class KnmiTextFragment : Fragment() {
                             element.select("p").forEach { paragraph ->
                                 contents[3] += paragraph.text() + "\n\n"
                             }
+                            element.select("span.meta").forEach { paragraph ->
+                                contents[3] += "Laatste update: " + paragraph.text() + "\n\n"
+                            }
                         }
                     }
                 }
