@@ -93,11 +93,18 @@
         app:key="settings_category_appearance"
         app:title="@string/settings_category_appearance">
 
-    <SwitchPreferenceCompat
-        android:key="floating_navigation_enable"
-        android:title="@string/settings_floating_navigation_enable"
-        android:summary="@string/settings_floating_navigation_sub"
-        android:defaultValue="false"/>
+        <SwitchPreferenceCompat
+            android:key="floating_navigation_enable"
+            android:title="@string/settings_floating_navigation_enable"
+            android:summary="@string/settings_floating_navigation_sub"
+            android:defaultValue="false"/>
+
+        <ListPreference
+            android:defaultValue="black"
+            android:entries="@array/background_colour_items"
+            android:entryValues="@array/background_colour_values"
+            android:key="background_colour"
+            android:title="@string/settings_background_colour"/>
 
     </PreferenceCategory>
 

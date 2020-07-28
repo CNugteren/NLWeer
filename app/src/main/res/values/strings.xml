@@ -73,6 +73,7 @@
     <string name="settings_category_appearance">Appearance options</string>
     <string name="settings_floating_navigation_enable">Show floating navigation buttons</string>
     <string name="settings_floating_navigation_sub">Enables one-tap next/previous navigation</string>
+    <string name="settings_background_colour">Background colour</string>
 
     <string name="share_subject">NLWeer weather map</string>
     <string name="share_choose">Share this map through</string>
@@ -92,4 +93,6 @@
 \nTemperature and sunrise icons: Icons made by Hirschwolf and Freepik from www.flaticon.com</string>
     <string name="about_text_header_5">NLWeer version info</string>
 
+    <string name="colour_black">Black</string>
+    <string name="colour_white">White</string>
 </resources>

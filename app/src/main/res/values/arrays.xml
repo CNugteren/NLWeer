@@ -7,4 +7,14 @@
     <string-array name="empty_values">
         <item>0</item>
     </string-array>
+
+    <string-array name="background_colour_items">
+        <item>@string/colour_black</item>
+        <item>@string/colour_white</item>
+    </string-array>
+
+    <string-array name="background_colour_values">
+        <item>black</item>
+        <item>white</item>
+    </string-array>
 </resources>

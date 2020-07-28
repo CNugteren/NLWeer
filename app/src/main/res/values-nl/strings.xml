@@ -74,6 +74,7 @@
     <string name="settings_category_appearance">Weergave instellingen</string>
     <string name="settings_floating_navigation_enable">Toon zwevende navigatie knoppen</string>
     <string name="settings_floating_navigation_sub">Maakt één-knops vorige/volgende navigatie mogelijk</string>
+    <string name="settings_background_colour">Achtergrond kleur</string>
 
     <string name="share_subject">NLWeer kaart</string>
     <string name="share_choose">Deel deze kaart via</string>
@@ -92,5 +93,8 @@
 \nZon-, wind-, hagel-, wolk-, miezer-, grafiek-, vochtigheid-, mist-, waarschuwing-, pijl- en weerberichticonen: Copyright Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
 \nTemperatuur en zonsopgang iconen: Gemaakt door Hirschwolf en Freepik van www.flaticon.com</string>
     <string name="about_text_header_5">NLWeer versie-informatie</string>
+
+    <string name="colour_black">Zwart</string>
+    <string name="colour_white">Wit</string>
 
 </resources>

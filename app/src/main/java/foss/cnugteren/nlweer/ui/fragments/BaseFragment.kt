@@ -89,6 +89,9 @@ abstract class BaseFragment : Fragment() {
     }
 
     open fun loadPage() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val backgroundColour = " " + sharedPreferences.getString("background_colour", "black") + " "
+
         // Centers the image both horizontally and vertically using CSS
         gifView.loadDataWithBaseURL(null,"""
             <html>
@@ -97,7 +100,7 @@ abstract class BaseFragment : Fragment() {
                         html {
                            width: 100%;
                            height: 100%;
-                           background: black url(""".trimIndent() + getURL() + """) center center no-repeat;
+                           background:""".trimIndent() + backgroundColour + """url(""".trimIndent() + getURL() + """) center center no-repeat;
                         }
                     </style>
                 </head>
