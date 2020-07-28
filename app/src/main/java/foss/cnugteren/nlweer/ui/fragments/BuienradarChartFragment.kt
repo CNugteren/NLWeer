@@ -111,8 +111,8 @@ class BuienradarChartFragment : Fragment() {
             latitude!!.toFloat() < 49.5f ||
             longitude!!.toFloat() > 8.0f ||
             longitude!!.toFloat() < 1.0f) {
-            chart.setNoDataText(getString(R.string.menu_buienradar_chart_outside_of_range) + " :" +
-                    "lat=" + latitude.toString() + ", lon=" + longitude.toString())
+            chart.setNoDataText(getString(R.string.menu_buienradar_chart_outside_of_range) + ": " +
+                    "lat=%.2f, lon=%.2f".format(latitude, longitude))
             chart.invalidate()
         }
         else {
@@ -134,8 +134,8 @@ class BuienradarChartFragment : Fragment() {
         // When complete: parses the result
         override fun onPostExecute(htmlDocument: Document?) {
             if (htmlDocument == null || htmlDocument.text() == "") {
-                chart.setNoDataText(getString(R.string.menu_buienradar_chart_error) + " :" +
-                        "lat=" + latitude.toString() + ", lon=" + longitude.toString())
+                chart.setNoDataText(getString(R.string.menu_buienradar_chart_error) + ": " +
+                        "lat=%.2f, lon=%.2f".format(latitude, longitude))
                 chart.invalidate()
                 return
             }
@@ -168,7 +168,8 @@ class BuienradarChartFragment : Fragment() {
                 dataSet.setColors(colors, context)
                 chart.data = BarData(dataSet)
             }
-            chart.setNoDataText(getString(R.string.menu_buienradar_chart_empty))
+            chart.setNoDataText(getString(R.string.menu_buienradar_chart_empty) + ": " +
+                    "lat=%.2f, lon=%.2f".format(latitude, longitude))
 
             // The labels on the x-axis
             val formatter: ValueFormatter =
