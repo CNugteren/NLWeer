@@ -62,7 +62,6 @@ class BuienradarChartFragment : Fragment() {
                 setLocation(lat, lon)
             }
             else { // Sets from the latest known values from the main activity
-                val activity = this.activity as MainActivity
                 setLocation(activity.gpsLat, activity.gpsLon)
             }
         }
@@ -104,7 +103,21 @@ class BuienradarChartFragment : Fragment() {
         chart.setBackgroundColor(Color.WHITE)
         chart.invalidate()
 
-        RetrieveWebPage().execute(getURL())
+        if (latitude == null || longitude == null) {
+            chart.setNoDataText(getString(R.string.menu_buienradar_chart_no_location))
+            chart.invalidate()
+        }
+        else if (latitude!!.toFloat() > 54.8f ||
+            latitude!!.toFloat() < 49.5f ||
+            longitude!!.toFloat() > 8.0f ||
+            longitude!!.toFloat() < 1.0f) {
+            chart.setNoDataText(getString(R.string.menu_buienradar_chart_outside_of_range) + " :" +
+                    "lat=" + latitude.toString() + ", lon=" + longitude.toString())
+            chart.invalidate()
+        }
+        else {
+            RetrieveWebPage().execute(getURL())
+        }
     }
 
     internal inner class RetrieveWebPage : AsyncTask<String, Void, Document>() {
@@ -120,14 +133,9 @@ class BuienradarChartFragment : Fragment() {
 
         // When complete: parses the result
         override fun onPostExecute(htmlDocument: Document?) {
-            if (htmlDocument == null) {
-                chart.setNoDataText(getString(R.string.menu_buienradar_chart_error))
-                chart.invalidate()
-                return
-            }
-
-            if (htmlDocument.text() == "") {
-                chart.setNoDataText(getString(R.string.menu_buienradar_chart_error))
+            if (htmlDocument == null || htmlDocument.text() == "") {
+                chart.setNoDataText(getString(R.string.menu_buienradar_chart_error) + " :" +
+                        "lat=" + latitude.toString() + ", lon=" + longitude.toString())
                 chart.invalidate()
                 return
             }
