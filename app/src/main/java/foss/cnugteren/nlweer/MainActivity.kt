@@ -307,9 +307,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun toggleNavigationButtons(enable: Boolean) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val enableButtons = sharedPreferences.getBoolean("floating_navigation_enable", false)
+
         val fabPrevious = findViewById<View>(R.id.fab_previous)
-        fabPrevious.isVisible = enable
+        fabPrevious.isVisible = enable && enableButtons
         val fabNext = findViewById<View>(R.id.fab_next)
-        fabNext.isVisible = enable
+        fabNext.isVisible = enable && enableButtons
     }
 }

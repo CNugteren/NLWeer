@@ -71,6 +71,10 @@
     <string-array name="location_provider_items"><item>Netwerk</item><item>GPS</item></string-array>
     <string-array name="location_provider_values"><item>Network</item><item>GPS</item></string-array>
 
+    <string name="settings_category_appearance">Weergave instellingen</string>
+    <string name="settings_floating_navigation_enable">Toon zwevende navigatie knoppen</string>
+    <string name="settings_floating_navigation_sub">Maakt één-knops vorige/volgende navigatie mogelijk</string>
+
     <string name="share_subject">NLWeer kaart</string>
     <string name="share_choose">Deel deze kaart via</string>
     <string name="share_disabled_alert_title">Niet geimplementeerd</string>

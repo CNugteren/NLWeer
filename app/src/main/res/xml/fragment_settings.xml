@@ -89,4 +89,16 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:key="settings_category_appearance"
+        app:title="@string/settings_category_appearance">
+
+    <SwitchPreferenceCompat
+        android:key="floating_navigation_enable"
+        android:title="@string/settings_floating_navigation_enable"
+        android:summary="@string/settings_floating_navigation_sub"
+        android:defaultValue="false"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

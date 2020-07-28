@@ -70,6 +70,10 @@
     <string-array name="location_provider_items"><item>Network</item><item>GPS</item></string-array>
     <string-array name="location_provider_values"><item>Network</item><item>GPS</item></string-array>
 
+    <string name="settings_category_appearance">Appearance options</string>
+    <string name="settings_floating_navigation_enable">Show floating navigation buttons</string>
+    <string name="settings_floating_navigation_sub">Enables one-tap next/previous navigation</string>
+
     <string name="share_subject">NLWeer weather map</string>
     <string name="share_choose">Share this map through</string>
     <string name="share_disabled_alert_title">Unsupported</string>
