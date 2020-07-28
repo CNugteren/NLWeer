@@ -11,8 +11,10 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -49,6 +51,7 @@ val BUIENRADAR_ITEMS = arrayOf(
     arrayOf(R.string.menu_buienradar_hail, R.id.nav_buienradar_hail, 0),
     arrayOf(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart, 1)
 )
+val ALL_ITEMS = KNMI_ITEMS + BUIENRADAR_ITEMS
 
 class MainActivity : AppCompatActivity() {
 
@@ -81,6 +84,35 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) { // Only when the app starts for the first time
             setStartFragment()
         }
+
+        // The floating buttons (FAB) to go to the previous/next view
+        val fabPrevious: View = findViewById(R.id.fab_previous)
+        fabPrevious.setOnClickListener {
+            val currentNavId = navController.currentDestination?.id
+            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item[1] == currentNavId }
+            for (prevIndex in currentIndex - 1 + ALL_ITEMS.size downTo 0) { // double array instead of modulo
+                val item = (ALL_ITEMS + ALL_ITEMS)[prevIndex]
+                val menuItem = navView.menu.findItem(item[1])
+                if (menuItem.isVisible) {
+                    navController.navigate(item[1])
+                    break
+                }
+            }
+        }
+        val fabNext: View = findViewById(R.id.fab_next)
+        fabNext.setOnClickListener {
+            val currentNavId = navController.currentDestination?.id
+            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item[1] == currentNavId }
+            for (nextIndex in currentIndex + 1 until ALL_ITEMS.size * 2) { // double array instead of modulo
+                val item = (ALL_ITEMS + ALL_ITEMS)[nextIndex]
+                val menuItem = navView.menu.findItem(item[1])
+                if (menuItem.isVisible) {
+                    navController.navigate(item[1])
+                    break
+                }
+            }
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -272,5 +304,12 @@ class MainActivity : AppCompatActivity() {
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
         override fun onProviderEnabled(provider: String) {}
         override fun onProviderDisabled(provider: String) {}
+    }
+
+    fun toggleNavigationButtons(enable: Boolean) {
+        val fabPrevious = findViewById<View>(R.id.fab_previous)
+        fabPrevious.isVisible = enable
+        val fabNext = findViewById<View>(R.id.fab_next)
+        fabNext.isVisible = enable
     }
 }

@@ -22,6 +22,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         enableDisableLocationProviderButton()
 
+        // Don't display floating navigation buttons
+        val activity = this.activity as MainActivity
+        activity.toggleNavigationButtons(false)
+
         // Sets the initial values as summaries
         val latString = sharedPreferences.getString("location_latitude", null)
         val lonString = sharedPreferences.getString("location_longitude", null)

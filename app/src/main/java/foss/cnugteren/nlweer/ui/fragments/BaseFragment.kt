@@ -30,6 +30,10 @@ abstract class BaseFragment : Fragment() {
             pullToRefresh.isRefreshing = false
         })
 
+        // Do display floating navigation buttons
+        val activity = this.activity as MainActivity
+        activity.toggleNavigationButtons(true)
+
         // The web-viewer for the content
         gifView = root.findViewById(R.id.gif_view) as DrawWebView
 

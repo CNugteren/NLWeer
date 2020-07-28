@@ -47,6 +47,10 @@ class BuienradarChartFragment : Fragment() {
             pullToRefresh.isRefreshing = false
         })
 
+        // Do display floating navigation buttons
+        val activity = this.activity as MainActivity
+        activity.toggleNavigationButtons(true)
+
         // Set the location (latitude and longitude)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val locationEnabled = sharedPreferences.getBoolean("location_enable", false)
