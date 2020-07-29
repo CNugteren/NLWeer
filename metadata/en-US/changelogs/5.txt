@@ -1,0 +1,6 @@
+- Added an option to customize which maps to show in the navigation menu
+- Added optional floating back/forward navigation buttons for quick navigation
+- Added new (optional) KNMI maps: sunstrenght, visibility, humidity, and warnings
+- Added a new button to share the URL of the current map being viewed
+- Various minor improvements
+

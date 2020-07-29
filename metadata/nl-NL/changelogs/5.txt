@@ -1,0 +1,6 @@
+- Nieuwe optie om te selecteren welke kaarten er weergegeven worden in het navigatie menu
+- Zwevende optionele navigatie knoppen toegevoegd om snel te kunnen navigeren
+- Nieuwe (optionele) KNMI kaarten toegevoegd: zonsterkte, zicht, vochtigheid en waarschuwing
+- Nieuwe knop toegevoegd om de URL van een kaart te delen
+- Enkele kleine verbeteringen
+
