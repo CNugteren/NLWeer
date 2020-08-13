@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             val currentIndex = ALL_ITEMS.indexOfFirst { item -> item[1] == currentNavId }
             for (prevIndex in currentIndex - 1 + ALL_ITEMS.size downTo 0) { // double array instead of modulo
                 val item = (ALL_ITEMS + ALL_ITEMS)[prevIndex]
-                if (navView.menu.findItem(item[1]).isVisible and navView.menu.findItem(item[3]).isVisible) {
+                if (navView.menu.findItem(item[1]).isVisible && navView.menu.findItem(item[3]).isVisible) {
                     navController.navigate(item[1])
                     break
                 }
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
             val currentIndex = ALL_ITEMS.indexOfFirst { item -> item[1] == currentNavId }
             for (nextIndex in currentIndex + 1 until ALL_ITEMS.size * 2) { // double array instead of modulo
                 val item = (ALL_ITEMS + ALL_ITEMS)[nextIndex]
-                if (navView.menu.findItem(item[1]).isVisible and navView.menu.findItem(item[3]).isVisible) {
+                if (navView.menu.findItem(item[1]).isVisible && navView.menu.findItem(item[3]).isVisible) {
                     navController.navigate(item[1])
                     break
                 }

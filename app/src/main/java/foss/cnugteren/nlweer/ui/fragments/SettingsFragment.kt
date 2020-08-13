@@ -3,15 +3,13 @@ package foss.cnugteren.nlweer.ui.fragments
 import android.Manifest
 import android.app.AlertDialog
 import android.content.DialogInterface
-import foss.cnugteren.nlweer.R
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.preference.*
 import com.google.android.material.navigation.NavigationView
-import foss.cnugteren.nlweer.BUIENRADAR_ITEMS
-import foss.cnugteren.nlweer.KNMI_ITEMS
-import foss.cnugteren.nlweer.MainActivity
+import foss.cnugteren.nlweer.*
+import foss.cnugteren.nlweer.R
 
 
 class SettingsFragment : PreferenceFragmentCompat(),
@@ -145,12 +143,14 @@ class SettingsFragment : PreferenceFragmentCompat(),
         if (pref is SwitchPreferenceCompat && (key == "buienradar_enable" || key == "knmi_enable")) {
             val activity = this.activity as MainActivity
             activity.setMenuItemsVisibility()
+            changeDefaultViewIfDisabled(sharedPreferences)
         }
 
-        // Change data sources for display in the menu
+        // Change individual maps for display in the menu
         if (pref is MultiSelectListPreference && (key == "settings_nav_view_knmi" || key == "settings_nav_view_buienradar")) {
             val activity = this.activity as MainActivity
             activity.setMenuItemsVisibility()
+            changeDefaultViewIfDisabled(sharedPreferences)
         }
 
         // Displays Buienradar permission confirmation dialog
@@ -203,5 +203,19 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
         // Toggle the location provider button
         enableDisableLocationProviderButton()
+    }
+
+    fun changeDefaultViewIfDisabled(sharedPreferences: SharedPreferences) {
+        val defaultViewId = sharedPreferences.getString("settings_default_view_listpreference", (R.id.nav_knmi_rain_m1).toString())?.toInt()
+        if (defaultViewId != null && defaultViewId != R.id.nav_empty) {
+            val activity = this.activity as MainActivity
+            val navView: NavigationView = activity.findViewById(R.id.nav_view)
+            val menu = navView.menu
+            val parentMenuId = ALL_ITEMS[ALL_ITEMS.indexOfFirst { item -> item[1] == defaultViewId }][3]
+            if (!menu.findItem(defaultViewId).isVisible || !menu.findItem(parentMenuId).isVisible) {
+                val pref = findPreference("settings_default_view_listpreference") as ListPreference
+                pref.value = R.id.nav_empty.toString()
+            }
+        }
     }
 }
