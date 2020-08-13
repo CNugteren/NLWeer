@@ -28,28 +28,32 @@ import foss.cnugteren.nlweer.ui.fragments.BaseFragment
 import foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment
 import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
 
-// Each item consists of: string name, nav ID, default shown (1) or not (0)
+// Each item consists of:
+// - string name
+// - nav ID
+// - default shown (1) or not (0)
+// - parent menu ID
 val KNMI_ITEMS = arrayOf(
-    arrayOf(R.string.menu_knmi_rain_m1, R.id.nav_knmi_rain_m1, 1),
-    arrayOf(R.string.menu_knmi_today, R.id.nav_knmi_today, 1),
-    arrayOf(R.string.menu_knmi_tonight, R.id.nav_knmi_tonight, 1),
-    arrayOf(R.string.menu_knmi_tomorrow, R.id.nav_knmi_tomorrow, 1),
-    arrayOf(R.string.menu_knmi_temperature, R.id.nav_knmi_temperature, 1),
-    arrayOf(R.string.menu_knmi_wind, R.id.nav_knmi_wind, 1),
-    arrayOf(R.string.menu_knmi_visibility, R.id.nav_knmi_visibility, 0),
-    arrayOf(R.string.menu_knmi_humidity, R.id.nav_knmi_humidity, 0),
-    arrayOf(R.string.menu_knmi_warnings, R.id.nav_knmi_warnings, 0),
-    arrayOf(R.string.menu_knmi_sun_today, R.id.nav_knmi_sun_tod, 0),
-    arrayOf(R.string.menu_knmi_sun_tomorrow, R.id.nav_knmi_sun_tom, 0),
-    arrayOf(R.string.menu_knmi_text, R.id.nav_knmi_text, 1)
+    arrayOf(R.string.menu_knmi_rain_m1, R.id.nav_knmi_rain_m1, 1, R.id.knmi_menu),
+    arrayOf(R.string.menu_knmi_today, R.id.nav_knmi_today, 1, R.id.knmi_menu),
+    arrayOf(R.string.menu_knmi_tonight, R.id.nav_knmi_tonight, 1, R.id.knmi_menu),
+    arrayOf(R.string.menu_knmi_tomorrow, R.id.nav_knmi_tomorrow, 1, R.id.knmi_menu),
+    arrayOf(R.string.menu_knmi_temperature, R.id.nav_knmi_temperature, 1, R.id.knmi_menu),
+    arrayOf(R.string.menu_knmi_wind, R.id.nav_knmi_wind, 1, R.id.knmi_menu),
+    arrayOf(R.string.menu_knmi_visibility, R.id.nav_knmi_visibility, 0, R.id.knmi_menu),
+    arrayOf(R.string.menu_knmi_humidity, R.id.nav_knmi_humidity, 0, R.id.knmi_menu),
+    arrayOf(R.string.menu_knmi_warnings, R.id.nav_knmi_warnings, 0, R.id.knmi_menu),
+    arrayOf(R.string.menu_knmi_sun_today, R.id.nav_knmi_sun_tod, 0, R.id.knmi_menu),
+    arrayOf(R.string.menu_knmi_sun_tomorrow, R.id.nav_knmi_sun_tom, 0, R.id.knmi_menu),
+    arrayOf(R.string.menu_knmi_text, R.id.nav_knmi_text, 1, R.id.knmi_menu)
 )
 val BUIENRADAR_ITEMS = arrayOf(
-    arrayOf(R.string.menu_buienradar_rain_m1, R.id.nav_buienradar_rain_m1, 1),
-    arrayOf(R.string.menu_buienradar_sun, R.id.nav_buienradar_sun, 1),
-    arrayOf(R.string.menu_buienradar_cloud, R.id.nav_buienradar_cloud, 1),
-    arrayOf(R.string.menu_buienradar_drizzle, R.id.nav_buienradar_drizzle, 0),
-    arrayOf(R.string.menu_buienradar_hail, R.id.nav_buienradar_hail, 0),
-    arrayOf(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart, 1)
+    arrayOf(R.string.menu_buienradar_rain_m1, R.id.nav_buienradar_rain_m1, 1, R.id.buienradar_menu),
+    arrayOf(R.string.menu_buienradar_sun, R.id.nav_buienradar_sun, 1, R.id.buienradar_menu),
+    arrayOf(R.string.menu_buienradar_cloud, R.id.nav_buienradar_cloud, 1, R.id.buienradar_menu),
+    arrayOf(R.string.menu_buienradar_drizzle, R.id.nav_buienradar_drizzle, 0, R.id.buienradar_menu),
+    arrayOf(R.string.menu_buienradar_hail, R.id.nav_buienradar_hail, 0, R.id.buienradar_menu),
+    arrayOf(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart, 1, R.id.buienradar_menu)
 )
 val ALL_ITEMS = KNMI_ITEMS + BUIENRADAR_ITEMS
 
@@ -92,8 +96,7 @@ class MainActivity : AppCompatActivity() {
             val currentIndex = ALL_ITEMS.indexOfFirst { item -> item[1] == currentNavId }
             for (prevIndex in currentIndex - 1 + ALL_ITEMS.size downTo 0) { // double array instead of modulo
                 val item = (ALL_ITEMS + ALL_ITEMS)[prevIndex]
-                val menuItem = navView.menu.findItem(item[1])
-                if (menuItem.isVisible) {
+                if (navView.menu.findItem(item[1]).isVisible and navView.menu.findItem(item[3]).isVisible) {
                     navController.navigate(item[1])
                     break
                 }
@@ -105,8 +108,7 @@ class MainActivity : AppCompatActivity() {
             val currentIndex = ALL_ITEMS.indexOfFirst { item -> item[1] == currentNavId }
             for (nextIndex in currentIndex + 1 until ALL_ITEMS.size * 2) { // double array instead of modulo
                 val item = (ALL_ITEMS + ALL_ITEMS)[nextIndex]
-                val menuItem = navView.menu.findItem(item[1])
-                if (menuItem.isVisible) {
+                if (navView.menu.findItem(item[1]).isVisible and navView.menu.findItem(item[3]).isVisible) {
                     navController.navigate(item[1])
                     break
                 }
