@@ -1,0 +1,3 @@
+- Bug opgelost dat de nieuwe optionele navigatie knoppen uitgezette data bronnen lieten zien
+- De eerste pagina wordt nu gerest naar een lege pagina als de gekozen pagina uitgezet is
+

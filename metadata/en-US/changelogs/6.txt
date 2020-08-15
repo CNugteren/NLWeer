@@ -1,0 +1,3 @@
+- Fixed that the new optional navigation buttons showed disabled data sources
+- First view is now reset to an empty view if the chosen view was disabled
+
