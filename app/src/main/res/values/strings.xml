@@ -63,7 +63,7 @@
 
     <string name="settings_category_location">Location settings</string>
     <string name="settings_location_enable">Show my location</string>
-    <string name="settings_location_enable_sub">Shows a circle at my location</string>
+    <string name="settings_location_enable_sub">Shows a marker at my location</string>
     <string name="settings_location_auto_enable">Use GPS/network location</string>
     <string name="settings_location_auto_enable_sub">Automatically determine location</string>
     <string name="settings_location_provider">Choose location provider</string>
@@ -76,6 +76,11 @@
     <string name="settings_floating_navigation_enable">Show floating navigation buttons</string>
     <string name="settings_floating_navigation_sub">Enables one-tap next/previous navigation</string>
     <string name="settings_background_colour">Background colour</string>
+    <string name="settings_location_shape">Location marker shape</string>
+    <string name="settings_location_colour">Location marker colour</string>
+
+    <string name="option_two_circles">Large and small circle</string>
+    <string name="option_one_circle">Single large circle</string>
 
     <string name="share_subject">NLWeer weather map</string>
     <string name="share_choose">Share this map through</string>
@@ -97,4 +102,9 @@
 
     <string name="colour_black">Black</string>
     <string name="colour_white">White</string>
+    <string name="colour_red">Red</string>
+    <string name="colour_orange">Orange</string>
+    <string name="colour_yellow">Yellow</string>
+    <string name="colour_purple">Purple</string>
+    <string name="colour_green">Green</string>
 </resources>

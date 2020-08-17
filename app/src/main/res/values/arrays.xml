@@ -17,4 +17,30 @@
         <item>black</item>
         <item>white</item>
     </string-array>
+
+    <string-array name="location_shape_items">
+        <item>@string/option_two_circles</item>
+        <item>@string/option_one_circle</item>
+    </string-array>
+
+    <string-array name="location_shape_values">
+        <item>two_circles</item>
+        <item>one_circle</item>
+    </string-array>
+
+    <string-array name="location_colour_items">
+        <item>@string/colour_red</item>
+        <item>@string/colour_orange</item>
+        <item>@string/colour_yellow</item>
+        <item>@string/colour_purple</item>
+        <item>@string/colour_green</item>
+    </string-array>
+
+    <string-array name="location_colour_values">
+        <item>#FF3311</item>
+        <item>#FF9800</item>
+        <item>#FFEB3B</item>
+        <item>#9C27B0</item>
+        <item>#4CAF50</item>
+    </string-array>
 </resources>

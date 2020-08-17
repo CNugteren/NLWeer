@@ -64,7 +64,7 @@
 
     <string name="settings_category_location">Locatie instellingen</string>
     <string name="settings_location_enable">Toon mijn locatie</string>
-    <string name="settings_location_enable_sub">Toon een cirkel op mijn locatie</string>
+    <string name="settings_location_enable_sub">Toon een marker op mijn locatie</string>
     <string name="settings_location_auto_enable">Gebruik GPS/netwerk-locatie</string>
     <string name="settings_location_auto_enable_sub">Bepaal locatie automatisch</string>
     <string name="settings_location_provider">Kies locatie provider</string>
@@ -77,6 +77,11 @@
     <string name="settings_floating_navigation_enable">Toon zwevende navigatie knoppen</string>
     <string name="settings_floating_navigation_sub">Maakt één-knops vorige/volgende navigatie mogelijk</string>
     <string name="settings_background_colour">Achtergrond kleur</string>
+    <string name="settings_location_shape">Vorm van de locatiemarker</string>
+    <string name="settings_location_colour">Kleur van de locatiemarker</string>
+
+    <string name="option_two_circles">Grote en kleine cirkel</string>
+    <string name="option_one_circle">Enkele grote cirkel</string>
 
     <string name="share_subject">NLWeer kaart</string>
     <string name="share_choose">Deel deze kaart via</string>
@@ -98,5 +103,9 @@
 
     <string name="colour_black">Zwart</string>
     <string name="colour_white">Wit</string>
-
+    <string name="colour_red">Rood</string>
+    <string name="colour_orange">Oranje</string>
+    <string name="colour_yellow">Geel</string>
+    <string name="colour_purple">Paars</string>
+    <string name="colour_green">Groen</string>
 </resources>

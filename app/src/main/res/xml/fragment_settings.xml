@@ -106,6 +106,20 @@
             android:key="background_colour"
             android:title="@string/settings_background_colour"/>
 
+        <ListPreference
+            android:defaultValue="two_circles"
+            android:entries="@array/location_shape_items"
+            android:entryValues="@array/location_shape_values"
+            android:key="location_shape"
+            android:title="@string/settings_location_shape"/>
+
+        <ListPreference
+            android:defaultValue="#FF3311"
+            android:entries="@array/location_colour_items"
+            android:entryValues="@array/location_colour_values"
+            android:key="location_colour"
+            android:title="@string/settings_location_colour"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

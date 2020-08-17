@@ -29,10 +29,14 @@ class SettingsFragment : PreferenceFragmentCompat(),
         val lonString = sharedPreferences.getString("location_longitude", null)
         val locationProvider = sharedPreferences.getString("location_provider", null)
         val backgroundColour = (findPreference("background_colour") as ListPreference).entry
+        val locationShape = (findPreference("location_shape") as ListPreference).entry
+        val locationColour = (findPreference("location_colour") as ListPreference).entry
         findPreference("location_latitude")?.summary = latString
         findPreference("location_longitude")?.summary = lonString
         findPreference("location_provider")?.summary = locationProvider
         findPreference("background_colour")?.summary = backgroundColour
+        findPreference("location_shape")?.summary = locationShape
+        findPreference("location_colour")?.summary = locationColour
 
         // Sets the views listed in the navigation menu
         val navViewsVisibleKNMI = findPreference("settings_nav_view_knmi") as MultiSelectListPreference
@@ -135,8 +139,9 @@ class SettingsFragment : PreferenceFragmentCompat(),
         if (pref is EditTextPreference) {
             pref.summary = sharedPreferences.getString(key, "")
         }
-        if (pref is ListPreference && key == "background_colour") {
-            pref.summary = (findPreference("background_colour") as ListPreference).entry
+        if (pref is ListPreference &&
+            (key == "background_colour" || key == "location_shape" || key == "location_colour")) {
+            pref.summary = (findPreference(key) as ListPreference).entry
         }
 
         // Change data sources for display in the menu

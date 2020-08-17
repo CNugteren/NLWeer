@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.webkit.WebView
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import kotlin.math.ceil
 import kotlin.math.min
 
@@ -33,12 +34,6 @@ class DrawWebView : WebView {
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(context, attrs, defStyle) { init() }
 
     private fun init() {
-        painter.color = Color.parseColor("#"+Integer.toHexString(ContextCompat.getColor(context, R.color.colorHighlight)))
-        painter.strokeWidth = 3f
-        painter.style = Paint.Style.STROKE
-        painter.isAntiAlias = true
-        painter.isDither = true
-        painter.textSize = 40f
     }
 
     fun setWidthFittingScale() {
@@ -69,6 +64,17 @@ class DrawWebView : WebView {
     private fun drawCircle(canvas: Canvas, lat: Float, lon: Float) {
         if (imageCoordinates.size < 6) { return } // invalid data provided
 
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val locationShape = sharedPreferences.getString("location_shape", "two_circles")
+        val locationColour = sharedPreferences.getString("location_colour", "#FF3311")
+        painter.color = Color.parseColor(locationColour)
+        painter.strokeWidth = 3f
+        painter.style = Paint.Style.STROKE
+        painter.isAntiAlias = true
+        painter.isDither = true
+        painter.textSize = 40f
+
+
         val minLat = imageCoordinates[0]; val minLon = imageCoordinates[1]
         val maxLat = imageCoordinates[2]; val maxLon = imageCoordinates[3]
 
@@ -86,8 +92,13 @@ class DrawWebView : WebView {
         val yPos = imageHeight * minScale * (1f - percentHeight)
         val offsetWidth = (fullWidth - imageWidth * minScale) / 2f
         val offsetHeight = (fullHeight - imageHeight * minScale) / 2f
-        canvas.drawCircle(xPos + offsetWidth, yPos + offsetHeight,25f, painter)
-        canvas.drawCircle(xPos + offsetWidth, yPos + offsetHeight,3f, painter)
+        if (locationShape == "two_circles") {
+            canvas.drawCircle(xPos + offsetWidth, yPos + offsetHeight, 25f, painter)
+            canvas.drawCircle(xPos + offsetWidth, yPos + offsetHeight, 3f, painter)
+        }
+        else { // (locationShape == "one_circle")
+            canvas.drawCircle(xPos + offsetWidth, yPos + offsetHeight, 25f, painter)
+        }
     }
 
 }
