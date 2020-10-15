@@ -28,33 +28,39 @@ class SettingsFragment : PreferenceFragmentCompat(),
         val latString = sharedPreferences.getString("location_latitude", null)
         val lonString = sharedPreferences.getString("location_longitude", null)
         val locationProvider = sharedPreferences.getString("location_provider", null)
-        val backgroundColour = (findPreference("background_colour") as ListPreference).entry
-        val locationShape = (findPreference("location_shape") as ListPreference).entry
-        val locationColour = (findPreference("location_colour") as ListPreference).entry
-        findPreference("location_latitude")?.summary = latString
-        findPreference("location_longitude")?.summary = lonString
-        findPreference("location_provider")?.summary = locationProvider
-        findPreference("background_colour")?.summary = backgroundColour
-        findPreference("location_shape")?.summary = locationShape
-        findPreference("location_colour")?.summary = locationColour
+        val backgroundColour = findPreference<ListPreference>("background_colour")?.entry
+        val locationShape = findPreference<ListPreference>("location_shape")?.entry
+        val locationColour = findPreference<ListPreference>("location_colour")?.entry
+        findPreference<EditTextPreference>("location_latitude")?.summary = latString
+        findPreference<EditTextPreference>("location_longitude")?.summary = lonString
+        findPreference<ListPreference>("location_provider")?.summary = locationProvider
+        findPreference<ListPreference>("background_colour")?.summary = backgroundColour
+        findPreference<ListPreference>("location_shape")?.summary = locationShape
+        findPreference<ListPreference>("location_colour")?.summary = locationColour
 
         // Sets the views listed in the navigation menu
-        val navViewsVisibleKNMI = findPreference("settings_nav_view_knmi") as MultiSelectListPreference
-        val navItemsKNMI = sharedPreferences.getStringSet("settings_nav_view_knmi", setOf("not_yet_set"))
-        setNavViews(navViewsVisibleKNMI, KNMI_ITEMS, navItemsKNMI == setOf("not_yet_set"))
-        val navViewsVisibleBuienradar = findPreference("settings_nav_view_buienradar") as MultiSelectListPreference
-        val navItemsBuienradar = sharedPreferences.getStringSet("settings_nav_view_buienradar", setOf("not_yet_set"))
-        setNavViews(navViewsVisibleBuienradar, BUIENRADAR_ITEMS, navItemsBuienradar == setOf("not_yet_set"))
+        val navViewsVisibleKNMI = findPreference<MultiSelectListPreference>("settings_nav_view_knmi")
+        if (navViewsVisibleKNMI != null) {
+            val navItemsKNMI = sharedPreferences.getStringSet("settings_nav_view_knmi", setOf("not_yet_set"))
+            setNavViews(navViewsVisibleKNMI, KNMI_ITEMS, navItemsKNMI == setOf("not_yet_set"))
+        }
+        val navViewsVisibleBuienradar = findPreference<MultiSelectListPreference>("settings_nav_view_buienradar")
+        if (navViewsVisibleBuienradar != null) {
+            val navItemsBuienradar = sharedPreferences.getStringSet("settings_nav_view_buienradar", setOf("not_yet_set"))
+            setNavViews(navViewsVisibleBuienradar, BUIENRADAR_ITEMS, navItemsBuienradar == setOf("not_yet_set"))
+        }
 
         // Sets the default view list options
-        val defaultViewSelection = findPreference("settings_default_view_listpreference") as ListPreference
-        setListPreferenceData(defaultViewSelection)
-        defaultViewSelection.onPreferenceClickListener = (object : Preference.OnPreferenceClickListener {
-            override fun onPreferenceClick(preference: Preference?): Boolean {
-                setListPreferenceData(defaultViewSelection)
-                return false
-            }
-        })
+        val defaultViewSelection = findPreference<ListPreference>("settings_default_view_listpreference")
+        if (defaultViewSelection != null) {
+            setListPreferenceData(defaultViewSelection)
+            defaultViewSelection.onPreferenceClickListener = (object : Preference.OnPreferenceClickListener {
+                override fun onPreferenceClick(preference: Preference?): Boolean {
+                    setListPreferenceData(defaultViewSelection)
+                    return false
+                }
+            })
+        }
     }
 
     override fun onResume() {
@@ -71,10 +77,12 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     private fun enableDisableLocationProviderButton() {
         // The 'choose location provider' button needs to be disabled/enabled appropriately
-        val locationProviderSetting = findPreference("location_provider") as ListPreference
-        val showMyLocation = findPreference("location_enable") as SwitchPreferenceCompat
-        val useAutoLocation = findPreference("gps_enable") as SwitchPreferenceCompat
-        locationProviderSetting.isEnabled = (showMyLocation.isChecked && useAutoLocation.isChecked)
+        val locationProviderSetting = findPreference<ListPreference>("location_provider")
+        val showMyLocation = findPreference<SwitchPreferenceCompat>("location_enable")
+        val useAutoLocation = findPreference<SwitchPreferenceCompat>("gps_enable")
+        if (locationProviderSetting != null && showMyLocation != null && useAutoLocation != null) {
+            locationProviderSetting.isEnabled = (showMyLocation.isChecked && useAutoLocation.isChecked)
+        }
     }
 
     private fun setNavViews(multiSelect: MultiSelectListPreference,
@@ -133,7 +141,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        val pref = findPreference(key)
+        val pref = findPreference<Preference>(key)
 
         // If the value of the settings change, sets the new values as summaries
         if (pref is EditTextPreference) {
@@ -141,7 +149,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         }
         if (pref is ListPreference &&
             (key == "background_colour" || key == "location_shape" || key == "location_colour")) {
-            pref.summary = (findPreference(key) as ListPreference).entry
+            pref.summary = findPreference<ListPreference>(key)?.entry
         }
 
         // Change data sources for display in the menu
@@ -218,8 +226,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
             val menu = navView.menu
             val parentMenuId = ALL_ITEMS[ALL_ITEMS.indexOfFirst { item -> item[1] == defaultViewId }][3]
             if (!menu.findItem(defaultViewId).isVisible || !menu.findItem(parentMenuId).isVisible) {
-                val pref = findPreference("settings_default_view_listpreference") as ListPreference
-                pref.value = R.id.nav_empty.toString()
+                val pref = findPreference<ListPreference>("settings_default_view_listpreference")
+                if (pref != null) {
+                    pref.value = R.id.nav_empty.toString()
+                }
             }
         }
     }

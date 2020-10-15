@@ -81,7 +81,7 @@ class KnmiTextFragment : Fragment() {
             }
             var contents = arrayOf("", "", "", "")
 
-            htmlDocument?.run {
+            htmlDocument.run {
                 select("div.columns.filled-main-content").forEachIndexed { index, group ->
 
                     // The main weather report

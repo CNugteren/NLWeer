@@ -62,8 +62,8 @@ abstract class BaseFragment : Fragment() {
                 setLocation(lat, lon)
             }
             else { // Sets from the latest known values from the main activity
-                val activity = this.activity as MainActivity
-                setLocation(activity.gpsLat, activity.gpsLon)
+                val thisActivity = this.activity as MainActivity
+                setLocation(thisActivity.gpsLat, thisActivity.gpsLon)
             }
         }
 
