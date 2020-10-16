@@ -27,6 +27,7 @@ import com.google.android.material.navigation.NavigationView
 import foss.cnugteren.nlweer.ui.fragments.BaseFragment
 import foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment
 import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
+import java.util.*
 
 // Each item consists of:
 // - string name
@@ -115,6 +116,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(newBase)
+        val systemLanguage = Locale.getDefault().toString()
+        var language = sharedPreferences.getString("language", systemLanguage)
+        if (language != null && language == "system") { language = systemLanguage }
+        super.attachBaseContext(ApplicationLanguageHelper.wrap(newBase!!, language!!))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -8,6 +8,18 @@
         <item>0</item>
     </string-array>
 
+    <string-array name="languages_items">
+        <item>@string/language_system</item>
+        <item>Nederlands</item>
+        <item>English</item>
+    </string-array>
+
+    <string-array name="languages_values">
+        <item>system</item>
+        <item>nl</item>
+        <item>en</item>
+    </string-array>
+
     <string-array name="background_colour_items">
         <item>@string/colour_black</item>
         <item>@string/colour_white</item>
