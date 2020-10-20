@@ -3,6 +3,7 @@ package foss.cnugteren.nlweer.ui.fragments
 import android.Manifest
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent.getIntent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
@@ -28,11 +29,13 @@ class SettingsFragment : PreferenceFragmentCompat(),
         val latString = sharedPreferences.getString("location_latitude", null)
         val lonString = sharedPreferences.getString("location_longitude", null)
         val locationProvider = sharedPreferences.getString("location_provider", null)
+        val language = findPreference<ListPreference>("language")?.entry
         val backgroundColour = findPreference<ListPreference>("background_colour")?.entry
         val locationShape = findPreference<ListPreference>("location_shape")?.entry
         val locationColour = findPreference<ListPreference>("location_colour")?.entry
         findPreference<EditTextPreference>("location_latitude")?.summary = latString
         findPreference<EditTextPreference>("location_longitude")?.summary = lonString
+        findPreference<ListPreference>("language")?.summary = language
         findPreference<ListPreference>("location_provider")?.summary = locationProvider
         findPreference<ListPreference>("background_colour")?.summary = backgroundColour
         findPreference<ListPreference>("location_shape")?.summary = locationShape
@@ -148,8 +151,17 @@ class SettingsFragment : PreferenceFragmentCompat(),
             pref.summary = sharedPreferences.getString(key, "")
         }
         if (pref is ListPreference &&
-            (key == "background_colour" || key == "location_shape" || key == "location_colour")) {
+            (key == "language" || key == "background_colour" || key == "location_shape" || key == "location_colour")) {
             pref.summary = findPreference<ListPreference>(key)?.entry
+        }
+
+        // Select the language
+        if (pref is ListPreference && key == "language") {
+            val activity = this.activity as MainActivity
+            // Now restart the activity (old style, new style with activity.recreate() doesn't work)
+            val intent = activity.intent
+            activity.finish()
+            startActivity(intent)
         }
 
         // Change data sources for display in the menu

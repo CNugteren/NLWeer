@@ -80,6 +80,9 @@
     <string name="settings_location_shape">Vorm van de locatiemarker</string>
     <string name="settings_location_colour">Kleur van de locatiemarker</string>
 
+    <string name="settings_languages">Weergavetaal</string>
+    <string name="language_system">Systeemstandaard</string>
+
     <string name="option_two_circles">Grote en kleine cirkel</string>
     <string name="option_one_circle">Enkele grote cirkel</string>
 

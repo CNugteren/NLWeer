@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -13,6 +14,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.BaseContextWrappingDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
@@ -64,6 +67,7 @@ class MainActivity : AppCompatActivity() {
     private var locationManager : LocationManager? = null
     var gpsLat: Float? = null
     var gpsLon: Float? = null
+    private var baseContextWrappingDelegate: AppCompatDelegate? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,6 +119,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    // From https://stackoverflow.com/questions/55265834/change-locale-not-work-after-migrate-to-androidx
+    override fun getDelegate() = baseContextWrappingDelegate ?: BaseContextWrappingDelegate(super.getDelegate()).apply {
+        baseContextWrappingDelegate = this
+    }
+
+    override fun createConfigurationContext(overrideConfiguration: Configuration) : Context {
+        val context = super.createConfigurationContext(overrideConfiguration)
+        super.attachBaseContext(ApplicationLanguageHelper.wrap(context!!))
+        return context
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
