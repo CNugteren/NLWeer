@@ -13,24 +13,26 @@ class ApplicationLanguageHelper(base: Context) : ContextThemeWrapper(base, R.sty
     companion object {
 
         fun wrap(context: Context): ContextThemeWrapper {
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-            val systemLanguage = Locale.getDefault().toString().split('_')[0]
-            var language = sharedPreferences.getString("language", systemLanguage)
-            if (language != null && language == "system") { language = systemLanguage }
 
+            // Determine the language to set
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+            val language = sharedPreferences.getString("language", "")
+            var locale = Locale.getDefault()  // system default if nothing else found
+            if (language != null && language in arrayListOf("en", "nl")) {
+                locale = Locale(language)
+            }
+
+            // Sets the new language
             var newContext = context
             val config = newContext.resources.configuration
-            if (language != null && language != "") {
-                val locale = Locale(language)
-                Locale.setDefault(locale)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    setSystemLocale(config, locale)
-                } else {
-                    setSystemLocaleLegacy(config, locale)
-                }
-                config.setLayoutDirection(locale)
-                newContext = newContext.createConfigurationContext(config)
+            Locale.setDefault(locale)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                setSystemLocale(config, locale)
+            } else {
+                setSystemLocaleLegacy(config, locale)
             }
+            config.setLayoutDirection(locale)
+            newContext = newContext.createConfigurationContext(config)
             return ApplicationLanguageHelper(newContext)
         }
 
