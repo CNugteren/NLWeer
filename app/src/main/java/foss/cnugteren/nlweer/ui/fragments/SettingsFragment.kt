@@ -3,6 +3,7 @@ package foss.cnugteren.nlweer.ui.fragments
 import android.Manifest
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.Intent.getIntent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
@@ -157,7 +158,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
         // Select the language
         if (pref is ListPreference && key == "language") {
             val activity = this.activity as MainActivity
-            //activity.recreate()  // TODO: This crashes the app
+            // Now restart the activity (old style, new style with activity.recreate() doesn't work)
+            val intent = activity.intent
+            activity.finish()
+            startActivity(intent)
         }
 
         // Change data sources for display in the menu

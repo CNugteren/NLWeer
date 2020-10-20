@@ -79,8 +79,8 @@
     <string name="settings_location_shape">Location marker shape</string>
     <string name="settings_location_colour">Location marker colour</string>
 
-    <string name="settings_languages">App language</string>
-    <string name="language_system">System language</string>
+    <string name="settings_languages">Display language</string>
+    <string name="language_system">System default</string>
 
     <string name="option_two_circles">Large and small circle</string>
     <string name="option_one_circle">Single large circle</string>
