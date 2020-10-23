@@ -1,0 +1,113 @@
+<resources>
+    <string name="app_name">NLWeer</string>
+    <string name="nav_header_title">NLWeer</string>
+    <string name="nav_header_subtitle">Météo néerlandaise gratuite et open-source</string>
+    <string name="nav_header_desc">Icône de navigation</string>
+
+    <string name="action_refresh">Rafraîchir</string>
+    <string name="action_share">Partager la carte</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="action_about">Info</string>
+
+    <string name="menu_about">NLWeer</string>
+    <string name="menu_settings">Paramètres</string>
+    <string name="menu_empty">Écran vide</string>
+
+    <string name="menu_knmi_header">Données KNMI</string>
+    <string name="menu_knmi_rain_m1">Pluie la dernière heure</string>
+    <string name="menu_knmi_today">Prévisions aujourd\'hui</string>
+    <string name="menu_knmi_tonight">Prévisions ce soir</string>
+    <string name="menu_knmi_tomorrow">Prévisions demain</string>
+    <string name="menu_knmi_temperature">Température</string>
+    <string name="menu_knmi_wind">Vent</string>
+    <string name="menu_knmi_visibility">Visibilité</string>
+    <string name="menu_knmi_humidity">Humidité relative</string>
+    <string name="menu_knmi_warnings">Alertes météorologiques</string>
+    <string name="menu_knmi_sun_today">Force du soleil aujourd\'hui</string>
+    <string name="menu_knmi_sun_tomorrow">Force du soleil demain</string>
+    <string name="menu_knmi_text">Bulletin météo</string>
+    <string name="menu_knmi_text_source">Source:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
+    <string name="menu_knmi_text_loading">En cours de chargement...</string>
+    <string name="menu_knmi_text_failed">Les données n\'ont pas pu être chargées</string>
+
+    <string name="menu_buienradar_header">Données Buienradar</string>
+    <string name="menu_buienradar_rain_m1">Pluie la dernière heure</string>
+    <string name="menu_buienradar_sun">Ensoleillement</string>
+    <string name="menu_buienradar_cloud">Couverture nuageuse</string>
+    <string name="menu_buienradar_drizzle">Bruine la dernière heure</string>
+    <string name="menu_buienradar_hail">Grêle la dernière heure</string>
+    <string name="menu_buienradar_chart">Prévision de la pluie</string>
+    <string name="menu_buienradar_chart_unit">mm/h</string>
+    <string name="menu_buienradar_chart_description">Deux heures d\'avance à</string>
+    <string name="menu_buienradar_chart_loading">En cours de chargement...</string>
+    <string name="menu_buienradar_chart_empty">Aucune précipitation prévue à</string>
+    <string name="menu_buienradar_chart_no_location">Erreur: Localisation pas activé, vérifiez les paramètres</string>
+    <string name="menu_buienradar_chart_outside_of_range">Erreur: Localisation en dehors des Pays-Bas</string>
+    <string name="menu_buienradar_chart_error">Les données n\'ont pas pu être chargées, réessayez plus tard</string>
+
+    <string name="settings_category_sources">Sources de données</string>
+    <string name="settings_knmi_enable">KNMI</string>
+    <string name="settings_knmi_enable_sub">Afficher les données de KNMI</string>
+    <string name="settings_buienradar_enable">Buienradar</string>
+    <string name="settings_buienradar_enable_sub">Afficher les données de Buienradar</string>
+    <string name="settings_buienradar_enable_title">Autorisations requises pour l\'utilisation mobile</string>
+    <string name="settings_buienradar_enable_message">Les données Buienradar ne peuvent être affichées que s\'il s\'agit d\'un appareil non-mobile ou si vous disposez d\'autorisations explicites. Pour plus d\'informations, voir: \nhttps://www.buienradar.nl/overbuienradar/gratis-weerdata</string>
+    <string name="settings_buienradar_enable_accept">Continue</string>
+    <string name="settings_buienradar_enable_decline">Annuler</string>
+    <string name="settings_default_view">Premier écran</string>
+    <string name="settings_default_view_sub">Sélectionnez l\'écran affiché au début</string>
+    <string name="settings_nav_view_knmi">KNMI écrans</string>
+    <string name="settings_nav_view_knmi_sub">Sélectionnez les écrans à afficher dans l\'application</string>
+    <string name="settings_nav_view_buienradar">Buienradar écrans</string>
+    <string name="settings_nav_view_buienradar_sub">Sélectionnez les écrans à afficher dans l\'application</string>
+
+    <string name="settings_category_location">Paramètres de localisation</string>
+    <string name="settings_location_enable">Afficher ma position</string>
+    <string name="settings_location_enable_sub">Affiche une balise à ma position</string>
+    <string name="settings_location_auto_enable">Utiliser la localisation GPS/réseau</string>
+    <string name="settings_location_auto_enable_sub">Déterminer ma position automatiquement</string>
+    <string name="settings_location_provider">Choisissez le type de localisation</string>
+    <string name="settings_latitude">Ma position: latitude</string>
+    <string name="settings_longitude">Ma position: longitude</string>
+    <string name="settings_network">Réseau</string>
+    <string name="settings_gps">GPS</string>
+
+    <string name="settings_category_appearance">Paramètres d\'apparence</string>
+    <string name="settings_floating_navigation_enable">Boutons de navigation flottants</string>
+    <string name="settings_floating_navigation_sub">Suivante/précédente avec un clic</string>
+    <string name="settings_background_colour">Couleur de fond</string>
+    <string name="settings_location_shape">Forme du balise de position</string>
+    <string name="settings_location_colour">Couleur du balise de position</string>
+
+    <string name="settings_languages">Langue</string>
+    <string name="language_system">Défaut du système</string>
+
+    <string name="option_two_circles">Grand et petit cercle</string>
+    <string name="option_one_circle">Un seul cercle grand</string>
+
+    <string name="share_subject">Carte météo de NLWeer</string>
+    <string name="share_choose">Partagez cette carte via</string>
+    <string name="share_disabled_alert_title">Non implémenté</string>
+    <string name="share_disabled_alert_message">Impossible de partager cette page, seulement possible pour cartes</string>
+
+    <string name="about_text_header_1">Sur NLWeer</string>
+    <string name="about_text_content_1">NLWeer est une application météo néerlandaise open-source et respectueuse de ton confidentialité. Il est gratuit aussi comme \'free lunch\' et comme \'freedom of speach\'. Le code est sous licence MIT. Les informations météorologiques sont fournies par KNMI et Buienradar, voir ci-dessous. Pour le code, problèmes, nouvelles versions et plus d\'informations, voir:  https://github.com/CNugteren/NLWeer</string>
+    <string name="about_text_header_2">Données KNMI</string>
+    <string name="about_text_content_2">Toutes les données KNMI ont la licence Creative Commons Zero (CC0), avec la note que KNMI lui-même n\'est pas impliqué avec l\'application NLWeer et ne prend pas activement en charge l\'utilisation de ces données dans NLWeer. Pour plus d\'informations, consultez https://www.knmi.nl/copyright</string>
+    <string name="about_text_header_3">Données Buienradar</string>
+    <string name="about_text_content_3">Les données de Buienradar sont disponibles gratuitement, cependant leur utilisation n\'est autorisée que pour l\'objectif non-commerciale. Son utilisation pour des applications mobiles ou pour l\'objectif commerciale nécessite l\'autorisation de Buienradar, une marque de RTL Nederland. Pour plus d\'informations, voir: https://www.buienradar.nl/overbuienradar/gratis-weerdata</string>
+    <string name="about_text_header_4">Icônes d\'application et de menu</string>
+    <string name="about_text_content_4">Icône principale de l\'application: Copyright Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
+\nIcône de la lune: Copyright OOjs UI Team, licence MIT, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
+\nIcônes de soleil, vent, grêle, nuage, bruine, graphique, humidité, brouillard, alerte, flèche et rapport: Copyright Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
+\nIcônes de température et de lever du soleil: Icônes créées par Hirschwolf et Freepik sur www.flaticon.com</string>
+    <string name="about_text_header_5">Version de NLWeer</string>
+
+    <string name="colour_black">Noir</string>
+    <string name="colour_white">Blanc</string>
+    <string name="colour_red">Rouge</string>
+    <string name="colour_orange">Orange</string>
+    <string name="colour_yellow">Jaune</string>
+    <string name="colour_purple">Violet</string>
+    <string name="colour_green">Vert</string>
+</resources>

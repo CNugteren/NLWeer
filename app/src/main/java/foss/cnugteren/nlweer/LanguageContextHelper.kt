@@ -18,7 +18,7 @@ class ApplicationLanguageHelper(base: Context) : ContextThemeWrapper(base, R.sty
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
             val language = sharedPreferences.getString("language", "")
             var locale = Locale.getDefault()  // system default if nothing else found
-            if (language != null && language in arrayListOf("en", "nl")) {
+            if (language != null && language in arrayListOf("en", "nl", "fr")) {
                 locale = Locale(language)
             }
 
