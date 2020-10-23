@@ -256,18 +256,18 @@ class MainActivity : AppCompatActivity() {
     fun setLocationManager() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         val gpsEnable = sharedPreferences.getBoolean("gps_enable", false)
-        val locationProvider = sharedPreferences.getString("location_provider", "Network")
+        val locationProvider = sharedPreferences.getString("location_provider", "network")
         if (gpsEnable) {
             try {
                 try {
                     locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager?
-                    if (locationProvider == "Network") {
+                    if (locationProvider == "network") {
                         val networkProvidedAvailable = locationManager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
                         if (networkProvidedAvailable != null && networkProvidedAvailable) {
                             locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1f, locationListener)
                         }
                     }
-                    else if (locationProvider == "GPS") {
+                    else if (locationProvider == "gps") {
                         locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1f, locationListener)
                     }
                 } catch (ex: SecurityException) { }

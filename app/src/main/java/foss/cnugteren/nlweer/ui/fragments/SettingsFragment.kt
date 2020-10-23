@@ -201,11 +201,11 @@ class SettingsFragment : PreferenceFragmentCompat(),
         if (pref is SwitchPreferenceCompat && key == "gps_enable") {
             val activity = this.activity as MainActivity
             if (pref.isChecked) {
-                val locationProvider = sharedPreferences.getString("location_provider", "Network")
-                if (locationProvider == "GPS") {
+                val locationProvider = sharedPreferences.getString("location_provider", "network")
+                if (locationProvider == "gps") {
                     ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
                 }
-                else { // Network
+                else { // network
                     ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),1)
                 }
             }
@@ -217,10 +217,10 @@ class SettingsFragment : PreferenceFragmentCompat(),
             val activity = this.activity as MainActivity
             pref.summary = sharedPreferences.getString(key, "")
             val locationProvider = pref.value
-            if (locationProvider == "GPS") {
+            if (locationProvider == "gps") {
                 ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
             }
-            else { // Network
+            else { // network
                 ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),1)
             }
             activity.setLocationManager()
