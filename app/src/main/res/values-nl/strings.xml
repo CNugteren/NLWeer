@@ -70,8 +70,8 @@
     <string name="settings_location_provider">Kies locatie provider</string>
     <string name="settings_latitude">Mijn locatie: breedtegraad</string>
     <string name="settings_longitude">Mijn locatie: lengtegraad</string>
-    <string-array name="location_provider_items"><item>Netwerk</item><item>GPS</item></string-array>
-    <string-array name="location_provider_values"><item>Network</item><item>GPS</item></string-array>
+    <string name="settings_network">Netwerk</string>
+    <string name="settings_gps">GPS</string>
 
     <string name="settings_category_appearance">Weergave instellingen</string>
     <string name="settings_floating_navigation_enable">Toon zwevende navigatie knoppen</string>

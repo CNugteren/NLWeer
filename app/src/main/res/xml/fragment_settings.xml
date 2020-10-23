@@ -64,7 +64,7 @@
             android:dependency="location_enable"/>
 
         <ListPreference
-            android:defaultValue="Network"
+            android:defaultValue="network"
             android:entries="@array/location_provider_items"
             android:entryValues="@array/location_provider_values"
             android:enabled="false"
