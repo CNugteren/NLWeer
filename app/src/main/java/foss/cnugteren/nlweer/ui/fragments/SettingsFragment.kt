@@ -28,7 +28,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         // Sets the initial values as summaries
         val latString = sharedPreferences.getString("location_latitude", null)
         val lonString = sharedPreferences.getString("location_longitude", null)
-        val locationProvider = sharedPreferences.getString("location_provider", null)
+        val locationProvider = findPreference<ListPreference>("location_provider")?.entry
         val language = findPreference<ListPreference>("language")?.entry
         val backgroundColour = findPreference<ListPreference>("background_colour")?.entry
         val locationShape = findPreference<ListPreference>("location_shape")?.entry
@@ -151,7 +151,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
             pref.summary = sharedPreferences.getString(key, "")
         }
         if (pref is ListPreference &&
-            (key == "language" || key == "background_colour" || key == "location_shape" || key == "location_colour")) {
+            (key == "language" || key == "background_colour" || key == "location_shape" || key == "location_colour" || key == "location_provider")) {
             pref.summary = findPreference<ListPreference>(key)?.entry
         }
 
@@ -215,7 +215,6 @@ class SettingsFragment : PreferenceFragmentCompat(),
         // Set/unset the kind of location provider
         if (pref is ListPreference && key == "location_provider") {
             val activity = this.activity as MainActivity
-            pref.summary = sharedPreferences.getString(key, "")
             val locationProvider = pref.value
             if (locationProvider == "gps") {
                 ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),1)
