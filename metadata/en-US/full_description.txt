@@ -12,5 +12,5 @@ Features of NLWeer:
 
 * Includes weather maps as well as a written weather report
 * Includes weather information from multiple sources
-* Three options for localisation (shown as a red circle): manual lon/lat coordinates, mobile service provider, or GPS
+* Three options for localisation: manual lon/lat coordinates, mobile service provider, or GPS
 * Includes a precipitation prediction graph on your current location
