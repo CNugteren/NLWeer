@@ -1,0 +1,2 @@
+- Correction du fait que les nouveaux boutons de navigation optionnels affichaient des sources de données désactivées
+- La première ecran est maintenant réinitialisée à une encran vide si l'ecran choisie a été désactivée

@@ -1,0 +1,2 @@
+- Affiche maintenant votre emplacement actuel sur la carte si spécifié
+- Aussi disponible en néerlandais

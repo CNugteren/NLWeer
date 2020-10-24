@@ -1,0 +1,5 @@
+- Ajout d'une option pour personnaliser les cartes à afficher dans le menu de navigation
+- Ajout de boutons de navigation flottants pour une navigation rapide
+- Ajout de nouvelles cartes KNMI: force du soleil, visibilité, humidité et alertes
+- Ajout d'un nouveau bouton pour partager les cartes
+- Diverses améliorations mineures

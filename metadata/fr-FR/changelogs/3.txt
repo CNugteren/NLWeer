@@ -1,0 +1,4 @@
+- Ajout d'une vue pour afficher le rapport météo écrit de KNMI
+- Ajout d'une option pour utiliser la détection de localisation basée sur le réseau GSM ou le GPS
+- Correction sur appareils API <= 22
+- Diverses améliorations mineures
