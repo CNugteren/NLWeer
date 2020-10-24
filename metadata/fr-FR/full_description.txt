@@ -1,0 +1,16 @@
+NLWeer est une simple app météo néerlandaise open-source et respectueuse de ton confidentialité pour Android (5.0 ou plus récent). Il est gratuit aussi comme 'free lunch' et comme 'freedom of speech'. Les informations météorologiques sont fournies par KNMI ou par Buienradar, voir l'écran 'info' de l'application pour plus d'informations.
+
+Par rapport à d'autres applications météo pour les Pays-Bas (par exemple Buienradar), voici quelques raisons d'utiliser NLWeer:
+
+* Il est open-source et peut être personnalisé ou amélioré par n'importe qui si nécessaire
+* Il n'affiche pas de publicités commerciales
+* Il ne nécessite aucune autorisation (sauf pour le GPS si demandé explicitement)
+* Il est très léger et bon pour la pile
+* Il ne nécessite pas les services Google Play
+
+Caractéristiques de NLWeer:
+
+* Cartes météorologiques et un bulletin météo écrit
+* Informations météorologiques provenant de plusieurs sources
+* Trois options de localisation: coordonnées longitude et latitude manuelles, reseaux mobile ou GPS
+* Comprend un graphique de prévision des précipitations sur votre emplacement actuel

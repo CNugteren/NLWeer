@@ -91,7 +91,7 @@
     <string name="share_disabled_alert_message">Impossible de partager cette page, seulement possible pour cartes</string>
 
     <string name="about_text_header_1">Sur NLWeer</string>
-    <string name="about_text_content_1">NLWeer est une application météo néerlandaise open-source et respectueuse de ton confidentialité. Il est gratuit aussi comme \'free lunch\' et comme \'freedom of speach\'. Le code est sous licence MIT. Les informations météorologiques sont fournies par KNMI et Buienradar, voir ci-dessous. Pour le code, problèmes, nouvelles versions et plus d\'informations, voir:  https://github.com/CNugteren/NLWeer</string>
+    <string name="about_text_content_1">NLWeer est une application météo néerlandaise open-source et respectueuse de ton confidentialité. Il est gratuit aussi comme \'free lunch\' et comme \'freedom of speech\'. Le code est sous licence MIT. Les informations météorologiques sont fournies par KNMI et Buienradar, voir ci-dessous. Pour le code, problèmes, nouvelles versions et plus d\'informations, voir:  https://github.com/CNugteren/NLWeer</string>
     <string name="about_text_header_2">Données KNMI</string>
     <string name="about_text_content_2">Toutes les données KNMI ont la licence Creative Commons Zero (CC0), avec la note que KNMI lui-même n\'est pas impliqué avec l\'application NLWeer et ne prend pas activement en charge l\'utilisation de ces données dans NLWeer. Pour plus d\'informations, consultez https://www.knmi.nl/copyright</string>
     <string name="about_text_header_3">Données Buienradar</string>
