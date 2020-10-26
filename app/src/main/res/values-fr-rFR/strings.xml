@@ -41,7 +41,7 @@
     <string name="menu_buienradar_chart_description">Deux heures d\'avance à</string>
     <string name="menu_buienradar_chart_loading">En cours de chargement...</string>
     <string name="menu_buienradar_chart_empty">Aucune précipitation prévue à</string>
-    <string name="menu_buienradar_chart_no_location">Erreur: Localisation pas activé, vérifiez les paramètres</string>
+    <string name="menu_buienradar_chart_no_location">Erreur: Localisation inconnu, vérifiez les paramètres</string>
     <string name="menu_buienradar_chart_outside_of_range">Erreur: Localisation en dehors des Pays-Bas</string>
     <string name="menu_buienradar_chart_error">Les données n\'ont pas pu être chargées, réessayez plus tard</string>
 

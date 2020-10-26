@@ -280,6 +280,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        setLocationManager()
+    }
+
     override fun onPause() {
         super.onPause()
         locationManager?.removeUpdates(locationListener)

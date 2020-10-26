@@ -41,7 +41,7 @@
     <string name="menu_buienradar_chart_description">Two hours ahead at</string>
     <string name="menu_buienradar_chart_loading">Data is being loaded...</string>
     <string name="menu_buienradar_chart_empty">No precipitation expected at</string>
-    <string name="menu_buienradar_chart_no_location">Error: Location not set, verify the settings</string>
+    <string name="menu_buienradar_chart_no_location">Error: Location not known, verify the settings</string>
     <string name="menu_buienradar_chart_outside_of_range">Error: Location outside of the Netherlands</string>
     <string name="menu_buienradar_chart_error">Data could not be loaded, try again later</string>
 

@@ -42,7 +42,7 @@
     <string name="menu_buienradar_chart_description">Twee uur vooruit op</string>
     <string name="menu_buienradar_chart_loading">Data wordt geladen...</string>
     <string name="menu_buienradar_chart_empty">Geen regen verwacht op</string>
-    <string name="menu_buienradar_chart_no_location">Fout: Locatie niet opgegeven, controleer de instellingen</string>
+    <string name="menu_buienradar_chart_no_location">Fout: Locatie niet bekend, controleer de instellingen</string>
     <string name="menu_buienradar_chart_outside_of_range">Fout: Locatie is buiten Nederland</string>
     <string name="menu_buienradar_chart_error">Data kon niet geladen worden, probeer later opnieuw</string>
 
