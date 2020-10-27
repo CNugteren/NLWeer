@@ -264,11 +264,11 @@ class MainActivity : AppCompatActivity() {
                     if (locationProvider == "network") {
                         val networkProvidedAvailable = locationManager?.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
                         if (networkProvidedAvailable != null && networkProvidedAvailable) {
-                            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1f, locationListener)
+                            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0f, locationListener)
                         }
                     }
                     else if (locationProvider == "gps") {
-                        locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1f, locationListener)
+                        locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0f, locationListener)
                     }
                 } catch (ex: SecurityException) { }
             }
