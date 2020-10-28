@@ -1,0 +1,5 @@
+- De locatie marker kan nu aangepast worden (vorm en kleur)
+- Alle Android library dependencies zijn geupdated naar de laatste versie
+- Fix voor een paar netwerk/GPS locatie problemen
+- De taal kan nu aangepast worden in het instellingen menu
+- De app is nu ook in het Frans vertaald

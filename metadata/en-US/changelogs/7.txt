@@ -1,0 +1,5 @@
+- Location marker can now be customized (shape and colour)
+- All Android library dependencies are updated to the latest versions
+- Fix some network/gps location issues
+- The display language is now configurable in the settings menu
+- The app has now also been translated into French

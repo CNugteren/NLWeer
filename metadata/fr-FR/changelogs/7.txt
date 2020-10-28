@@ -1,0 +1,5 @@
+- Le balise d'emplacement peut maintenant être personnalisé (forme et couleur)
+- Toutes les dépendances des bibliothèques Android sont mises à jour
+- Correction de certains problèmes de localisation
+- La langue est configurable dans le menu des paramètres
+- NLWeer est maintenant disponible en français
