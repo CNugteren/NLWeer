@@ -27,7 +27,7 @@
     <string name="menu_knmi_sun_tomorrow">Force du soleil demain</string>
     <string name="menu_knmi_text">Bulletin météo</string>
     <string name="menu_knmi_text_source">Source:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
-    <string name="menu_knmi_text_loading">En cours de chargement...</string>
+    <string name="menu_knmi_text_loading">En cours de chargement&#8230;</string>
     <string name="menu_knmi_text_failed">Les données n\'ont pas pu être chargées</string>
 
     <string name="menu_buienradar_header">Données Buienradar</string>
@@ -38,8 +38,7 @@
     <string name="menu_buienradar_hail">Grêle la dernière heure</string>
     <string name="menu_buienradar_chart">Prévision de la pluie</string>
     <string name="menu_buienradar_chart_unit">mm/h</string>
-    <string name="menu_buienradar_chart_description">Deux heures d\'avance à</string>
-    <string name="menu_buienradar_chart_loading">En cours de chargement...</string>
+    <string name="menu_buienradar_chart_loading">En cours de chargement&#8230;</string>
     <string name="menu_buienradar_chart_empty">Aucune précipitation prévue à</string>
     <string name="menu_buienradar_chart_no_location">Erreur: Localisation inconnu, vérifiez les paramètres</string>
     <string name="menu_buienradar_chart_outside_of_range">Erreur: Localisation en dehors des Pays-Bas</string>

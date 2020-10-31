@@ -28,7 +28,7 @@
     <string name="menu_knmi_sun_tomorrow">Zonsterkte morgen</string>
     <string name="menu_knmi_text">Weerbericht</string>
     <string name="menu_knmi_text_source">Bron:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
-    <string name="menu_knmi_text_loading">Data wordt geladen...</string>
+    <string name="menu_knmi_text_loading">Data wordt geladen&#8230;</string>
     <string name="menu_knmi_text_failed">Data kon niet geladen worden</string>
 
     <string name="menu_buienradar_header">Bron: Buienradar</string>
@@ -39,8 +39,7 @@
     <string name="menu_buienradar_hail">Hagel afgelopen uur</string>
     <string name="menu_buienradar_chart">Neerslagverwachting</string>
     <string name="menu_buienradar_chart_unit">mm/u</string>
-    <string name="menu_buienradar_chart_description">Twee uur vooruit op</string>
-    <string name="menu_buienradar_chart_loading">Data wordt geladen...</string>
+    <string name="menu_buienradar_chart_loading">Data wordt geladen&#8230;</string>
     <string name="menu_buienradar_chart_empty">Geen regen verwacht op</string>
     <string name="menu_buienradar_chart_no_location">Fout: Locatie niet bekend, controleer de instellingen</string>
     <string name="menu_buienradar_chart_outside_of_range">Fout: Locatie is buiten Nederland</string>
