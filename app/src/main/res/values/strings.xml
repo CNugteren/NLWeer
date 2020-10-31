@@ -27,7 +27,7 @@
     <string name="menu_knmi_sun_tomorrow">Sun strength tomorrow</string>
     <string name="menu_knmi_text">Weather report</string>
     <string name="menu_knmi_text_source">Source:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
-    <string name="menu_knmi_text_loading">Data is being loaded...</string>
+    <string name="menu_knmi_text_loading">Data is being loaded&#8230;</string>
     <string name="menu_knmi_text_failed">Data could not be loaded</string>
 
     <string name="menu_buienradar_header">Source: Buienradar</string>
@@ -38,8 +38,7 @@
     <string name="menu_buienradar_hail">Hail last hour</string>
     <string name="menu_buienradar_chart">Rain prediction chart</string>
     <string name="menu_buienradar_chart_unit">mm/h</string>
-    <string name="menu_buienradar_chart_description">Two hours ahead at</string>
-    <string name="menu_buienradar_chart_loading">Data is being loaded...</string>
+    <string name="menu_buienradar_chart_loading">Data is being loaded&#8230;</string>
     <string name="menu_buienradar_chart_empty">No precipitation expected at</string>
     <string name="menu_buienradar_chart_no_location">Error: Location not known, verify the settings</string>
     <string name="menu_buienradar_chart_outside_of_range">Error: Location outside of the Netherlands</string>
