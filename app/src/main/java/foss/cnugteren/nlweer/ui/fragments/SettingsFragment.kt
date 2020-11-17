@@ -3,7 +3,6 @@ package foss.cnugteren.nlweer.ui.fragments
 import android.Manifest
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.content.Intent.getIntent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
@@ -89,16 +88,16 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     private fun setNavViews(multiSelect: MultiSelectListPreference,
-                            items: Array<Array<Int>>, do_set_defaults: Boolean) {
+                            items: Array<MapData>, do_set_defaults: Boolean) {
         // Add all the items possible to show in the nav menu to the list of options
         val entries = mutableListOf<String>()
         val values = mutableListOf<String>()
         val defaults = mutableListOf<String>()
         for (item in items) {
-            entries.add(getString(item[0]))
-            values.add(item[1].toString())
-            if (item[2] == 1) {
-                defaults.add(item[1].toString())
+            entries.add(getString(item.stringId))
+            values.add(item.navId.toString())
+            if (item.defaultVisible == 1) {
+                defaults.add(item.navId.toString())
             }
         }
         multiSelect.entries = entries.toTypedArray()
@@ -123,17 +122,17 @@ class SettingsFragment : PreferenceFragmentCompat(),
         val values = mutableListOf(R.id.nav_empty.toString())
         if (sourceEnableKNMI) {
             for (item in KNMI_ITEMS) {
-                if (menu.findItem(item[1]).isVisible) {
-                    entries.add("KNMI: " + getString(item[0]))
-                    values.add(item[1].toString())
+                if (menu.findItem(item.navId).isVisible) {
+                    entries.add("KNMI: " + getString(item.stringId))
+                    values.add(item.navId.toString())
                 }
             }
         }
         if (sourceEnableBuienradar) {
             for (item in BUIENRADAR_ITEMS) {
-                if (menu.findItem(item[1]).isVisible) {
-                    entries.add("Buienradar: " + getString(item[0]))
-                    values.add(item[1].toString())
+                if (menu.findItem(item.navId).isVisible) {
+                    entries.add("Buienradar: " + getString(item.stringId))
+                    values.add(item.navId.toString())
                 }
             }
         }
@@ -235,7 +234,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
             val activity = this.activity as MainActivity
             val navView: NavigationView = activity.findViewById(R.id.nav_view)
             val menu = navView.menu
-            val parentMenuId = ALL_ITEMS[ALL_ITEMS.indexOfFirst { item -> item[1] == defaultViewId }][3]
+            val parentMenuId = ALL_ITEMS[ALL_ITEMS.indexOfFirst { item -> item.navId == defaultViewId }].parentMenuId
             if (!menu.findItem(defaultViewId).isVisible || !menu.findItem(parentMenuId).isVisible) {
                 val pref = findPreference<ListPreference>("settings_default_view_listpreference")
                 if (pref != null) {

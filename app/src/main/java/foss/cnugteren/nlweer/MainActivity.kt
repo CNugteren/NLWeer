@@ -31,35 +31,6 @@ import foss.cnugteren.nlweer.ui.fragments.BaseFragment
 import foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment
 import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
 
-// Each item consists of:
-// - string name
-// - nav ID
-// - default shown (1) or not (0)
-// - parent menu ID
-val KNMI_ITEMS = arrayOf(
-    arrayOf(R.string.menu_knmi_rain_m1, R.id.nav_knmi_rain_m1, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_today, R.id.nav_knmi_today, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_tonight, R.id.nav_knmi_tonight, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_tomorrow, R.id.nav_knmi_tomorrow, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_temperature, R.id.nav_knmi_temperature, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_wind, R.id.nav_knmi_wind, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_visibility, R.id.nav_knmi_visibility, 0, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_humidity, R.id.nav_knmi_humidity, 0, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_warnings, R.id.nav_knmi_warnings, 0, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_sun_today, R.id.nav_knmi_sun_tod, 0, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_sun_tomorrow, R.id.nav_knmi_sun_tom, 0, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_text, R.id.nav_knmi_text, 1, R.id.knmi_menu)
-)
-val BUIENRADAR_ITEMS = arrayOf(
-    arrayOf(R.string.menu_buienradar_rain_m1, R.id.nav_buienradar_rain_m1, 1, R.id.buienradar_menu),
-    arrayOf(R.string.menu_buienradar_sun, R.id.nav_buienradar_sun, 1, R.id.buienradar_menu),
-    arrayOf(R.string.menu_buienradar_cloud, R.id.nav_buienradar_cloud, 1, R.id.buienradar_menu),
-    arrayOf(R.string.menu_buienradar_drizzle, R.id.nav_buienradar_drizzle, 0, R.id.buienradar_menu),
-    arrayOf(R.string.menu_buienradar_hail, R.id.nav_buienradar_hail, 0, R.id.buienradar_menu),
-    arrayOf(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart, 1, R.id.buienradar_menu)
-)
-val ALL_ITEMS = KNMI_ITEMS + BUIENRADAR_ITEMS
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -82,8 +53,8 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val destinations = mutableSetOf(R.id.nav_empty)
-        for (item in KNMI_ITEMS) { destinations.add(item[1]) }
-        for (item in BUIENRADAR_ITEMS) { destinations.add(item[1]) }
+        for (item in KNMI_ITEMS) { destinations.add(item.navId) }
+        for (item in BUIENRADAR_ITEMS) { destinations.add(item.navId) }
         appBarConfiguration = AppBarConfiguration(destinations, drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -97,11 +68,11 @@ class MainActivity : AppCompatActivity() {
         val fabPrevious: View = findViewById(R.id.fab_previous)
         fabPrevious.setOnClickListener {
             val currentNavId = navController.currentDestination?.id
-            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item[1] == currentNavId }
+            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item.navId == currentNavId }
             for (prevIndex in currentIndex - 1 + ALL_ITEMS.size downTo 0) { // double array instead of modulo
                 val item = (ALL_ITEMS + ALL_ITEMS)[prevIndex]
-                if (navView.menu.findItem(item[1]).isVisible && navView.menu.findItem(item[3]).isVisible) {
-                    navController.navigate(item[1])
+                if (navView.menu.findItem(item.navId).isVisible && navView.menu.findItem(item.parentMenuId).isVisible) {
+                    navController.navigate(item.navId)
                     break
                 }
             }
@@ -109,11 +80,11 @@ class MainActivity : AppCompatActivity() {
         val fabNext: View = findViewById(R.id.fab_next)
         fabNext.setOnClickListener {
             val currentNavId = navController.currentDestination?.id
-            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item[1] == currentNavId }
+            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item.navId == currentNavId }
             for (nextIndex in currentIndex + 1 until ALL_ITEMS.size * 2) { // double array instead of modulo
                 val item = (ALL_ITEMS + ALL_ITEMS)[nextIndex]
-                if (navView.menu.findItem(item[1]).isVisible && navView.menu.findItem(item[3]).isVisible) {
-                    navController.navigate(item[1])
+                if (navView.menu.findItem(item.navId).isVisible && navView.menu.findItem(item.parentMenuId).isVisible) {
+                    navController.navigate(item.navId)
                     break
                 }
             }
@@ -159,18 +130,18 @@ class MainActivity : AppCompatActivity() {
         val navItemsKNMI = sharedPreferences.getStringSet("settings_nav_view_knmi", setOf("not_yet_set"))
         if (navItemsKNMI != null) {
             for (item in KNMI_ITEMS) {
-                val menuItem = menu.findItem(item[1])
-                if (navItemsKNMI == setOf("not_yet_set")) {  menuItem.isVisible = (item[2] == 1) }
-                else { menuItem.isVisible = (item[1].toString() in navItemsKNMI) }
+                val menuItem = menu.findItem(item.navId)
+                if (navItemsKNMI == setOf("not_yet_set")) {  menuItem.isVisible = (item.defaultVisible == 1) }
+                else { menuItem.isVisible = (item.navId.toString() in navItemsKNMI) }
             }
         }
 
         val navItemsBuienradar = sharedPreferences.getStringSet("settings_nav_view_buienradar", setOf("not_yet_set"))
         if (navItemsBuienradar != null) {
             for (item in BUIENRADAR_ITEMS) {
-                val menuItem = menu.findItem(item[1])
-                if (navItemsBuienradar == setOf("not_yet_set")) {  menuItem.isVisible = (item[2] == 1) }
-                else { menuItem.isVisible = (item[1].toString() in navItemsBuienradar) }
+                val menuItem = menu.findItem(item.navId)
+                if (navItemsBuienradar == setOf("not_yet_set")) {  menuItem.isVisible = (item.defaultVisible == 1) }
+                else { menuItem.isVisible = (item.navId.toString() in navItemsBuienradar) }
             }
         }
     }
