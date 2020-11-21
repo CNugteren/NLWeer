@@ -26,6 +26,14 @@
     <string name="menu_knmi_warnings">Waarschuwingen</string>
     <string name="menu_knmi_sun_today">Zonsterkte vandaag</string>
     <string name="menu_knmi_sun_tomorrow">Zonsterkte morgen</string>
+    <string name="menu_knmi_daily_max_temperature">Max temperatuur gisteren</string>
+    <string name="menu_knmi_daily_min_temperature">Min temperatuur gisteren</string>
+    <string name="menu_knmi_daily_max_wind_gust">Max windstoten gisteren</string>
+    <string name="menu_knmi_daily_max_wind_speed">Max windsnelheid gisteren</string>
+    <string name="menu_knmi_daily_rain">Dagelijkse neerslag</string>
+    <string name="menu_knmi_daily_snow">Sneeuwdek vandaag</string>
+    <string name="menu_knmi_daily_sun">Zonneschijn gisteren</string>
+
     <string name="menu_knmi_text">Weerbericht</string>
     <string name="menu_knmi_text_source">Bron:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
     <string name="menu_knmi_text_loading">Data wordt geladen&#8230;</string>
@@ -99,7 +107,7 @@
     <string name="about_text_header_4">App- en menu-iconen</string>
     <string name="about_text_content_4">Appicoon: Copyright Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
 \nMaanicoon: Copyright OOjs UI Team, MIT licentie, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
-\nZon-, wind-, hagel-, wolk-, miezer-, grafiek-, vochtigheid-, mist-, waarschuwing-, pijl- en weerberichticonen: Copyright Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
+\nZon-, wind-, regen-, sneeuw-, windsnelheid-, hagel-, wolk-, miezer-, grafiek-, vochtigheid-, mist-, waarschuwing-, pijl- en weerberichticonen: Copyright Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
 \nTemperatuur en zonsopgang iconen: Gemaakt door Hirschwolf en Freepik van www.flaticon.com</string>
     <string name="about_text_header_5">NLWeer versie-informatie</string>
 

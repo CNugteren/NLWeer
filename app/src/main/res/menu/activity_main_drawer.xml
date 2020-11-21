@@ -49,6 +49,35 @@
                 android:id="@+id/nav_knmi_sun_tom"
                 android:icon="@drawable/menu_tomorrow"
                 android:title="@string/menu_knmi_sun_tomorrow" />
+
+            <item
+                android:id="@+id/nav_knmi_daily_max_temperature"
+                android:icon="@drawable/menu_temperature"
+                android:title="@string/menu_knmi_daily_max_temperature" />
+            <item
+                android:id="@+id/nav_knmi_daily_min_temperature"
+                android:icon="@drawable/menu_temperature"
+                android:title="@string/menu_knmi_daily_min_temperature" />
+            <item
+                android:id="@+id/nav_knmi_daily_max_wind_gust"
+                android:icon="@drawable/menu_wind"
+                android:title="@string/menu_knmi_daily_max_wind_gust" />
+            <item
+                android:id="@+id/nav_knmi_daily_max_wind_speed"
+                android:icon="@drawable/menu_wind_speed"
+                android:title="@string/menu_knmi_daily_max_wind_speed" />
+            <item
+                android:id="@+id/nav_knmi_daily_rain"
+                android:icon="@drawable/menu_rain"
+                android:title="@string/menu_knmi_daily_rain" />
+            <item
+                android:id="@+id/nav_knmi_daily_snow"
+                android:icon="@drawable/menu_snow"
+                android:title="@string/menu_knmi_daily_snow" />
+            <item
+                android:id="@+id/nav_knmi_daily_sun"
+                android:icon="@drawable/menu_today"
+                android:title="@string/menu_knmi_daily_sun" />
             <item
                 android:id="@+id/nav_knmi_text"
                 android:icon="@drawable/menu_weather_report"
