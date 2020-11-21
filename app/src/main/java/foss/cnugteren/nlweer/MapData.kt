@@ -25,7 +25,14 @@ val KNMI_ITEMS = arrayOf(
     MapData(R.string.menu_knmi_humidity, R.id.nav_knmi_humidity, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/actueel-weer/relvocht.png", 569, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
     MapData(R.string.menu_knmi_warnings, R.id.nav_knmi_warnings, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/current/weather/warning/waarschuwing_land_0_new.gif", 425, 457, arrayOf(50.70f, 3.10f, 53.65f, 7.55f, -0.01f, 0.00f)),
     MapData(R.string.menu_knmi_sun_today, R.id.nav_knmi_sun_tod, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/zonkracht/zonkracht_dag0.gif", 425, 457, arrayOf(50.70f, 3.10f, 53.65f, 7.55f, -0.01f, 0.00f)),
-    MapData(R.string.menu_knmi_sun_tomorrow, R.id.nav_knmi_sun_tom, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/zonkracht/zonkracht_dag1.gif", 425, 457, arrayOf(50.70f, 3.10f, 53.65f, 7.55f, -0.01f, 0.00f))
+    MapData(R.string.menu_knmi_sun_tomorrow, R.id.nav_knmi_sun_tom, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/zonkracht/zonkracht_dag1.gif", 425, 457, arrayOf(50.70f, 3.10f, 53.65f, 7.55f, -0.01f, 0.00f)),
+    MapData(R.string.menu_knmi_daily_max_temperature, R.id.nav_knmi_daily_max_temperature, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/tx/tx.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
+    MapData(R.string.menu_knmi_daily_min_temperature, R.id.nav_knmi_daily_min_temperature, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/tn/tn.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
+    MapData(R.string.menu_knmi_daily_max_wind_gust, R.id.nav_knmi_daily_max_wind_gust, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/fxx/fxx.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
+    MapData(R.string.menu_knmi_daily_max_wind_speed, R.id.nav_knmi_daily_max_wind_speed, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/fhx/fhx.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
+    MapData(R.string.menu_knmi_daily_rain, R.id.nav_knmi_daily_rain, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/prec/prec.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
+    MapData(R.string.menu_knmi_daily_snow, R.id.nav_knmi_daily_snow, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/sx/sx.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
+    MapData(R.string.menu_knmi_daily_sun, R.id.nav_knmi_daily_sun, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/sq/sq.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f))
 )
 
 val BUIENRADAR_ITEMS = arrayOf(
