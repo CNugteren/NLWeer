@@ -20,16 +20,17 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.createGraph
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.fragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
-import foss.cnugteren.nlweer.ui.fragments.BaseFragment
-import foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment
-import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
+import foss.cnugteren.nlweer.ui.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        createNavGraph()
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -114,6 +117,32 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    fun createNavGraph() {
+        // This is instead of a hard-coded mobile_navigation.xml file. That file still exists though
+        // to define the R.id values
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+        navHostFragment.navController.apply {
+            graph = createGraph(startDestination = R.id.nav_knmi_rain_m1) {
+                for (item in ALL_ITEMS) {
+                    if (item.navId == R.id.nav_knmi_text) {
+                        fragment<KnmiTextFragment>(item.navId) {label = getString(item.stringId) }
+                    }
+                    else if (item.navId == R.id.nav_buienradar_chart) {
+                        fragment<BuienradarChartFragment>(item.navId) {label = getString(item.stringId) }
+                    }
+                    else {
+                        fragment<MapFragment>(item.navId) {label = getString(item.stringId) }
+                    }
+                }
+                fragment<MapFragment>(R.id.nav_empty) { label = getString(R.string.menu_empty) }
+                fragment<AboutFragment>(R.id.nav_about) { label = getString(R.string.menu_about) }
+                fragment<SettingsFragment>(R.id.nav_settings) { label = getString(R.string.menu_settings) }
+            }
+        }
+
+    }
+
     fun setMenuItemsVisibility() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val menu = navView.menu
@@ -162,7 +191,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         if (navHostFragment != null) {
             val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
-            if (fragment is BaseFragment) {
+            if (fragment is MapFragment) {
                 fragment.refreshPage()
             }
             if (fragment is KnmiTextFragment) {
@@ -179,8 +208,8 @@ class MainActivity : AppCompatActivity() {
             // Retrieve the URL to share
             val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
             val url: String
-            if (fragment is BaseFragment) {
-                url = fragment.getURL()
+            if (fragment is MapFragment) {
+                url = fragment.url
             } else {
 
                 // Unsupported
@@ -286,7 +315,7 @@ class MainActivity : AppCompatActivity() {
             val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
             if (navHostFragment != null) {
                 val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
-                if (fragment is BaseFragment) {
+                if (fragment is MapFragment) {
                     fragment.setLocation(gpsLatCurrent, gpsLonCurrent)
                 }
                 if (fragment is BuienradarChartFragment) {
