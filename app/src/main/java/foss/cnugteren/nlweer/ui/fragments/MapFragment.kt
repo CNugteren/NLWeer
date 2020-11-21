@@ -9,12 +9,19 @@ import androidx.fragment.app.Fragment
 import foss.cnugteren.nlweer.R
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import android.view.ViewTreeObserver
+import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
+import foss.cnugteren.nlweer.ALL_ITEMS
 import foss.cnugteren.nlweer.MainActivity
 
-abstract class BaseFragment : Fragment() {
+class MapFragment : Fragment() {
 
     private lateinit var gifView: DrawWebView
+
+    var url: String = ""
+    private var imageWidth: Int = 1
+    private var imageHeight: Int = 1
+    private var coordinates: Array<Float> = arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,6 +29,20 @@ abstract class BaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_knmi, container, false)
+        val activity = this.activity as MainActivity
+
+        // Iterate over all items to find the current one and set the private variables accordingly
+        val navController = activity.findNavController(R.id.nav_host_fragment)
+        val thisNavId = navController.currentDestination?.id
+        for (item in ALL_ITEMS) {
+            if (item.navId == thisNavId) {
+                url = item.mapUrl
+                imageWidth = item.imageWidth
+                imageHeight = item.imageHeight
+                coordinates = item.coordinates
+                break
+            }
+        }
 
         // Pull down to refresh the page
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
@@ -31,7 +52,6 @@ abstract class BaseFragment : Fragment() {
         })
 
         // Do display floating navigation buttons
-        val activity = this.activity as MainActivity
         activity.toggleNavigationButtons(true)
 
         // The web-viewer for the content
@@ -43,9 +63,9 @@ abstract class BaseFragment : Fragment() {
                 root.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 gifView.fullWidth = root.width
                 gifView.fullHeight = root.height
-                gifView.imageWidth = imageWidth()
-                gifView.imageHeight = imageHeight()
-                gifView.imageCoordinates = coordinates()
+                gifView.imageWidth = imageWidth
+                gifView.imageHeight = imageHeight
+                gifView.imageCoordinates = coordinates
                 gifView.setWidthFittingScale()
                 loadPage()
             }
@@ -70,12 +90,6 @@ abstract class BaseFragment : Fragment() {
         return root
     }
 
-    abstract fun imageWidth(): Int // Implemented in derived classes
-    abstract fun imageHeight(): Int // Implemented in derived classes
-    abstract fun coordinates(): Array<Float> // Implemented in derived classes
-
-    abstract fun getURL(): String // Implemented in derived classes
-
     fun setLocation(lat: Float?, lon: Float?) {
         if (lat != null && lon != null) { // Only sets if valid
             gifView.lat = lat
@@ -88,7 +102,7 @@ abstract class BaseFragment : Fragment() {
         loadPage()
     }
 
-    open fun loadPage() {
+    fun loadPage() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val backgroundColour = " " + sharedPreferences.getString("background_colour", "black") + " "
 
@@ -100,7 +114,7 @@ abstract class BaseFragment : Fragment() {
                         html {
                            width: 100%;
                            height: 100%;
-                           background:""".trimIndent() + backgroundColour + """url(""".trimIndent() + getURL() + """) center center no-repeat;
+                           background:""".trimIndent() + backgroundColour + """url(""".trimIndent() + url + """) center center no-repeat;
                         }
                     </style>
                 </head>

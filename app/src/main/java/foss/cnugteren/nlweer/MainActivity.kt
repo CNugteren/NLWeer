@@ -20,45 +20,17 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.createGraph
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.fragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
-import foss.cnugteren.nlweer.ui.fragments.BaseFragment
-import foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment
-import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
-
-// Each item consists of:
-// - string name
-// - nav ID
-// - default shown (1) or not (0)
-// - parent menu ID
-val KNMI_ITEMS = arrayOf(
-    arrayOf(R.string.menu_knmi_rain_m1, R.id.nav_knmi_rain_m1, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_today, R.id.nav_knmi_today, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_tonight, R.id.nav_knmi_tonight, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_tomorrow, R.id.nav_knmi_tomorrow, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_temperature, R.id.nav_knmi_temperature, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_wind, R.id.nav_knmi_wind, 1, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_visibility, R.id.nav_knmi_visibility, 0, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_humidity, R.id.nav_knmi_humidity, 0, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_warnings, R.id.nav_knmi_warnings, 0, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_sun_today, R.id.nav_knmi_sun_tod, 0, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_sun_tomorrow, R.id.nav_knmi_sun_tom, 0, R.id.knmi_menu),
-    arrayOf(R.string.menu_knmi_text, R.id.nav_knmi_text, 1, R.id.knmi_menu)
-)
-val BUIENRADAR_ITEMS = arrayOf(
-    arrayOf(R.string.menu_buienradar_rain_m1, R.id.nav_buienradar_rain_m1, 1, R.id.buienradar_menu),
-    arrayOf(R.string.menu_buienradar_sun, R.id.nav_buienradar_sun, 1, R.id.buienradar_menu),
-    arrayOf(R.string.menu_buienradar_cloud, R.id.nav_buienradar_cloud, 1, R.id.buienradar_menu),
-    arrayOf(R.string.menu_buienradar_drizzle, R.id.nav_buienradar_drizzle, 0, R.id.buienradar_menu),
-    arrayOf(R.string.menu_buienradar_hail, R.id.nav_buienradar_hail, 0, R.id.buienradar_menu),
-    arrayOf(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart, 1, R.id.buienradar_menu)
-)
-val ALL_ITEMS = KNMI_ITEMS + BUIENRADAR_ITEMS
+import foss.cnugteren.nlweer.ui.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -75,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        createNavGraph()
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         setMenuItemsVisibility()
@@ -82,8 +56,8 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val destinations = mutableSetOf(R.id.nav_empty)
-        for (item in KNMI_ITEMS) { destinations.add(item[1]) }
-        for (item in BUIENRADAR_ITEMS) { destinations.add(item[1]) }
+        for (item in KNMI_ITEMS) { destinations.add(item.navId) }
+        for (item in BUIENRADAR_ITEMS) { destinations.add(item.navId) }
         appBarConfiguration = AppBarConfiguration(destinations, drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -97,11 +71,11 @@ class MainActivity : AppCompatActivity() {
         val fabPrevious: View = findViewById(R.id.fab_previous)
         fabPrevious.setOnClickListener {
             val currentNavId = navController.currentDestination?.id
-            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item[1] == currentNavId }
+            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item.navId == currentNavId }
             for (prevIndex in currentIndex - 1 + ALL_ITEMS.size downTo 0) { // double array instead of modulo
                 val item = (ALL_ITEMS + ALL_ITEMS)[prevIndex]
-                if (navView.menu.findItem(item[1]).isVisible && navView.menu.findItem(item[3]).isVisible) {
-                    navController.navigate(item[1])
+                if (navView.menu.findItem(item.navId).isVisible && navView.menu.findItem(item.parentMenuId).isVisible) {
+                    navController.navigate(item.navId)
                     break
                 }
             }
@@ -109,11 +83,11 @@ class MainActivity : AppCompatActivity() {
         val fabNext: View = findViewById(R.id.fab_next)
         fabNext.setOnClickListener {
             val currentNavId = navController.currentDestination?.id
-            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item[1] == currentNavId }
+            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item.navId == currentNavId }
             for (nextIndex in currentIndex + 1 until ALL_ITEMS.size * 2) { // double array instead of modulo
                 val item = (ALL_ITEMS + ALL_ITEMS)[nextIndex]
-                if (navView.menu.findItem(item[1]).isVisible && navView.menu.findItem(item[3]).isVisible) {
-                    navController.navigate(item[1])
+                if (navView.menu.findItem(item.navId).isVisible && navView.menu.findItem(item.parentMenuId).isVisible) {
+                    navController.navigate(item.navId)
                     break
                 }
             }
@@ -143,6 +117,32 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    fun createNavGraph() {
+        // This is instead of a hard-coded mobile_navigation.xml file. That file still exists though
+        // to define the R.id values
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+
+        navHostFragment.navController.apply {
+            graph = createGraph(startDestination = R.id.nav_knmi_rain_m1) {
+                for (item in ALL_ITEMS) {
+                    if (item.navId == R.id.nav_knmi_text) {
+                        fragment<KnmiTextFragment>(item.navId) {label = getString(item.stringId) }
+                    }
+                    else if (item.navId == R.id.nav_buienradar_chart) {
+                        fragment<BuienradarChartFragment>(item.navId) {label = getString(item.stringId) }
+                    }
+                    else {
+                        fragment<MapFragment>(item.navId) {label = getString(item.stringId) }
+                    }
+                }
+                fragment<MapFragment>(R.id.nav_empty) { label = getString(R.string.menu_empty) }
+                fragment<AboutFragment>(R.id.nav_about) { label = getString(R.string.menu_about) }
+                fragment<SettingsFragment>(R.id.nav_settings) { label = getString(R.string.menu_settings) }
+            }
+        }
+
+    }
+
     fun setMenuItemsVisibility() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val menu = navView.menu
@@ -159,18 +159,18 @@ class MainActivity : AppCompatActivity() {
         val navItemsKNMI = sharedPreferences.getStringSet("settings_nav_view_knmi", setOf("not_yet_set"))
         if (navItemsKNMI != null) {
             for (item in KNMI_ITEMS) {
-                val menuItem = menu.findItem(item[1])
-                if (navItemsKNMI == setOf("not_yet_set")) {  menuItem.isVisible = (item[2] == 1) }
-                else { menuItem.isVisible = (item[1].toString() in navItemsKNMI) }
+                val menuItem = menu.findItem(item.navId)
+                if (navItemsKNMI == setOf("not_yet_set")) {  menuItem.isVisible = (item.defaultVisible == 1) }
+                else { menuItem.isVisible = (item.navId.toString() in navItemsKNMI) }
             }
         }
 
         val navItemsBuienradar = sharedPreferences.getStringSet("settings_nav_view_buienradar", setOf("not_yet_set"))
         if (navItemsBuienradar != null) {
             for (item in BUIENRADAR_ITEMS) {
-                val menuItem = menu.findItem(item[1])
-                if (navItemsBuienradar == setOf("not_yet_set")) {  menuItem.isVisible = (item[2] == 1) }
-                else { menuItem.isVisible = (item[1].toString() in navItemsBuienradar) }
+                val menuItem = menu.findItem(item.navId)
+                if (navItemsBuienradar == setOf("not_yet_set")) {  menuItem.isVisible = (item.defaultVisible == 1) }
+                else { menuItem.isVisible = (item.navId.toString() in navItemsBuienradar) }
             }
         }
     }
@@ -191,7 +191,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         if (navHostFragment != null) {
             val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
-            if (fragment is BaseFragment) {
+            if (fragment is MapFragment) {
                 fragment.refreshPage()
             }
             if (fragment is KnmiTextFragment) {
@@ -208,8 +208,8 @@ class MainActivity : AppCompatActivity() {
             // Retrieve the URL to share
             val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
             val url: String
-            if (fragment is BaseFragment) {
-                url = fragment.getURL()
+            if (fragment is MapFragment) {
+                url = fragment.url
             } else {
 
                 // Unsupported
@@ -315,7 +315,7 @@ class MainActivity : AppCompatActivity() {
             val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
             if (navHostFragment != null) {
                 val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
-                if (fragment is BaseFragment) {
+                if (fragment is MapFragment) {
                     fragment.setLocation(gpsLatCurrent, gpsLonCurrent)
                 }
                 if (fragment is BuienradarChartFragment) {

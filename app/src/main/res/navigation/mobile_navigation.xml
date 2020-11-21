@@ -1,123 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_knmi_rain_m1">
+    android:id="@+id/mobile_navigation">
 
-    <fragment
-        android:id="@+id/nav_knmi_rain_m1"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiRainM1Fragment"
-        android:label="@string/menu_knmi_rain_m1"
-        tools:layout="@layout/fragment_knmi" />
-    <fragment
-        android:id="@+id/nav_knmi_today"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiTodayFragment"
-        android:label="@string/menu_knmi_today"
-        tools:layout="@layout/fragment_knmi" />
-    <fragment
-        android:id="@+id/nav_knmi_tonight"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiTonightFragment"
-        android:label="@string/menu_knmi_tonight"
-        tools:layout="@layout/fragment_knmi" />
-    <fragment
-        android:id="@+id/nav_knmi_tomorrow"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiTomorrowFragment"
-        android:label="@string/menu_knmi_tomorrow"
-        tools:layout="@layout/fragment_knmi" />
-    <fragment
-        android:id="@+id/nav_knmi_temperature"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiTemperatureFragment"
-        android:label="@string/menu_knmi_temperature"
-        tools:layout="@layout/fragment_knmi" />
-    <fragment
-        android:id="@+id/nav_knmi_wind"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiWindFragment"
-        android:label="@string/menu_knmi_wind"
-        tools:layout="@layout/fragment_knmi" />
-    <fragment
-        android:id="@+id/nav_knmi_visibility"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiVisibilityFragment"
-        android:label="@string/menu_knmi_visibility"
-        tools:layout="@layout/fragment_knmi" />
-    <fragment
-        android:id="@+id/nav_knmi_humidity"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiHumidityFragment"
-        android:label="@string/menu_knmi_humidity"
-        tools:layout="@layout/fragment_knmi" />
-    <fragment
-        android:id="@+id/nav_knmi_warnings"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiWarningsFragment"
-        android:label="@string/menu_knmi_warnings"
-        tools:layout="@layout/fragment_knmi" />
-    <fragment
-        android:id="@+id/nav_knmi_sun_tod"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiSunStrengthTodayFragment"
-        android:label="@string/menu_knmi_sun_today"
-        tools:layout="@layout/fragment_knmi" />
-    <fragment
-        android:id="@+id/nav_knmi_sun_tom"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiSunStrengthTomorrowFragment"
-        android:label="@string/menu_knmi_sun_tomorrow"
-        tools:layout="@layout/fragment_knmi" />
-    <fragment
-        android:id="@+id/nav_knmi_text"
-        android:name="foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment"
-        android:label="@string/menu_knmi_text"
-        tools:layout="@layout/fragment_knmi" />
+    <fragment android:id="@+id/nav_knmi_rain_m1" />
+    <fragment android:id="@+id/nav_knmi_today" />
+    <fragment android:id="@+id/nav_knmi_tonight" />
+    <fragment android:id="@+id/nav_knmi_tomorrow" />
+    <fragment android:id="@+id/nav_knmi_temperature" />
+    <fragment android:id="@+id/nav_knmi_wind" />
+    <fragment android:id="@+id/nav_knmi_text" />
 
-    <fragment
-        android:id="@+id/nav_buienradar_rain_m1"
-        android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarRainM1Fragment"
-        android:label="@string/menu_buienradar_rain_m1"
-        tools:layout="@layout/fragment_buienradar" />
+    <fragment android:id="@+id/nav_knmi_visibility" />
+    <fragment android:id="@+id/nav_knmi_humidity" />
+    <fragment android:id="@+id/nav_knmi_warnings"/>
+    <fragment android:id="@+id/nav_knmi_sun_tod" />
+    <fragment android:id="@+id/nav_knmi_sun_tom" />
 
-    <fragment
-        android:id="@+id/nav_buienradar_sun"
-        android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarSunFragment"
-        android:label="@string/menu_buienradar_sun"
-        tools:layout="@layout/fragment_buienradar" />
+    <fragment android:id="@+id/nav_buienradar_rain_m1" />
+    <fragment android:id="@+id/nav_buienradar_sun" />
+    <fragment android:id="@+id/nav_buienradar_cloud" />
+    <fragment android:id="@+id/nav_buienradar_chart" />
 
-    <fragment
-        android:id="@+id/nav_buienradar_cloud"
-        android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarCloudFragment"
-        android:label="@string/menu_buienradar_cloud"
-        tools:layout="@layout/fragment_buienradar" />
+    <fragment android:id="@+id/nav_buienradar_drizzle" />
+    <fragment android:id="@+id/nav_buienradar_hail" />
 
-    <fragment
-        android:id="@+id/nav_buienradar_drizzle"
-        android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarDrizzleFragment"
-        android:label="@string/menu_buienradar_drizzle"
-        tools:layout="@layout/fragment_buienradar" />
-
-    <fragment
-        android:id="@+id/nav_buienradar_hail"
-        android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarHailFragment"
-        android:label="@string/menu_buienradar_hail"
-        tools:layout="@layout/fragment_buienradar" />
-
-    <fragment
-        android:id="@+id/nav_buienradar_chart"
-        android:name="foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment"
-        android:label="@string/menu_buienradar_chart"
-        tools:layout="@layout/fragment_buienradar" />
-
-    <fragment
-        android:id="@+id/nav_empty"
-        android:name="foss.cnugteren.nlweer.ui.fragments.EmptyFragment"
-        android:label="@string/menu_empty"
-        tools:layout="@layout/fragment_knmi" />
-
-    <fragment
-        android:id="@+id/nav_about"
-        android:name="foss.cnugteren.nlweer.ui.fragments.AboutFragment"
-        android:label="@string/menu_about"
-        tools:layout="@layout/fragment_about" />
-
-    <fragment
-        android:id="@+id/nav_settings"
-        android:name="foss.cnugteren.nlweer.ui.fragments.SettingsFragment"
-        android:label="@string/menu_settings"
-        tools:layout="@layout/fragment_settings" />
+    <fragment android:id="@+id/nav_empty" />
+    <fragment android:id="@+id/nav_about" />
+    <fragment android:id="@+id/nav_settings" />
 
 </navigation>
