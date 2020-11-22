@@ -79,6 +79,18 @@
                 android:icon="@drawable/menu_today"
                 android:title="@string/menu_knmi_daily_sun" />
             <item
+                android:id="@+id/nav_knmi_europe_synoptic_now"
+                android:icon="@drawable/menu_isobars"
+                android:title="@string/menu_knmi_europe_synoptic_now" />
+            <item
+                android:id="@+id/nav_knmi_europe_synoptic_next_12h"
+                android:icon="@drawable/menu_isobars"
+                android:title="@string/menu_knmi_europe_synoptic_next_12h" />
+            <item
+                android:id="@+id/nav_knmi_europe_synoptic_next_24h"
+                android:icon="@drawable/menu_isobars"
+                android:title="@string/menu_knmi_europe_synoptic_next_24h" />
+            <item
                 android:id="@+id/nav_knmi_text"
                 android:icon="@drawable/menu_weather_report"
                 android:title="@string/menu_knmi_text" />

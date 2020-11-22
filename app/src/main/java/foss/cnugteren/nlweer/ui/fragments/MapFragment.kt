@@ -4,15 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import foss.cnugteren.nlweer.DrawWebView
-import androidx.fragment.app.Fragment
-import foss.cnugteren.nlweer.R
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import android.view.ViewTreeObserver
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.ALL_ITEMS
+import foss.cnugteren.nlweer.DrawWebView
 import foss.cnugteren.nlweer.MainActivity
+import foss.cnugteren.nlweer.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MapFragment : Fragment() {
 
@@ -74,7 +76,7 @@ class MapFragment : Fragment() {
         // Set the location (latitude and longitude)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         gifView.drawCircles = sharedPreferences.getBoolean("location_enable", false)
-        if (gifView.drawCircles) {
+        if (gifView.drawCircles && !coordinates.contentEquals(arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))) {
             val gpsEnable = sharedPreferences.getBoolean("gps_enable", false)
             if (!gpsEnable) { // Sets the lat/lon from manual source
                 val lat = sharedPreferences.getString("location_latitude", null)?.toFloatOrNull()
@@ -102,6 +104,32 @@ class MapFragment : Fragment() {
         loadPage()
     }
 
+    fun mapUrl(): String {
+        var mapUrl = url // base URL
+
+        // Needs time-zone based replacement
+        if ("<DDHH>" in mapUrl) {
+            val hourFormatter = SimpleDateFormat("HH")
+            val daysFormatter = SimpleDateFormat("dd")
+            val time = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+
+            val dayNow = daysFormatter.format(time.time)
+            val hourNow = if (hourFormatter.format(time.time).toInt() < 12) "00" else "12"
+            time.add(Calendar.HOUR, 12)
+            val dayPlus12h = daysFormatter.format(time.time)
+            val hourPlus12h = if (hourFormatter.format(time.time).toInt() < 12) "00" else "12"
+            time.add(Calendar.HOUR, 12)
+            val dayPlus24h = daysFormatter.format(time.time)
+            val hourPlus24h = if (hourFormatter.format(time.time).toInt() < 12) "00" else "12"
+
+            // Replace the date with the current day of the month and 00 or 12 depending on the hour
+            mapUrl = mapUrl.replace("<DDHH>+24", dayPlus24h + hourNow)
+            mapUrl = mapUrl.replace("<DDHH>+12", dayPlus12h + hourPlus12h)
+            mapUrl = mapUrl.replace("<DDHH>", dayNow + hourPlus24h)
+        }
+        return mapUrl
+    }
+
     fun loadPage() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val backgroundColour = " " + sharedPreferences.getString("background_colour", "black") + " "
@@ -114,7 +142,7 @@ class MapFragment : Fragment() {
                         html {
                            width: 100%;
                            height: 100%;
-                           background:""".trimIndent() + backgroundColour + """url(""".trimIndent() + url + """) center center no-repeat;
+                           background:""".trimIndent() + backgroundColour + """url(""".trimIndent() + mapUrl() + """) center center no-repeat;
                         }
                     </style>
                 </head>

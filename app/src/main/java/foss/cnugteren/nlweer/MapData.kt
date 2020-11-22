@@ -32,7 +32,10 @@ val KNMI_ITEMS = arrayOf(
     MapData(R.string.menu_knmi_daily_max_wind_speed, R.id.nav_knmi_daily_max_wind_speed, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/fhx/fhx.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
     MapData(R.string.menu_knmi_daily_rain, R.id.nav_knmi_daily_rain, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/prec/prec.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
     MapData(R.string.menu_knmi_daily_snow, R.id.nav_knmi_daily_snow, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/sx/sx.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
-    MapData(R.string.menu_knmi_daily_sun, R.id.nav_knmi_daily_sun, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/sq/sq.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f))
+    MapData(R.string.menu_knmi_daily_sun, R.id.nav_knmi_daily_sun, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/sq/sq.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
+    MapData(R.string.menu_knmi_europe_synoptic_now, R.id.nav_knmi_europe_synoptic_now, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/AL<DDHH>_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
+    MapData(R.string.menu_knmi_europe_synoptic_next_12h, R.id.nav_knmi_europe_synoptic_next_12h, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/PL<DDHH>+12_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
+    MapData(R.string.menu_knmi_europe_synoptic_next_24h, R.id.nav_knmi_europe_synoptic_next_24h, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/PL<DDHH>+24_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))
 )
 
 val BUIENRADAR_ITEMS = arrayOf(
