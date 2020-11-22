@@ -209,7 +209,7 @@ class MainActivity : AppCompatActivity() {
             val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
             val url: String
             if (fragment is MapFragment) {
-                url = fragment.url
+                url = fragment.mapUrl()
             } else {
 
                 // Unsupported

@@ -32,6 +32,9 @@
     <string name="menu_knmi_daily_rain">Daily precipitation</string>
     <string name="menu_knmi_daily_snow">Snow cover</string>
     <string name="menu_knmi_daily_sun">Yesterday\'s sunshine</string>
+    <string name="menu_knmi_europe_synoptic_now">Synoptic map now</string>
+    <string name="menu_knmi_europe_synoptic_next_12h">Synoptic map next 12h</string>
+    <string name="menu_knmi_europe_synoptic_next_24h">Synoptic map next 24h</string>
 
     <string name="menu_knmi_text">Weather report</string>
     <string name="menu_knmi_text_source">Source:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
@@ -107,7 +110,7 @@
     <string name="about_text_content_4">Main app icon: Copyright by Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
 \nMoon icon: Copyright OOjs UI Team, MIT License, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
 \nSun, wind, rain, snow, wind speed, hail, cloud, drizzle, graph, humidity, fog, warning, arrow, and report icons: Copyright by Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
-\nTemperature and sunrise icons: Icons made by Hirschwolf and Freepik from www.flaticon.com</string>
+\nTemperature, isobar, and sunrise icons: Icons made by Hirschwolf and Freepik from www.flaticon.com</string>
     <string name="about_text_header_5">NLWeer version info</string>
 
     <string name="colour_black">Black</string>
