@@ -19,7 +19,6 @@ val KNMI_ITEMS = arrayOf(
     MapData(R.string.menu_knmi_tomorrow, R.id.nav_knmi_tomorrow, 1, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/current/weather/forecast/kaart_verwachtingen_Morgen_dag.gif", 425, 467, arrayOf(50.70f, 3.10f, 53.65f, 7.55f, -0.01f, 0.00f)),
     MapData(R.string.menu_knmi_temperature, R.id.nav_knmi_temperature, 1, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/actueel-weer/temperatuur.png", 569, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
     MapData(R.string.menu_knmi_wind, R.id.nav_knmi_wind, 1, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/actueel-weer/windkracht.png", 569, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
-    MapData(R.string.menu_knmi_text, R.id.nav_knmi_text, 1, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
     // Optionally shown
     MapData(R.string.menu_knmi_visibility, R.id.nav_knmi_visibility, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/actueel-weer/zicht.png", 569, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
     MapData(R.string.menu_knmi_humidity, R.id.nav_knmi_humidity, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/actueel-weer/relvocht.png", 569, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
@@ -35,7 +34,9 @@ val KNMI_ITEMS = arrayOf(
     MapData(R.string.menu_knmi_daily_sun, R.id.nav_knmi_daily_sun, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/klimatologie/geografische-overzichten/sq/sq.png", 570, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
     MapData(R.string.menu_knmi_europe_synoptic_now, R.id.nav_knmi_europe_synoptic_now, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/AL<DDHH>_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
     MapData(R.string.menu_knmi_europe_synoptic_next_12h, R.id.nav_knmi_europe_synoptic_next_12h, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/PL<DDHH>+12_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
-    MapData(R.string.menu_knmi_europe_synoptic_next_24h, R.id.nav_knmi_europe_synoptic_next_24h, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/PL<DDHH>+24_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))
+    MapData(R.string.menu_knmi_europe_synoptic_next_24h, R.id.nav_knmi_europe_synoptic_next_24h, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/PL<DDHH>+24_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
+    // Special maps
+    MapData(R.string.menu_knmi_text, R.id.nav_knmi_text, 1, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))
 )
 
 val BUIENRADAR_ITEMS = arrayOf(
@@ -43,10 +44,11 @@ val BUIENRADAR_ITEMS = arrayOf(
     MapData(R.string.menu_buienradar_rain_m1, R.id.nav_buienradar_rain_m1, 1, R.id.buienradar_menu, "https://api.buienradar.nl/image/1.0/RadarMapNL?w=550&h=510", 550, 510, arrayOf(49.50f, 0.15f, 54.80f, 10.25f, 0.02f, -0.01f)),
     MapData(R.string.menu_buienradar_sun, R.id.nav_buienradar_sun, 1, R.id.buienradar_menu, "https://image.buienradar.nl/2.0/image/animation/RadarMapSunNL?w=550&h=510", 550, 510, arrayOf(49.50f, 0.15f, 54.80f, 10.25f, 0.02f, -0.01f)),
     MapData(R.string.menu_buienradar_cloud, R.id.nav_buienradar_cloud, 1, R.id.buienradar_menu, "https://image.buienradar.nl/2.0/image/animation/RadarMapCloudNL?w=550&h=510", 550, 510, arrayOf(49.50f, 0.15f, 54.80f, 10.25f, 0.02f, -0.01f)),
-    MapData(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart, 1, R.id.buienradar_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
     // Optionally shown
     MapData(R.string.menu_buienradar_drizzle, R.id.nav_buienradar_drizzle, 0, R.id.buienradar_menu, "https://image.buienradar.nl/2.0/image/animation/RadarMapDrizzleNL?w=550&h=510", 550, 510, arrayOf(49.50f, 0.15f, 54.80f, 10.25f, 0.02f, -0.01f)),
-    MapData(R.string.menu_buienradar_hail, R.id.nav_buienradar_hail, 0, R.id.buienradar_menu, "https://image.buienradar.nl/2.0/image/animation/RadarMapHailNL?w=550&h=510", 550, 510, arrayOf(49.50f, 0.15f, 54.80f, 10.25f, 0.02f, -0.01f))
+    MapData(R.string.menu_buienradar_hail, R.id.nav_buienradar_hail, 0, R.id.buienradar_menu, "https://image.buienradar.nl/2.0/image/animation/RadarMapHailNL?w=550&h=510", 550, 510, arrayOf(49.50f, 0.15f, 54.80f, 10.25f, 0.02f, -0.01f)),
+    // Special maps
+    MapData(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart, 1, R.id.buienradar_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))
 )
 
 val ALL_ITEMS = KNMI_ITEMS + BUIENRADAR_ITEMS
