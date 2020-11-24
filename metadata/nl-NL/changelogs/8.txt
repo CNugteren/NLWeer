@@ -1,0 +1,2 @@
+- Drie nieuwe optionele KNMI Europa weerkaarten
+- Zeven nieuwe optionele KNMI kaarten met de extremen van de afgelopen 24 uur

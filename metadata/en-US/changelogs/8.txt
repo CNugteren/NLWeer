@@ -1,0 +1,2 @@
+- Add three new optional KNMI Europe synoptic weather maps
+- Add seven new optional KNMI past 24 hour extremes maps

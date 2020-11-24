@@ -1,0 +1,2 @@
+- Trois nouvelles cartes météorologiques Europe optionnel KNMI
+- Sept nouvelles cartes KNMI optionnel avec les extrêmes des dernières 24 heures
