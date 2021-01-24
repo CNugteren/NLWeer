@@ -36,7 +36,8 @@ val KNMI_ITEMS = arrayOf(
     MapData(R.string.menu_knmi_europe_synoptic_next_12h, R.id.nav_knmi_europe_synoptic_next_12h, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/PL<DDHH>+12_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
     MapData(R.string.menu_knmi_europe_synoptic_next_24h, R.id.nav_knmi_europe_synoptic_next_24h, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/PL<DDHH>+24_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
     // Special maps
-    MapData(R.string.menu_knmi_text, R.id.nav_knmi_text, 1, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))
+    MapData(R.string.menu_knmi_text, R.id.nav_knmi_text, 1, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
+    MapData(R.string.menu_knmi_pluim, R.id.nav_knmi_pluim, 0, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))
 )
 
 val BUIENRADAR_ITEMS = arrayOf(
@@ -48,7 +49,8 @@ val BUIENRADAR_ITEMS = arrayOf(
     MapData(R.string.menu_buienradar_drizzle, R.id.nav_buienradar_drizzle, 0, R.id.buienradar_menu, "https://image.buienradar.nl/2.0/image/animation/RadarMapDrizzleNL?w=550&h=510", 550, 510, arrayOf(49.50f, 0.15f, 54.80f, 10.25f, 0.02f, -0.01f)),
     MapData(R.string.menu_buienradar_hail, R.id.nav_buienradar_hail, 0, R.id.buienradar_menu, "https://image.buienradar.nl/2.0/image/animation/RadarMapHailNL?w=550&h=510", 550, 510, arrayOf(49.50f, 0.15f, 54.80f, 10.25f, 0.02f, -0.01f)),
     // Special maps
-    MapData(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart, 1, R.id.buienradar_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))
+    MapData(R.string.menu_buienradar_chart, R.id.nav_buienradar_chart, 1, R.id.buienradar_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
+    MapData(R.string.menu_buienradar_pluim, R.id.nav_buienradar_pluim, 0, R.id.buienradar_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))
 )
 
 val ALL_ITEMS = KNMI_ITEMS + BUIENRADAR_ITEMS
