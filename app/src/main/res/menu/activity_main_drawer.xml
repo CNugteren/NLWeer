@@ -127,6 +127,10 @@
                 android:id="@+id/nav_buienradar_chart"
                 android:icon="@drawable/menu_bargraph"
                 android:title="@string/menu_buienradar_chart" />
+            <item
+                android:id="@+id/nav_buienradar_pluim"
+                android:icon="@drawable/menu_graph"
+                android:title="@string/menu_buienradar_pluim" />
         </menu>
 
     </item>

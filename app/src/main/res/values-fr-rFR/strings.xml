@@ -55,6 +55,7 @@
     <string name="menu_buienradar_chart_no_location">Erreur: Localisation inconnu, vérifiez les paramètres</string>
     <string name="menu_buienradar_chart_outside_of_range">Erreur: Localisation en dehors des Pays-Bas</string>
     <string name="menu_buienradar_chart_error">Les données n\'ont pas pu être chargées, réessayez plus tard</string>
+    <string name="menu_buienradar_pluim">Pluim</string>
 
     <string name="settings_category_sources">Sources de données</string>
     <string name="settings_knmi_enable">KNMI</string>

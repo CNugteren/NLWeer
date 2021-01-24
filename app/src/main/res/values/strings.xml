@@ -55,6 +55,7 @@
     <string name="menu_buienradar_chart_no_location">Error: Location not known, verify the settings</string>
     <string name="menu_buienradar_chart_outside_of_range">Error: Location outside of the Netherlands</string>
     <string name="menu_buienradar_chart_error">Data could not be loaded, try again later</string>
+    <string name="menu_buienradar_pluim">Pluim</string>
 
     <string name="settings_category_sources">Data sources</string>
     <string name="settings_knmi_enable">KNMI</string>

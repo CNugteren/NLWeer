@@ -134,6 +134,9 @@ class MainActivity : AppCompatActivity() {
                     else if (item.navId == R.id.nav_buienradar_chart) {
                         fragment<BuienradarChartFragment>(item.navId) {label = getString(item.stringId) }
                     }
+                    else if (item.navId == R.id.nav_buienradar_pluim) {
+                        fragment<BuienradarPluimFragment>(item.navId) {label = getString(item.stringId) }
+                    }
                     else {
                         fragment<MapFragment>(item.navId) {label = getString(item.stringId) }
                     }
