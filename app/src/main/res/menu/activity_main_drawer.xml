@@ -94,6 +94,10 @@
                 android:id="@+id/nav_knmi_text"
                 android:icon="@drawable/menu_weather_report"
                 android:title="@string/menu_knmi_text" />
+            <item
+                android:id="@+id/nav_knmi_pluim"
+                android:icon="@drawable/menu_weather_report"
+                android:title="@string/menu_knmi_pluim" />
         </menu>
     </item>
 
