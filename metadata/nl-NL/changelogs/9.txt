@@ -1,0 +1,1 @@
+- Nieuwe optionele 'pluim' grafieken voor KNMI en Buienradar toegevoegd

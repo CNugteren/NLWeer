@@ -1,0 +1,1 @@
+- Add new optional 'Pluim' graphs for both KNMI and Buienradar
