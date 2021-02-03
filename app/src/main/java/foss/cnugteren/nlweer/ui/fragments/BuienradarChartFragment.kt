@@ -88,10 +88,10 @@ class BuienradarChartFragment : Fragment() {
 
     fun loadPage() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val backgroundColour = sharedPreferences.getString("background_colour", "black")
+        val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
         var textColour = Color.BLACK
         var background = Color.WHITE
-        if (backgroundColour == "black") {
+        if (darkMode == "dark_mode_yes") {
             textColour = Color.WHITE
             background = Color.rgb(46, 46, 46) // matches Android's dark mode colours
         }
