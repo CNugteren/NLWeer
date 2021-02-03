@@ -30,6 +30,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         val locationProvider = findPreference<ListPreference>("location_provider")?.entry
         val language = findPreference<ListPreference>("language")?.entry
         val backgroundColour = findPreference<ListPreference>("background_colour")?.entry
+        val darkMode = findPreference<ListPreference>("dark_mode")?.entry
         val locationShape = findPreference<ListPreference>("location_shape")?.entry
         val locationColour = findPreference<ListPreference>("location_colour")?.entry
         findPreference<EditTextPreference>("location_latitude")?.summary = latString
@@ -37,6 +38,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         findPreference<ListPreference>("language")?.summary = language
         findPreference<ListPreference>("location_provider")?.summary = locationProvider
         findPreference<ListPreference>("background_colour")?.summary = backgroundColour
+        findPreference<ListPreference>("dark_mode")?.summary = darkMode
         findPreference<ListPreference>("location_shape")?.summary = locationShape
         findPreference<ListPreference>("location_colour")?.summary = locationColour
 
@@ -114,7 +116,8 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
         // Retrieves the view to be able to get the nav-menu to check for visibility
         val activity = this.activity as MainActivity
-        val navView: NavigationView = activity.findViewById(R.id.nav_view)
+        val navView = activity.findViewById<NavigationView>(R.id.nav_view)
+        if (navView == null) { return }
         val menu = navView.menu
 
         // Add all the items that are currently visible in the nav menu to the list of options
@@ -150,7 +153,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
             pref.summary = sharedPreferences.getString(key, "")
         }
         if (pref is ListPreference &&
-            (key == "language" || key == "background_colour" || key == "location_shape" || key == "location_colour" || key == "location_provider")) {
+            (key == "language" || key == "background_colour" || key == "dark_mode" || key == "location_shape" || key == "location_colour" || key == "location_provider")) {
             pref.summary = findPreference<ListPreference>(key)?.entry
         }
 
@@ -226,6 +229,12 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
         // Toggle the location provider button
         enableDisableLocationProviderButton()
+
+        // Set dark mode
+        if (pref is ListPreference && key == "dark_mode") {
+            val activity = this.activity as MainActivity
+            activity.setAppTheme()
+        }
     }
 
     fun changeDefaultViewIfDisabled(sharedPreferences: SharedPreferences) {
