@@ -91,6 +91,10 @@
     <string name="settings_location_shape">Forme du balise de position</string>
     <string name="settings_location_colour">Couleur du balise de position</string>
 
+    <string name="settings_dark_mode">Mode sombre</string>
+    <string name="dark_mode_no">Désactivé</string>
+    <string name="dark_mode_yes">Activé</string>
+
     <string name="settings_languages">Langue</string>
     <string name="language_system">Défaut du système</string>
 

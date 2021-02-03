@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) { // Only when the app starts for the first time
             setStartFragment()
         }
+        setAppTheme()
 
         // The floating buttons (FAB) to go to the previous/next view
         val fabPrevious: View = findViewById(R.id.fab_previous)
@@ -189,6 +190,18 @@ class MainActivity : AppCompatActivity() {
             val navGraph = navController.graph
             navGraph.startDestination = defaultViewId
             navController.graph = navGraph
+        }
+    }
+
+    // Dark mode
+    fun setAppTheme() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val darkModeSetting = sharedPreferences.getString("dark_mode", "dark_mode_no")
+        if (darkModeSetting == "dark_mode_yes") {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
 
@@ -339,8 +352,8 @@ class MainActivity : AppCompatActivity() {
         val enableButtons = sharedPreferences.getBoolean("floating_navigation_enable", false)
 
         val fabPrevious = findViewById<View>(R.id.fab_previous)
-        fabPrevious.isVisible = enable && enableButtons
+        if (fabPrevious != null) { fabPrevious.isVisible = enable && enableButtons }
         val fabNext = findViewById<View>(R.id.fab_next)
-        fabNext.isVisible = enable && enableButtons
+        if (fabNext != null) { fabNext.isVisible = enable && enableButtons }
     }
 }

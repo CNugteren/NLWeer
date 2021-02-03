@@ -107,6 +107,13 @@
             android:title="@string/settings_languages"/>
 
         <ListPreference
+            android:defaultValue="dark_mode_no"
+            android:entries="@array/dark_mode_items"
+            android:entryValues="@array/dark_mode_values"
+            android:key="dark_mode"
+            android:title="@string/settings_dark_mode"/>
+
+        <ListPreference
             android:defaultValue="black"
             android:entries="@array/background_colour_items"
             android:entryValues="@array/background_colour_values"

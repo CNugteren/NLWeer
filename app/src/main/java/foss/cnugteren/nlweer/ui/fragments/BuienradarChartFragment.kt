@@ -87,20 +87,33 @@ class BuienradarChartFragment : Fragment() {
     }
 
     fun loadPage() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
+        var textColour = Color.BLACK
+        var background = Color.WHITE
+        if (darkMode == "dark_mode_yes") {
+            textColour = Color.WHITE
+            background = Color.rgb(46, 46, 46) // matches Android's dark mode colours
+        }
+
         chart = root.findViewById(R.id.buienradar_chart)
 
         // Chart styling and formatting
         chart.axisRight.isEnabled = false
         var description = Description()
+        description.textColor = textColour
         description.text = ""
         chart.description = description
         chart.setNoDataText(getString(R.string.menu_buienradar_chart_loading))
-        chart.setNoDataTextColor(Color.BLACK)
+        chart.setNoDataTextColor(textColour)
         chart.setDrawGridBackground(false)
         chart.xAxis.setDrawGridLines(false)
         chart.axisLeft.setDrawGridLines(false)
         chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
-        chart.setBackgroundColor(Color.WHITE)
+        chart.xAxis.textColor = textColour
+        chart.legend.textColor = textColour
+        chart.axisLeft.textColor = textColour
+        chart.setBackgroundColor(background)
         chart.invalidate()
 
         if (latitude == null || longitude == null) {
