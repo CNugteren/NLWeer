@@ -14,7 +14,7 @@
     <string name="menu_empty">Écran vide</string>
 
     <string name="menu_knmi_header">Données KNMI</string>
-    <string name="menu_knmi_rain_m1">Pluie la dernière heure</string>
+    <string name="menu_knmi_rain_m1">Pluie la dernière heure (+temp)</string>
     <string name="menu_knmi_today">Prévisions aujourd\'hui</string>
     <string name="menu_knmi_tonight">Prévisions ce soir</string>
     <string name="menu_knmi_tomorrow">Prévisions demain</string>
@@ -35,6 +35,8 @@
     <string name="menu_knmi_europe_synoptic_now">Carte météo maintenant</string>
     <string name="menu_knmi_europe_synoptic_next_12h">Carte météo 12h suivvante</string>
     <string name="menu_knmi_europe_synoptic_next_24h">Carte météo 24h suivante</string>
+    <string name="menu_knmi_chill_temperature">Refroidissement éolien</string>
+    <string name="menu_knmi_rain_m1_no_temp">Pluie la dernière heure</string>
 
     <string name="menu_knmi_text">Bulletin météo</string>
     <string name="menu_knmi_text_source">Source:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>

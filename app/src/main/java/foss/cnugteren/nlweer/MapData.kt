@@ -35,6 +35,8 @@ val KNMI_ITEMS = arrayOf(
     MapData(R.string.menu_knmi_europe_synoptic_now, R.id.nav_knmi_europe_synoptic_now, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/AL<DDHH>_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
     MapData(R.string.menu_knmi_europe_synoptic_next_12h, R.id.nav_knmi_europe_synoptic_next_12h, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/PL<DDHH>+12_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
     MapData(R.string.menu_knmi_europe_synoptic_next_24h, R.id.nav_knmi_europe_synoptic_next_24h, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/PL<DDHH>+24_large.gif", 1083, 696, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
+    MapData(R.string.menu_knmi_chill_temperature, R.id.nav_knmi_chill_temperature, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/actueel-weer/gevoelstemperatuur.png", 569, 622, arrayOf(50.70f, 2.95f, 53.65f, 7.30f, -0.01f, 0.00f)),
+    MapData(R.string.menu_knmi_rain_m1_no_temp, R.id.nav_knmi_rain_m1_no_temp, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/actueel-weer/neerslagradar/WWWRADAR_loop.gif", 425, 445, arrayOf(50.60f, 1.85f, 54.05f, 7.20f, -0.10f, 0.09f)),
     // Special maps
     MapData(R.string.menu_knmi_text, R.id.nav_knmi_text, 1, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
     MapData(R.string.menu_knmi_pluim, R.id.nav_knmi_pluim, 0, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))
