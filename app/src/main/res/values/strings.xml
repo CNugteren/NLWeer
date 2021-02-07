@@ -14,7 +14,7 @@
     <string name="menu_empty">Empty screen</string>
 
     <string name="menu_knmi_header">Source: KNMI</string>
-    <string name="menu_knmi_rain_m1">Rain last hour</string>
+    <string name="menu_knmi_rain_m1">Rain last hour (+temp)</string>
     <string name="menu_knmi_today">Forecast today</string>
     <string name="menu_knmi_tonight">Forecast tonight</string>
     <string name="menu_knmi_tomorrow">Forecast tomorrow</string>
@@ -35,6 +35,8 @@
     <string name="menu_knmi_europe_synoptic_now">Synoptic map now</string>
     <string name="menu_knmi_europe_synoptic_next_12h">Synoptic map next 12h</string>
     <string name="menu_knmi_europe_synoptic_next_24h">Synoptic map next 24h</string>
+    <string name="menu_knmi_chill_temperature">Windchill</string>
+    <string name="menu_knmi_rain_m1_no_temp">Rain last hour</string>
 
     <string name="menu_knmi_text">Weather report</string>
     <string name="menu_knmi_text_source">Source:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>

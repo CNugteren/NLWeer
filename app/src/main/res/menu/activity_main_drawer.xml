@@ -91,6 +91,14 @@
                 android:icon="@drawable/menu_isobars"
                 android:title="@string/menu_knmi_europe_synoptic_next_24h" />
             <item
+                android:id="@+id/nav_knmi_chill_temperature"
+                android:icon="@drawable/menu_temperature"
+                android:title="@string/menu_knmi_chill_temperature" />
+            <item
+                android:id="@+id/nav_knmi_rain_m1_no_temp"
+                android:icon="@drawable/menu_radar"
+                android:title="@string/menu_knmi_rain_m1_no_temp" />
+            <item
                 android:id="@+id/nav_knmi_text"
                 android:icon="@drawable/menu_weather_report"
                 android:title="@string/menu_knmi_text" />
