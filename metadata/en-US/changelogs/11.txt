@@ -1,0 +1,1 @@
+- Add two new optional KNMI maps: rain (without temperature) and windchill

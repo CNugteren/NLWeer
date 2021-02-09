@@ -1,0 +1,1 @@
+- Twee nieuwe optionele KNMI weerkaarten: regen (zonder temperatuur) en gevoelstemperatuur

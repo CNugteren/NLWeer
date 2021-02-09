@@ -1,0 +1,1 @@
+- Deux nouvelles cartes météorologiques optionnel KNMI: pluie (sans temp.) et refroidissement éolien
