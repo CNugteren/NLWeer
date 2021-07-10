@@ -36,6 +36,7 @@
     <string name="menu_knmi_europe_synoptic_now">Weerkaart nu</string>
     <string name="menu_knmi_europe_synoptic_next_12h">Weerkaart volgende 12h</string>
     <string name="menu_knmi_europe_synoptic_next_24h">Weerkaart volgende 24h</string>
+    <string name="menu_knmi_satellite">Satelliet</string>
     <string name="menu_knmi_chill_temperature">Gevoelstemperatuur</string>
     <string name="menu_knmi_rain_m1_no_temp">Regen afgelopen uur</string>
 
@@ -118,7 +119,7 @@
     <string name="about_text_header_4">App- en menu-iconen</string>
     <string name="about_text_content_4">Appicoon: Copyright Mozilla, CC BY 4.0, https://commons.wikimedia.org/w/index.php?curid=59726384\n
 \nMaanicoon: Copyright OOjs UI Team, MIT licentie, https://phabricator.wikimedia.org/diffusion/GOJU/browse/master/LICENSE-MIT\n
-\nZon-, wind-, regen-, sneeuw-, windsnelheid-, hagel-, wolk-, miezer-, grafiek-, vochtigheid-, mist-, waarschuwing-, pijl- en weerberichticonen: Copyright Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
+\nZon-, wind-, regen-, sneeuw-, windsnelheid-, hagel-, wolk-, miezer-, grafiek-, vochtigheid-, mist-, waarschuwing-, pijl-, satelliet- en weerberichticonen: Copyright Icon Fonts, CC BY 3.0, http://www.onlinewebfonts.com/icon\n
 \nTemperatuur-, isolijn- en zonsopgangiconen: Gemaakt door Hirschwolf en Freepik van www.flaticon.com</string>
     <string name="about_text_header_5">NLWeer versie-informatie</string>
 
