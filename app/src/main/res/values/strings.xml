@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">NLWeer</string>
     <string name="nav_header_title">NLWeer</string>
-    <string name="nav_header_subtitle">Free, open-source, and privacy-friendly Dutch weather app</string>
+    <string name="nav_header_subtitle">Free, open source, and privacy-friendly Dutch weather app</string>
     <string name="nav_header_desc">Navigation header icon</string>
 
     <string name="action_refresh">Refresh</string>
