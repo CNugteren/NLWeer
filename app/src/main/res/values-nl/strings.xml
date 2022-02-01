@@ -34,8 +34,8 @@
     <string name="menu_knmi_daily_snow">Sneeuwdek vandaag</string>
     <string name="menu_knmi_daily_sun">Zonneschijn gisteren</string>
     <string name="menu_knmi_europe_synoptic_now">Weerkaart nu</string>
-    <string name="menu_knmi_europe_synoptic_next_12h">Weerkaart volgende 12h</string>
-    <string name="menu_knmi_europe_synoptic_next_24h">Weerkaart volgende 24h</string>
+    <string name="menu_knmi_europe_synoptic_next_12h">Weerkaart volgende 12u</string>
+    <string name="menu_knmi_europe_synoptic_next_24h">Weerkaart volgende 24u</string>
     <string name="menu_knmi_satellite">Satelliet</string>
     <string name="menu_knmi_chill_temperature">Gevoelstemperatuur</string>
     <string name="menu_knmi_rain_m1_no_temp">Regen afgelopen uur</string>
@@ -107,7 +107,7 @@
 
     <string name="share_subject">NLWeer kaart</string>
     <string name="share_choose">Deel deze kaart via</string>
-    <string name="share_disabled_alert_title">Niet geimplementeerd</string>
+    <string name="share_disabled_alert_title">Niet geïmplementeerd</string>
     <string name="share_disabled_alert_message">Deze pagina kan niet gedeeld worden, alleen kaarten worden ondersteund</string>
 
     <string name="about_text_header_1">Over NLWeer</string>

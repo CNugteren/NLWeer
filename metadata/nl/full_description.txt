@@ -12,5 +12,5 @@ Eigenschappen van NLWeer:
 
 * Laat weerkaarten en een geschreven weerbericht zien
 * Laat weerinformatie zien vanuit verschillende bronnen
-* Drie opties voor locatiebepaling: handmatige coordinaten, via het telefoonnetwerk, of via GPS
+* Drie opties voor locatiebepaling: handmatige coördinaten, via het telefoonnetwerk, of via GPS
 * Laat een voorspellingsgrafiek van regen zien op jouw locatie
