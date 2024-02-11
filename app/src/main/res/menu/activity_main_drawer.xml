@@ -110,6 +110,10 @@
                 android:id="@+id/nav_knmi_pluim"
                 android:icon="@drawable/menu_graph"
                 android:title="@string/menu_knmi_pluim" />
+            <item
+                android:id="@+id/nav_knmi_forecast"
+                android:icon="@drawable/menu_graph"
+                android:title="@string/menu_knmi_forecast" />
         </menu>
     </item>
 

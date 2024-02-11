@@ -44,6 +44,7 @@
     <string name="menu_knmi_text_loading">Data is being loaded&#8230;</string>
     <string name="menu_knmi_text_failed">Data could not be loaded</string>
     <string name="menu_knmi_pluim">Pluim</string>
+    <string name="menu_knmi_forecast">Forecast</string>
 
     <string name="menu_buienradar_header">Source: Buienradar</string>
     <string name="menu_buienradar_rain_m1">Rain last hour</string>
