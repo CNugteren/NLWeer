@@ -28,10 +28,6 @@ class WebClientKnmiForecast : WebViewClient() {
                 "document.getElementsByClassName('site-header')[0].style.display='none';" +
                 "document.getElementsByClassName('site-footer')[0].style.display='none';" +
                 "document.getElementsByClassName('morelinks')[0].style.display='none';" +
-                "document.getElementsByClassName('columns')[0].style.display='none';" +
-                "document.getElementsByClassName('columns')[1].style.display='none';" +
-                "document.getElementsByClassName('columns')[3].style.display='none';" +
-                "document.getElementsByClassName('chart-legend__wrp')[0].style.display='none';" +
                 "}\n)()")
     }
 }

@@ -41,6 +41,7 @@ val KNMI_ITEMS = arrayOf(
     // Special maps
     MapData(R.string.menu_knmi_text, R.id.nav_knmi_text, 1, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
     MapData(R.string.menu_knmi_pluim, R.id.nav_knmi_pluim, 0, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))
+    MapData(R.string.menu_knmi_forecast, R.id.nav_knmi_forecast, 1, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
 )
 
 val BUIENRADAR_ITEMS = arrayOf(
