@@ -79,20 +79,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewHeader1" />
 
             <TextView
-                android:id="@+id/textViewContent2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="32dp"
-                android:textIsSelectable="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewContent1" />
-
-            <TextView
-                android:id="@+id/textViewHeader3"
+                android:id="@+id/textViewHeader2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -102,10 +89,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewContent2" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewContent1" />
 
             <TextView
-                android:id="@+id/textViewContent3"
+                android:id="@+id/textViewContent2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -116,7 +103,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewHeader3" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewHeader2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
