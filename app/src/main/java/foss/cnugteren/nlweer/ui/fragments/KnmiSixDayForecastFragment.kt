@@ -50,7 +50,7 @@ class KnmiSixDayForecastFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.fragment_knmi_forecast, container, false)
+        root = inflater.inflate(R.layout.fragment_knmi_sixdayforecast, container, false)
 
         // Pull down to refresh the page
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
