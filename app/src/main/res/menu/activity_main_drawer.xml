@@ -108,7 +108,7 @@
                 android:title="@string/menu_knmi_text" />
             <item
                 android:id="@+id/nav_knmi_sixdayforecast"
-                android:icon="@drawable/menu_graph"
+                android:icon="@drawable/menu_sixdayforecast"
                 android:title="@string/menu_knmi_sixdayforecast" />
             <item
                 android:id="@+id/nav_knmi_pluim"
