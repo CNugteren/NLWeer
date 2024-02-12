@@ -111,9 +111,9 @@
                 android:icon="@drawable/menu_graph"
                 android:title="@string/menu_knmi_pluim" />
             <item
-                android:id="@+id/nav_knmi_forecast"
+                android:id="@+id/nav_knmi_sixdayforecast"
                 android:icon="@drawable/menu_graph"
-                android:title="@string/menu_knmi_forecast" />
+                android:title="@string/menu_knmi_sixdayforecast" />
         </menu>
     </item>
 

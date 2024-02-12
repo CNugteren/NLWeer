@@ -129,11 +129,11 @@ class MainActivity : AppCompatActivity() {
                     if (item.navId == R.id.nav_knmi_text) {
                         fragment<KnmiTextFragment>(item.navId) {label = getString(item.stringId) }
                     }
+                    else if (item.navId == R.id.nav_knmi_sixdayforecast) {
+                        fragment<KnmiSixDayForecastFragment>(item.navId) {label = getString(item.stringId) }
+                    }
                     else if (item.navId == R.id.nav_knmi_pluim) {
                         fragment<KnmiPluimFragment>(item.navId) {label = getString(item.stringId) }
-                    }
-                    else if (item.navId == R.id.nav_knmi_forecast) {
-                        fragment<KnmiHtmlFragment>(item.navId) {label = getString(item.stringId) }
                     }
                     else if (item.navId == R.id.nav_buienradar_chart) {
                         fragment<BuienradarChartFragment>(item.navId) {label = getString(item.stringId) }

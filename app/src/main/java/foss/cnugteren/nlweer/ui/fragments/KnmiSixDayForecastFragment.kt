@@ -11,7 +11,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
 
-class WebClientKnmiForecast : WebViewClient() {
+class WebClientKnmiSixDayForecast : WebViewClient() {
     // From https://stackoverflow.com/questions/14423981/android-webview-display-only-some-part-of-website
 
     override fun shouldOverrideUrlLoading(
@@ -39,7 +39,7 @@ class WebClientKnmiForecast : WebViewClient() {
     }
 }
 
-class KnmiHtmlFragment : Fragment() {
+class KnmiSixDayForecastFragment : Fragment() {
 
     private lateinit var webView: WebView
 
@@ -65,7 +65,7 @@ class KnmiHtmlFragment : Fragment() {
 
         // The web-viewer for the content
         webView = root.findViewById(R.id.web_view) as WebView
-        val webViewClientModified = WebClientKnmiForecast()
+        val webViewClientModified = WebClientKnmiSixDayForecast()
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = webViewClientModified
 
