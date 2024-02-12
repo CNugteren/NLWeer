@@ -1,5 +1,6 @@
 package foss.cnugteren.nlweer.ui.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
@@ -36,6 +38,12 @@ class WebClientKnmiSixDayForecast : WebViewClient() {
                 "document.getElementsByClassName('morelinks')[0].style.display='none';" +
                 "document.getElementsByClassName('banner-visual-wrp')[0].style.display='none';" +
                 "}\n)()")
+        view.loadUrl(
+            "javascript:document.body.style.setProperty(\"color\", \"white\");"
+        );
+        //view.loadUrl("javascript:(function() {" +
+        //        "document.getElementsByClassName('weather-map__label')[0].style.setProperty(\"color\", \"white\");" +
+        //        "}\n)()")
     }
 }
 
@@ -85,5 +93,11 @@ class KnmiSixDayForecastFragment : Fragment() {
 
     private fun loadPage() {
         webView.loadUrl(getURL())
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
+        if (darkMode == "dark_mode_yes") {
+            webView.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
+        }
     }
 }
