@@ -37,12 +37,15 @@ class WebClientKnmiSixDayForecast : WebViewClient() {
                 "document.getElementsByClassName('morelinks')[0].style.display='none';" +
                 "document.getElementsByClassName('banner-visual-wrp')[0].style.display='none';" +
                 "}\n)()")
-        view.loadUrl(
-            "javascript:document.body.style.setProperty(\"color\", \"white\");"
-        );
-        //view.loadUrl("javascript:(function() {" +
-        //        "document.getElementsByClassName('weather-map__label')[0].style.setProperty(\"color\", \"white\");" +
-        //        "}\n)()")
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.context)
+        val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
+        if (darkMode == "dark_mode_yes") {
+            view.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
+            view.loadUrl(
+                "javascript:document.body.style.setProperty(\"color\", \"white\");"
+            );
+        }
     }
 }
 
@@ -92,11 +95,5 @@ class KnmiSixDayForecastFragment : Fragment() {
 
     private fun loadPage() {
         webView.loadUrl(getURL())
-
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
-        if (darkMode == "dark_mode_yes") {
-            webView.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
-        }
     }
 }
