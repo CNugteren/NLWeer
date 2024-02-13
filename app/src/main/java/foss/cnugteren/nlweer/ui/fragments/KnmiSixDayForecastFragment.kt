@@ -32,7 +32,6 @@ class WebClientKnmiSixDayForecast : WebViewClient() {
                 "document.getElementsByClassName('site-footer')[0].style.display='none';" +
                 "document.getElementsByClassName('columns')[0].style.display='none';" +
                 "document.getElementsByClassName('columns')[1].style.display='none';" +
-                "document.getElementsByClassName('text-center')[0].style.display='none';" +
                 "document.getElementsByClassName('columns')[3].style.display='none';" +
                 "document.getElementsByClassName('columns')[4].style.display='none';" +
                 "document.getElementsByClassName('morelinks')[0].style.display='none';" +
