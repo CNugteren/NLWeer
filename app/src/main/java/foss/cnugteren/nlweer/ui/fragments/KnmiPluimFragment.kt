@@ -40,9 +40,6 @@ class WebClientKnmiPluim : WebViewClient() {
         val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
         if (darkMode == "dark_mode_yes") {
             view.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
-            view.loadUrl(
-                "javascript:document.body.style.setProperty(\"color\", \"white\");"
-            );
         }
     }
 }
