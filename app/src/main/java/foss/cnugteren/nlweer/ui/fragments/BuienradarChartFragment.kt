@@ -29,16 +29,13 @@ import kotlin.math.max
 
 class BuienradarChartFragment : Fragment() {
 
-    private lateinit var root: View
-    private lateinit var chart: BarChart
     private var latitude: Float? = null
     private var longitude: Float? = null
     private var _binding: FragmentBuienradarChartBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-
+    
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -108,7 +105,7 @@ class BuienradarChartFragment : Fragment() {
             background = Color.rgb(46, 46, 46) // matches Android's dark mode colours
         }
 
-        chart = root.findViewById(R.id.buienradar_chart)
+        val chart = binding.buienradarChart
 
         // Chart styling and formatting
         chart.axisRight.isEnabled = false
@@ -158,6 +155,7 @@ class BuienradarChartFragment : Fragment() {
 
         // When complete: parses the result
         override fun onPostExecute(htmlDocument: Document?) {
+            val chart = binding.buienradarChart
             if (htmlDocument == null || htmlDocument.text() == "") {
                 chart.setNoDataText(getString(R.string.menu_buienradar_chart_error) + ": " +
                         "lat=%.2f, lon=%.2f".format(latitude, longitude))

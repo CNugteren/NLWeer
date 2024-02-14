@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
+import foss.cnugteren.nlweer.databinding.FragmentBuienradarChartBinding
 
 class WebClientBuienradarPluim : WebViewClient() {
     // From https://stackoverflow.com/questions/14423981/android-webview-display-only-some-part-of-website
@@ -38,6 +39,10 @@ class BuienradarPluimFragment : Fragment() {
     private lateinit var webView: WebView
 
     private lateinit var root: View
+    private var _binding: FragmentBuienradarChartBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
