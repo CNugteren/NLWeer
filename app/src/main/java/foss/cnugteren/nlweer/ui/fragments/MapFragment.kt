@@ -10,11 +10,9 @@ import androidx.navigation.findNavController
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.ALL_ITEMS
-import foss.cnugteren.nlweer.DrawWebView
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
 import foss.cnugteren.nlweer.databinding.FragmentKnmiBinding
-import foss.cnugteren.nlweer.databinding.FragmentKnmiTextBinding
 import java.text.SimpleDateFormat
 import java.util.*
 

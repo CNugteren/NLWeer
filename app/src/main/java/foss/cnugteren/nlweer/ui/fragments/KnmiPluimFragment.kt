@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
-import foss.cnugteren.nlweer.databinding.FragmentBuienradarPluimBinding
 import foss.cnugteren.nlweer.databinding.FragmentKnmiPluimBinding
 
 class WebClientKnmiPluim : WebViewClient() {

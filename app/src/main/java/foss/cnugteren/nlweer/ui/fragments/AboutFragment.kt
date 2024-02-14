@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import foss.cnugteren.nlweer.BuildConfig
 import foss.cnugteren.nlweer.MainActivity
-import foss.cnugteren.nlweer.R
 import foss.cnugteren.nlweer.databinding.FragmentAboutBinding
 
 class AboutFragment: Fragment() {

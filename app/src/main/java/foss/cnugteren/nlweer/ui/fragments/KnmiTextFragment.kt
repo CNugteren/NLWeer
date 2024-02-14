@@ -1,18 +1,17 @@
 package foss.cnugteren.nlweer.ui.fragments
 
+import android.os.AsyncTask
 import android.os.Bundle
-import org.jsoup.Jsoup
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import foss.cnugteren.nlweer.R
-import android.os.AsyncTask
 import foss.cnugteren.nlweer.MainActivity
-import foss.cnugteren.nlweer.databinding.FragmentKnmiPluimBinding
+import foss.cnugteren.nlweer.R
 import foss.cnugteren.nlweer.databinding.FragmentKnmiTextBinding
+import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
 

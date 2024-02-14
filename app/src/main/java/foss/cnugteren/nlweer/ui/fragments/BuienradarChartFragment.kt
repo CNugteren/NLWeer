@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
@@ -19,12 +18,12 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import foss.cnugteren.nlweer.MainActivity
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import kotlin.math.pow
 import foss.cnugteren.nlweer.R
 import foss.cnugteren.nlweer.databinding.FragmentBuienradarChartBinding
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 import kotlin.math.max
+import kotlin.math.pow
 
 
 class BuienradarChartFragment : Fragment() {
