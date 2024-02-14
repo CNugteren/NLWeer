@@ -23,6 +23,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import kotlin.math.pow
 import foss.cnugteren.nlweer.R
+import foss.cnugteren.nlweer.databinding.FragmentBuienradarChartBinding
 import kotlin.math.max
 
 
@@ -32,13 +33,19 @@ class BuienradarChartFragment : Fragment() {
     private lateinit var chart: BarChart
     private var latitude: Float? = null
     private var longitude: Float? = null
+    private var _binding: FragmentBuienradarChartBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.fragment_buienradar_chart, container, false)
+        _binding = FragmentBuienradarChartBinding.inflate(inflater, container, false)
+        val root = binding.root
 
         // Pull down to refresh the page
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
@@ -69,6 +76,11 @@ class BuienradarChartFragment : Fragment() {
         loadPage()
 
         return root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     fun setLocation(lat: Float?, lon: Float?) {
