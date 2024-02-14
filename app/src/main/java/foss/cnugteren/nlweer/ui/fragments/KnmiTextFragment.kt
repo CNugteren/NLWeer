@@ -11,21 +11,27 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.R
 import android.os.AsyncTask
 import foss.cnugteren.nlweer.MainActivity
+import foss.cnugteren.nlweer.databinding.FragmentKnmiPluimBinding
+import foss.cnugteren.nlweer.databinding.FragmentKnmiTextBinding
 import org.jsoup.nodes.Document
 
 
 class KnmiTextFragment : Fragment() {
 
-    private lateinit var root: View
+    private var _binding: FragmentKnmiTextBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.fragment_knmi_text, container, false)
+        _binding = FragmentKnmiTextBinding.inflate(inflater, container, false)
 
         // Pull down to refresh the page
+        val root = binding.root
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
         pullToRefresh.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             refreshPage()
@@ -41,6 +47,11 @@ class KnmiTextFragment : Fragment() {
         return root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     fun getURL(): String {
         return "https://www.knmi.nl/nederland-nu/weer/verwachtingen"
     }
@@ -49,7 +60,8 @@ class KnmiTextFragment : Fragment() {
         loadPage()
     }
 
-    fun loadPage() {
+    private fun loadPage() {
+        val root = binding.root
         val headers = arrayOf("Vandaag & Morgen", "Vooruitzichten", "", "Vooruitzichten lange termijn")
         root.findViewById<TextView>(R.id.textViewHeader0).text = headers[0]
         root.findViewById<TextView>(R.id.textViewHeader1).text = headers[1]
@@ -73,13 +85,14 @@ class KnmiTextFragment : Fragment() {
 
         // When complete: parses the result
         override fun onPostExecute(htmlDocument: Document?) {
+            val root = binding.root
             if (htmlDocument == null) {
                 root.findViewById<TextView>(R.id.textViewContent0).text = getString(R.string.menu_knmi_text_failed)
                 root.findViewById<TextView>(R.id.textViewContent1).text = getString(R.string.menu_knmi_text_failed)
                 root.findViewById<TextView>(R.id.textViewContent3).text = getString(R.string.menu_knmi_text_failed)
                 return
             }
-            var contents = arrayOf("", "", "", "")
+            val contents = arrayOf("", "", "", "")
 
             htmlDocument.run {
                 select("div.columns.filled-main-content").forEachIndexed { index, group ->
