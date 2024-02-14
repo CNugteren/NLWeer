@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.BaseContextWrappingDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.createGraph
 import androidx.navigation.findNavController
@@ -30,6 +29,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
+import foss.cnugteren.nlweer.databinding.ActivityMainBinding
 import foss.cnugteren.nlweer.ui.fragments.*
 
 class MainActivity : AppCompatActivity() {
@@ -40,16 +40,19 @@ class MainActivity : AppCompatActivity() {
     var gpsLat: Float? = null
     var gpsLon: Float? = null
     private var baseContextWrappingDelegate: AppCompatDelegate? = null
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         createNavGraph()
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         setMenuItemsVisibility()
         val navController = findNavController(R.id.nav_host_fragment)
@@ -58,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         val destinations = mutableSetOf(R.id.nav_empty)
         for (item in KNMI_ITEMS) { destinations.add(item.navId) }
         for (item in BUIENRADAR_ITEMS) { destinations.add(item.navId) }
-        appBarConfiguration = AppBarConfiguration(destinations, drawerLayout)
+        appBarConfiguration = AppBarConfiguration(destinations, binding.drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -151,8 +154,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setMenuItemsVisibility() {
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        val menu = navView.menu
+        val menu = binding.navView.menu
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
 
         val sourceEnableKNMI = sharedPreferences.getBoolean("knmi_enable", true)
