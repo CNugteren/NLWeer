@@ -11,10 +11,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
 import foss.cnugteren.nlweer.databinding.FragmentBuienradarChartBinding
+import foss.cnugteren.nlweer.databinding.FragmentBuienradarPluimBinding
 
 class WebClientBuienradarPluim : WebViewClient() {
     // From https://stackoverflow.com/questions/14423981/android-webview-display-only-some-part-of-website
 
+    @Deprecated("Deprecated in Java")
     override fun shouldOverrideUrlLoading(
         view: WebView,
         url: String
@@ -36,10 +38,7 @@ class WebClientBuienradarPluim : WebViewClient() {
 
 class BuienradarPluimFragment : Fragment() {
 
-    private lateinit var webView: WebView
-
-    private lateinit var root: View
-    private var _binding: FragmentBuienradarChartBinding? = null
+    private var _binding: FragmentBuienradarPluimBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -49,8 +48,9 @@ class BuienradarPluimFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.fragment_knmi_pluim, container, false)
+        _binding = FragmentBuienradarPluimBinding.inflate(inflater, container, false)
 
+        val root = binding.root
         // Pull down to refresh the page
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
         pullToRefresh.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
@@ -63,7 +63,7 @@ class BuienradarPluimFragment : Fragment() {
         activity.toggleNavigationButtons(true)
 
         // The web-viewer for the content
-        webView = root.findViewById(R.id.web_view) as WebView
+        val webView = binding.webView
         val webViewClientModified = WebClientBuienradarPluim()
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = webViewClientModified
@@ -73,16 +73,23 @@ class BuienradarPluimFragment : Fragment() {
         return root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun getURL(): String {
         return "https://www.buienradar.nl/nederland/verwachtingen/de-pluim"
     }
 
     private fun refreshPage() {
+        val webView = binding.webView
         webView.clearCache(false)
         loadPage()
     }
 
     private fun loadPage() {
+        val webView = binding.webView
         webView.loadUrl(getURL())
     }
 }
