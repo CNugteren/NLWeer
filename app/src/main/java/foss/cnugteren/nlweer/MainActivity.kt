@@ -2,7 +2,6 @@ package foss.cnugteren.nlweer
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
@@ -121,7 +120,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun createNavGraph() {
+    private fun createNavGraph() {
         // This is instead of a hard-coded mobile_navigation.xml file. That file still exists though
         // to define the R.id values
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -129,20 +128,22 @@ class MainActivity : AppCompatActivity() {
         navHostFragment.navController.apply {
             graph = createGraph(startDestination = R.id.nav_knmi_rain_m1) {
                 for (item in ALL_ITEMS) {
-                    if (item.navId == R.id.nav_knmi_text) {
-                        fragment<KnmiTextFragment>(item.navId) {label = getString(item.stringId) }
-                    }
-                    else if (item.navId == R.id.nav_knmi_pluim) {
-                        fragment<KnmiPluimFragment>(item.navId) {label = getString(item.stringId) }
-                    }
-                    else if (item.navId == R.id.nav_buienradar_chart) {
-                        fragment<BuienradarChartFragment>(item.navId) {label = getString(item.stringId) }
-                    }
-                    else if (item.navId == R.id.nav_buienradar_pluim) {
-                        fragment<BuienradarPluimFragment>(item.navId) {label = getString(item.stringId) }
-                    }
-                    else {
-                        fragment<MapFragment>(item.navId) {label = getString(item.stringId) }
+                    when (item.navId) {
+                        R.id.nav_knmi_text -> {
+                            fragment<KnmiTextFragment>(item.navId) {label = getString(item.stringId) }
+                        }
+                        R.id.nav_knmi_pluim -> {
+                            fragment<KnmiPluimFragment>(item.navId) {label = getString(item.stringId) }
+                        }
+                        R.id.nav_buienradar_chart -> {
+                            fragment<BuienradarChartFragment>(item.navId) {label = getString(item.stringId) }
+                        }
+                        R.id.nav_buienradar_pluim -> {
+                            fragment<BuienradarPluimFragment>(item.navId) {label = getString(item.stringId) }
+                        }
+                        else -> {
+                            fragment<MapFragment>(item.navId) {label = getString(item.stringId) }
+                        }
                     }
                 }
                 fragment<MapFragment>(R.id.nav_empty) { label = getString(R.string.menu_empty) }
@@ -184,7 +185,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setStartFragment() {
+    private fun setStartFragment() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         val defaultViewId = sharedPreferences.getString("settings_default_view_listpreference", (R.id.nav_knmi_rain_m1).toString())?.toInt()
         if (defaultViewId != null) {
@@ -239,8 +240,8 @@ class MainActivity : AppCompatActivity() {
                     builder.setMessage(R.string.share_disabled_alert_message)
                     builder.setTitle(R.string.share_disabled_alert_title)
                     builder.apply {
-                        setPositiveButton(R.string.settings_buienradar_enable_accept,
-                            DialogInterface.OnClickListener { _, _ -> })
+                        setPositiveButton(R.string.settings_buienradar_enable_accept
+                        ) { _, _ -> }
                     }
                     builder.create()
                 }
@@ -291,9 +292,9 @@ class MainActivity : AppCompatActivity() {
                     else if (locationProvider == "gps") {
                         locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0f, locationListener)
                     }
-                } catch (ex: SecurityException) { }
+                } catch (_: SecurityException) { }
             }
-            catch (ex: Exception) { }
+            catch (_: Exception) { }
         }
         else {
             locationManager?.removeUpdates(locationListener)
