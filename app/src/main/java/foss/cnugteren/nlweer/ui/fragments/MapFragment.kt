@@ -13,12 +13,17 @@ import foss.cnugteren.nlweer.ALL_ITEMS
 import foss.cnugteren.nlweer.DrawWebView
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
+import foss.cnugteren.nlweer.databinding.FragmentKnmiBinding
+import foss.cnugteren.nlweer.databinding.FragmentKnmiTextBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MapFragment : Fragment() {
 
-    private lateinit var gifView: DrawWebView
+    private var _binding: FragmentKnmiBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     var url: String = ""
     private var imageWidth: Int = 1
@@ -30,7 +35,7 @@ class MapFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_knmi, container, false)
+        _binding = FragmentKnmiBinding.inflate(inflater, container, false)
         val activity = this.activity as MainActivity
 
         // Iterate over all items to find the current one and set the private variables accordingly
@@ -46,6 +51,7 @@ class MapFragment : Fragment() {
             }
         }
 
+        val root = binding.root
         // Pull down to refresh the page
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
         pullToRefresh.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
@@ -57,7 +63,7 @@ class MapFragment : Fragment() {
         activity.toggleNavigationButtons(true)
 
         // The web-viewer for the content
-        gifView = root.findViewById(R.id.gif_view) as DrawWebView
+        val gifView = binding.gifView
 
         // Sets the scale of the image
         root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -92,14 +98,21 @@ class MapFragment : Fragment() {
         return root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     fun setLocation(lat: Float?, lon: Float?) {
         if (lat != null && lon != null) { // Only sets if valid
+            val gifView = binding.gifView
             gifView.lat = lat
             gifView.lon = lon
         }
     }
 
     fun refreshPage() {
+        val gifView = binding.gifView
         gifView.clearCache(false)
         loadPage()
     }
@@ -134,6 +147,7 @@ class MapFragment : Fragment() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val backgroundColour = " " + sharedPreferences.getString("background_colour", "black") + " "
 
+        val gifView = binding.gifView
         // Centers the image both horizontally and vertically using CSS
         gifView.loadDataWithBaseURL(null,"""
             <html>
