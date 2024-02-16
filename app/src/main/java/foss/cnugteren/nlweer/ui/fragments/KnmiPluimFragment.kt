@@ -1,5 +1,6 @@
 package foss.cnugteren.nlweer.ui.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
@@ -27,14 +29,20 @@ class WebClientKnmiPluim : WebViewClient() {
     override fun onPageFinished(view: WebView, url: String) {
         view.loadUrl("javascript:(function() {" +
                 "document.getElementsByClassName('breadcrumb')[0].style.display='none';" +
+                "document.getElementsByClassName('weather-small')[0].style.display='none';" +
                 "document.getElementsByClassName('site-header')[0].style.display='none';" +
                 "document.getElementsByClassName('site-footer')[0].style.display='none';" +
                 "document.getElementsByClassName('morelinks')[0].style.display='none';" +
                 "document.getElementsByClassName('columns')[0].style.display='none';" +
-                "document.getElementsByClassName('columns')[1].style.display='none';" +
+                "document.getElementsByClassName('columns')[2].style.display='none';" +
                 "document.getElementsByClassName('columns')[3].style.display='none';" +
                 "document.getElementsByClassName('chart-legend__wrp')[0].style.display='none';" +
                 "}\n)()")
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.context)
+        val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
+        if (darkMode == "dark_mode_yes") {
+            view.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
+        }
     }
 }
 
