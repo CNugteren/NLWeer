@@ -1,57 +1,15 @@
 package foss.cnugteren.nlweer.ui.fragments
 
-import android.graphics.Color
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
-import android.webkit.WebViewClient
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-
-class WebClientKnmiSixDayForecast : WebViewClient() {
-    // From https://stackoverflow.com/questions/14423981/android-webview-display-only-some-part-of-website
-
-    override fun shouldOverrideUrlLoading(
-        view: WebView,
-        url: String
-    ): Boolean {
-        view.loadUrl(url)
-        return true
-    }
-
-    override fun onPageFinished(view: WebView, url: String) {
-        /*view.loadUrl("javascript:(function() {" +
-                "document.getElementsByClassName('breadcrumb')[0].style.display='none';" +
-                "document.getElementsByClassName('weather-small')[0].style.display='none';" +
-                "document.getElementsByClassName('site-header')[0].style.display='none';" +
-                "document.getElementsByClassName('site-footer')[0].style.display='none';" +
-                "document.getElementsByClassName('columns')[0].style.display='none';" +
-                "document.getElementsByClassName('columns')[1].style.display='none';" +
-                "document.getElementsByClassName('columns')[3].style.display='none';" +
-                "document.getElementsByClassName('columns')[4].style.display='none';" +
-                "document.getElementsByClassName('morelinks')[0].style.display='none';" +
-                "document.getElementsByClassName('banner-visual-wrp')[0].style.display='none';" +
-                "}\n)()")*/
-
-        /*val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.context)
-        val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
-        if (darkMode == "dark_mode_yes") {
-            view.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
-            view.loadUrl(
-                "javascript:document.body.style.setProperty(\"color\", \"white\");"
-            );
-        }*/
-    }
-}
 
 class KnmiSixDayForecastFragment : Fragment() {
 
@@ -79,9 +37,7 @@ class KnmiSixDayForecastFragment : Fragment() {
 
         // The web-viewer for the content
         webView = root.findViewById(R.id.web_view) as WebView
-        val webViewClientModified = WebClientKnmiSixDayForecast()
         webView.settings.javaScriptEnabled = true
-        webView.webViewClient = webViewClientModified
 
         loadPage()
 
@@ -98,22 +54,14 @@ class KnmiSixDayForecastFragment : Fragment() {
     }
 
     private fun loadPage() {
-        //webView.loadUrl(getURL())
-
-
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(webView.context)
         val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
-        var backgroundColor = "rgb(255, 255, 255)"
-        var textColor = "black;"
+        var backgroundColor = "white"
+        var textColor = "black"
         if (darkMode == "dark_mode_yes") {
-            backgroundColor = "rgb(46, 46, 46)"
-            textColor = "rgb(193, 193, 193);"
-            //webView.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
-            //webView.loadUrl(
-            //    "javascript:document.body.style.setProperty(\"color\", \"white\");"
-            //)
+            backgroundColor = "rgb(46, 46, 46)" // Android dark mode color
+            textColor = "rgb(193, 193, 193)" // Android dark mode color
         }
-        //webView.isHorizontalScrollBarEnabled = true
 
         webView.loadData(
             """
@@ -141,6 +89,10 @@ class KnmiSixDayForecastFragment : Fragment() {
                         }
                         tr {
                           font-size: 14px;
+                        }
+                        body {
+                          font-size: 14px;
+                          color:""".trimIndent() + textColor + """;
                         }
                     </style>
                 </head>
@@ -270,12 +222,12 @@ class KnmiSixDayForecastFragment : Fragment() {
                         <td>NO 3</td>
                       </tr>
                     </table>
+                    <p>""".trimIndent() + getString(R.string.menu_knmi_text_source) + """</p>
                 </body>
             </html>
         """.trimIndent(),
             "text/html", "UTF-8"
         )
-
         //RetrieveWebPage().execute(getURL())
     }
 
