@@ -107,7 +107,7 @@ class KnmiSixDayForecastFragment : Fragment() {
         var textColor = "black;"
         if (darkMode == "dark_mode_yes") {
             backgroundColor = "rgb(46, 46, 46)"
-            textColor = "white;"
+            textColor = "rgb(193, 193, 193);"
             //webView.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
             //webView.loadUrl(
             //    "javascript:document.body.style.setProperty(\"color\", \"white\");"
@@ -127,10 +127,6 @@ class KnmiSixDayForecastFragment : Fragment() {
                         body {
                           background-color:""".trimIndent() + backgroundColor + """;
                         }
-                        .center {
-                          display: table-cell;
-                          vertical-align: middle;
-                        }
                         tr:nth-child(2n+3) {
                           height: 30px;
                           vertical-align: text-top;
@@ -144,7 +140,7 @@ class KnmiSixDayForecastFragment : Fragment() {
                           color: grey;
                         }
                         tr {
-                          font-size: calc(12px + 1.0vw);
+                          font-size: 14px;
                         }
                     </style>
                 </head>
