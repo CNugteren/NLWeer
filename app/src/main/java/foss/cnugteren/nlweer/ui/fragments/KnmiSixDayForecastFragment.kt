@@ -101,14 +101,18 @@ class KnmiSixDayForecastFragment : Fragment() {
         //webView.loadUrl(getURL())
 
 
-        /*val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(webView.context)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(webView.context)
         val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
+        var backgroundColor = "rgb(255, 255, 255)"
+        var textColor = "black;"
         if (darkMode == "dark_mode_yes") {
-            webView.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
-            webView.loadUrl(
-                "javascript:document.body.style.setProperty(\"color\", \"white\");"
-            );
-        }*/
+            backgroundColor = "rgb(46, 46, 46)"
+            textColor = "white;"
+            //webView.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
+            //webView.loadUrl(
+            //    "javascript:document.body.style.setProperty(\"color\", \"white\");"
+            //)
+        }
         //webView.isHorizontalScrollBarEnabled = true
 
         webView.loadData(
@@ -118,7 +122,10 @@ class KnmiSixDayForecastFragment : Fragment() {
                     <style type='text/css'>
                         html {
                            width: 100%;
-                           height: 100%;
+                           height: 100%;                           
+                        }
+                        body {
+                          background-color:""".trimIndent() + backgroundColor + """;
                         }
                         .center {
                           display: table-cell;
@@ -127,20 +134,21 @@ class KnmiSixDayForecastFragment : Fragment() {
                         tr:nth-child(2n+3) {
                           height: 30px;
                           vertical-align: text-top;
+                          color:""".trimIndent() + textColor + """;
                         }
                         tr:nth-child(1) {
                           font-weight: bold;
+                          color:""".trimIndent() + textColor + """;                          
                         }
-                        tr:nth-child(2) {
+                        tr:nth-child(2n) {
                           color: grey;
                         }
-                        tr:nth-child(2n+2) {
-                          color: grey;
+                        tr {
+                          font-size: calc(12px + 1.0vw);
                         }
                     </style>
                 </head>
                 <body>
-                    <div class="center">
                     <table>
                       <colgroup>
                         <col style="min-width:120px" span="6" />
@@ -265,7 +273,7 @@ class KnmiSixDayForecastFragment : Fragment() {
                         <td>Z 4</td>
                         <td>NO 3</td>
                       </tr>
-                    </table></div>
+                    </table>
                 </body>
             </html>
         """.trimIndent(),
