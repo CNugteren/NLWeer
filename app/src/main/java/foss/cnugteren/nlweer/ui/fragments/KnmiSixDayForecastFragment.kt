@@ -68,11 +68,9 @@ class KnmiSixDayForecastFragment : Fragment() {
             <html>
                 <head>
                     <style type='text/css'>
-                        html {
-                           width: 100%;
-                           height: 100%;                           
-                        }
                         body {
+                          font-size: 14px;
+                          color:""".trimIndent() + textColor + """;
                           background-color:""".trimIndent() + backgroundColor + """;
                         }
                         tr:nth-child(2n+3) {
@@ -89,10 +87,6 @@ class KnmiSixDayForecastFragment : Fragment() {
                         }
                         tr {
                           font-size: 14px;
-                        }
-                        body {
-                          font-size: 14px;
-                          color:""".trimIndent() + textColor + """;
                         }
                     </style>
                 </head>
