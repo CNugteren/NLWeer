@@ -1,5 +1,7 @@
 package foss.cnugteren.nlweer.ui.fragments
 
+import android.content.res.Resources
+import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,8 @@ import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
 
 class KnmiSixDayForecastFragment : Fragment() {
 
@@ -63,6 +67,10 @@ class KnmiSixDayForecastFragment : Fragment() {
             textColor = "rgb(193, 193, 193)" // Android dark mode color
         }
 
+        val widthPx = Resources.getSystem().displayMetrics.widthPixels
+        val density = Resources.getSystem().displayMetrics.density
+        val usablePixels = widthPx / density;
+
         webView.loadData(
             """
             <html>
@@ -97,7 +105,7 @@ class KnmiSixDayForecastFragment : Fragment() {
                 <body>
                     <table>
                       <colgroup>
-                        <col style="min-width:115px" span="6" />
+                        <col style="min-width:110px" span="6" />
                       </colgroup>
                       <tr>
                         <td>Wo</td>
@@ -281,10 +289,10 @@ class KnmiSixDayForecastFragment : Fragment() {
         """.trimIndent(),
             "text/html", "UTF-8"
         )
-        //RetrieveWebPage().execute(getURL())
+        RetrieveWebPage().execute(getURL())
     }
 
-    /*internal inner class RetrieveWebPage : AsyncTask<String, Void, Document>() {
+    internal inner class RetrieveWebPage : AsyncTask<String, Void, Document>() {
 
         // Retrieves the data from the URL using JSoup (async)
         override fun doInBackground(vararg urls: String): Document? {
@@ -302,18 +310,14 @@ class KnmiSixDayForecastFragment : Fragment() {
                 return
             }
 
+            val column = arrayOfNulls<String>(15)
             val table = htmlDocument.select("div.weather-map__table-wrp")
-             htmlDocument.head()
-            webView.loadData("""
-                <html>
-                    <head>
-                        <link rel="stylesheet" media="all" href="https://cdn.knmi.nl/assets/application-df01943aed6e5fbce0fd7b0f592c8077e84edc232ec9a6376f1e2c3cc73696c3.css" data-turbolinks-track="true" />
-                    </head>
-                <body>""".trimIndent() + table + """</body>
-            </html>
-            """.trimIndent(),
-                "text/html", "UTF-8"
-            )
+            table.forEach { element ->
+                element.select("li").forEach { column ->
+                    column.select("span.weather-map__table-cell").forEachIndexed { index, item ->
+                    }
+                }
+            }
         }
-    }*/
+    }
 }
