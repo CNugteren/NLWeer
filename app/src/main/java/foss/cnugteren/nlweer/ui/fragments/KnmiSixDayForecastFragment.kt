@@ -59,7 +59,7 @@ class KnmiSixDayForecastFragment : Fragment() {
         var backgroundColor = "white"
         var textColor = "black"
         if (darkMode == "dark_mode_yes") {
-            backgroundColor = "rgb(46, 46, 46)" // Android dark mode color
+            backgroundColor = "rgb(48, 48, 48)" // Android dark mode color
             textColor = "rgb(193, 193, 193)" // Android dark mode color
         }
 
@@ -97,7 +97,7 @@ class KnmiSixDayForecastFragment : Fragment() {
                 <body>
                     <table>
                       <colgroup>
-                        <col style="min-width:120px" span="6" />
+                        <col style="min-width:115px" span="6" />
                       </colgroup>
                       <tr>
                         <td>Wo</td>

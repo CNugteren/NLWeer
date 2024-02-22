@@ -93,7 +93,7 @@ class BuienradarChartFragment : Fragment() {
         var background = Color.WHITE
         if (darkMode == "dark_mode_yes") {
             textColour = Color.WHITE
-            background = Color.rgb(46, 46, 46) // matches Android's dark mode colours
+            background = Color.rgb(48, 48, 48) // matches Android's dark mode colours
         }
 
         chart = root.findViewById(R.id.buienradar_chart)
