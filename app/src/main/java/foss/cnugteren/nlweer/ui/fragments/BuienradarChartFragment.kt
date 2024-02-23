@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
@@ -19,26 +18,30 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import foss.cnugteren.nlweer.MainActivity
+import foss.cnugteren.nlweer.R
+import foss.cnugteren.nlweer.databinding.FragmentBuienradarChartBinding
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import kotlin.math.pow
-import foss.cnugteren.nlweer.R
 import kotlin.math.max
+import kotlin.math.pow
 
 
 class BuienradarChartFragment : Fragment() {
 
-    private lateinit var root: View
-    private lateinit var chart: BarChart
     private var latitude: Float? = null
     private var longitude: Float? = null
+    private var _binding: FragmentBuienradarChartBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.fragment_buienradar_chart, container, false)
+        _binding = FragmentBuienradarChartBinding.inflate(inflater, container, false)
+        val root = binding.root
 
         // Pull down to refresh the page
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
@@ -71,6 +74,11 @@ class BuienradarChartFragment : Fragment() {
         return root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     fun setLocation(lat: Float?, lon: Float?) {
         if (lat != null && lon != null) { // Only sets if valid
             latitude = lat
@@ -96,7 +104,7 @@ class BuienradarChartFragment : Fragment() {
             background = Color.rgb(48, 48, 48) // matches Android's dark mode colours
         }
 
-        chart = root.findViewById(R.id.buienradar_chart)
+        val chart = binding.buienradarChart
 
         // Chart styling and formatting
         chart.axisRight.isEnabled = false
@@ -146,6 +154,7 @@ class BuienradarChartFragment : Fragment() {
 
         // When complete: parses the result
         override fun onPostExecute(htmlDocument: Document?) {
+            val chart = binding.buienradarChart
             if (htmlDocument == null || htmlDocument.text() == "") {
                 chart.setNoDataText(getString(R.string.menu_buienradar_chart_error) + ": " +
                         "lat=%.2f, lon=%.2f".format(latitude, longitude))

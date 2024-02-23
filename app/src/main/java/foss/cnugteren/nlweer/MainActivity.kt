@@ -2,7 +2,6 @@ package foss.cnugteren.nlweer
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
@@ -18,7 +17,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.BaseContextWrappingDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.createGraph
 import androidx.navigation.findNavController
@@ -30,6 +28,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
+import foss.cnugteren.nlweer.databinding.ActivityMainBinding
 import foss.cnugteren.nlweer.ui.fragments.*
 
 class MainActivity : AppCompatActivity() {
@@ -40,16 +39,19 @@ class MainActivity : AppCompatActivity() {
     var gpsLat: Float? = null
     var gpsLon: Float? = null
     private var baseContextWrappingDelegate: AppCompatDelegate? = null
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         createNavGraph()
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         setMenuItemsVisibility()
         val navController = findNavController(R.id.nav_host_fragment)
@@ -58,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         val destinations = mutableSetOf(R.id.nav_empty)
         for (item in KNMI_ITEMS) { destinations.add(item.navId) }
         for (item in BUIENRADAR_ITEMS) { destinations.add(item.navId) }
-        appBarConfiguration = AppBarConfiguration(destinations, drawerLayout)
+        appBarConfiguration = AppBarConfiguration(destinations, binding.drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -118,7 +120,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun createNavGraph() {
+    private fun createNavGraph() {
         // This is instead of a hard-coded mobile_navigation.xml file. That file still exists though
         // to define the R.id values
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -126,23 +128,25 @@ class MainActivity : AppCompatActivity() {
         navHostFragment.navController.apply {
             graph = createGraph(startDestination = R.id.nav_knmi_rain_m1) {
                 for (item in ALL_ITEMS) {
-                    if (item.navId == R.id.nav_knmi_text) {
-                        fragment<KnmiTextFragment>(item.navId) {label = getString(item.stringId) }
-                    }
-                    else if (item.navId == R.id.nav_knmi_sixdayforecast) {
-                        fragment<KnmiSixDayForecastFragment>(item.navId) {label = getString(item.stringId) }
-                    }
-                    else if (item.navId == R.id.nav_knmi_pluim) {
-                        fragment<KnmiPluimFragment>(item.navId) {label = getString(item.stringId) }
-                    }
-                    else if (item.navId == R.id.nav_buienradar_chart) {
-                        fragment<BuienradarChartFragment>(item.navId) {label = getString(item.stringId) }
-                    }
-                    else if (item.navId == R.id.nav_buienradar_pluim) {
-                        fragment<BuienradarPluimFragment>(item.navId) {label = getString(item.stringId) }
-                    }
-                    else {
-                        fragment<MapFragment>(item.navId) {label = getString(item.stringId) }
+                    when (item.navId) {
+                        R.id.nav_knmi_text -> {
+                            fragment<KnmiTextFragment>(item.navId) {label = getString(item.stringId) }
+                        }
+                        R.id.nav_knmi_sixdayforecast -> {
+                            fragment<KnmiSixDayForecastFragment>(item.navId) {label = getString(item.stringId) }
+                    	}
+                        R.id.nav_knmi_pluim -> {
+                            fragment<KnmiPluimFragment>(item.navId) {label = getString(item.stringId) }
+                        }
+                        R.id.nav_buienradar_chart -> {
+                            fragment<BuienradarChartFragment>(item.navId) {label = getString(item.stringId) }
+                        }
+                        R.id.nav_buienradar_pluim -> {
+                            fragment<BuienradarPluimFragment>(item.navId) {label = getString(item.stringId) }
+                        }
+                        else -> {
+                            fragment<MapFragment>(item.navId) {label = getString(item.stringId) }
+                        }
                     }
                 }
                 fragment<MapFragment>(R.id.nav_empty) { label = getString(R.string.menu_empty) }
@@ -154,8 +158,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setMenuItemsVisibility() {
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        val menu = navView.menu
+        val menu = binding.navView.menu
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
 
         val sourceEnableKNMI = sharedPreferences.getBoolean("knmi_enable", true)
@@ -185,7 +188,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setStartFragment() {
+    private fun setStartFragment() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         val defaultViewId = sharedPreferences.getString("settings_default_view_listpreference", (R.id.nav_knmi_rain_m1).toString())?.toInt()
         if (defaultViewId != null) {
@@ -240,8 +243,8 @@ class MainActivity : AppCompatActivity() {
                     builder.setMessage(R.string.share_disabled_alert_message)
                     builder.setTitle(R.string.share_disabled_alert_title)
                     builder.apply {
-                        setPositiveButton(R.string.settings_buienradar_enable_accept,
-                            DialogInterface.OnClickListener { _, _ -> })
+                        setPositiveButton(R.string.settings_buienradar_enable_accept
+                        ) { _, _ -> }
                     }
                     builder.create()
                 }
@@ -292,9 +295,9 @@ class MainActivity : AppCompatActivity() {
                     else if (locationProvider == "gps") {
                         locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0f, locationListener)
                     }
-                } catch (ex: SecurityException) { }
+                } catch (_: SecurityException) { }
             }
-            catch (ex: Exception) { }
+            catch (_: Exception) { }
         }
         else {
             locationManager?.removeUpdates(locationListener)
@@ -345,6 +348,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        @Deprecated("Deprecated in Java")
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
         override fun onProviderEnabled(provider: String) {}
         override fun onProviderDisabled(provider: String) {}
