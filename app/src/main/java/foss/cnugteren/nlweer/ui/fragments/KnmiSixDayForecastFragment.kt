@@ -335,8 +335,8 @@ class KnmiSixDayForecastFragment : Fragment() {
             val tableData = Array<Array<String>>(6, { Array<String>(15, {""}) })
 
             val htmlDocumentData = htmlDocument.select("div.weather-map__table-wrp")
-            htmlDocumentData.forEachIndexed { colIndex, colItem ->
-                colItem.select("li").forEach { column ->
+            htmlDocumentData.forEach { colItem ->
+                colItem.select("li").forEachIndexed { colIndex, column ->
                     var rowIndex = 0
 
                     val dayOfTheWeek = column.selectFirst("strong.weather-map__table-cell")
@@ -353,8 +353,10 @@ class KnmiSixDayForecastFragment : Fragment() {
                             rowIndex++
                         }
                         else {
-                            tableData[colIndex][rowIndex] = rowItem.text()
-                            rowIndex++
+                            rowItem.text().split(' ', ignoreCase =  false, limit =  2).forEach { item ->
+                                tableData[colIndex][rowIndex] = item
+                                rowIndex++
+                            }
                         }
                     }
                 }
