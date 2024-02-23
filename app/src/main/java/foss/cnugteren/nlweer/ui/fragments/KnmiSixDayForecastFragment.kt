@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
+import androidx.core.view.marginEnd
+import androidx.core.view.marginStart
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -73,9 +75,7 @@ class KnmiSixDayForecastFragment : Fragment() {
             textColor = "rgb(193, 193, 193)" // Android dark mode color
         }
 
-        val widthPx = Resources.getSystem().displayMetrics.widthPixels
-        val density = Resources.getSystem().displayMetrics.density
-        val usablePixels = widthPx / density;
+        val columnsPerRow = CalculateColumnsPerRow(webView)
 
         webView.loadData(
             """
@@ -111,7 +111,7 @@ class KnmiSixDayForecastFragment : Fragment() {
                 <body>
                     <table>
                       <colgroup>
-                        <col style="min-width:110px" span="6" />
+                        <col style="min-width:""".trimIndent() + columnWidth + """px" span="6" />
                       </colgroup>
                       <tr>
                         <td>Wo</td>
@@ -298,6 +298,16 @@ class KnmiSixDayForecastFragment : Fragment() {
         RetrieveWebPage().execute(getURL())
     }
 
+    private fun CalculateColumnsPerRow(webView: WebView): Int {
+        val widthPx = Resources.getSystem().displayMetrics.widthPixels
+        val density = Resources.getSystem().displayMetrics.density
+        val effectiveWidth = Math.floor((widthPx / density).toDouble());
+        val usableWidth = effectiveWidth - (webView.marginStart + webView.marginEnd) / density
+        val columnWidth = 105
+        val columnsPerRow = Math.floor(usableWidth / columnWidth).toInt()
+        return columnsPerRow
+    }
+
     internal inner class RetrieveWebPage : AsyncTask<String, Void, Document>() {
 
         // Retrieves the data from the URL using JSoup (async)
@@ -317,7 +327,7 @@ class KnmiSixDayForecastFragment : Fragment() {
                 return
             }
 
-            val column = arrayOfNulls<String>(15)
+            val columns = Array<Array<String>>(6, { Array<String>(15, {""}) })
             val table = htmlDocument.select("div.weather-map__table-wrp")
             table.forEach { element ->
                 element.select("li").forEach { column ->
