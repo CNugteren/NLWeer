@@ -15,9 +15,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
 import foss.cnugteren.nlweer.databinding.FragmentKnmiSixdayforecastBinding
-import foss.cnugteren.nlweer.databinding.FragmentKnmiTextBinding
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
+import org.jsoup.nodes.Element
+import org.jsoup.nodes.TextNode
+import kotlin.math.floor
 
 class KnmiSixDayForecastFragment : Fragment() {
 
@@ -25,6 +27,9 @@ class KnmiSixDayForecastFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    // Width in pixels of column containing KNMI weather data
+    private val columnWidth get() = 105
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -301,16 +306,15 @@ class KnmiSixDayForecastFragment : Fragment() {
     private fun CalculateColumnsPerRow(webView: WebView): Int {
         val widthPx = Resources.getSystem().displayMetrics.widthPixels
         val density = Resources.getSystem().displayMetrics.density
-        val effectiveWidth = Math.floor((widthPx / density).toDouble());
+        val effectiveWidth = floor((widthPx / density).toDouble());
         val usableWidth = effectiveWidth - (webView.marginStart + webView.marginEnd) / density
-        val columnWidth = 105
-        val columnsPerRow = Math.floor(usableWidth / columnWidth).toInt()
-        return columnsPerRow
+        return floor(usableWidth / columnWidth).toInt()
     }
 
     internal inner class RetrieveWebPage : AsyncTask<String, Void, Document>() {
 
         // Retrieves the data from the URL using JSoup (async)
+        @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg urls: String): Document? {
             try {
                 return Jsoup.connect(urls[0]).get()
@@ -320,6 +324,7 @@ class KnmiSixDayForecastFragment : Fragment() {
         }
 
         // When complete: parses the result
+        @Deprecated("Deprecated in Java")
         override fun onPostExecute(htmlDocument: Document?) {
             val webView = binding.webView
             if (htmlDocument == null) {
@@ -327,11 +332,30 @@ class KnmiSixDayForecastFragment : Fragment() {
                 return
             }
 
-            val columns = Array<Array<String>>(6, { Array<String>(15, {""}) })
-            val table = htmlDocument.select("div.weather-map__table-wrp")
-            table.forEach { element ->
-                element.select("li").forEach { column ->
-                    column.select("span.weather-map__table-cell").forEachIndexed { index, item ->
+            val tableData = Array<Array<String>>(6, { Array<String>(15, {""}) })
+
+            val htmlDocumentData = htmlDocument.select("div.weather-map__table-wrp")
+            htmlDocumentData.forEachIndexed { colIndex, colItem ->
+                colItem.select("li").forEach { column ->
+                    var rowIndex = 0
+
+                    val dayOfTheWeek = column.selectFirst("strong.weather-map__table-cell")
+                        ?.text()
+                    if (dayOfTheWeek != null) {
+                        tableData[colIndex][rowIndex] = dayOfTheWeek
+                        rowIndex++
+                    }
+
+                    column.select("span.weather-map__table-cell").forEach { rowItem ->
+                        val imageItem = rowItem.selectFirst("img")
+                        if (imageItem != null) {
+                            tableData[colIndex][rowIndex] = imageItem.attr("src")
+                            rowIndex++
+                        }
+                        else {
+                            tableData[colIndex][rowIndex] = rowItem.text()
+                            rowIndex++
+                        }
                     }
                 }
             }
