@@ -12,23 +12,27 @@ import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
+import foss.cnugteren.nlweer.databinding.FragmentKnmiSixdayforecastBinding
+import foss.cnugteren.nlweer.databinding.FragmentKnmiTextBinding
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 
 class KnmiSixDayForecastFragment : Fragment() {
 
-    private lateinit var webView: WebView
-
-    private lateinit var root: View
+    private var _binding: FragmentKnmiSixdayforecastBinding? = null
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        root = inflater.inflate(R.layout.fragment_knmi_sixdayforecast, container, false)
+        _binding = FragmentKnmiSixdayforecastBinding.inflate(inflater, container, false)
 
         // Pull down to refresh the page
+        val root = binding.root
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
         pullToRefresh.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             refreshPage()
@@ -40,7 +44,7 @@ class KnmiSixDayForecastFragment : Fragment() {
         activity.toggleNavigationButtons(true)
 
         // The web-viewer for the content
-        webView = root.findViewById(R.id.web_view) as WebView
+        val webView = binding.webView
         webView.settings.javaScriptEnabled = true
 
         loadPage()
@@ -53,11 +57,13 @@ class KnmiSixDayForecastFragment : Fragment() {
     }
 
     private fun refreshPage() {
+        val webView = binding.webView
         webView.clearCache(false)
         loadPage()
     }
 
     private fun loadPage() {
+        val webView = binding.webView
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(webView.context)
         val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
         var backgroundColor = "white"
@@ -305,6 +311,7 @@ class KnmiSixDayForecastFragment : Fragment() {
 
         // When complete: parses the result
         override fun onPostExecute(htmlDocument: Document?) {
+            val webView = binding.webView
             if (htmlDocument == null) {
                 webView.loadData(getString(R.string.menu_knmi_text_failed), "text/html", "utf-8")
                 return
