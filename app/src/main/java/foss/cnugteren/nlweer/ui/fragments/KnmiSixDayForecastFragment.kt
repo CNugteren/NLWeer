@@ -332,31 +332,35 @@ class KnmiSixDayForecastFragment : Fragment() {
                 return
             }
 
+            val tableWrapperElement = htmlDocument.select("div.weather-map__table-wrp").firstOrNull()
+            if (tableWrapperElement == null){
+                webView.loadData(getString(R.string.menu_knmi_text_failed), "text/html", "utf-8")
+                return
+            }
+
             val tableData = Array<Array<String>>(6, { Array<String>(15, {""}) })
+            tableWrapperElement.select("li").forEachIndexed { colIndex, column ->
+                var rowIndex = 0
 
-            val htmlDocumentData = htmlDocument.select("div.weather-map__table-wrp")
-            htmlDocumentData.forEach { colItem ->
-                colItem.select("li").forEachIndexed { colIndex, column ->
-                    var rowIndex = 0
+                val dayOfTheWeek = column.selectFirst("strong.weather-map__table-cell")
+                    ?.text()
+                if (dayOfTheWeek != null) {
+                    tableData[colIndex][rowIndex] = dayOfTheWeek
+                    rowIndex++
+                }
 
-                    val dayOfTheWeek = column.selectFirst("strong.weather-map__table-cell")
-                        ?.text()
-                    if (dayOfTheWeek != null) {
-                        tableData[colIndex][rowIndex] = dayOfTheWeek
+                column.select("span.weather-map__table-cell").forEach { rowItem ->
+                    // If cell contains image, get the src link
+                    val imageItem = rowItem.selectFirst("img")
+                    if (imageItem != null) {
+                        tableData[colIndex][rowIndex] = imageItem.attr("src")
                         rowIndex++
                     }
-
-                    column.select("span.weather-map__table-cell").forEach { rowItem ->
-                        val imageItem = rowItem.selectFirst("img")
-                        if (imageItem != null) {
-                            tableData[colIndex][rowIndex] = imageItem.attr("src")
+                    else {
+                        // Item contains just text; split into header and data, if applicable
+                        rowItem.text().split(' ', ignoreCase =  false, limit =  2).forEach { item ->
+                            tableData[colIndex][rowIndex] = item
                             rowIndex++
-                        }
-                        else {
-                            rowItem.text().split(' ', ignoreCase =  false, limit =  2).forEach { item ->
-                                tableData[colIndex][rowIndex] = item
-                                rowIndex++
-                            }
                         }
                     }
                 }
