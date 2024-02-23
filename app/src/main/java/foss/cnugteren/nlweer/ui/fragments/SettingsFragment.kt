@@ -145,7 +145,11 @@ class SettingsFragment : PreferenceFragmentCompat(),
         defaultViewSelection.setDefaultValue(R.id.nav_knmi_rain_m1.toString())
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (sharedPreferences == null || key == null){
+            return
+        }
+
         val pref = findPreference<Preference>(key)
 
         // If the value of the settings change, sets the new values as summaries
