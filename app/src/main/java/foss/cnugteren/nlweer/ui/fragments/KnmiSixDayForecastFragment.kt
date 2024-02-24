@@ -73,118 +73,6 @@ class KnmiSixDayForecastFragment : Fragment() {
         RetrieveWebPage().execute(getURL())
     }
 
-    internal inner class TableHtmlBuilder {
-
-        // Width in pixels of column containing KNMI weather data
-        private val columnWidth get() = 105
-
-        // Image size in pixels
-        private val imageSize get() = 54
-
-        // Font size to be used in HTML; in pixels
-        private val fontSize get() = 14
-
-        // Row height used for every other row for aesthetic reasons; in pixels
-        private val paddedRowHeight get() = 24
-
-        fun buildHtmlPage(tableData: Array<Array<String>>) : String {
-            val columnsPerTable = calculateColumnsPerTable(tableData)
-            val tablesHtml = getHtmlTables(tableData, columnsPerTable)
-
-            return getHtmlPageWithTable(tablesHtml)
-        }
-
-        private fun calculateColumnsPerTable(tableData: Array<Array<String>>): Int {
-            val webView = binding.webView
-            val widthPx = Resources.getSystem().displayMetrics.widthPixels
-            val density = Resources.getSystem().displayMetrics.density
-            val effectiveWidth = floor((widthPx / density).toDouble());
-            val usableWidth = effectiveWidth - (webView.marginStart + webView.marginEnd) / density
-            val columnsPerRow = floor(usableWidth / columnWidth).toInt()
-
-            return min(columnsPerRow, tableData.size)
-        }
-
-        private fun getHtmlTables(tableData: Array<Array<String>>, columnsPerTable: Int) : String {
-            val numberOfTables = ceil(tableData.size.toDouble() / columnsPerTable).toInt()
-            val numberOfRowsPerTable = tableData[0].size
-            var htmlTable = ""
-            var totalNumberOfColumns = tableData.size
-            for (i in 0..<numberOfTables) {
-                htmlTable += """
-                    <table>
-                        <colgroup>
-                            <col style="min-width:""".trimIndent() + columnWidth + """px" span="""" + totalNumberOfColumns + """" />
-                        </colgroup>""".trimMargin()
-
-                for (row in 0..<numberOfRowsPerTable) {
-                    htmlTable += """<tr>"""
-                    var column = i * columnsPerTable
-                    while (column < (i + 1 ) * columnsPerTable && column < totalNumberOfColumns) {
-                        var content = tableData[column][row]
-                        if (URLUtil.isValidUrl(content)) {
-                            content = """<img alt="" src="""" + content + """" width="""" + imageSize + """px"/>"""
-                        }
-                        htmlTable += "<td>$content</td>"
-
-                        column++
-                    }
-                    htmlTable += """</tr>"""
-                }
-
-                htmlTable += "</table>"
-                htmlTable += "<p></p>"
-            }
-
-            return htmlTable
-        }
-
-        private fun getHtmlPageWithTable(table: String) : String {
-            val webView = binding.webView
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(webView.context)
-            val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
-            var backgroundColor = "rgb(250, 250, 250)"
-            var textColor = "black"
-            if (darkMode == "dark_mode_yes") {
-                backgroundColor = "rgb(48, 48, 48)" // Android dark mode color
-                textColor = "rgb(193, 193, 193)" // Android dark mode color
-            }
-
-            return """<html>
-                <head>
-                    <style type='text/css'>
-                        body {
-                          font-size: """.trimIndent() + fontSize + """px;
-                          color:""".trimIndent() + textColor + """;
-                          background-color:""".trimIndent() + backgroundColor + """;
-                        }
-                        tr:nth-child(2n+3) {
-                          height: """.trimIndent() + paddedRowHeight + """px;
-                          vertical-align: text-top;
-                          color:""".trimIndent() + textColor + """;
-                        }
-                        tr:nth-child(1) {
-                          font-weight: bold;
-                          color:""".trimIndent() + textColor + """;                          
-                        }
-                        tr:nth-child(19) {
-                          font-weight: bold;
-                          color:""".trimIndent() + textColor + """;                          
-                        }
-                        tr:nth-child(2n) {
-                          color: grey;
-                        }
-                        tr {
-                          font-size: """.trimIndent() + fontSize +  """px;
-                        }
-                    </style>
-                </head>
-                <body>""" + table + """
-                    <p>""".trimIndent() + getString(R.string.menu_knmi_text_source) + """</p>
-                    </body>""".trimIndent()
-        }
-    }
-
     internal inner class RetrieveWebPage : AsyncTask<String, Void, Document>() {
 
         // Retrieves the data from the URL using JSoup (async)
@@ -250,6 +138,117 @@ class KnmiSixDayForecastFragment : Fragment() {
             }
 
             return tableData
+        }
+    }
+
+    internal inner class TableHtmlBuilder {
+
+        // Width in pixels of column containing KNMI weather data
+        private val columnWidth get() = 105
+
+        // Image size in pixels
+        private val imageSize get() = 54
+
+        // Font size to be used in HTML; in pixels
+        private val fontSize get() = 14
+
+        // Row height used for every other row for aesthetic reasons; in pixels
+        private val paddedRowHeight get() = 24
+
+        fun buildHtmlPage(tableData: Array<Array<String>>) : String {
+            val columnsPerTable = calculateColumnsPerTable(tableData)
+            val tablesHtml = getHtmlTables(tableData, columnsPerTable)
+
+            return getHtmlPageWithTable(tablesHtml)
+        }
+
+        private fun calculateColumnsPerTable(tableData: Array<Array<String>>): Int {
+            val webView = binding.webView
+            val widthPx = Resources.getSystem().displayMetrics.widthPixels
+            val density = Resources.getSystem().displayMetrics.density
+            val effectiveWidth = floor((widthPx / density).toDouble());
+            val usableWidth = effectiveWidth - (webView.marginStart + webView.marginEnd) / density
+            val columnsPerRow = floor(usableWidth / columnWidth).toInt()
+
+            return min(columnsPerRow, tableData.size)
+        }
+
+        private fun getHtmlTables(tableData: Array<Array<String>>, columnsPerTable: Int) : String {
+            val numberOfTables = ceil(tableData.size.toDouble() / columnsPerTable).toInt()
+            val numberOfRowsPerTable = tableData[0].size
+            var htmlTable = ""
+            var totalNumberOfColumns = tableData.size
+            for (i in 0..<numberOfTables) {
+                htmlTable += """
+                    <table>
+                        <colgroup>
+                            <col style="min-width:""".trimIndent() + columnWidth + """px" span="""" + totalNumberOfColumns + """" />
+                        </colgroup>""".trimMargin()
+
+                for (row in 0..<numberOfRowsPerTable) {
+                    htmlTable += """<tr>"""
+                    var column = i * columnsPerTable
+                    while (column < (i + 1 ) * columnsPerTable && column < totalNumberOfColumns) {
+                        var content = tableData[column][row]
+                        if (URLUtil.isValidUrl(content)) {
+                            content = """<img alt="" src="""" + content + """" width="""" + imageSize + """px"/>"""
+                        }
+                        htmlTable += "<td>$content</td>"
+
+                        column++
+                    }
+                    htmlTable += """</tr>"""
+                }
+
+                htmlTable += "</table>"
+                htmlTable += "<p></p>"
+                if (i < numberOfTables - 1) {
+                    htmlTable += """<br style="line-height: 10px">"""
+                }
+            }
+
+            return htmlTable
+        }
+
+        private fun getHtmlPageWithTable(table: String) : String {
+            val webView = binding.webView
+            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(webView.context)
+            val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
+            var backgroundColor = "rgb(250, 250, 250)"
+            var textColor = "black"
+            if (darkMode == "dark_mode_yes") {
+                backgroundColor = "rgb(48, 48, 48)" // Android dark mode color
+                textColor = "rgb(193, 193, 193)" // Android dark mode color
+            }
+
+            return """<html>
+                <head>
+                    <style type='text/css'>
+                        body {
+                          font-size: """.trimIndent() + fontSize + """px;
+                          color:""".trimIndent() + textColor + """;
+                          background-color:""".trimIndent() + backgroundColor + """;
+                        }
+                        tr {
+                          font-size: """.trimIndent() + fontSize +  """px;
+                        }    
+                        tr:nth-child(1) {
+                          font-weight: bold;
+                          color:""".trimIndent() + textColor + """;                          
+                        }
+                        tr:nth-child(2n) {
+                          color: grey;
+                        }                                            
+                        tr:nth-child(2n+3) {
+                          height: """.trimIndent() + paddedRowHeight + """px;
+                          vertical-align: text-top;
+                          color:""".trimIndent() + textColor + """;
+                        }
+                    </style>
+                </head>
+                <body>""" + table + """
+                    <p>""".trimIndent() + getString(R.string.menu_knmi_text_source) + """</p>
+                    </body>""".trimIndent()
         }
     }
 }
