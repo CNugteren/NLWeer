@@ -100,7 +100,8 @@ class KnmiSixDayForecastFragment : Fragment() {
             val density = Resources.getSystem().displayMetrics.density
             val effectiveWidth = floor((widthPx / density).toDouble());
             val usableWidth = effectiveWidth - (webView.marginStart + webView.marginEnd) / density
-            var columnsPerRow = floor(usableWidth / columnWidth).toInt()
+            val columnsPerRow = floor(usableWidth / columnWidth).toInt()
+
             return min(columnsPerRow, tableData.size)
         }
 
@@ -142,7 +143,7 @@ class KnmiSixDayForecastFragment : Fragment() {
             val webView = binding.webView
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(webView.context)
             val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
-            var backgroundColor = "white"
+            var backgroundColor = "rgb(250, 250, 250)"
             var textColor = "black"
             if (darkMode == "dark_mode_yes") {
                 backgroundColor = "rgb(48, 48, 48)" // Android dark mode color
