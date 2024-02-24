@@ -228,7 +228,9 @@ class KnmiSixDayForecastFragment : Fragment() {
                         }
                     </style>
                 </head>
-                <body>""" + table + """</body>"""
+                <body>""" + table + """
+                    <p>""".trimIndent() + getString(R.string.menu_knmi_text_source) + """</p>
+                    </body>""".trimIndent()
         }
     }
 }
