@@ -142,20 +142,21 @@ class KnmiSixDayForecastFragment : Fragment() {
 
                 for (row in 0..<numberOfRows) {
                     htmlTable += """<tr>"""
-                    var j = 0
-                    while (i * columnsPerTable + j < totalNumberOfColumns) {
-                        var content = tableData[j][row]
+                    var column = i * columnsPerTable
+                    while (column < totalNumberOfColumns) {
+                        var content = tableData[column][row]
                         if (content.endsWith(".svg")) {
                             content = """<img alt="" src="""" + content + """" width="60px"/>"""
                         }
                         htmlTable += """<td>""" + content + """</td>"""
 
-                        j++
+                        column++
                     }
                     htmlTable += """</tr>"""
                 }
 
                 htmlTable += "</table>"
+                htmlTable += "<p></p>"
             }
 
             return htmlTable
