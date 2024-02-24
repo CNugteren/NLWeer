@@ -20,6 +20,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import kotlin.math.ceil
 import kotlin.math.floor
+import kotlin.time.times
 
 class KnmiSixDayForecastFragment : Fragment() {
 
@@ -125,11 +126,39 @@ class KnmiSixDayForecastFragment : Fragment() {
             webView.loadData(htmlPageToShow, "text/html", "UTF-8")
         }
 
-        private fun getHtmlTable(tableData: Array<Array<String>>, columnsPerRow: Int) : String {
-            val numberOfRows = ceil((tableData.size / columnsPerRow).toDouble())
-            for (i in tableData.indices) {
+        private fun getHtmlTable(tableData: Array<Array<String>>, columnsPerTable: Int) : String {
+            val numberOfTables = ceil((tableData.size / columnsPerTable).toDouble()).toInt()
+            val numberOfRows = tableData[0].size
 
+            var htmlTable = ""
+            var totalNumberOfColumns = tableData.size
+            for (i in 0..<numberOfTables) {
+                htmlTable += """
+                                    <table>
+                                        <colgroup>
+                                            <col style="min-width:""".trimIndent() + columnWidth + """px" span="6" />
+                                          </colgroup>
+                                """.trimMargin()
+
+                for (row in 0..<numberOfRows) {
+                    htmlTable += """<tr>"""
+                    var j = 0
+                    while (i * columnsPerTable + j < totalNumberOfColumns) {
+                        var content = tableData[j][row]
+                        if (content.endsWith(".svg")) {
+                            content = """<img alt="" src="""" + content + """" width="60px"/>"""
+                        }
+                        htmlTable += """<td>""" + content + """</td>"""
+
+                        j++
+                    }
+                    htmlTable += """</tr>"""
+                }
+
+                htmlTable += "</table>"
             }
+
+            return htmlTable
         }
 
         // Get the weather data per day of the week
@@ -206,7 +235,7 @@ class KnmiSixDayForecastFragment : Fragment() {
                         }
                     </style>
                 </head>
-                <body>\n""" + table + """</body>"""
+                <body>""" + table + """</body>"""
         }
     }
 }
