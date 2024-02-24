@@ -119,7 +119,7 @@ class KnmiSixDayForecastFragment : Fragment() {
         }
 
         private fun getHtmlTable(tableData: Array<Array<String>>, columnsPerTable: Int) : String {
-            val numberOfTables = ceil((tableData.size / columnsPerTable).toDouble()).toInt()
+            val numberOfTables = ceil(tableData.size.toDouble() / columnsPerTable).toInt()
             val numberOfRowsPerTable = tableData[0].size
 
             var htmlTable = ""
@@ -135,7 +135,7 @@ class KnmiSixDayForecastFragment : Fragment() {
                 for (row in 0..<numberOfRowsPerTable) {
                     htmlTable += """<tr>"""
                     var column = i * columnsPerTable
-                    while (column < (i + 1 )* columnsPerTable && column < totalNumberOfColumns) {
+                    while (column < (i + 1 ) * columnsPerTable && column < totalNumberOfColumns) {
                         var content = tableData[column][row]
                         if (content.endsWith(".svg")) {
                             content = """<img alt="" src="""" + content + """" width="60px"/>"""
