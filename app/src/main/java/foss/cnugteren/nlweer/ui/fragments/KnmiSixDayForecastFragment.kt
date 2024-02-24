@@ -178,7 +178,8 @@ class KnmiSixDayForecastFragment : Fragment() {
             val numberOfRowsPerTable = tableData[0].size
             var htmlTable = ""
             var totalNumberOfColumns = tableData.size
-            for (i in 0..<numberOfTables) {
+
+            for (tableNumber in 0..<numberOfTables) {
                 htmlTable += """
                     <table>
                         <colgroup>
@@ -187,8 +188,10 @@ class KnmiSixDayForecastFragment : Fragment() {
 
                 for (row in 0..<numberOfRowsPerTable) {
                     htmlTable += """<tr>"""
-                    var column = i * columnsPerTable
-                    while (column < (i + 1 ) * columnsPerTable && column < totalNumberOfColumns) {
+                    var column = tableNumber * columnsPerTable
+                    // Loop until either all columns for the current table have been processed,
+                    // or all columns have already been processed
+                    while (column < (tableNumber + 1 ) * columnsPerTable && column < totalNumberOfColumns) {
                         var content = tableData[column][row]
                         if (URLUtil.isValidUrl(content)) {
                             content = """<img alt="" src="""" + content + """" width="""" + imageSize + """px"/>"""
@@ -202,7 +205,8 @@ class KnmiSixDayForecastFragment : Fragment() {
 
                 htmlTable += "</table>"
                 htmlTable += "<p></p>"
-                if (i < numberOfTables - 1) {
+                // Add additional spacing between tables
+                if (tableNumber < numberOfTables - 1) {
                     htmlTable += """<br style="line-height: 10px">"""
                 }
             }
