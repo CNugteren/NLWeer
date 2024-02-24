@@ -20,6 +20,7 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import kotlin.math.ceil
 import kotlin.math.floor
+import kotlin.math.min
 import kotlin.time.times
 
 class KnmiSixDayForecastFragment : Fragment() {
@@ -71,25 +72,7 @@ class KnmiSixDayForecastFragment : Fragment() {
     }
 
     private fun loadPage() {
-        val webView = binding.webView
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(webView.context)
-        val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
-        var backgroundColor = "white"
-        var textColor = "black"
-        if (darkMode == "dark_mode_yes") {
-            backgroundColor = "rgb(48, 48, 48)" // Android dark mode color
-            textColor = "rgb(193, 193, 193)" // Android dark mode color
-        }
-
         RetrieveWebPage().execute(getURL())
-    }
-
-    private fun CalculateColumnsPerRow(webView: WebView): Int {
-        val widthPx = Resources.getSystem().displayMetrics.widthPixels
-        val density = Resources.getSystem().displayMetrics.density
-        val effectiveWidth = floor((widthPx / density).toDouble());
-        val usableWidth = effectiveWidth - (webView.marginStart + webView.marginEnd) / density
-        return floor(usableWidth / columnWidth).toInt()
     }
 
     internal inner class RetrieveWebPage : AsyncTask<String, Void, Document>() {
@@ -120,15 +103,24 @@ class KnmiSixDayForecastFragment : Fragment() {
             }
 
             val tableData = getTableData(tableWrapperElement)
-            val columnsPerRow = CalculateColumnsPerRow(webView)
+            val columnsPerRow = calculateColumnsPerRow(webView, tableData)
             val htmlTable = getHtmlTable(tableData, columnsPerRow)
             val htmlPageToShow = getHtmlPageWithTable(htmlTable)
             webView.loadData(htmlPageToShow, "text/html", "UTF-8")
         }
 
+        private fun calculateColumnsPerRow(webView: WebView, tableData: Array<Array<String>>): Int {
+            val widthPx = Resources.getSystem().displayMetrics.widthPixels
+            val density = Resources.getSystem().displayMetrics.density
+            val effectiveWidth = floor((widthPx / density).toDouble());
+            val usableWidth = effectiveWidth - (webView.marginStart + webView.marginEnd) / density
+            var columnsPerRow = floor(usableWidth / columnWidth).toInt()
+            return min(columnsPerRow, tableData.size)
+        }
+
         private fun getHtmlTable(tableData: Array<Array<String>>, columnsPerTable: Int) : String {
             val numberOfTables = ceil((tableData.size / columnsPerTable).toDouble()).toInt()
-            val numberOfRows = tableData[0].size
+            val numberOfRowsPerTable = tableData[0].size
 
             var htmlTable = ""
             var totalNumberOfColumns = tableData.size
@@ -140,10 +132,10 @@ class KnmiSixDayForecastFragment : Fragment() {
                                           </colgroup>
                                 """.trimMargin()
 
-                for (row in 0..<numberOfRows) {
+                for (row in 0..<numberOfRowsPerTable) {
                     htmlTable += """<tr>"""
                     var column = i * columnsPerTable
-                    while (column < totalNumberOfColumns) {
+                    while (column < (i + 1 )* columnsPerTable && column < totalNumberOfColumns) {
                         var content = tableData[column][row]
                         if (content.endsWith(".svg")) {
                             content = """<img alt="" src="""" + content + """" width="60px"/>"""
