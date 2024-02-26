@@ -154,6 +154,11 @@ class BuienradarChartFragment : Fragment() {
 
         // When complete: parses the result
         override fun onPostExecute(htmlDocument: Document?) {
+            // It may be that the user has already moved on to the next fragment
+            if (_binding == null) {
+                return
+            }
+
             val chart = binding.buienradarChart
             if (htmlDocument == null || htmlDocument.text() == "") {
                 chart.setNoDataText(getString(R.string.menu_buienradar_chart_error) + ": " +

@@ -94,6 +94,11 @@ class KnmiSixDayForecastFragment : Fragment() {
         // When complete: parses the result
         @Deprecated("Deprecated in Java")
         override fun onPostExecute(htmlDocument: Document?) {
+            // It may be that the user has already moved on to the next fragment
+            if (_binding == null) {
+                return
+            }
+
             val webView = binding.webView
             val htmlBuilder = HtmlBuilder()
             if (htmlDocument == null) {

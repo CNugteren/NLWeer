@@ -84,6 +84,11 @@ class KnmiTextFragment : Fragment() {
 
         // When complete: parses the result
         override fun onPostExecute(htmlDocument: Document?) {
+            // It may be that the user has already moved on to the next fragment
+            if (_binding == null) {
+                return
+            }
+
             val root = binding.root
             if (htmlDocument == null) {
                 root.findViewById<TextView>(R.id.textViewContent0).text = getString(R.string.menu_knmi_text_failed)
