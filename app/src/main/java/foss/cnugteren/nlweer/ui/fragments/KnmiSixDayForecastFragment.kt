@@ -155,7 +155,7 @@ class KnmiSixDayForecastFragment : Fragment() {
     internal inner class HtmlBuilder {
 
         // Width in pixels of column containing KNMI weather data
-        private val columnWidth get() = 105
+        private val columnWidth get() = 110
 
         // Image size in pixels
         private val imageSize get() = 54
