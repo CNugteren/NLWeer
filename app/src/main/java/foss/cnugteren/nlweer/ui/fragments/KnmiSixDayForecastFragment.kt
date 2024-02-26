@@ -57,6 +57,11 @@ class KnmiSixDayForecastFragment : Fragment() {
         return root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun getURL(): String {
         return "https://www.knmi.nl/nederland-nu/weer/verwachtingen"
     }
