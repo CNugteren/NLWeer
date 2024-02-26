@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.URLUtil
-import android.webkit.WebView
 import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import androidx.fragment.app.Fragment
@@ -22,7 +21,6 @@ import org.jsoup.nodes.Element
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.min
-import kotlin.time.times
 
 class KnmiSixDayForecastFragment : Fragment() {
 
@@ -70,6 +68,9 @@ class KnmiSixDayForecastFragment : Fragment() {
     }
 
     private fun loadPage() {
+        val webView = binding.webView
+        val htmlBuilder = HtmlBuilder()
+        webView.loadData(htmlBuilder.buildHtmlPageWithLoadingMessage(), "text/html", "utf-8")
         RetrieveWebPage().execute(getURL())
     }
 
@@ -89,20 +90,20 @@ class KnmiSixDayForecastFragment : Fragment() {
         @Deprecated("Deprecated in Java")
         override fun onPostExecute(htmlDocument: Document?) {
             val webView = binding.webView
-            val tableHtmlBuilder = TableHtmlBuilder()
+            val htmlBuilder = HtmlBuilder()
             if (htmlDocument == null) {
-                webView.loadData(tableHtmlBuilder.getHtmPageWithLoadingError(), "text/html", "utf-8")
+                webView.loadData(htmlBuilder.buildHtmPageWithLoadingError(), "text/html", "utf-8")
                 return
             }
 
             val tableWrapperElement = htmlDocument.select("div.weather-map__table-wrp").firstOrNull()
             if (tableWrapperElement == null){
-                webView.loadData(tableHtmlBuilder.getHtmPageWithLoadingError(), "text/html", "utf-8")
+                webView.loadData(htmlBuilder.buildHtmPageWithLoadingError(), "text/html", "utf-8")
                 return
             }
 
             val tableData = getTableData(tableWrapperElement)
-            val htmlPageToShow = tableHtmlBuilder.buildHtmlPage(tableData)
+            val htmlPageToShow = htmlBuilder.buildHtmlPageWithTables(tableData)
             webView.loadData(htmlPageToShow, "text/html", "UTF-8")
         }
 
@@ -141,7 +142,7 @@ class KnmiSixDayForecastFragment : Fragment() {
         }
     }
 
-    internal inner class TableHtmlBuilder {
+    internal inner class HtmlBuilder {
 
         // Width in pixels of column containing KNMI weather data
         private val columnWidth get() = 105
@@ -155,7 +156,7 @@ class KnmiSixDayForecastFragment : Fragment() {
         // Row height used for every other row for aesthetic reasons; in pixels
         private val paddedRowHeight get() = 24
 
-        fun buildHtmlPage(tableData: Array<Array<String>>) : String {
+        fun buildHtmlPageWithTables(tableData: Array<Array<String>>) : String {
             val columnsPerTable = calculateColumnsPerTable(tableData)
             val tablesHtml = getHtmlTables(tableData, columnsPerTable)
 
@@ -214,7 +215,12 @@ class KnmiSixDayForecastFragment : Fragment() {
             return htmlTable
         }
 
-        fun getHtmPageWithLoadingError() : String {
+        fun buildHtmlPageWithLoadingMessage() : String {
+            val loadingMessageHtml = "<p>" + getString(R.string.menu_knmi_text_loading) + "</p>" + """<br style="line-height: 10px">"""
+            return getHtmlPageWithContent(loadingMessageHtml)
+        }
+
+        fun buildHtmPageWithLoadingError() : String {
             val errorMessageHtml = "<p>" + getString(R.string.menu_knmi_text_failed) + "</p>" + """<br style="line-height: 10px">"""
             return getHtmlPageWithContent(errorMessageHtml)
         }
