@@ -89,19 +89,19 @@ class KnmiSixDayForecastFragment : Fragment() {
         @Deprecated("Deprecated in Java")
         override fun onPostExecute(htmlDocument: Document?) {
             val webView = binding.webView
+            val tableHtmlBuilder = TableHtmlBuilder()
             if (htmlDocument == null) {
-                webView.loadData(getString(R.string.menu_knmi_text_failed), "text/html", "utf-8")
+                webView.loadData(tableHtmlBuilder.getHtmPageWithLoadingError(), "text/html", "utf-8")
                 return
             }
 
             val tableWrapperElement = htmlDocument.select("div.weather-map__table-wrp").firstOrNull()
             if (tableWrapperElement == null){
-                webView.loadData(getString(R.string.menu_knmi_text_failed), "text/html", "utf-8")
+                webView.loadData(tableHtmlBuilder.getHtmPageWithLoadingError(), "text/html", "utf-8")
                 return
             }
 
             val tableData = getTableData(tableWrapperElement)
-            val tableHtmlBuilder = TableHtmlBuilder()
             val htmlPageToShow = tableHtmlBuilder.buildHtmlPage(tableData)
             webView.loadData(htmlPageToShow, "text/html", "UTF-8")
         }
@@ -159,7 +159,7 @@ class KnmiSixDayForecastFragment : Fragment() {
             val columnsPerTable = calculateColumnsPerTable(tableData)
             val tablesHtml = getHtmlTables(tableData, columnsPerTable)
 
-            return getHtmlPageWithTable(tablesHtml)
+            return getHtmlPageWithContent(tablesHtml)
         }
 
         private fun calculateColumnsPerTable(tableData: Array<Array<String>>): Int {
@@ -214,7 +214,12 @@ class KnmiSixDayForecastFragment : Fragment() {
             return htmlTable
         }
 
-        private fun getHtmlPageWithTable(table: String) : String {
+        fun getHtmPageWithLoadingError() : String {
+            val errorMessageHtml = "<p>" + getString(R.string.menu_knmi_text_failed) + "</p>" + """<br style="line-height: 10px">"""
+            return getHtmlPageWithContent(errorMessageHtml)
+        }
+
+        private fun getHtmlPageWithContent(content: String) : String {
             val webView = binding.webView
             val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(webView.context)
             val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
@@ -250,7 +255,7 @@ class KnmiSixDayForecastFragment : Fragment() {
                         }
                     </style>
                 </head>
-                <body>""" + table + """
+                <body>""" + content + """
                     <p>""".trimIndent() + getString(R.string.menu_knmi_text_source) + """</p>
                     </body>""".trimIndent()
         }
