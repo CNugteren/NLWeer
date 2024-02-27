@@ -61,13 +61,13 @@ class KnmiTextFragment : Fragment() {
 
     private fun loadPage() {
         val root = binding.root
-        val headers = arrayOf("Vandaag & Morgen", "Vooruitzichten", "", "Vooruitzichten lange termijn")
+        val headers = arrayOf("Vandaag & Morgen", "Vooruitzichten", "Vooruitzichten lange termijn")
         root.findViewById<TextView>(R.id.textViewHeader0).text = headers[0]
         root.findViewById<TextView>(R.id.textViewHeader1).text = headers[1]
-        root.findViewById<TextView>(R.id.textViewHeader3).text = headers[3]
+        root.findViewById<TextView>(R.id.textViewHeader2).text = headers[2]
         root.findViewById<TextView>(R.id.textViewContent0).text = getString(R.string.menu_knmi_text_loading)
         root.findViewById<TextView>(R.id.textViewContent1).text = getString(R.string.menu_knmi_text_loading)
-        root.findViewById<TextView>(R.id.textViewContent3).text = getString(R.string.menu_knmi_text_loading)
+        root.findViewById<TextView>(R.id.textViewContent2).text = getString(R.string.menu_knmi_text_loading)
         RetrieveWebPage().execute(getURL())
     }
 
@@ -84,11 +84,16 @@ class KnmiTextFragment : Fragment() {
 
         // When complete: parses the result
         override fun onPostExecute(htmlDocument: Document?) {
+            // It may be that the user has already moved on to the next fragment
+            if (_binding == null) {
+                return
+            }
+
             val root = binding.root
             if (htmlDocument == null) {
                 root.findViewById<TextView>(R.id.textViewContent0).text = getString(R.string.menu_knmi_text_failed)
                 root.findViewById<TextView>(R.id.textViewContent1).text = getString(R.string.menu_knmi_text_failed)
-                root.findViewById<TextView>(R.id.textViewContent3).text = getString(R.string.menu_knmi_text_failed)
+                root.findViewById<TextView>(R.id.textViewContent2).text = getString(R.string.menu_knmi_text_failed)
                 return
             }
             val contents = arrayOf("", "", "", "")
@@ -114,32 +119,14 @@ class KnmiTextFragment : Fragment() {
                         }
                     }
 
-                    // The icons/numbers week overview
-                    if (index == 2) {
-                        group.select("div.weather-map__table-wrp").forEach { element ->
-                            element.select("li").forEach { column ->
-                                var tableData = ""
-                                column.select("span.weather-map__table-cell").forEachIndexed { index, item ->
-                                    if (index == 0) {
-                                        tableData += "[" + item.text() + "] "
-                                    }
-                                    else {
-                                        tableData += item.text() + " "
-                                    }
-                                }
-                                contents[2] += tableData + "\n\n"
-                            }
-                        }
-                    }
-
                     // The long term report
                     if (index == 3) {
                         group.select("div.col-sm-12.col-md-7").forEach { element ->
                             element.select("p").forEach { paragraph ->
-                                contents[3] += paragraph.text() + "\n\n"
+                                contents[2] += paragraph.text() + "\n\n"
                             }
                             element.select("span.meta").forEach { paragraph ->
-                                contents[3] += "Laatste update: " + paragraph.text() + "\n\n"
+                                contents[2] += "Laatste update: " + paragraph.text() + "\n\n"
                             }
                         }
                     }
@@ -149,8 +136,7 @@ class KnmiTextFragment : Fragment() {
             // Displays the found data
             root.findViewById<TextView>(R.id.textViewContent0).text = contents[0].trimEnd()
             root.findViewById<TextView>(R.id.textViewContent1).text = contents[1].trimEnd()
-            root.findViewById<TextView>(R.id.textViewContent2).text = contents[2].trimEnd()
-            root.findViewById<TextView>(R.id.textViewContent3).text = contents[3].trimEnd() + "\n\n"
+            root.findViewById<TextView>(R.id.textViewContent2).text = contents[2].trimEnd() + "\n\n"
         }
     }
 }

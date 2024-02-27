@@ -132,6 +132,9 @@ class MainActivity : AppCompatActivity() {
                         R.id.nav_knmi_text -> {
                             fragment<KnmiTextFragment>(item.navId) {label = getString(item.stringId) }
                         }
+                        R.id.nav_knmi_sixdayforecast -> {
+                            fragment<KnmiSixDayForecastFragment>(item.navId) {label = getString(item.stringId) }
+                    	}
                         R.id.nav_knmi_pluim -> {
                             fragment<KnmiPluimFragment>(item.navId) {label = getString(item.stringId) }
                         }

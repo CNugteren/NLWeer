@@ -10,6 +10,7 @@
     <fragment android:id="@+id/nav_knmi_wind" />
     <fragment android:id="@+id/nav_knmi_text" />
     <fragment android:id="@+id/nav_knmi_pluim" />
+    <fragment android:id="@+id/nav_knmi_sixdayforecast" />
 
     <fragment android:id="@+id/nav_knmi_visibility" />
     <fragment android:id="@+id/nav_knmi_humidity" />

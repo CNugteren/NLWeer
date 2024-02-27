@@ -40,6 +40,7 @@ val KNMI_ITEMS = arrayOf(
     MapData(R.string.menu_knmi_rain_m1_no_temp, R.id.nav_knmi_rain_m1_no_temp, 0, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/page/weer/actueel-weer/neerslagradar/WWWRADAR_loop.gif", 425, 445, arrayOf(50.60f, 1.85f, 54.05f, 7.20f, -0.10f, 0.09f)),
     // Special maps
     MapData(R.string.menu_knmi_text, R.id.nav_knmi_text, 1, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
+    MapData(R.string.menu_knmi_sixdayforecast, R.id.nav_knmi_sixdayforecast, 1, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f)),
     MapData(R.string.menu_knmi_pluim, R.id.nav_knmi_pluim, 0, R.id.knmi_menu, "N/A", 0, 0, arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))
 )
 
