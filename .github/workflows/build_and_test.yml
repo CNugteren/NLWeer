@@ -15,7 +15,8 @@ jobs:
         java-version: 17
     - name: Set-up a temporary keystore for signing
       run: |
-        echo y | keytool -genkeypair -dname "cn=GitHub CI, ou=JavaSoft, o=Sun, c=US" -alias alias -keypass android -keystore ci.keystore -storepass android -keyalg RSA -keysize 2048 -validity 20000
+        echo y | keytool -genkeypair -dname "cn=GitHub CI, ou=JavaSoft, o=Sun, c=US" -alias alias -keypass android -keystore ci.keystore -storepass android -keyalg RSA -keysize 2048 -validity 2
+        mkdir -p ~/.gradle
         echo RELEASE_STORE_FILE=`pwd`/ci.keystore > ~/.gradle/gradle.properties
         echo RELEASE_STORE_PASSWORD=android >> ~/.gradle/gradle.properties
         echo RELEASE_KEY_ALIAS=alias >> ~/.gradle/gradle.properties
