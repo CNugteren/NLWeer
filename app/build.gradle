@@ -8,8 +8,8 @@ android {
         applicationId "foss.cnugteren.nlweer"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 11
-        versionName "1.9.0"
+        versionCode 12
+        versionName "1.10.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -28,6 +28,25 @@ android {
     }
     kotlinOptions {
         jvmTarget = '17'
+    }
+
+    // From https://stackoverflow.com/a/21020469
+    signingConfigs {
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+
+            // Optional, specify signing versions used
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
     }
 
     namespace 'foss.cnugteren.nlweer'
