@@ -74,8 +74,7 @@ class KnmiSixDayForecastFragment : Fragment() {
 
     private fun loadPage() {
         val webView = binding.webView
-        val htmlBuilder = HtmlBuilder()
-        webView.loadData(htmlBuilder.buildHtmlPageWithLoadingMessage(), "text/html", "utf-8")
+        webView.loadData(HtmlBuilder().buildHtmlPageWithLoadingMessage(), "text/html", "utf-8")
         RetrieveWebPage().execute(getURL())
     }
 
@@ -112,9 +111,14 @@ class KnmiSixDayForecastFragment : Fragment() {
                 return
             }
 
-            val tableData = getTableData(tableWrapperElement)
-            val htmlPageToShow = htmlBuilder.buildHtmlPageWithTables(tableData)
-            webView.loadData(htmlPageToShow, "text/html", "UTF-8")
+            try {
+                val tableData = getTableData(tableWrapperElement)
+                val htmlPageToShow = htmlBuilder.buildHtmlPageWithTables(tableData)
+                webView.loadData(htmlPageToShow, "text/html", "UTF-8")
+            }
+            catch (ex: Exception) {
+                webView.loadData(htmlBuilder.buildHtmPageWithLoadingError(), "text/html", "utf-8")
+            }
         }
 
         // Get the weather data per day of the week
@@ -202,7 +206,8 @@ class KnmiSixDayForecastFragment : Fragment() {
                     var column = tableNumber * columnsPerTable
                     // Loop until either all columns for the current table have been processed,
                     // or all columns have already been processed
-                    while (column < (tableNumber + 1 ) * columnsPerTable && column < totalNumberOfColumns) {
+                    val endColumn = min((tableNumber + 1 ) * columnsPerTable, totalNumberOfColumns)
+                    while (column < endColumn) {
                         var content = tableData[column][row]
                         if (URLUtil.isValidUrl(content)) {
                             content = """<img alt="" src="""" + content + """" width="""" + imageSize + """px"/>"""
