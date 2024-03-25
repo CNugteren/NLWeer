@@ -18,6 +18,7 @@ import foss.cnugteren.nlweer.databinding.FragmentKnmiSixdayforecastBinding
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
+import java.lang.IllegalArgumentException
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.min
@@ -74,8 +75,7 @@ class KnmiSixDayForecastFragment : Fragment() {
 
     private fun loadPage() {
         val webView = binding.webView
-        val htmlBuilder = HtmlBuilder()
-        webView.loadData(htmlBuilder.buildHtmlPageWithLoadingMessage(), "text/html", "utf-8")
+        webView.loadData(HtmlBuilder().buildHtmlPageWithLoadingMessage(), "text/html", "utf-8")
         RetrieveWebPage().execute(getURL())
     }
 
@@ -112,15 +112,28 @@ class KnmiSixDayForecastFragment : Fragment() {
                 return
             }
 
-            val tableData = getTableData(tableWrapperElement)
-            val htmlPageToShow = htmlBuilder.buildHtmlPageWithTables(tableData)
-            webView.loadData(htmlPageToShow, "text/html", "UTF-8")
+            try {
+                val tableData = getTableData(tableWrapperElement)
+                val htmlPageToShow = htmlBuilder.buildHtmlPageWithTables(tableData)
+                webView.loadData(htmlPageToShow, "text/html", "UTF-8")
+            }
+            catch (ex: Exception) {
+                webView.loadData(htmlBuilder.buildHtmPageWithLoadingError(), "text/html", "utf-8")
+            }
         }
 
         // Get the weather data per day of the week
         private fun getTableData(tableWrapperElement: Element) : Array<Array<String>> {
             val weatherPerDay = tableWrapperElement.select("li")
-            val tableData = Array<Array<String>>(weatherPerDay.size, { Array<String>(15, {""}) })
+            val numberOfTableCells = weatherPerDay.firstOrNull()?.select("span.weather-map__table-cell")?.size
+            if (numberOfTableCells == null) {
+                throw IllegalArgumentException("No rows with weather data found")
+            }
+            // Day of the week + date + weather icon + 2 rows for each property
+            val numberOfRows = 2 * (numberOfTableCells - 1) + 1
+            val tableData = Array<Array<String>>(weatherPerDay.size, { Array<String>(numberOfRows, {""}) })
+
+
             weatherPerDay.forEachIndexed { colIndex, column ->
                 var rowIndex = 0
 
@@ -202,7 +215,8 @@ class KnmiSixDayForecastFragment : Fragment() {
                     var column = tableNumber * columnsPerTable
                     // Loop until either all columns for the current table have been processed,
                     // or all columns have already been processed
-                    while (column < (tableNumber + 1 ) * columnsPerTable && column < totalNumberOfColumns) {
+                    val endColumn = min((tableNumber + 1 ) * columnsPerTable, totalNumberOfColumns)
+                    while (column < endColumn) {
                         var content = tableData[column][row]
                         if (URLUtil.isValidUrl(content)) {
                             content = """<img alt="" src="""" + content + """" width="""" + imageSize + """px"/>"""
