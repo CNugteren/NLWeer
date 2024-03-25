@@ -18,6 +18,7 @@ import foss.cnugteren.nlweer.databinding.FragmentKnmiSixdayforecastBinding
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
+import java.lang.IllegalArgumentException
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.min
@@ -124,7 +125,15 @@ class KnmiSixDayForecastFragment : Fragment() {
         // Get the weather data per day of the week
         private fun getTableData(tableWrapperElement: Element) : Array<Array<String>> {
             val weatherPerDay = tableWrapperElement.select("li")
-            val tableData = Array<Array<String>>(weatherPerDay.size, { Array<String>(15, {""}) })
+            val numberOfTableCells = weatherPerDay.firstOrNull()?.select("span.weather-map__table-cell")?.size
+            if (numberOfTableCells == null) {
+                throw IllegalArgumentException("No rows with weather data found")
+            }
+            // Day of the week + date + weather icon + 2 rows for each property
+            val numberOfRows = 2 * (numberOfTableCells - 1) + 1
+            val tableData = Array<Array<String>>(weatherPerDay.size, { Array<String>(numberOfRows, {""}) })
+
+
             weatherPerDay.forEachIndexed { colIndex, column ->
                 var rowIndex = 0
 
