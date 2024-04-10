@@ -42,7 +42,7 @@
 
     <string name="menu_knmi_text">Weerbericht</string>
     <string name="menu_knmi_text_source">Bron:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
-    <string name="menu_knmi_sixdayforecast">6-Daagse verwachting</string>
+    <string name="menu_knmi_sixdayforecast">7-Daagse verwachting</string>
     <string name="menu_knmi_text_loading">Data wordt geladen&#8230;</string>
     <string name="menu_knmi_text_failed">Data kon niet geladen worden</string>
     <string name="menu_knmi_pluim">Pluim</string>

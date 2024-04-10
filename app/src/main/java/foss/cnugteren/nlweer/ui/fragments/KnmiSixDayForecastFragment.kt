@@ -106,14 +106,14 @@ class KnmiSixDayForecastFragment : Fragment() {
                 return
             }
 
-            val tableWrapperElement = htmlDocument.select("div.weather-map__table-wrp").firstOrNull()
-            if (tableWrapperElement == null){
+            val weatherForecastTable = htmlDocument.select("div.weather-forecast__table").firstOrNull()
+            if (weatherForecastTable == null){
                 webView.loadData(htmlBuilder.buildHtmPageWithLoadingError(), "text/html", "utf-8")
                 return
             }
 
             try {
-                val tableData = getTableData(tableWrapperElement)
+                val tableData = getTableData(weatherForecastTable)
                 val htmlPageToShow = htmlBuilder.buildHtmlPageWithTables(tableData)
                 webView.loadData(htmlPageToShow, "text/html", "UTF-8")
             }
@@ -123,28 +123,35 @@ class KnmiSixDayForecastFragment : Fragment() {
         }
 
         // Get the weather data per day of the week
-        private fun getTableData(tableWrapperElement: Element) : Array<Array<String>> {
-            val weatherPerDay = tableWrapperElement.select("li")
-            val numberOfTableCells = weatherPerDay.firstOrNull()?.select("span.weather-map__table-cell")?.size
-            if (numberOfTableCells == null) {
-                throw IllegalArgumentException("No rows with weather data found")
+        private fun getTableData(weatherForecastTable: Element) : Array<Array<String>> {
+            val weatherPerDay = weatherForecastTable.children()
+            val weatherOfFirstDay = weatherPerDay.firstOrNull()?.select("div.weather-forecast__day")
+            if (weatherOfFirstDay == null) {
+                throw IllegalArgumentException("Forecast first day not found")
             }
+            val weatherInfoPerDay  = weatherOfFirstDay.select("div.weather-forecast__banner").firstOrNull()?.childrenSize()
+            if (weatherInfoPerDay == null) {
+                throw IllegalArgumentException("Forecast info cannot be found")
+            }
+            val weatherStatsPerDay = weatherOfFirstDay.select("div.weather-forecast__details").firstOrNull()?.childrenSize()
+            if (weatherStatsPerDay == null) {
+                throw IllegalArgumentException("Forecast stats cannot be found")
+            }
+
             // Day of the week + date + weather icon + 2 rows for each property
-            val numberOfRows = 2 * (numberOfTableCells - 1) + 1
+            val numberOfRows = 2 * (weatherInfoPerDay + weatherStatsPerDay - 1) + 1
             val tableData = Array<Array<String>>(weatherPerDay.size, { Array<String>(numberOfRows, {""}) })
 
 
             weatherPerDay.forEachIndexed { colIndex, column ->
                 var rowIndex = 0
 
-                val dayOfTheWeek = column.selectFirst("strong.weather-map__table-cell")
-                    ?.text()
-                if (dayOfTheWeek != null) {
-                    tableData[colIndex][rowIndex] = dayOfTheWeek
-                    rowIndex++
+                val weatherBanner = column.select("div.weather-forecast__banner").firstOrNull()
+                if (weatherBanner == null) {
+                    throw IllegalArgumentException("Forecast banner not found")
                 }
 
-                column.select("span.weather-map__table-cell").forEach { rowItem ->
+                weatherBanner.children().forEach { rowItem ->
                     // If cell contains image, get the src link
                     val imageItem = rowItem.selectFirst("img")
                     if (imageItem != null) {
@@ -153,15 +160,33 @@ class KnmiSixDayForecastFragment : Fragment() {
                     }
                     else {
                         // Item contains just text; split into header and data, if applicable
-                        rowItem.text().split(' ', ignoreCase =  false, limit =  2).forEach { item ->
+                        getCellHeaderAndValue(rowItem).forEach { item ->
                             tableData[colIndex][rowIndex] = item
                             rowIndex++
                         }
                     }
                 }
+
+                val weatherDetails = column.select("div.weather-forecast__details").firstOrNull()
+                if (weatherDetails == null) {
+                    throw IllegalArgumentException("Forecast details not found")
+                }
+
+                weatherDetails.children().forEach { rowItem ->
+                    // Item contains just text; split into header and data, if applicable
+                    getCellHeaderAndValue(rowItem).forEach { item ->
+                        tableData[colIndex][rowIndex] = item
+                        rowIndex++
+                    }
+                }
             }
 
             return tableData
+        }
+
+        // Item contains just text; split into header and data, if applicable
+        private fun getCellHeaderAndValue(rowItem: Element) : List<String> {
+            return rowItem.text().split(' ', ignoreCase =  false, limit =  2)
         }
     }
 

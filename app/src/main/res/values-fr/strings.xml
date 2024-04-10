@@ -41,7 +41,7 @@
 
     <string name="menu_knmi_text">Bulletin météo</string>
     <string name="menu_knmi_text_source">Source:\nhttps://www.knmi.nl/nederland-nu/weer/verwachtingen</string>
-    <string name="menu_knmi_sixdayforecast">Prévisions à 6 jours</string>
+    <string name="menu_knmi_sixdayforecast">Prévisions à 7 jours</string>
     <string name="menu_knmi_text_loading">En cours de chargement&#8230;</string>
     <string name="menu_knmi_text_failed">Les données n\'ont pas pu être chargées</string>
     <string name="menu_knmi_pluim">Pluim</string>
