@@ -120,7 +120,7 @@ class KnmiTextFragment : Fragment() {
                     }
 
                     // The long term report
-                    if (index == 3) {
+                    if (index == 4) {
                         group.select("div.col-sm-12.col-md-7").forEach { element ->
                             element.select("p").forEach { paragraph ->
                                 contents[2] += paragraph.text() + "\n\n"
