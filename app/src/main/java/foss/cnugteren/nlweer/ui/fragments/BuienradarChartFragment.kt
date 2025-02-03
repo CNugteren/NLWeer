@@ -55,7 +55,7 @@ class BuienradarChartFragment : Fragment() {
         activity.toggleNavigationButtons(true)
 
         // Set the location (latitude and longitude)
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context!!)
         val locationEnabled = sharedPreferences.getBoolean("location_enable", false)
         if (locationEnabled) {
             val gpsEnable = sharedPreferences.getBoolean("gps_enable", false)
@@ -95,7 +95,7 @@ class BuienradarChartFragment : Fragment() {
     }
 
     fun loadPage() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context!!)
         val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
         var textColour = Color.BLACK
         var background = Color.WHITE

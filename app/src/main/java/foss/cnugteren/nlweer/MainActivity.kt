@@ -194,7 +194,7 @@ class MainActivity : AppCompatActivity() {
         if (defaultViewId != null) {
             val navController = findNavController(R.id.nav_host_fragment)
             val navGraph = navController.graph
-            navGraph.startDestination = defaultViewId
+            navGraph.setStartDestination(defaultViewId)
             navController.graph = navGraph
         }
     }
