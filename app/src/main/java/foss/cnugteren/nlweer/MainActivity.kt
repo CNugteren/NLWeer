@@ -20,6 +20,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.createGraph
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorDestinationBuilder
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.fragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -124,34 +125,53 @@ class MainActivity : AppCompatActivity() {
         // This is instead of a hard-coded mobile_navigation.xml file. That file still exists though
         // to define the R.id values
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-
         navHostFragment.navController.apply {
-            graph = createGraph(startDestination = R.id.nav_knmi_rain_m1) {
+            graph = createGraph(
+                startDestination = R.id.nav_knmi_rain_m1
+            ) {
                 for (item in ALL_ITEMS) {
                     when (item.navId) {
                         R.id.nav_knmi_text -> {
-                            fragment<KnmiTextFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<KnmiTextFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                         }
                         R.id.nav_knmi_sixdayforecast -> {
-                            fragment<KnmiSixDayForecastFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<KnmiSixDayForecastFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                     	}
                         R.id.nav_knmi_pluim -> {
-                            fragment<KnmiPluimFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<KnmiPluimFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                         }
                         R.id.nav_buienradar_chart -> {
-                            fragment<BuienradarChartFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<BuienradarChartFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                         }
                         R.id.nav_buienradar_pluim -> {
-                            fragment<BuienradarPluimFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<BuienradarPluimFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                         }
                         else -> {
-                            fragment<MapFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<MapFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                         }
                     }
                 }
-                fragment<MapFragment>(R.id.nav_empty) { label = getString(R.string.menu_empty) }
-                fragment<AboutFragment>(R.id.nav_about) { label = getString(R.string.menu_about) }
-                fragment<SettingsFragment>(R.id.nav_settings) { label = getString(R.string.menu_settings) }
+                fragment<MapFragment>(R.id.nav_empty) {
+                    label = getString(R.string.menu_empty)
+                }
+                fragment<AboutFragment>(R.id.nav_about) {
+                    label = getString(R.string.menu_about)
+                }
+                fragment<SettingsFragment>(R.id.nav_settings) {
+                    label = getString(R.string.menu_settings)
+                }
             }
         }
 
@@ -194,7 +214,7 @@ class MainActivity : AppCompatActivity() {
         if (defaultViewId != null) {
             val navController = findNavController(R.id.nav_host_fragment)
             val navGraph = navController.graph
-            navGraph.startDestination = defaultViewId
+            navGraph.setStartDestination(defaultViewId)
             navController.graph = navGraph
         }
     }
@@ -317,6 +337,7 @@ class MainActivity : AppCompatActivity() {
 
     // Try again the above function when the request was accepted
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             1 -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {

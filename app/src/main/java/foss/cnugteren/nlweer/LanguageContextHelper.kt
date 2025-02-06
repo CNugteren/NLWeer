@@ -38,7 +38,7 @@ class ApplicationLanguageHelper(base: Context) : ContextThemeWrapper(base, R.sty
 
         @SuppressWarnings("deprecation")
         fun setSystemLocaleLegacy(config: Configuration, locale: Locale) {
-            config.locale = locale
+            config.setLocale(locale)
         }
 
         @TargetApi(Build.VERSION_CODES.N)
