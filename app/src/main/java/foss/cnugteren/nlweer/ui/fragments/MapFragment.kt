@@ -78,7 +78,7 @@ class MapFragment : Fragment() {
         })
 
         // Set the location (latitude and longitude)
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context!!)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         gifView.drawCircles = sharedPreferences.getBoolean("location_enable", false)
         if (gifView.drawCircles && !coordinates.contentEquals(arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))) {
             val gpsEnable = sharedPreferences.getBoolean("gps_enable", false)
@@ -142,7 +142,7 @@ class MapFragment : Fragment() {
     }
 
     fun loadPage() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context!!)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         val backgroundColour = " " + sharedPreferences.getString("background_colour", "black") + " "
 
         val gifView = binding.gifView

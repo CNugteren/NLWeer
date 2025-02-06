@@ -17,7 +17,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.fragment_settings, rootKey)
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context!!)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         enableDisableLocationProviderButton()
 
         // Don't display floating navigation buttons
@@ -69,13 +69,13 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     override fun onResume() {
         super.onResume()
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context!!)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         sharedPreferences.registerOnSharedPreferenceChangeListener(this)
     }
 
     override fun onPause() {
         super.onPause()
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context!!)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
     }
 
@@ -110,7 +110,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
     }
 
     private fun setListPreferenceData(defaultViewSelection: ListPreference) {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context!!)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         val sourceEnableKNMI = sharedPreferences.getBoolean("knmi_enable", true)
         val sourceEnableBuienradar = sharedPreferences.getBoolean("buienradar_enable", false)
 
