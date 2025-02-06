@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.ALL_ITEMS
@@ -37,7 +37,7 @@ class MapFragment : Fragment() {
         val activity = this.activity as MainActivity
 
         // Iterate over all items to find the current one and set the private variables accordingly
-        val navController = activity.findNavController(R.id.nav_host_fragment)
+        val navController = NavHostFragment.findNavController(this)
         val thisNavId = navController.currentDestination?.id
         for (item in ALL_ITEMS) {
             if (item.navId == thisNavId) {
