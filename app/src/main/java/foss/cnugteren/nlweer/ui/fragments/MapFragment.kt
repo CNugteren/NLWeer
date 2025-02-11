@@ -35,6 +35,7 @@ class MapFragment : Fragment() {
     ): View? {
         _binding = FragmentKnmiBinding.inflate(inflater, container, false)
         val activity = this.activity as MainActivity
+        activity.createNavGraph() // only runs if it wasn't created yet
 
         // Iterate over all items to find the current one and set the private variables accordingly
         val navController = NavHostFragment.findNavController(this)

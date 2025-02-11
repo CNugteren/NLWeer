@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     var gpsLon: Float? = null
     private var baseContextWrappingDelegate: AppCompatDelegate? = null
     private lateinit var binding: ActivityMainBinding
+    private var navGraphCreated: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,7 +121,10 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun createNavGraph() {
+    fun createNavGraph() {
+        if (navGraphCreated) {
+            return
+        }
         // This is instead of a hard-coded mobile_navigation.xml file. That file still exists though
         // to define the R.id values
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -173,7 +177,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
+        navGraphCreated = true
     }
 
     fun setMenuItemsVisibility() {
