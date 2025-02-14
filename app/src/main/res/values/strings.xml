@@ -98,6 +98,7 @@
     <string name="settings_dark_mode">App dark mode</string>
     <string name="dark_mode_no">Disabled</string>
     <string name="dark_mode_yes">Enabled</string>
+    <string name="dark_mode_system">System default</string>
 
     <string name="settings_languages">Display language</string>
     <string name="language_system">System default</string>

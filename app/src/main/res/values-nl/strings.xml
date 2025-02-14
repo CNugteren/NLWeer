@@ -99,6 +99,7 @@
     <string name="settings_dark_mode">Donkere modus</string>
     <string name="dark_mode_no">Uit</string>
     <string name="dark_mode_yes">Aan</string>
+    <string name="dark_mode_system">Systeemstandaard</string>
 
     <string name="settings_languages">Weergavetaal</string>
     <string name="language_system">Systeemstandaard</string>

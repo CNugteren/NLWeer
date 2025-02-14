@@ -45,11 +45,13 @@
     <string-array name="dark_mode_items">
         <item>@string/dark_mode_no</item>
         <item>@string/dark_mode_yes</item>
+        <item>@string/dark_mode_system</item>
     </string-array>
 
     <string-array name="dark_mode_values">
         <item>dark_mode_no</item>
         <item>dark_mode_yes</item>
+        <item>dark_mode_system</item>
     </string-array>
 
     <string-array name="location_shape_items">
