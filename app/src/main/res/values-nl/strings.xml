@@ -96,9 +96,10 @@
     <string name="settings_location_shape">Vorm van de locatiemarker</string>
     <string name="settings_location_colour">Kleur van de locatiemarker</string>
 
-    <string name="settings_dark_mode">Donkere modus</string>
-    <string name="dark_mode_no">Uit</string>
-    <string name="dark_mode_yes">Aan</string>
+    <string name="settings_dark_mode">Thema</string>
+    <string name="dark_mode_no">Licht</string>
+    <string name="dark_mode_yes">Donker</string>
+    <string name="dark_mode_system">Systeemstandaard</string>
 
     <string name="settings_languages">Weergavetaal</string>
     <string name="language_system">Systeemstandaard</string>

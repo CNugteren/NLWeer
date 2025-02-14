@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     private var locationManager : LocationManager? = null
     var gpsLat: Float? = null
     var gpsLon: Float? = null
+    var appIsInDarkMode: Boolean = false
     private var baseContextWrappingDelegate: AppCompatDelegate? = null
     private lateinit var binding: ActivityMainBinding
     private var navGraphCreated: Boolean = false
@@ -225,14 +226,22 @@ class MainActivity : AppCompatActivity() {
     // Dark mode
     fun setAppTheme() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        val darkModeSetting = sharedPreferences.getString("dark_mode", "dark_mode_no")
+        val darkModeSetting = sharedPreferences.getString("dark_mode", "dark_mode_system")
         if (darkModeSetting == "dark_mode_yes") {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            appIsInDarkMode = true
+        }
+        else if (darkModeSetting == "dark_mode_system") {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            val darkModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+            appIsInDarkMode = darkModeFlags == Configuration.UI_MODE_NIGHT_YES
         }
         else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            appIsInDarkMode = false
         }
     }
+
 
     // Menu button: refresh
     fun onClickRefresh(@Suppress("UNUSED_PARAMETER") v: MenuItem) {

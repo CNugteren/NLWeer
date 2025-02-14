@@ -75,11 +75,13 @@ class KnmiSixDayForecastFragment : Fragment() {
 
     private fun loadPage() {
         val webView = binding.webView
-        webView.loadData(HtmlBuilder().buildHtmlPageWithLoadingMessage(), "text/html", "utf-8")
-        RetrieveWebPage().execute(getURL())
+        val activity = this.activity as MainActivity
+        webView.loadData(HtmlBuilder().buildHtmlPageWithLoadingMessage(activity.appIsInDarkMode), "text/html", "utf-8")
+        RetrieveWebPage(activity).execute(getURL())
     }
 
-    internal inner class RetrieveWebPage : AsyncTask<String, Void, Document>() {
+    internal inner class RetrieveWebPage(activity: MainActivity) : AsyncTask<String, Void, Document>() {
+        private var mainActivity: MainActivity = activity
 
         // Retrieves the data from the URL using JSoup (async)
         @Deprecated("Deprecated in Java")
@@ -98,27 +100,26 @@ class KnmiSixDayForecastFragment : Fragment() {
             if (_binding == null) {
                 return
             }
-
             val webView = binding.webView
             val htmlBuilder = HtmlBuilder()
             if (htmlDocument == null) {
-                webView.loadData(htmlBuilder.buildHtmPageWithLoadingError(), "text/html", "utf-8")
+                webView.loadData(htmlBuilder.buildHtmPageWithLoadingError(mainActivity.appIsInDarkMode), "text/html", "utf-8")
                 return
             }
 
             val weatherForecastTable = htmlDocument.select("div.weather-forecast__table").firstOrNull()
             if (weatherForecastTable == null){
-                webView.loadData(htmlBuilder.buildHtmPageWithLoadingError(), "text/html", "utf-8")
+                webView.loadData(htmlBuilder.buildHtmPageWithLoadingError(mainActivity.appIsInDarkMode), "text/html", "utf-8")
                 return
             }
 
             try {
                 val tableData = getTableData(weatherForecastTable)
-                val htmlPageToShow = htmlBuilder.buildHtmlPageWithTables(tableData)
+                val htmlPageToShow = htmlBuilder.buildHtmlPageWithTables(tableData, mainActivity.appIsInDarkMode)
                 webView.loadData(htmlPageToShow, "text/html", "UTF-8")
             }
             catch (ex: Exception) {
-                webView.loadData(htmlBuilder.buildHtmPageWithLoadingError(), "text/html", "utf-8")
+                webView.loadData(htmlBuilder.buildHtmPageWithLoadingError(mainActivity.appIsInDarkMode), "text/html", "utf-8")
             }
         }
 
@@ -204,11 +205,11 @@ class KnmiSixDayForecastFragment : Fragment() {
         // Row height used for every other row for aesthetic reasons; in pixels
         private val paddedRowHeight get() = 24
 
-        fun buildHtmlPageWithTables(tableData: Array<Array<String>>) : String {
+        fun buildHtmlPageWithTables(tableData: Array<Array<String>>, appIsInDarkMode: Boolean) : String {
             val columnsPerTable = calculateColumnsPerTable(tableData)
             val tablesHtml = getHtmlTables(tableData, columnsPerTable)
 
-            return getHtmlPageWithContent(tablesHtml)
+            return getHtmlPageWithContent(tablesHtml, appIsInDarkMode)
         }
 
         private fun calculateColumnsPerTable(tableData: Array<Array<String>>): Int {
@@ -264,23 +265,20 @@ class KnmiSixDayForecastFragment : Fragment() {
             return htmlTable
         }
 
-        fun buildHtmlPageWithLoadingMessage() : String {
+        fun buildHtmlPageWithLoadingMessage(appIsInDarkMode: Boolean) : String {
             val loadingMessageHtml = "<p>" + getString(R.string.menu_knmi_text_loading) + "</p>" + """<br style="line-height: 10px">"""
-            return getHtmlPageWithContent(loadingMessageHtml)
+            return getHtmlPageWithContent(loadingMessageHtml, appIsInDarkMode)
         }
 
-        fun buildHtmPageWithLoadingError() : String {
+        fun buildHtmPageWithLoadingError(appIsInDarkMode: Boolean) : String {
             val errorMessageHtml = "<p>" + getString(R.string.menu_knmi_text_failed) + "</p>" + """<br style="line-height: 10px">"""
-            return getHtmlPageWithContent(errorMessageHtml)
+            return getHtmlPageWithContent(errorMessageHtml, appIsInDarkMode)
         }
 
-        private fun getHtmlPageWithContent(content: String) : String {
-            val webView = binding.webView
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(webView.context)
-            val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
+        private fun getHtmlPageWithContent(content: String, appIsInDarkMode: Boolean) : String {
             var backgroundColor = "rgb(250, 250, 250)"
             var textColor = "black"
-            if (darkMode == "dark_mode_yes") {
+            if (appIsInDarkMode) {
                 backgroundColor = "rgb(48, 48, 48)" // Android dark mode color
                 textColor = "rgb(193, 193, 193)" // Android dark mode color
             }
