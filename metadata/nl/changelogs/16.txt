@@ -1,0 +1,5 @@
+- Dark-mode kan nu ook automatisch de systeeminstellingen volgen
+- Verbeterde compatibiliteit met Android 15
+- Gradle en de Android libraries zijn geupdated
+- Probleem opgelost waarbij het logo in het zij-menu niet volledig zichtbaar was
+- Logo en oude changelogs zijn toegevoegd voor F-Droid

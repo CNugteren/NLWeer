@@ -1,0 +1,5 @@
+- Add an option to set dark-mode based on the system settings
+- Improve compatibility with Android 15
+- Update Gradle and the Android library dependencies
+- Fix an issue where the logo would be cut-off in the side navigation drawer
+- Add an icon and missing changelogs for F-Droid
