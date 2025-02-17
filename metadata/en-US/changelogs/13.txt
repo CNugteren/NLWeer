@@ -1,0 +1,1 @@
+- Fixed issue with 6-day forecast crashes

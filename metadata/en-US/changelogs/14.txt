@@ -1,0 +1,1 @@
+- Fixed issue with 6-day (now 7-day) forecast data re-organization on KNMI side
