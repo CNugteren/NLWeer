@@ -1,0 +1,5 @@
+- Nieuwe pagina: 6-daagse KNMI voorspelling
+- Nieuwe kaart: KNMI satelliet
+- Probleem opgelost met de KNMI pluim
+- Betere vertalingen en metadata
+- Gradle, Kotlin, en dependencies zijn geupdated

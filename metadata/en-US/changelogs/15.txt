@@ -1,0 +1,1 @@
+- Fixed an issue with the long term weather forecast text due to a change in the KNMI website

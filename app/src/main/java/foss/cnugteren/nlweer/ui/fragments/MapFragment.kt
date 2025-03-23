@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.ALL_ITEMS
@@ -35,9 +35,10 @@ class MapFragment : Fragment() {
     ): View? {
         _binding = FragmentKnmiBinding.inflate(inflater, container, false)
         val activity = this.activity as MainActivity
+        activity.createNavGraph() // only runs if it wasn't created yet
 
         // Iterate over all items to find the current one and set the private variables accordingly
-        val navController = activity.findNavController(R.id.nav_host_fragment)
+        val navController = NavHostFragment.findNavController(this)
         val thisNavId = navController.currentDestination?.id
         for (item in ALL_ITEMS) {
             if (item.navId == thisNavId) {
@@ -78,7 +79,7 @@ class MapFragment : Fragment() {
         })
 
         // Set the location (latitude and longitude)
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         gifView.drawCircles = sharedPreferences.getBoolean("location_enable", false)
         if (gifView.drawCircles && !coordinates.contentEquals(arrayOf(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f))) {
             val gpsEnable = sharedPreferences.getBoolean("gps_enable", false)
@@ -142,7 +143,7 @@ class MapFragment : Fragment() {
     }
 
     fun loadPage() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         val backgroundColour = " " + sharedPreferences.getString("background_colour", "black") + " "
 
         val gifView = binding.gifView

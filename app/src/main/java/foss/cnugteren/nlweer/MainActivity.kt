@@ -38,8 +38,10 @@ class MainActivity : AppCompatActivity() {
     private var locationManager : LocationManager? = null
     var gpsLat: Float? = null
     var gpsLon: Float? = null
+    var appIsInDarkMode: Boolean = false
     private var baseContextWrappingDelegate: AppCompatDelegate? = null
     private lateinit var binding: ActivityMainBinding
+    private var navGraphCreated: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,41 +122,63 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun createNavGraph() {
+    fun createNavGraph() {
+        if (navGraphCreated) {
+            return
+        }
         // This is instead of a hard-coded mobile_navigation.xml file. That file still exists though
         // to define the R.id values
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-
         navHostFragment.navController.apply {
-            graph = createGraph(startDestination = R.id.nav_knmi_rain_m1) {
+            graph = createGraph(
+                startDestination = R.id.nav_knmi_rain_m1
+            ) {
                 for (item in ALL_ITEMS) {
                     when (item.navId) {
                         R.id.nav_knmi_text -> {
-                            fragment<KnmiTextFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<KnmiTextFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                         }
                         R.id.nav_knmi_sixdayforecast -> {
-                            fragment<KnmiSixDayForecastFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<KnmiSixDayForecastFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                     	}
                         R.id.nav_knmi_pluim -> {
-                            fragment<KnmiPluimFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<KnmiPluimFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                         }
                         R.id.nav_buienradar_chart -> {
-                            fragment<BuienradarChartFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<BuienradarChartFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                         }
                         R.id.nav_buienradar_pluim -> {
-                            fragment<BuienradarPluimFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<BuienradarPluimFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                         }
                         else -> {
-                            fragment<MapFragment>(item.navId) {label = getString(item.stringId) }
+                            fragment<MapFragment>(item.navId) {
+                                label = getString(item.stringId)
+                            }
                         }
                     }
                 }
-                fragment<MapFragment>(R.id.nav_empty) { label = getString(R.string.menu_empty) }
-                fragment<AboutFragment>(R.id.nav_about) { label = getString(R.string.menu_about) }
-                fragment<SettingsFragment>(R.id.nav_settings) { label = getString(R.string.menu_settings) }
+                fragment<MapFragment>(R.id.nav_empty) {
+                    label = getString(R.string.menu_empty)
+                }
+                fragment<AboutFragment>(R.id.nav_about) {
+                    label = getString(R.string.menu_about)
+                }
+                fragment<SettingsFragment>(R.id.nav_settings) {
+                    label = getString(R.string.menu_settings)
+                }
             }
         }
-
+        navGraphCreated = true
     }
 
     fun setMenuItemsVisibility() {
@@ -194,7 +218,7 @@ class MainActivity : AppCompatActivity() {
         if (defaultViewId != null) {
             val navController = findNavController(R.id.nav_host_fragment)
             val navGraph = navController.graph
-            navGraph.startDestination = defaultViewId
+            navGraph.setStartDestination(defaultViewId)
             navController.graph = navGraph
         }
     }
@@ -202,14 +226,22 @@ class MainActivity : AppCompatActivity() {
     // Dark mode
     fun setAppTheme() {
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        val darkModeSetting = sharedPreferences.getString("dark_mode", "dark_mode_no")
+        val darkModeSetting = sharedPreferences.getString("dark_mode", "dark_mode_system")
         if (darkModeSetting == "dark_mode_yes") {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            appIsInDarkMode = true
+        }
+        else if (darkModeSetting == "dark_mode_system") {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            val darkModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+            appIsInDarkMode = darkModeFlags == Configuration.UI_MODE_NIGHT_YES
         }
         else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            appIsInDarkMode = false
         }
     }
+
 
     // Menu button: refresh
     fun onClickRefresh(@Suppress("UNUSED_PARAMETER") v: MenuItem) {
@@ -317,6 +349,7 @@ class MainActivity : AppCompatActivity() {
 
     // Try again the above function when the request was accepted
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             1 -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {

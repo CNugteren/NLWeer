@@ -1,0 +1,5 @@
+- Add new view: 6-day KNMI forecast
+- Add new view: Satellite KNMI map
+- Fix broken KNMI pluim
+- Improved translations, metadata and paths
+- Update Gradle, Kotlin, and dependencies

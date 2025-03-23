@@ -8,14 +8,15 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
 import foss.cnugteren.nlweer.databinding.FragmentKnmiPluimBinding
 
-class WebClientKnmiPluim : WebViewClient() {
+class WebClientKnmiPluim(activity: MainActivity) : WebViewClient() {
     // From https://stackoverflow.com/questions/14423981/android-webview-display-only-some-part-of-website
+
+    private var mainActivity: MainActivity = activity
 
     @Deprecated("Deprecated in Java")
     override fun shouldOverrideUrlLoading(
@@ -38,9 +39,8 @@ class WebClientKnmiPluim : WebViewClient() {
                 "document.getElementsByClassName('columns')[3].style.display='none';" +
                 "document.getElementsByClassName('chart-legend__wrp')[0].style.display='none';" +
                 "}\n)()")
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.context)
-        val darkMode = sharedPreferences.getString("dark_mode", "dark_mode_no")
-        if (darkMode == "dark_mode_yes") {
+
+        if (mainActivity.appIsInDarkMode) {
             view.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
         }
     }
@@ -74,7 +74,7 @@ class KnmiPluimFragment : Fragment() {
 
         // The web-viewer for the content
         val webView = binding.webView
-        val webViewClientModified = WebClientKnmiPluim()
+        val webViewClientModified = WebClientKnmiPluim(activity)
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = webViewClientModified
 
