@@ -30,6 +30,8 @@ class KnmiSixDayForecastFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val knmiUrl get() = "https://www.knmi.nl"
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -156,7 +158,11 @@ class KnmiSixDayForecastFragment : Fragment() {
                     // If cell contains image, get the src link
                     val imageItem = rowItem.selectFirst("img")
                     if (imageItem != null) {
-                        tableData[colIndex][rowIndex] = imageItem.attr("src")
+                        var source = imageItem.attr("src");
+                        if (source.startsWith('/')) {
+                            source = "$knmiUrl$source";
+                        }
+                        tableData[colIndex][rowIndex] = source;
                         rowIndex++
                     }
                     else {

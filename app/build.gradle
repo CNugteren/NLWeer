@@ -8,8 +8,8 @@ android {
         applicationId "foss.cnugteren.nlweer"
         minSdkVersion 21
         targetSdkVersion 35
-        versionCode 16
-        versionName "1.11.0"
+        versionCode 17
+        versionName "1.11.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
