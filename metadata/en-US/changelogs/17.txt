@@ -1,0 +1,1 @@
+- Fixed an issue with KNMI weather icons not shown properly anymore
