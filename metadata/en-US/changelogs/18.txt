@@ -1,0 +1,1 @@
+- Fixed mid-term report being empty
