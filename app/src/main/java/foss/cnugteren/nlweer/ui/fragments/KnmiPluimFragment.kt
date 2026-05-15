@@ -28,7 +28,7 @@ class WebClientKnmiPluim(activity: MainActivity) : WebViewClient() {
     }
 
     override fun onPageFinished(view: WebView, url: String) {
-        view.loadUrl("javascript:(function() {" +
+        view.evaluateJavascript("(function() {" +
                 "document.getElementsByClassName('breadcrumb')[0].style.display='none';" +
                 "document.getElementsByClassName('weather-small')[0].style.display='none';" +
                 "document.getElementsByClassName('site-header')[0].style.display='none';" +
@@ -38,7 +38,7 @@ class WebClientKnmiPluim(activity: MainActivity) : WebViewClient() {
                 "document.getElementsByClassName('columns')[2].style.display='none';" +
                 "document.getElementsByClassName('columns')[3].style.display='none';" +
                 "document.getElementsByClassName('chart-legend__wrp')[0].style.display='none';" +
-                "}\n)()")
+                "}\n)()", null)
 
         if (mainActivity.appIsInDarkMode) {
             view.setBackgroundColor(Color.parseColor("#2e2e2e")); // matches Android's dark mode colours
