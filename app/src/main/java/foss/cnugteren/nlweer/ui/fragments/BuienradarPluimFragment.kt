@@ -25,13 +25,13 @@ class WebClientBuienradarPluim : WebViewClient() {
     }
 
     override fun onPageFinished(view: WebView, url: String) {
-        view.loadUrl("javascript:(function() {" +
+        view.evaluateJavascript("(function() {" +
                 "document.getElementById('header').style.display='none';" +
                 "document.getElementById('footer').style.display='none';" +
                 "document.getElementById('adholderContainerFooterSmall').style.display='none';" +
                 "document.getElementsByClassName('control-block')[0].style.display='none';" +
                 "document.getElementsByClassName('side-content')[0].style.display='none';" +
-                "}\n)()")
+                "}\n)()", null)
     }
 }
 
