@@ -12,28 +12,29 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.BaseContextWrappingDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.createGraph
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.fragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
-import com.google.android.material.navigation.NavigationView
+import androidx.viewpager2.widget.ViewPager2
 import foss.cnugteren.nlweer.databinding.ActivityMainBinding
-import foss.cnugteren.nlweer.ui.fragments.*
+import foss.cnugteren.nlweer.ui.WeatherPagerAdapter
+import foss.cnugteren.nlweer.ui.fragments.AboutFragment
+import foss.cnugteren.nlweer.ui.fragments.BuienradarChartFragment
+import foss.cnugteren.nlweer.ui.fragments.EmptyFragment
+import foss.cnugteren.nlweer.ui.fragments.KnmiTextFragment
+import foss.cnugteren.nlweer.ui.fragments.MapFragment
+import foss.cnugteren.nlweer.ui.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    private enum class Overlay {
+        NONE, EMPTY, SETTINGS, ABOUT
+    }
 
     private var locationManager : LocationManager? = null
     var gpsLat: Float? = null
@@ -41,63 +42,259 @@ class MainActivity : AppCompatActivity() {
     var appIsInDarkMode: Boolean = false
     private var baseContextWrappingDelegate: AppCompatDelegate? = null
     private lateinit var binding: ActivityMainBinding
-    private var navGraphCreated: Boolean = false
+    private lateinit var pager: ViewPager2
+    private lateinit var fragmentOverlay: View
+    private lateinit var drawerToggle: ActionBarDrawerToggle
+    private var pages: List<MapData> = emptyList()
+    private var pagerInitialized = false
+    private var overlay = Overlay.NONE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
+        pager = findViewById(R.id.pager)
+        fragmentOverlay = findViewById(R.id.fragment_overlay)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        setupDrawer(toolbar)
 
-        createNavGraph()
-
-        val navView: NavigationView = findViewById(R.id.nav_view)
         setMenuItemsVisibility()
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val destinations = mutableSetOf(R.id.nav_empty)
-        for (item in KNMI_ITEMS) { destinations.add(item.navId) }
-        for (item in BUIENRADAR_ITEMS) { destinations.add(item.navId) }
-        appBarConfiguration = AppBarConfiguration(destinations, binding.drawerLayout)
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        setupPager()
+        setupNavigationView()
         setLocationManager()
+        supportFragmentManager.addOnBackStackChangedListener {
+            onOverlayBackStackChanged()
+        }
+
         if (savedInstanceState == null) { // Only when the app starts for the first time
             setStartFragment()
+        } else {
+            restoreOverlayState()
         }
         setAppTheme()
+    }
 
-        // The floating buttons (FAB) to go to the previous/next view
-        val fabPrevious: View = findViewById(R.id.fab_previous)
-        fabPrevious.setOnClickListener {
-            val currentNavId = navController.currentDestination?.id
-            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item.navId == currentNavId }
-            for (prevIndex in currentIndex - 1 + ALL_ITEMS.size downTo 0) { // double array instead of modulo
-                val item = (ALL_ITEMS + ALL_ITEMS)[prevIndex]
-                if (navView.menu.findItem(item.navId).isVisible && navView.menu.findItem(item.parentMenuId).isVisible) {
-                    navController.navigate(item.navId)
-                    break
+    private fun setupDrawer(toolbar: Toolbar) {
+        drawerToggle = ActionBarDrawerToggle(
+            this,
+            binding.drawerLayout,
+            toolbar,
+            R.string.nav_drawer_open,
+            R.string.nav_drawer_close
+        )
+        binding.drawerLayout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+    }
+
+    private fun setupPager() {
+        pager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                if (overlay == Overlay.NONE) {
+                    updateActionBarForPage(position)
                 }
             }
-        }
-        val fabNext: View = findViewById(R.id.fab_next)
-        fabNext.setOnClickListener {
-            val currentNavId = navController.currentDestination?.id
-            val currentIndex = ALL_ITEMS.indexOfFirst { item -> item.navId == currentNavId }
-            for (nextIndex in currentIndex + 1 until ALL_ITEMS.size * 2) { // double array instead of modulo
-                val item = (ALL_ITEMS + ALL_ITEMS)[nextIndex]
-                if (navView.menu.findItem(item.navId).isVisible && navView.menu.findItem(item.parentMenuId).isVisible) {
-                    navController.navigate(item.navId)
-                    break
-                }
+        })
+        pagerInitialized = true
+        rebuildPagerPages()
+    }
+
+    private fun setupNavigationView() {
+        binding.navView.setNavigationItemSelectedListener { item ->
+            val index = pages.indexOfFirst { page -> page.navId == item.itemId }
+            if (index >= 0) {
+                showPagerBeforeNavigation()
+                pager.setCurrentItem(index, false)
+                binding.drawerLayout.closeDrawers()
+                true
+            } else {
+                false
             }
         }
+    }
 
+    private fun buildVisiblePages(): List<MapData> {
+        val menu = binding.navView.menu
+        return ALL_ITEMS.filter { item ->
+            val menuItem = menu.findItem(item.navId)
+            val parentMenuItem = menu.findItem(item.parentMenuId)
+            menuItem != null && parentMenuItem != null &&
+                menuItem.isVisible && parentMenuItem.isVisible
+        }
+    }
+
+    private fun rebuildPagerPages() {
+        val currentNavId = pages.getOrNull(pager.currentItem)?.navId
+        pages = buildVisiblePages()
+        pager.adapter = WeatherPagerAdapter(this, pages)
+
+        if (pages.isEmpty()) {
+            pager.setCurrentItem(0, false)
+            if (overlay == Overlay.NONE) {
+                showEmptyOverlay()
+            }
+            return
+        }
+
+        val targetIndex = pages.indexOfFirst { page -> page.navId == currentNavId }
+            .let { if (it >= 0) it else 0 }
+        pager.setCurrentItem(targetIndex, false)
+
+        if (overlay == Overlay.EMPTY) {
+            hideEmptyOverlay()
+        } else if (overlay == Overlay.NONE) {
+            updateActionBarForPage(targetIndex)
+        }
+    }
+
+    private fun updateActionBarForPage(position: Int) {
+        val page = pages.getOrNull(position)
+        val title = if (page != null) getString(page.stringId) else getString(R.string.app_name)
+        setActionBarMode(showUp = false, title = title)
+        if (page != null) {
+            binding.navView.setCheckedItem(page.navId)
+        }
+    }
+
+    private fun setActionBarMode(showUp: Boolean, title: String) {
+        supportActionBar?.title = title
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        drawerToggle.isDrawerIndicatorEnabled = !showUp
+        drawerToggle.syncState()
+    }
+
+    private fun setStartFragment() {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val defaultViewId = sharedPreferences
+            .getString("settings_default_view_listpreference", (R.id.nav_knmi_rain_m1).toString())
+            ?.toIntOrNull() ?: R.id.nav_knmi_rain_m1
+
+        if (pages.isEmpty()) {
+            return
+        }
+
+        if (defaultViewId == R.id.nav_empty) {
+            showEmptyOverlay()
+            return
+        }
+
+        val index = pages.indexOfFirst { page -> page.navId == defaultViewId }
+        pager.setCurrentItem(if (index >= 0) index else 0, false)
+        updateActionBarForPage(pager.currentItem)
+    }
+
+    private fun currentContentFragment(): Fragment? {
+        if (!pager.isVisible) {
+            return supportFragmentManager.findFragmentById(R.id.fragment_overlay)
+        }
+        return supportFragmentManager.findFragmentByTag("f${pager.currentItem}")
+    }
+
+    private fun showPagerBeforeNavigation() {
+        when (overlay) {
+            Overlay.EMPTY -> hideEmptyOverlay()
+            Overlay.SETTINGS, Overlay.ABOUT -> {
+                if (supportFragmentManager.backStackEntryCount > 0) {
+                    supportFragmentManager.popBackStackImmediate()
+                }
+            }
+            Overlay.NONE -> { }
+        }
+    }
+
+    private fun showEmptyOverlay() {
+        overlay = Overlay.EMPTY
+        showOverlayFragment(EmptyFragment(), addToBackStack = false)
+        setActionBarMode(showUp = false, title = getString(R.string.menu_empty))
+    }
+
+    private fun hideEmptyOverlay() {
+        if (overlay != Overlay.EMPTY) {
+            return
+        }
+        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_overlay)
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction().remove(fragment).commitNow()
+        }
+        overlay = Overlay.NONE
+        fragmentOverlay.isVisible = false
+        pager.isVisible = true
+        updateActionBarForPage(pager.currentItem)
+    }
+
+    private fun showSettings() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStackImmediate()
+        }
+        overlay = Overlay.SETTINGS
+        showOverlayFragment(SettingsFragment(), addToBackStack = true)
+        setActionBarMode(showUp = true, title = getString(R.string.menu_settings))
+    }
+
+    private fun showAbout() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStackImmediate()
+        }
+        overlay = Overlay.ABOUT
+        showOverlayFragment(AboutFragment(), addToBackStack = true)
+        setActionBarMode(showUp = true, title = getString(R.string.menu_about))
+    }
+
+    private fun showOverlayFragment(fragment: Fragment, addToBackStack: Boolean) {
+        pager.isVisible = false
+        fragmentOverlay.isVisible = true
+        val transaction = supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_overlay, fragment)
+        if (addToBackStack) {
+            transaction.addToBackStack(fragment.javaClass.simpleName)
+        }
+        transaction.commit()
+    }
+
+    private fun onOverlayBackStackChanged() {
+        if (supportFragmentManager.backStackEntryCount == 0 && overlay != Overlay.EMPTY) {
+            overlay = Overlay.NONE
+            if (pages.isEmpty()) {
+                showEmptyOverlay()
+            } else {
+                fragmentOverlay.isVisible = false
+                pager.isVisible = true
+                updateActionBarForPage(pager.currentItem)
+            }
+        }
+    }
+
+    private fun restoreOverlayState() {
+        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_overlay)
+        if (fragment == null) {
+            overlay = Overlay.NONE
+            if (pages.isEmpty()) {
+                showEmptyOverlay()
+            } else {
+                fragmentOverlay.isVisible = false
+                pager.isVisible = true
+                updateActionBarForPage(pager.currentItem)
+            }
+            return
+        }
+
+        pager.isVisible = false
+        fragmentOverlay.isVisible = true
+        when (fragment) {
+            is SettingsFragment -> {
+                overlay = Overlay.SETTINGS
+                setActionBarMode(showUp = true, title = getString(R.string.menu_settings))
+            }
+            is AboutFragment -> {
+                overlay = Overlay.ABOUT
+                setActionBarMode(showUp = true, title = getString(R.string.menu_about))
+            }
+            else -> {
+                overlay = Overlay.EMPTY
+                setActionBarMode(showUp = false, title = getString(R.string.menu_empty))
+            }
+        }
     }
 
     // From https://stackoverflow.com/questions/55265834/change-locale-not-work-after-migrate-to-androidx
@@ -118,67 +315,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+            return true
+        }
+        return super.onSupportNavigateUp()
     }
 
-    fun createNavGraph() {
-        if (navGraphCreated) {
-            return
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true
         }
-        // This is instead of a hard-coded mobile_navigation.xml file. That file still exists though
-        // to define the R.id values
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navHostFragment.navController.apply {
-            graph = createGraph(
-                startDestination = R.id.nav_knmi_rain_m1
-            ) {
-                for (item in ALL_ITEMS) {
-                    when (item.navId) {
-                        R.id.nav_knmi_text -> {
-                            fragment<KnmiTextFragment>(item.navId) {
-                                label = getString(item.stringId)
-                            }
-                        }
-                        R.id.nav_knmi_sixdayforecast -> {
-                            fragment<KnmiSixDayForecastFragment>(item.navId) {
-                                label = getString(item.stringId)
-                            }
-                    	}
-                        R.id.nav_knmi_pluim -> {
-                            fragment<KnmiPluimFragment>(item.navId) {
-                                label = getString(item.stringId)
-                            }
-                        }
-                        R.id.nav_buienradar_chart -> {
-                            fragment<BuienradarChartFragment>(item.navId) {
-                                label = getString(item.stringId)
-                            }
-                        }
-                        R.id.nav_buienradar_pluim -> {
-                            fragment<BuienradarPluimFragment>(item.navId) {
-                                label = getString(item.stringId)
-                            }
-                        }
-                        else -> {
-                            fragment<MapFragment>(item.navId) {
-                                label = getString(item.stringId)
-                            }
-                        }
-                    }
-                }
-                fragment<MapFragment>(R.id.nav_empty) {
-                    label = getString(R.string.menu_empty)
-                }
-                fragment<AboutFragment>(R.id.nav_about) {
-                    label = getString(R.string.menu_about)
-                }
-                fragment<SettingsFragment>(R.id.nav_settings) {
-                    label = getString(R.string.menu_settings)
-                }
-            }
+        if (item.itemId == android.R.id.home && supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+            return true
         }
-        navGraphCreated = true
+        return super.onOptionsItemSelected(item)
     }
 
     fun setMenuItemsVisibility() {
@@ -210,16 +362,9 @@ class MainActivity : AppCompatActivity() {
                 else { menuItem.isVisible = (item.navId.toString() in navItemsBuienradar) }
             }
         }
-    }
 
-    private fun setStartFragment() {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        val defaultViewId = sharedPreferences.getString("settings_default_view_listpreference", (R.id.nav_knmi_rain_m1).toString())?.toInt()
-        if (defaultViewId != null) {
-            val navController = findNavController(R.id.nav_host_fragment)
-            val navGraph = navController.graph
-            navGraph.setStartDestination(defaultViewId)
-            navController.graph = navGraph
+        if (pagerInitialized) {
+            rebuildPagerPages()
         }
     }
 
@@ -245,68 +390,54 @@ class MainActivity : AppCompatActivity() {
 
     // Menu button: refresh
     fun onClickRefresh(@Suppress("UNUSED_PARAMETER") v: MenuItem) {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
-        if (navHostFragment != null) {
-            val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
-            if (fragment is MapFragment) {
-                fragment.refreshPage()
-            }
-            if (fragment is KnmiTextFragment) {
-                fragment.refreshPage()
-            }
+        val fragment = currentContentFragment()
+        if (fragment is MapFragment) {
+            fragment.refreshPage()
+        }
+        if (fragment is KnmiTextFragment) {
+            fragment.refreshPage()
         }
     }
 
     // Menu button: share
     fun onClickShare(@Suppress("UNUSED_PARAMETER") v: MenuItem) {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
-        if (navHostFragment != null) {
+        val fragment = currentContentFragment()
+        val url: String
+        if (fragment is MapFragment) {
+            url = fragment.mapUrl()
+        } else {
 
-            // Retrieve the URL to share
-            val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
-            val url: String
-            if (fragment is MapFragment) {
-                url = fragment.mapUrl()
-            } else {
-
-                // Unsupported
-                val alertDialog: AlertDialog? = let {
-                    val builder = AlertDialog.Builder(it)
-                    builder.setMessage(R.string.share_disabled_alert_message)
-                    builder.setTitle(R.string.share_disabled_alert_title)
-                    builder.apply {
-                        setPositiveButton(R.string.settings_buienradar_enable_accept
-                        ) { _, _ -> }
-                    }
-                    builder.create()
+            // Unsupported
+            val alertDialog: AlertDialog? = let {
+                val builder = AlertDialog.Builder(it)
+                builder.setMessage(R.string.share_disabled_alert_message)
+                builder.setTitle(R.string.share_disabled_alert_title)
+                builder.apply {
+                    setPositiveButton(R.string.settings_buienradar_enable_accept
+                    ) { _, _ -> }
                 }
-                alertDialog?.show()
-                return
+                builder.create()
             }
-
-            // Share it
-            val sharing = Intent(Intent.ACTION_SEND)
-            sharing.type = "text/plain"
-            sharing.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_subject))
-            sharing.putExtra(Intent.EXTRA_TEXT, url)
-            startActivity(Intent.createChooser(sharing, getString(R.string.share_choose)))
+            alertDialog?.show()
+            return
         }
+
+        // Share it
+        val sharing = Intent(Intent.ACTION_SEND)
+        sharing.type = "text/plain"
+        sharing.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_subject))
+        sharing.putExtra(Intent.EXTRA_TEXT, url)
+        startActivity(Intent.createChooser(sharing, getString(R.string.share_choose)))
     }
 
     // Menu button: settings
     fun onClickSettings(@Suppress("UNUSED_PARAMETER") v: MenuItem) {
-        val navController = findNavController(R.id.nav_host_fragment)
-        if (navController.currentDestination?.id != R.id.nav_settings) {
-            navController.navigate(R.id.nav_settings)
-        }
+        showSettings()
     }
 
     // Menu button: about
     fun onClickAbout(@Suppress("UNUSED_PARAMETER") v: MenuItem) {
-        val navController = findNavController(R.id.nav_host_fragment)
-        if (navController.currentDestination?.id != R.id.nav_about) {
-            navController.navigate(R.id.nav_about)
-        }
+        showAbout()
     }
 
     // Location for GPS (if enabled)
@@ -370,30 +501,17 @@ class MainActivity : AppCompatActivity() {
             gpsLon = gpsLonCurrent
 
             // Also updates the map with the latest values
-            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
-            if (navHostFragment != null) {
-                val fragment: Fragment = navHostFragment.childFragmentManager.fragments[0]
-                if (fragment is MapFragment) {
-                    fragment.setLocation(gpsLatCurrent, gpsLonCurrent)
-                }
-                if (fragment is BuienradarChartFragment) {
-                    fragment.setLocation(gpsLatCurrent, gpsLonCurrent)
-                }
+            val fragment = currentContentFragment()
+            if (fragment is MapFragment) {
+                fragment.setLocation(gpsLatCurrent, gpsLonCurrent)
+            }
+            if (fragment is BuienradarChartFragment) {
+                fragment.setLocation(gpsLatCurrent, gpsLonCurrent)
             }
         }
         @Deprecated("Deprecated in Java")
         override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
         override fun onProviderEnabled(provider: String) {}
         override fun onProviderDisabled(provider: String) {}
-    }
-
-    fun toggleNavigationButtons(enable: Boolean) {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
-        val enableButtons = sharedPreferences.getBoolean("floating_navigation_enable", false)
-
-        val fabPrevious = findViewById<View>(R.id.fab_previous)
-        if (fabPrevious != null) { fabPrevious.isVisible = enable && enableButtons }
-        val fabNext = findViewById<View>(R.id.fab_next)
-        if (fabNext != null) { fabNext.isVisible = enable && enableButtons }
     }
 }

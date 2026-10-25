@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -50,10 +51,6 @@ class BuienradarChartFragment : Fragment() {
             pullToRefresh.isRefreshing = false
         })
 
-        // Do display floating navigation buttons
-        val activity = this.activity as MainActivity
-        activity.toggleNavigationButtons(true)
-
         // Set the location (latitude and longitude)
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         val locationEnabled = sharedPreferences.getBoolean("location_enable", false)
@@ -65,7 +62,10 @@ class BuienradarChartFragment : Fragment() {
                 setLocation(lat, lon)
             }
             else { // Sets from the latest known values from the main activity
-                setLocation(activity.gpsLat, activity.gpsLon)
+                val mainActivity = activity as? MainActivity
+                if (mainActivity != null) {
+                    setLocation(mainActivity.gpsLat, mainActivity.gpsLon)
+                }
             }
         }
 
@@ -97,10 +97,10 @@ class BuienradarChartFragment : Fragment() {
     fun loadPage() {
         val activity = this.activity as MainActivity
         var textColour = Color.BLACK
-        var background = Color.WHITE
+        var background = ContextCompat.getColor(requireContext(), R.color.lightBackground)
         if (activity.appIsInDarkMode) {
             textColour = Color.WHITE
-            background = Color.rgb(48, 48, 48) // matches Android's dark mode colours
+            background = ContextCompat.getColor(requireContext(), R.color.darkBackground)
         }
 
         val chart = binding.buienradarChart

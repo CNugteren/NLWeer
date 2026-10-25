@@ -89,8 +89,8 @@
     <string name="settings_gps">GPS</string>
 
     <string name="settings_category_appearance">Appearance options</string>
-    <string name="settings_floating_navigation_enable">Show floating navigation buttons</string>
-    <string name="settings_floating_navigation_sub">Enables one-tap next/previous navigation</string>
+    <string name="nav_drawer_open">Open navigation menu</string>
+    <string name="nav_drawer_close">Close navigation menu</string>
     <string name="settings_background_colour">Background colour</string>
     <string name="settings_location_shape">Location marker shape</string>
     <string name="settings_location_colour">Location marker colour</string>

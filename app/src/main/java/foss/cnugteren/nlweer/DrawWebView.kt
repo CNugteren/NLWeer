@@ -46,7 +46,14 @@ class DrawWebView : WebView {
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (drawCircles) {
-            drawCircle(canvas, lat, lon)
+            try {
+                if (!::imageCoordinates.isInitialized) {
+                    return
+                }
+                drawCircle(canvas, lat, lon)
+            } catch (e: Exception) {
+                // Ignore any exceptions when drawing location circles
+            }
         }
     }
 
@@ -62,7 +69,14 @@ class DrawWebView : WebView {
     }
 
     private fun drawCircle(canvas: Canvas, lat: Float, lon: Float) {
+        if (!::imageCoordinates.isInitialized) {
+            return
+        }
         if (imageCoordinates.size < 6) { return } // invalid data provided
+        if (imageCoordinates[0] == 0.0f && imageCoordinates[1] == 0.0f &&
+            imageCoordinates[2] == 0.0f && imageCoordinates[3] == 0.0f) {
+            return // invalid coordinates
+        }
 
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val locationShape = sharedPreferences.getString("location_shape", "two_circles")
@@ -78,11 +92,21 @@ class DrawWebView : WebView {
         val minLat = imageCoordinates[0]; val minLon = imageCoordinates[1]
         val maxLat = imageCoordinates[2]; val maxLon = imageCoordinates[3]
 
+        if (maxLon - minLon == 0.0f || maxLat - minLat == 0.0f) {
+            return
+        }
+
         // Percentage of the image computation
         var percentWidth = (lon - minLon) / (maxLon - minLon)
         var percentHeight = (lat - minLat) / (maxLat - minLat)
+        if (percentWidth.isNaN() || percentHeight.isNaN() || percentWidth.isInfinite() || percentHeight.isInfinite()) {
+            return
+        }
         percentWidth += percentHeight * imageCoordinates[4]
         percentHeight += percentWidth * imageCoordinates[5]
+        if (percentHeight.isNaN() || percentWidth.isNaN() || percentHeight.isInfinite() || percentWidth.isInfinite()) {
+            return
+        }
         if (percentHeight < 0 || percentWidth < 0 || percentHeight > 1 || percentWidth > 1) {
             return // skip drawing - out of bounds
         }

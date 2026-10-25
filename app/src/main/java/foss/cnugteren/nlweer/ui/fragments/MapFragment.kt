@@ -1,12 +1,12 @@
 package foss.cnugteren.nlweer.ui.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.ALL_ITEMS
@@ -17,6 +17,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MapFragment : Fragment() {
+
+    companion object {
+        const val ARG_NAV_ID = "nav_id"
+    }
 
     private var _binding: FragmentKnmiBinding? = null
     // This property is only valid between onCreateView and
@@ -34,12 +38,9 @@ class MapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentKnmiBinding.inflate(inflater, container, false)
-        val activity = this.activity as MainActivity
-        activity.createNavGraph() // only runs if it wasn't created yet
 
         // Iterate over all items to find the current one and set the private variables accordingly
-        val navController = NavHostFragment.findNavController(this)
-        val thisNavId = navController.currentDestination?.id
+        val thisNavId = arguments?.getInt(ARG_NAV_ID) ?: 0
         for (item in ALL_ITEMS) {
             if (item.navId == thisNavId) {
                 url = item.mapUrl
@@ -51,15 +52,14 @@ class MapFragment : Fragment() {
         }
 
         val root = binding.root
+        applyBackgroundColour()
+
         // Pull down to refresh the page
         val pullToRefresh = root.findViewById<SwipeRefreshLayout>(R.id.pullToRefresh)
         pullToRefresh.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             refreshPage()
             pullToRefresh.isRefreshing = false
         })
-
-        // Do display floating navigation buttons
-        activity.toggleNavigationButtons(true)
 
         // The web-viewer for the content
         val gifView = binding.gifView
@@ -89,8 +89,10 @@ class MapFragment : Fragment() {
                 setLocation(lat, lon)
             }
             else { // Sets from the latest known values from the main activity
-                val thisActivity = this.activity as MainActivity
-                setLocation(thisActivity.gpsLat, thisActivity.gpsLon)
+                val thisActivity = activity as? MainActivity
+                if (thisActivity != null) {
+                    setLocation(thisActivity.gpsLat, thisActivity.gpsLon)
+                }
             }
         }
 
@@ -142,7 +144,16 @@ class MapFragment : Fragment() {
         return mapUrl
     }
 
+    private fun applyBackgroundColour() {
+        val backgroundColour = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .getString("background_colour", "black")
+        val backgroundColor = if (backgroundColour == "white") Color.WHITE else Color.BLACK
+        binding.root.setBackgroundColor(backgroundColor)
+        binding.gifView.setBackgroundColor(backgroundColor)
+    }
+
     fun loadPage() {
+        applyBackgroundColour()
         val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
         val backgroundColour = " " + sharedPreferences.getString("background_colour", "black") + " "
 

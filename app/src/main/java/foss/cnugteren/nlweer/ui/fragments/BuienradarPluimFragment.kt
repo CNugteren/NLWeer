@@ -1,11 +1,13 @@
 package foss.cnugteren.nlweer.ui.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import foss.cnugteren.nlweer.MainActivity
@@ -57,15 +59,19 @@ class BuienradarPluimFragment : Fragment() {
             pullToRefresh.isRefreshing = false
         })
 
-        // Do display floating navigation buttons
-        val activity = this.activity as MainActivity
-        activity.toggleNavigationButtons(true)
-
         // The web-viewer for the content
         val webView = binding.webView
         val webViewClientModified = WebClientBuienradarPluim()
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = webViewClientModified
+
+        val backgroundColor = if ((requireActivity() as MainActivity).appIsInDarkMode) {
+            ContextCompat.getColor(requireContext(), R.color.darkBackground)
+        } else {
+            ContextCompat.getColor(requireContext(), R.color.lightBackground)
+        }
+        root.setBackgroundColor(backgroundColor)
+        webView.setBackgroundColor(backgroundColor)
 
         loadPage()
 

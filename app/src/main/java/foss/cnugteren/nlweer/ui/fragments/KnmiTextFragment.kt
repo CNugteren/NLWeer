@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.R
 import foss.cnugteren.nlweer.databinding.FragmentKnmiTextBinding
 import org.jsoup.Jsoup
@@ -36,10 +35,6 @@ class KnmiTextFragment : Fragment() {
             refreshPage()
             pullToRefresh.isRefreshing = false
         })
-
-        // Do display floating navigation buttons
-        val activity = this.activity as MainActivity
-        activity.toggleNavigationButtons(true)
 
         loadPage()
 
