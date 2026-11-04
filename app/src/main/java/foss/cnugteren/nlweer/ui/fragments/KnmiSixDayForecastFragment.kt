@@ -151,8 +151,7 @@ class KnmiSixDayForecastFragment : Fragment() {
                 }
 
                 weatherMetrics.children().forEach { rowItem ->
-                    // If cell contains image, get the src link
-                    // val imageItem = rowItem.selectFirst("img")
+                    // If cell is only an image, get the src link
                     if (rowItem.tagName() == "img") {
                         var source = rowItem.attr("src");
                         if (source.startsWith('/')) {
