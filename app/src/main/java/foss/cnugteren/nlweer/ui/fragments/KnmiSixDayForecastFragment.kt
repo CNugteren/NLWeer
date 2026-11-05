@@ -128,37 +128,32 @@ class KnmiSixDayForecastFragment : Fragment() {
         // Get the weather data per day of the week
         private fun getTableData(weatherForecastTable: Element) : Array<Array<String>> {
             val weatherPerDay = weatherForecastTable.children()
-            val weatherOfFirstDay = weatherPerDay.firstOrNull()?.select("div.weather-forecast__day")
+            val weatherOfFirstDay = weatherPerDay.firstOrNull()?.select("article.weather-forecast__day")
             if (weatherOfFirstDay == null) {
                 throw IllegalArgumentException("Forecast first day not found")
             }
-            val weatherInfoPerDay  = weatherOfFirstDay.select("div.weather-forecast__banner").firstOrNull()?.childrenSize()
-            if (weatherInfoPerDay == null) {
+            val numberOfMetrics  = weatherOfFirstDay.select("div.weather-forecast__metrics").firstOrNull()?.childrenSize()
+            if (numberOfMetrics == null) {
                 throw IllegalArgumentException("Forecast info cannot be found")
-            }
-            val weatherStatsPerDay = weatherOfFirstDay.select("div.weather-forecast__details").firstOrNull()?.childrenSize()
-            if (weatherStatsPerDay == null) {
-                throw IllegalArgumentException("Forecast stats cannot be found")
             }
 
             // Day of the week + date + weather icon + 2 rows for each property
-            val numberOfRows = 2 * (weatherInfoPerDay + weatherStatsPerDay - 1) + 1
+            val numberOfRows = 2 * numberOfMetrics
             val tableData = Array<Array<String>>(weatherPerDay.size, { Array<String>(numberOfRows, {""}) })
 
 
             weatherPerDay.forEachIndexed { colIndex, column ->
                 var rowIndex = 0
 
-                val weatherBanner = column.select("div.weather-forecast__banner").firstOrNull()
-                if (weatherBanner == null) {
+                val weatherMetrics = column.select("div.weather-forecast__metrics").firstOrNull()
+                if (weatherMetrics == null) {
                     throw IllegalArgumentException("Forecast banner not found")
                 }
 
-                weatherBanner.children().forEach { rowItem ->
-                    // If cell contains image, get the src link
-                    val imageItem = rowItem.selectFirst("img")
-                    if (imageItem != null) {
-                        var source = imageItem.attr("src");
+                weatherMetrics.children().forEach { rowItem ->
+                    // If cell is only an image, get the src link
+                    if (rowItem.tagName() == "img") {
+                        var source = rowItem.attr("src");
                         if (source.startsWith('/')) {
                             source = "$knmiUrl$source";
                         }
@@ -171,19 +166,6 @@ class KnmiSixDayForecastFragment : Fragment() {
                             tableData[colIndex][rowIndex] = item
                             rowIndex++
                         }
-                    }
-                }
-
-                val weatherDetails = column.select("div.weather-forecast__details").firstOrNull()
-                if (weatherDetails == null) {
-                    throw IllegalArgumentException("Forecast details not found")
-                }
-
-                weatherDetails.children().forEach { rowItem ->
-                    // Item contains just text; split into header and data, if applicable
-                    getCellHeaderAndValue(rowItem).forEach { item ->
-                        tableData[colIndex][rowIndex] = item
-                        rowIndex++
                     }
                 }
             }
