@@ -1,6 +1,7 @@
 package foss.cnugteren.nlweer.ui.fragments
 
 import android.content.res.Resources
+import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -47,13 +48,17 @@ class KnmiSixDayForecastFragment : Fragment() {
             pullToRefresh.isRefreshing = false
         })
 
-        // Do display floating navigation buttons
-        val activity = this.activity as MainActivity
-        activity.toggleNavigationButtons(true)
-
         // The web-viewer for the content
         val webView = binding.webView
         webView.settings.javaScriptEnabled = true
+
+        val backgroundColor = if ((requireActivity() as MainActivity).appIsInDarkMode) {
+            androidx.core.content.ContextCompat.getColor(requireContext(), R.color.darkBackground)
+        } else {
+            Color.rgb(250, 250, 250)
+        }
+        root.setBackgroundColor(backgroundColor)
+        webView.setBackgroundColor(backgroundColor)
 
         loadPage()
 
@@ -267,8 +272,8 @@ class KnmiSixDayForecastFragment : Fragment() {
             var backgroundColor = "rgb(250, 250, 250)"
             var textColor = "black"
             if (appIsInDarkMode) {
-                backgroundColor = "rgb(48, 48, 48)" // Android dark mode color
-                textColor = "rgb(193, 193, 193)" // Android dark mode color
+            backgroundColor = "rgb(48, 48, 48)" // Android dark mode color (defined in colors.xml as darkBackground)
+            textColor = "rgb(193, 193, 193)" // Android dark mode color
             }
 
             return """<html>

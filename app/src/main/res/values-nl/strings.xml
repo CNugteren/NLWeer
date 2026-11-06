@@ -90,8 +90,8 @@
     <string name="settings_gps">GPS</string>
 
     <string name="settings_category_appearance">Weergave instellingen</string>
-    <string name="settings_floating_navigation_enable">Toon zwevende navigatie knoppen</string>
-    <string name="settings_floating_navigation_sub">Maakt één-knops vorige/volgende navigatie mogelijk</string>
+    <string name="nav_drawer_open">Navigatiemenu openen</string>
+    <string name="nav_drawer_close">Navigatiemenu sluiten</string>
     <string name="settings_background_colour">Achtergrond kleur</string>
     <string name="settings_location_shape">Vorm van de locatiemarker</string>
     <string name="settings_location_colour">Kleur van de locatiemarker</string>

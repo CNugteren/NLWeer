@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import foss.cnugteren.nlweer.BuildConfig
-import foss.cnugteren.nlweer.MainActivity
 import foss.cnugteren.nlweer.databinding.FragmentAboutBinding
 
 class AboutFragment: Fragment() {
@@ -23,10 +22,6 @@ class AboutFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAboutBinding.inflate(inflater, container, false)
-
-        // Don't display floating navigation buttons
-        val activity = this.activity as MainActivity
-        activity.toggleNavigationButtons(false)
 
         val versionCode = BuildConfig.VERSION_CODE
         val versionName = BuildConfig.VERSION_NAME

@@ -68,15 +68,19 @@ class KnmiPluimFragment : Fragment() {
             pullToRefresh.isRefreshing = false
         })
 
-        // Do display floating navigation buttons
-        val activity = this.activity as MainActivity
-        activity.toggleNavigationButtons(true)
-
         // The web-viewer for the content
         val webView = binding.webView
-        val webViewClientModified = WebClientKnmiPluim(activity)
+        val webViewClientModified = WebClientKnmiPluim(requireActivity() as MainActivity)
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = webViewClientModified
+
+        val backgroundColor = if ((requireActivity() as MainActivity).appIsInDarkMode) {
+            Color.parseColor("#2e2e2e")
+        } else {
+            Color.WHITE
+        }
+        root.setBackgroundColor(backgroundColor)
+        webView.setBackgroundColor(backgroundColor)
 
         loadPage()
 
