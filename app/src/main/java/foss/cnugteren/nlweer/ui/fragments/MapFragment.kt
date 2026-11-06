@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.webkit.WebSettings
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -63,6 +64,8 @@ class MapFragment : Fragment() {
 
         // The web-viewer for the content
         val gifView = binding.gifView
+        // Maps are regenerated every few minutes, so never show a cached (possibly stale) image
+        gifView.settings.cacheMode = WebSettings.LOAD_NO_CACHE
 
         // Sets the scale of the image
         root.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
