@@ -1,0 +1,5 @@
+- Modernize navigation
+- Fix the KNMI 'pluim'
+- Fix the KNMI multi-day forecast
+- Fix the KNMI weather + temperature map
+- Fix occasionally incorrect disk caching

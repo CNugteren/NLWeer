@@ -1,0 +1,5 @@
+- De navigatie is gemoderniseerd
+- Probleem opgelost met de KNMI 'pluim'
+- Probleem opgelost met de KNMI meerdaagse voorspelling
+- Probleem opgelost met de KNMI weer en temperatuur kaart
+- Probleem opgelost met onjuiste disk caching
