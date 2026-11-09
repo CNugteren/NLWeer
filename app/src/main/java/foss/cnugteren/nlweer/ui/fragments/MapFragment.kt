@@ -114,7 +114,7 @@ class MapFragment : Fragment() {
 
     fun refreshPage() {
         val gifView = binding.gifView
-        gifView.clearCache(false)
+        gifView.clearCache(true)
         loadPage()
     }
 
