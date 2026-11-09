@@ -13,7 +13,7 @@ data class MapData(
 
 val KNMI_ITEMS = arrayOf(
     // Shown by default
-    MapData(R.string.menu_knmi_rain_m1, R.id.nav_knmi_rain_m1, 1, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/general/weather-map.gif", 425, 445, arrayOf(50.60f, 1.85f, 54.05f, 7.20f, -0.10f, 0.09f)),
+    MapData(R.string.menu_knmi_rain_m1, R.id.nav_knmi_rain_m1, 1, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/general/weather-map.gif", 755, 815, arrayOf(50.60f, 1.85f, 54.05f, 7.20f, -0.10f, 0.09f)),
     MapData(R.string.menu_knmi_today, R.id.nav_knmi_today, 1, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/current/weather/forecast/kaart_verwachtingen_Vandaag_dag.gif", 425, 467, arrayOf(50.70f, 3.10f, 53.65f, 7.55f, -0.01f, 0.00f)),
     MapData(R.string.menu_knmi_tonight, R.id.nav_knmi_tonight, 1, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/current/weather/forecast/kaart_verwachtingen_Morgen_nacht.gif", 425, 467, arrayOf(50.70f, 3.10f, 53.65f, 7.55f, -0.01f, 0.00f)),
     MapData(R.string.menu_knmi_tomorrow, R.id.nav_knmi_tomorrow, 1, R.id.knmi_menu, "https://cdn.knmi.nl/knmi/map/current/weather/forecast/kaart_verwachtingen_Morgen_dag.gif", 425, 467, arrayOf(50.70f, 3.10f, 53.65f, 7.55f, -0.01f, 0.00f)),
