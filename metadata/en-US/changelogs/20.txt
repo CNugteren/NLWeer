@@ -1,0 +1,1 @@
+- Allow swiping from the last view to the first view and back
