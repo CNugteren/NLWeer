@@ -1,0 +1,1 @@
+- Swipen van de laatste naar de eerste weergave en terug is weer mogelijk
