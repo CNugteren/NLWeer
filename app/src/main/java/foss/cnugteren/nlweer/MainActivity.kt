@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             val index = pages.indexOfFirst { page -> page.navId == item.itemId }
             if (index >= 0) {
                 showPagerBeforeNavigation()
-                pager.setCurrentItem(index, false)
+                pager.setCurrentItem(pagerPosition(index), false)
                 binding.drawerLayout.closeDrawers()
                 true
             } else {
@@ -125,9 +125,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun rebuildPagerPages() {
-        val currentNavId = pages.getOrNull(pager.currentItem)?.navId
+        val currentNavId = pageAt(pager.currentItem)?.navId
         pages = buildVisiblePages()
-        pager.adapter = WeatherPagerAdapter(this, pages)
+        val adapter = WeatherPagerAdapter(this, pages)
+        pager.adapter = adapter
 
         if (pages.isEmpty()) {
             pager.setCurrentItem(0, false)
@@ -139,17 +140,23 @@ class MainActivity : AppCompatActivity() {
 
         val targetIndex = pages.indexOfFirst { page -> page.navId == currentNavId }
             .let { if (it >= 0) it else 0 }
-        pager.setCurrentItem(targetIndex, false)
+        pager.setCurrentItem(adapter.startPosition(targetIndex), false)
 
         if (overlay == Overlay.EMPTY) {
             hideEmptyOverlay()
         } else if (overlay == Overlay.NONE) {
-            updateActionBarForPage(targetIndex)
+            updateActionBarForPage(pager.currentItem)
         }
     }
 
+    // The pager repeats the pages, so a pager position maps to page index `position % pages.size`
+    private fun pageAt(position: Int): MapData? = if (pages.isEmpty()) null else pages[position % pages.size]
+
+    // Pager position of page `index` within the current loop, to keep the current position nearby
+    private fun pagerPosition(index: Int): Int = pager.currentItem - pager.currentItem % pages.size + index
+
     private fun updateActionBarForPage(position: Int) {
-        val page = pages.getOrNull(position)
+        val page = pageAt(position)
         val title = if (page != null) getString(page.stringId) else getString(R.string.app_name)
         setActionBarMode(showUp = false, title = title)
         if (page != null) {
@@ -180,7 +187,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val index = pages.indexOfFirst { page -> page.navId == defaultViewId }
-        pager.setCurrentItem(if (index >= 0) index else 0, false)
+        pager.setCurrentItem(pagerPosition(if (index >= 0) index else 0), false)
         updateActionBarForPage(pager.currentItem)
     }
 
